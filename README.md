@@ -44,4 +44,4 @@ Proof-of-work folder for document review practice, discrepancy findings, dry ice
 
 Build the system before chasing the opportunity.
 
-Use official sources first. Keep notes clean. Separate research from speculation. Do not store confidential customer documents unless redacted.# Nexus Aurea Command Center
+Use official sources first. Keep notes clean. Separate research from speculation. Do not store confidential customer documents unless redacted.

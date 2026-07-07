@@ -9,6 +9,7 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | CARV | Carver Bancorp, Inc. | Banking | Community bank / ownership and capital structure watch | High | Track filings, dilution, capital position, insider activity |
 | INFQ | Infleqtion Inc. | Quantum technology | Quantum infrastructure and public-company watch | High | Verify latest filings, capital raises, partnerships, dilution |
 | LIFE | Ethos Technologies | Insurtech / financial technology | Insurance technology / newly public company watch | Medium | Track filings, revenue growth, profitability, insider activity |
+| QBTS | D-Wave Quantum Inc. | Quantum technology | Quantum infrastructure / heavy dilution and cash-burn watch | High | Track bookings vs. revenue gap, cash runway, CHIPS Act stake, QCI acquisition integration |
 | WQTM | WQTM | Verify | Need to confirm exact company, fund, or ticker | Hold | Do not analyze until verified |
 
 ## Filing Types to Track

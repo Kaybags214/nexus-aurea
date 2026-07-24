@@ -14,6 +14,7 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | CRCL | Circle Internet Group, Inc. | Stablecoin / fintech infrastructure | USDC, digital payments, regulated crypto settlement, reserve infrastructure, trust-bank development | High | Track 10-Q/10-K updates, Form 4/Form 144 insider activity, USDC circulation, reserve income, regulation, competition, Arc blockchain execution, valuation risk |
 | CRSP | CRISPR Therapeutics AG | Gene editing / biotech | CASGEVY commercialization, CRISPR/Cas9 platform, gene-editing pipeline, regulated medicine infrastructure | High | Track CASGEVY revenue and patient starts, Vertex economics, cash burn, clinical trial results, safety/regulatory updates, dilution, and pipeline progress |
 | CYRX | Cryoport, Inc. | Cold chain / life-sciences logistics | Temperature-controlled supply chain, cell and gene therapy logistics, clinical-trial support, specialty packaging, life-sciences infrastructure | High | Track Q2 2026 results, full-year guidance, gross margin, operating cash flow, cash balance, trial count, commercial therapy count, DHL partnership, dilution or buybacks, and biotech funding demand |
+| H | Hyatt Hotels Corporation | Hospitality / travel infrastructure | User works at Hyatt; hotel operations, travel demand, asset-light hotel management, brand/loyalty economics, resort and international growth | Medium-High | Track RevPAR, management/franchise fees, owned vs managed mix, debt, buybacks, Playa integration, development pipeline, travel-cycle risk, and insider activity; do not trade on non-public workplace information |
 
 ## Filing Types to Track
 
@@ -38,3 +39,4 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 - Treat newly public infrastructure names as watch-first until valuation, filings, and lockup / insider activity are understood.
 - Treat biotech names as milestone-driven: watch clinical data, regulatory events, safety signals, cash runway, dilution, and commercialization progress before investing.
 - Treat cold-chain logistics names as operating-infrastructure watches: focus on revenue quality, margin trend, cash flow, customer demand, trial activity, and strategic partnerships.
+- Treat employer-related stocks carefully: separate personal workplace experience from public filing evidence, and never trade on non-public workplace information.

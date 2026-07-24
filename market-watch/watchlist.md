@@ -12,6 +12,7 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | WQTM | WisdomTree Quantum Computing Fund | Quantum ETF | Sector basket / quantum theme watch | Hold | ETF, not operating company; analyze holdings and sector movement, not company filings |
 | CJMB | Callan JMB Inc. | Cold chain / emergency logistics | Healthcare logistics, vaccine storage, emergency preparedness, specialty packaging, regulated operations | High-risk watch | Track Nasdaq compliance, reverse split risk, dilution, government contracts, customer concentration, 10-Q cash burn, going-concern language |
 | CRCL | Circle Internet Group, Inc. | Stablecoin / fintech infrastructure | USDC, digital payments, regulated crypto settlement, reserve infrastructure, trust-bank development | High | Track 10-Q/10-K updates, Form 4/Form 144 insider activity, USDC circulation, reserve income, regulation, competition, Arc blockchain execution, valuation risk |
+| CRSP | CRISPR Therapeutics AG | Gene editing / biotech | CASGEVY commercialization, CRISPR/Cas9 platform, gene-editing pipeline, regulated medicine infrastructure | High | Track CASGEVY revenue and patient starts, Vertex economics, cash burn, clinical trial results, safety/regulatory updates, dilution, and pipeline progress |
 
 ## Filing Types to Track
 
@@ -34,3 +35,4 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 - Treat hype sectors carefully.
 - Treat microcap / low-price stocks as high-risk until filings prove stability.
 - Treat newly public infrastructure names as watch-first until valuation, filings, and lockup / insider activity are understood.
+- Treat biotech names as milestone-driven: watch clinical data, regulatory events, safety signals, cash runway, dilution, and commercialization progress before investing.

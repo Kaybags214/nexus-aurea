@@ -10,6 +10,8 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | INFQ | Infleqtion Inc. | Quantum technology | Quantum infrastructure and public-company watch | High | Verify latest filings, capital raises, partnerships, dilution |
 | LIFE | Ethos Technologies | Insurtech / financial technology | Insurance technology / newly public company watch | Medium | Track filings, revenue growth, profitability, insider activity |
 | WQTM | WQTM | Verify | Need to confirm exact company, fund, or ticker | Hold | Do not analyze until verified |
+| SOXX | iShares Semiconductor ETF | Semiconductors (ETF) | Diversified AI/semiconductor exposure across the whole chip value chain (logic, equipment, memory); candidate for future investment | High | ETF, not a single filer — track fund flows, holdings rotation (AMD/NVDA/AVGO/MU), AI capex trends instead of 8-K/10-Q filings |
+| DRAM | Roundhill Memory ETF | Semiconductor memory (ETF) | Concentrated bet on the 2026 DRAM/HBM supercycle (Micron, SK Hynix, Samsung >73% of fund); candidate for future investment | Medium | New fund (launched Apr 2026), high volatility, thin track record; monitor DRAM antitrust price-fixing suit (Garciaguirre v. Samsung) and signs of memory cycle turning |
 
 ## Filing Types to Track
 

@@ -22,6 +22,13 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | KTOS | Kratos Defense & Security Solutions, Inc. | Defense technology / drones / space systems | Jet-powered unmanned systems, hypersonics, rocket systems, satellite ground systems, C5ISR, microwave electronics, missile defense, counter-UAS, and national-security infrastructure | High | Track backlog/book-to-bill, drone production scaling, contract awards, defense budget exposure, margins, free cash flow, R&D spend, stock compensation, dilution, and valuation risk |
 | NVO | Novo Nordisk A/S | Pharma / obesity care / diabetes / GLP-1 medicine | Ozempic, Wegovy, oral Wegovy, higher-dose Wegovy, diabetes and obesity care, regulated medicine infrastructure, cold-chain demand, and global metabolic-health market | High | Track Wegovy/Ozempic sales, GLP-1 market share, Lilly competition, oral obesity medicine adoption, pricing/reimbursement pressure, supply capacity, pipeline data, FDA/regulatory updates, litigation, margins, and currency effects |
 | OKLO | Oklo Inc. | Advanced nuclear / AI power infrastructure | Fast-fission power plants, Aurora powerhouse, nuclear fuel recycling, isotope production, DOE Reactor Pilot Program, AI data-center power demand, and U.S. energy security | High-risk watch | Track DOE/NRC authorization steps, Aurora-INL milestones, fuel supply, construction progress, cash burn, dilution, customer power agreements, data-center demand, policy support, permitting risk, and whether first power is actually delivered |
+| RGTI | Rigetti Computing, Inc. | Quantum computing / superconducting qubits | Full-stack quantum computing, superconducting quantum processors, quantum cloud services, and founder-linked private company Sygaldry Technologies as an adjacent private quantum-AI signal | High-risk watch | Track cash runway, dilution, revenue quality, system roadmap, qubit fidelity, customer traction, government contracts, technical milestones, quantum-sector hype risk, and Sygaldry developments |
+
+## Private Company Signals
+
+| Company | Sector | Reason Watching | Notes |
+|---|---|---|---|
+| Sygaldry Technologies | Private quantum-AI infrastructure | Founder-linked private company tied to Chad Rigetti; useful as an adjacent signal for quantum-accelerated AI server development | Private company, not directly investable through public shares; track product claims, funding, partnerships, hiring, customer validation, technical milestones, and whether developments affect the public quantum lane |
 
 ## Filing Types to Track
 
@@ -54,3 +61,5 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 - Treat defense technology names as contract-and-execution watches: focus on backlog, book-to-bill, production scaling, contract timing, budget exposure, margins, cash flow, R&D intensity, dilution, and valuation.
 - Treat major pharma platform names as regulated-medicine infrastructure watches: focus on commercialization, supply capacity, reimbursement, clinical pipeline durability, regulatory updates, litigation, margins, and competitive pressure.
 - Treat advanced nuclear names as pre-commercial infrastructure watches: focus on permitting, DOE/NRC authorization, fuel supply, construction execution, customer agreements, cash runway, dilution, safety milestones, and proof of first power.
+- Treat public quantum names as high-risk milestone watches: focus on cash runway, dilution, customer validation, government contracts, system performance, technical roadmaps, and whether revenue is real or mostly hype.
+- Treat private-company signals as research context only: they are not public-stock entries unless a public security exists; use them to understand sector direction, founder movement, funding, partnerships, and technology claims.

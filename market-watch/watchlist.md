@@ -15,6 +15,7 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | CRSP | CRISPR Therapeutics AG | Gene editing / biotech | CASGEVY commercialization, CRISPR/Cas9 platform, gene-editing pipeline, regulated medicine infrastructure | High | Track CASGEVY revenue and patient starts, Vertex economics, cash burn, clinical trial results, safety/regulatory updates, dilution, and pipeline progress |
 | CYRX | Cryoport, Inc. | Cold chain / life-sciences logistics | Temperature-controlled supply chain, cell and gene therapy logistics, clinical-trial support, specialty packaging, life-sciences infrastructure | High | Track Q2 2026 results, full-year guidance, gross margin, operating cash flow, cash balance, trial count, commercial therapy count, DHL partnership, dilution or buybacks, and biotech funding demand |
 | H | Hyatt Hotels Corporation | Hospitality / travel infrastructure | User works at Hyatt; hotel operations, travel demand, asset-light hotel management, brand/loyalty economics, resort and international growth | Medium-High | Track RevPAR, management/franchise fees, owned vs managed mix, debt, buybacks, Playa integration, development pipeline, travel-cycle risk, and insider activity; do not trade on non-public workplace information |
+| IBM | International Business Machines Corporation | Enterprise AI / hybrid cloud / quantum | Red Hat, watsonx, enterprise AI governance, mainframe infrastructure, quantum research, automation, and dividend tech exposure | Medium-High | Track software growth, Red Hat growth, free cash flow, debt, dividend coverage, consulting demand, AI revenue quality, quantum milestones, and mainframe cycle |
 
 ## Filing Types to Track
 
@@ -40,3 +41,4 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 - Treat biotech names as milestone-driven: watch clinical data, regulatory events, safety signals, cash runway, dilution, and commercialization progress before investing.
 - Treat cold-chain logistics names as operating-infrastructure watches: focus on revenue quality, margin trend, cash flow, customer demand, trial activity, and strategic partnerships.
 - Treat employer-related stocks carefully: separate personal workplace experience from public filing evidence, and never trade on non-public workplace information.
+- Treat mature enterprise technology names as cash-flow and execution watches: focus on durable software growth, free cash flow, debt, dividend coverage, and whether AI claims turn into measurable revenue.

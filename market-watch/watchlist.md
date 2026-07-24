@@ -9,7 +9,8 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 | CARV | Carver Bancorp, Inc. | Banking | Community bank / ownership and capital structure watch | High | Track filings, dilution, capital position, insider activity |
 | INFQ | Infleqtion Inc. | Quantum technology | Quantum infrastructure and public-company watch | High | Verify latest filings, capital raises, partnerships, dilution |
 | LIFE | Ethos Technologies | Insurtech / financial technology | Insurance technology / newly public company watch | Medium | Track filings, revenue growth, profitability, insider activity |
-| WQTM | WQTM | Verify | Need to confirm exact company, fund, or ticker | Hold | Do not analyze until verified |
+| WQTM | WisdomTree Quantum Computing Fund | Quantum ETF | Sector basket / quantum theme watch | Hold | ETF, not operating company; analyze holdings and sector movement, not company filings |
+| CJMB | Callan JMB Inc. | Cold chain / emergency logistics | Healthcare logistics, vaccine storage, emergency preparedness, specialty packaging, regulated operations | High-risk watch | Track Nasdaq compliance, reverse split risk, dilution, government contracts, customer concentration, 10-Q cash burn, going-concern language |
 
 ## Filing Types to Track
 
@@ -30,3 +31,4 @@ Purpose: Track selected public companies through filings, fundamentals, risks, o
 - Separate speculation from evidence.
 - Watch ownership changes, share issuance, capital raises, and regulatory issues.
 - Treat hype sectors carefully.
+- Treat microcap / low-price stocks as high-risk until filings prove stability.

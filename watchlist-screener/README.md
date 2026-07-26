@@ -28,7 +28,27 @@ python screener.py --format json                # JSON to stdout
 python screener.py --output report.md           # write to a file
 python screener.py --tickers NVDA,RGTI --proxies SMH
 python screener.py --fetch-timeout 20           # lower the per-ticker network ceiling
+python screener.py --z-threshold 2.5 --gap-threshold 5 --corr-window 90
 ```
+
+## Screens
+
+- **Volatility**: rolling 20-day and 60-day annualized volatility (stdev of
+  daily log returns) vs. each ticker's own trailing 1yr average of the 20-day
+  series. Flags `elevated` (>30% above average) or `compressed` (>30% below).
+- **Volume z-score**: each day's volume vs. the mean/stdev of the *preceding*
+  20 days. Flags any of the last 20 trading days where `|z| > 2` (tunable via
+  `--z-threshold`).
+- **Gap detection**: open vs. prior close, flagged when the move exceeds
+  `--gap-threshold` percent (default 3%), over the last 20 trading days.
+- **Correlation matrix**: pairwise correlation of daily log returns across the
+  full watchlist + sector proxies, over the trailing `--corr-window` days
+  (default 60). Symbols without enough overlapping history (e.g. a recent
+  listing) are dropped from the matrix rather than shown with a misleading
+  partial-window number.
+
+All four are descriptive only — flags mark days/conditions worth a human
+look, not buy/sell signals.
 
 Progress ("Fetching NVDA...", row counts, per-ticker errors) prints to stderr as it
 runs, so you can see what's happening rather than staring at a blank terminal.
@@ -49,17 +69,16 @@ sanity-check plain connectivity to Yahoo Finance from your machine/network
 
 ## Status
 
-Implemented so far: data pull (yfinance) + rolling 20/60-day volatility vs.
-each ticker's own trailing 1-year average. Volume z-score, gap detection, and
-the rolling correlation matrix are being added next.
+All four screens (volatility, volume z-score, gap detection, correlation
+matrix) are implemented, tested against synthetic data, and confirmed
+against live Yahoo Finance data for the default watchlist.
 
-## Note on testing in this environment
+## Testing
 
-This was built in a sandboxed session whose network egress is restricted to
-an allowlist (PyPI, npm, GitHub, Anthropic) — general internet hosts,
-including Yahoo Finance, are blocked by the environment's egress policy. The
-screen logic and the CLI/report pipeline were validated end-to-end against
-synthetic OHLCV data (see `tests/`), but the actual `yfinance` data pull has
-not been exercised against live Yahoo Finance data. Run `python screener.py`
-locally to confirm the live pull and inspect real output before relying on
-it.
+`tests/` covers the screen math and the fetch-timeout watchdog against
+synthetic/mocked data (`python -m pytest tests/`, no network required). This
+was originally built in a sandboxed session whose network egress is
+restricted to an allowlist (PyPI, npm, GitHub, Anthropic) — general internet
+hosts, including Yahoo Finance, are blocked there — so the live data pull
+could only be exercised by running `python screener.py` in a normal
+environment, which has since been done successfully.

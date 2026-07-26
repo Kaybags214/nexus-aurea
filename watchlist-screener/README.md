@@ -1,10 +1,11 @@
 # Watchlist Screener
 
-A descriptive, on-demand screener for a fixed watchlist plus sector-proxy
-tickers. It pulls daily OHLCV and computes rolling statistics (volatility,
-volume anomalies, gaps, correlation). It does **not** generate trade signals,
-place orders, or run as a scheduled job — run it manually whenever you want a
-fresh read.
+A descriptive screener for a fixed watchlist plus sector-proxy tickers. It
+pulls daily OHLCV and computes rolling statistics (volatility, volume
+anomalies, gaps, correlation). It does **not** generate trade signals or
+place orders. Run it on demand, or optionally on a daily schedule (see
+"Daily automation" below) — either way it only ever produces a descriptive
+report, never an action.
 
 ## Watchlist
 
@@ -17,8 +18,13 @@ Sector proxies (default): `SMH` (semiconductors, relevant to NVDA), `QTUM`
 
 ```bash
 cd watchlist-screener
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+(A venv isn't strictly required for manual runs, but `run_daily.sh` below
+expects one at `.venv/` so cron doesn't need your shell profile.)
 
 ## Usage
 
@@ -66,6 +72,64 @@ is slow, watch the stderr progress lines to see which ticker is stuck, and
 try `--fetch-timeout 15` to fail faster. If every ticker times out, first
 sanity-check plain connectivity to Yahoo Finance from your machine/network
 (`python -c "import yfinance as yf; print(yf.Ticker('NVDA').history(period='5d'))"`).
+
+## Daily automation
+
+`run_daily.sh` wraps the screener for cron/Task Scheduler: it activates
+`.venv`, writes a dated report to `reports/YYYY-MM-DD.md`, and captures
+stderr to `reports/YYYY-MM-DD.log`. It exits non-zero only if **every**
+watchlist ticker failed to fetch (a proxy failing alone still exits 0),
+so cron's failure notifications mean something.
+
+```bash
+chmod +x run_daily.sh
+./run_daily.sh                 # sanity-check it manually first
+```
+
+Reports and logs land in `reports/`, which is gitignored by default —
+they're local output, not source. Extra arguments pass straight through to
+`screener.py`, e.g. `./run_daily.sh --gap-threshold 5`.
+
+### Linux/macOS: cron
+
+Use the absolute path (cron's environment has no shell profile or PATH to
+speak of):
+
+```bash
+crontab -e
+```
+
+Add a line like this (7:00am on weekdays; cron uses the system's local
+time, adjust the hour for yours):
+
+```
+0 7 * * 1-5 /absolute/path/to/nexus-aurea/watchlist-screener/run_daily.sh
+```
+
+Check it's registered with `crontab -l`. The next morning, confirm it ran:
+`ls -la reports/` and read the newest `.md`/`.log` pair.
+
+### macOS alternative: launchd
+
+cron works fine on macOS, but if you'd rather use a launchd plist (survives
+sleep/wake more reliably), ask and I can add one.
+
+### Windows: Task Scheduler
+
+```powershell
+schtasks /create /tn "WatchlistScreener" /tr "C:\path\to\watchlist-screener\run_daily.sh" /sc daily /st 07:00
+```
+
+(Requires Git Bash/WSL for the `.sh` wrapper, or ask and I can add a native
+`.ps1` equivalent instead.)
+
+### What automation does *not* do here
+
+The cron job only runs the screener and writes local files — it does not
+commit, push, or email anything. If you want the daily report automatically
+committed to this repo, or emailed/Slacked to you, that's a separate,
+explicit addition (touches shared state / external services), not something
+to silently bundle in.
 
 ## Status
 

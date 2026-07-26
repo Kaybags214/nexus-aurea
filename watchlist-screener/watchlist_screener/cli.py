@@ -110,6 +110,11 @@ def main(argv: list[str] | None = None) -> int:
             f.write(output + "\n")
     else:
         print(output)
+
+    watchlist_results = [t for t in tickers if t in results]
+    if tickers and not watchlist_results:
+        print("error: every watchlist ticker failed to fetch, see errors above", file=sys.stderr)
+        return 1
     return 0
 
 

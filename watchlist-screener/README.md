@@ -27,7 +27,25 @@ python screener.py                              # default watchlist, markdown to
 python screener.py --format json                # JSON to stdout
 python screener.py --output report.md           # write to a file
 python screener.py --tickers NVDA,RGTI --proxies SMH
+python screener.py --fetch-timeout 20           # lower the per-ticker network ceiling
 ```
+
+Progress ("Fetching NVDA...", row counts, per-ticker errors) prints to stderr as it
+runs, so you can see what's happening rather than staring at a blank terminal.
+
+## If it seems to hang
+
+yfinance makes several sequential HTTP calls per ticker (cookie, crumb, chart
+data) with no retries but generous per-call timeouts, so a stalled connection
+(rate limiting, a flaky network, a corporate proxy) can make a single ticker
+take a long time. This screener fetches all tickers in parallel and enforces
+a hard `--fetch-timeout` per ticker (default 45s) — a stuck ticker is recorded
+as an error and the run continues, and the process force-exits once the
+report is built even if a stalled background thread is still alive. If a run
+is slow, watch the stderr progress lines to see which ticker is stuck, and
+try `--fetch-timeout 15` to fail faster. If every ticker times out, first
+sanity-check plain connectivity to Yahoo Finance from your machine/network
+(`python -c "import yfinance as yf; print(yf.Ticker('NVDA').history(period='5d'))"`).
 
 ## Status
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 
@@ -33,6 +34,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--format", choices=["markdown", "json"], default="markdown", help="Report output format"
     )
     parser.add_argument("--output", help="Write report to this file instead of stdout")
+    parser.add_argument(
+        "--fetch-timeout",
+        type=int,
+        default=data.FETCH_TIMEOUT,
+        help=f"Max seconds to wait per ticker before giving up on it (default: {data.FETCH_TIMEOUT})",
+    )
     return parser.parse_args(argv)
 
 
@@ -42,7 +49,9 @@ def main(argv: list[str] | None = None) -> int:
     proxies = [t.strip().upper() for t in args.proxies.split(",") if t.strip()]
     all_symbols = tickers + [p for p in proxies if p not in tickers]
 
-    price_data, errors = data.fetch_all(all_symbols, period=args.period)
+    price_data, errors = data.fetch_all(
+        all_symbols, period=args.period, fetch_timeout=args.fetch_timeout
+    )
     for ticker, message in errors.items():
         print(f"warning: skipping {ticker}: {message}", file=sys.stderr)
 
@@ -106,5 +115,14 @@ def _render_markdown(report: dict) -> str:
     return "\n".join(lines)
 
 
+def _run_as_script() -> None:
+    """Run main() and force the process to exit even if a stalled network
+    thread from yfinance is still alive in the background (see data.py)."""
+    code = main()
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(code)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    _run_as_script()

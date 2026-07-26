@@ -75,20 +75,47 @@ sanity-check plain connectivity to Yahoo Finance from your machine/network
 
 ## Daily automation
 
-`run_daily.sh` wraps the screener for cron/Task Scheduler: it activates
-`.venv`, writes a dated report to `reports/YYYY-MM-DD.md`, and captures
-stderr to `reports/YYYY-MM-DD.log`. It exits non-zero only if **every**
-watchlist ticker failed to fetch (a proxy failing alone still exits 0),
-so cron's failure notifications mean something.
+`run_daily.sh` wraps the screener for cron/Task Scheduler:
+
+1. Activates `.venv`, runs the screener, and writes a dated report to
+   `reports/YYYY-MM-DD.md` with stderr captured to `reports/YYYY-MM-DD.log`
+   (both gitignored — local debug copies).
+2. On success, commits that report to `market-watch/screener-reports/YYYY-MM-DD.md`
+   on `main` and pushes it.
 
 ```bash
 chmod +x run_daily.sh
 ./run_daily.sh                 # sanity-check it manually first
 ```
 
-Reports and logs land in `reports/`, which is gitignored by default —
-they're local output, not source. Extra arguments pass straight through to
-`screener.py`, e.g. `./run_daily.sh --gap-threshold 5`.
+Extra arguments pass straight through to `screener.py`, e.g.
+`./run_daily.sh --gap-threshold 5`.
+
+### How the auto-commit stays out of your way
+
+The commit happens in a dedicated git worktree at `.report-worktree/`, not
+in your working checkout. That means the job **never** switches your branch,
+stashes your edits, or touches uncommitted work — you can be mid-change on a
+feature branch while the 7am job commits to `main`. The worktree is
+bot-managed: it's hard-reset to `origin/main` on every run, so it can't
+drift or carry stale state into a commit.
+
+Behavior in the cases that matter:
+
+- **Screener fails** (every watchlist ticker unfetchable) → exits non-zero,
+  commits nothing. A proxy alone failing still counts as success.
+- **Report unchanged** from one already committed today → no duplicate
+  commit, exits 0.
+- **Someone else pushed to `main`** in the meantime → fetches and rebases
+  onto their work before pushing, with retries. Their commits are never
+  overwritten (no force-push anywhere in this script).
+- **Push fails** after retries → exits non-zero; the commit still exists in
+  `.report-worktree/` so nothing is lost.
+
+All four paths were tested end-to-end against a throwaway local repo.
+
+Add `.report-worktree/` to your global gitignore if you don't want to see it
+in `git status` (it's already listed in this repo's `.gitignore`).
 
 ### Linux/macOS: cron
 
@@ -125,11 +152,15 @@ schtasks /create /tn "WatchlistScreener" /tr "C:\path\to\watchlist-screener\run_
 
 ### What automation does *not* do here
 
-The cron job only runs the screener and writes local files — it does not
-commit, push, or email anything. If you want the daily report automatically
-committed to this repo, or emailed/Slacked to you, that's a separate,
-explicit addition (touches shared state / external services), not something
-to silently bundle in.
+The cron job commits and pushes the daily report to `main` and nothing else.
+It does not email, Slack, or otherwise notify you, and it does not act on
+the report's contents in any way. If you want notifications, that's a
+separate addition — say so explicitly.
+
+To stop the auto-commit and go back to local-files-only, remove the commit
+block at the bottom of `run_daily.sh` (everything below the
+`--- Commit + push ---` comment) and delete `.report-worktree/` with
+`git worktree remove .report-worktree`.
 
 ## Status
 

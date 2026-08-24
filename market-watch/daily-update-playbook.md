@@ -108,24 +108,28 @@ One card per token in `blockchain-pharma-watchlist.md`:
 
 Keep the study framing from the crypto watchlist file — real adoption over price action.
 
-**Data sources.** Use the Crypto.com connector for market data - it is an exchange feed and is
-authoritative for price and volume. All nine watchlist tokens trade there against USD:
+**Data sources.** The Crypto.com connector was disconnected on 2026-08-24, so crypto market data
+comes from web research. Because there is no single authoritative feed, sourcing discipline matters
+more here than anywhere else in the report:
 
-| Tool | Use for | Instrument format |
-|---|---|---|
-| `get_tickers` | Last price, 24h high/low, 24h change, volume, best bid/ask | `BTC_USD`, `TRAC_USD`, `VET_USD` |
-| `get_candlestick` | 7-day change and trend from daily candles | same |
-| `get_book` | Order book depth and spread on thin names | same |
-| `get_trades` | Recent trade flow | same |
+- Take price, 24h change, market cap, volume, and supply from a major aggregator (CoinGecko or
+  CoinMarketCap). Name the aggregator and the as-of timestamp on every figure.
+- Cross-check anything that looks like a large move against a second source before reporting it.
+  Aggregators differ, and a stale or thin quote can look like a real move.
+- For the thin names in particular - TRAC, VET, FIL - note the venue the quote came from. Low-volume
+  tokens can print very different prices across exchanges.
+- Network activity (transactions, active addresses, TVL, staking) comes from block explorers,
+  project dashboards, or DefiLlama. Label the source.
+- Never carry a price forward from the previous report. If a token cannot be priced, print
+  DATA UNAVAILABLE with the reason.
 
-Verified working for BTC, ETH, LINK, HBAR, VET, TRAC, XLM, XRP, and FIL as `<TOKEN>_USD`.
-
-The exchange feed does not carry market capitalization, circulating or total supply, unlock
-schedules, or on-chain network activity. Get those from web research and label the source
-separately - do not present them as exchange data.
-
-Note that `change` from `get_tickers` is a fractional 24h change (0.0152 means +1.52%), not a
-percentage. Convert before display.
+If the Crypto.com connector is reconnected later, prefer it for price and volume - it is an exchange
+feed and more reliable than aggregator scraping. All nine watchlist tokens trade there as
+`<TOKEN>_USD` (verified 2026-08-24 for BTC, ETH, LINK, HBAR, VET, TRAC, XLM, XRP, FIL). Use
+`get_tickers` for last price, 24h high/low, change and volume; `get_candlestick` for 7-day change;
+`get_book` for spread and depth. Its `change` field is a fraction, not a percent - 0.0152 means
++1.52%. Even then, market cap, supply, unlock schedules, and on-chain activity still come from web
+research, since the exchange feed does not carry them.
 
 ### 2.5 Private company signals
 
@@ -225,12 +229,13 @@ reminder prompts.
 
 ## 8. Connector availability
 
-The Crypto.com connector is authenticated on the account, but connectors cannot be attached to
-routines created through the API - the organization blocks that parameter. Scheduled runs therefore
-may or may not have `mcp__Crypto_com__*` tools available.
+The Crypto.com connector was disconnected on 2026-08-24. Scheduled runs use web research for crypto
+market data, per section 2.4.
 
-The run prompt handles both cases: it checks for the connector tools first and uses them when
-present, otherwise falls back to web research and records which source was used in the report.
+The run prompt still probes for `mcp__Crypto_com__*` tools at the start of each run and prefers them
+when present, so reconnecting the connector restores the exchange feed with no further changes.
 
-To attach the connector permanently, recreate the routine from the Routines UI on claude.ai, where
+Note that connectors cannot be attached to routines created through the API - the organization
+blocks that parameter. Reconnecting alone may therefore not be enough; to guarantee the scheduled
+sessions receive connector tools, recreate the routine from the Routines UI on claude.ai, where
 connector grants can be selected.

@@ -88,6 +88,11 @@ For non-U.S. names (Samsung, Novo Nordisk ADR context, Shenzhen-listed optical c
 equivalent local disclosure — exchange filings, annual and interim reports, 20-F where applicable —
 and label the source clearly.
 
+**ETFs file differently.** WQTM and IYW are registered investment companies, not operating
+companies - they file no 10-K, 10-Q, or 8-K. For these, check N-PORT and N-CSR for holdings and
+index changes and 485BPOS for prospectus changes, and report holdings, concentration, and expense
+ratio rather than company fundamentals.
+
 Append every newly discovered filing as a row in `market-watch/filing-tracker.md`.
 
 ### 2.4 Crypto / blockchain watchlist
@@ -190,7 +195,7 @@ note stating the market was closed and covering crypto only — crypto trades co
 
 ## 7. Schedule mechanics
 
-Driven by a Claude Routine, trigger ID `trig_01Pg5zjTwsLZnZEi71MZjKUA`, on cron `32 20 * * 1-5`.
+Driven by a Claude Routine, trigger ID `trig_01VpM5waKPTsMgEciRdHi4Pd`, on cron `32 20 * * 1-5`.
 
 Cron is evaluated in UTC and does not follow daylight saving, so the schedule has to be shifted by
 hand twice a year to stay at 4:32 PM Eastern:
@@ -212,6 +217,11 @@ One-shot reminder routines are scheduled to make each switch:
 
 Each reminder fires on the Sunday of the change, before the following Monday's run, and sends a push
 and email notification. The March reminder also re-arms the next two, so the chain sustains itself.
+Both reminders fall back to looking the routine up by name if the trigger ID has changed.
+
+Notification channels cannot be edited via `update_trigger`; changing them means recreating the
+routine, which issues a new trigger ID. If that happens, update the ID in this table and in both
+reminder prompts.
 
 ## 8. Connector availability
 

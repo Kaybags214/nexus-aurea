@@ -103,6 +103,25 @@ One card per token in `blockchain-pharma-watchlist.md`:
 
 Keep the study framing from the crypto watchlist file — real adoption over price action.
 
+**Data sources.** Use the Crypto.com connector for market data - it is an exchange feed and is
+authoritative for price and volume. All nine watchlist tokens trade there against USD:
+
+| Tool | Use for | Instrument format |
+|---|---|---|
+| `get_tickers` | Last price, 24h high/low, 24h change, volume, best bid/ask | `BTC_USD`, `TRAC_USD`, `VET_USD` |
+| `get_candlestick` | 7-day change and trend from daily candles | same |
+| `get_book` | Order book depth and spread on thin names | same |
+| `get_trades` | Recent trade flow | same |
+
+Verified working for BTC, ETH, LINK, HBAR, VET, TRAC, XLM, XRP, and FIL as `<TOKEN>_USD`.
+
+The exchange feed does not carry market capitalization, circulating or total supply, unlock
+schedules, or on-chain network activity. Get those from web research and label the source
+separately - do not present them as exchange data.
+
+Note that `change` from `get_tickers` is a fractional 24h change (0.0152 means +1.52%), not a
+percentage. Convert before display.
+
 ### 2.5 Private company signals
 
 For each private entry (Sygaldry Technologies, Solidigm, and any added later):
@@ -171,10 +190,37 @@ note stating the market was closed and covering crypto only — crypto trades co
 
 ## 7. Schedule mechanics
 
-The run is driven by a Claude Routine on cron `32 20 * * 1-5` (UTC), which is 4:32 PM Eastern while
-U.S. Eastern Daylight Time is in effect.
+Driven by a Claude Routine, trigger ID `trig_01Pg5zjTwsLZnZEi71MZjKUA`, on cron `32 20 * * 1-5`.
 
-Cron is evaluated in UTC and does not follow daylight saving. When the U.S. returns to Eastern
-Standard Time in early November, the schedule must move to `32 21 * * 1-5` to stay at 4:32 PM ET,
-and back to `32 20 * * 1-5` when EDT resumes in March. Left unchanged over the winter, the run would
-fire at 3:32 PM ET — while the market is still open.
+Cron is evaluated in UTC and does not follow daylight saving, so the schedule has to be shifted by
+hand twice a year to stay at 4:32 PM Eastern:
+
+| Period | Cron (UTC) | Eastern |
+|---|---|---|
+| EDT (Mar-Nov) | `32 20 * * 1-5` | 4:32 PM |
+| EST (Nov-Mar) | `32 21 * * 1-5` | 4:32 PM |
+
+Left unchanged over the winter the run fires at 3:32 PM ET, while the market is still open, and
+every report would capture mid-session prices instead of the close.
+
+One-shot reminder routines are scheduled to make each switch:
+
+| Fires | Trigger ID | Action |
+|---|---|---|
+| 2026-11-01 | `trig_0199DnhhGkehVQtbvkpNB66d` | EDT to EST, set cron to `32 21 * * 1-5` |
+| 2027-03-14 | `trig_01YZAKT22UXzFfaSH82ZodKY` | EST to EDT, set cron to `32 20 * * 1-5`, and schedule the next pair |
+
+Each reminder fires on the Sunday of the change, before the following Monday's run, and sends a push
+and email notification. The March reminder also re-arms the next two, so the chain sustains itself.
+
+## 8. Connector availability
+
+The Crypto.com connector is authenticated on the account, but connectors cannot be attached to
+routines created through the API - the organization blocks that parameter. Scheduled runs therefore
+may or may not have `mcp__Crypto_com__*` tools available.
+
+The run prompt handles both cases: it checks for the connector tools first and uses them when
+present, otherwise falls back to web research and records which source was used in the report.
+
+To attach the connector permanently, recreate the routine from the Routines UI on claude.ai, where
+connector grants can be selected.

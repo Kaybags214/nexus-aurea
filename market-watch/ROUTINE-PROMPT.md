@@ -34,6 +34,17 @@ volume, previous close, change, change percent, and trading day. Do NOT use `REA
 it is a premium endpoint and returns fabricated sample data (MSFT/AAPL/IBM) on this plan. If you
 ever see those three tickers unrequested, discard the response.
 
+**CRITICAL - validate freshness on every quote.** `GLOBAL_QUOTE` can silently return a stale
+cached row. Observed on 2026-08-27: CJMB first returned `latest trading day: 2026-08-24` at
+$2.27 / -8.84%, then minutes later returned `2026-08-27` at $2.20 / +4.76% - same endpoint, same
+ticker, no error either time. Check the `07. latest trading day` field on EVERY response. If it does
+not match today's session date, re-request once; if it still disagrees, print the figure with its
+actual as-of date and mark it STALE rather than presenting it as today's close.
+
+**Confirm today's date from the data, not the system clock.** This environment's clock has been
+observed running days behind. Take the session date from the `latest trading day` returned by a
+liquid ticker (IBM, INTC), and use that date for the report filename and headers.
+
 **Fundamentals - Alpha Vantage `COMPANY_OVERVIEW`, one call per US ticker.** Gives market cap,
 EBITDA, P/E, PEG, book value, EPS, revenue TTM, margins, ROA/ROE, analyst target price and the full
 strong-buy/buy/hold/sell/strong-sell breakdown, 52-week range, 50/200-day moving averages, shares

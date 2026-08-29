@@ -1,0 +1,322 @@
+<title>Market Watch Sample Report</title>
+<style>
+body{background:#0f172a;color:#f8fafc;font-family:ui-sans-serif,system-ui,sans-serif;padding:2rem;max-width:1600px;margin:0 auto}
+.header{border-bottom:2px solid #1e293b;padding-bottom:1rem;margin-bottom:1.5rem}
+h1{margin:0 0 .25rem;font-size:1.75rem}
+.sub{color:#94a3b8;font-size:.9rem}
+.mkt-bar{display:flex;flex-wrap:wrap;gap:1.5rem;background:#1e293b;padding:1rem;border-radius:.5rem;margin-top:1rem}
+.mkt-item{display:flex;flex-direction:column}
+.banner{background:#2d2613;border:1px solid #f59e0b;border-radius:.5rem;padding:1rem 1.25rem;margin:1.5rem 0}
+.banner h3{margin:0 0 .5rem;color:#f59e0b;font-size:1rem}
+.banner ul{margin:.5rem 0 0;padding-left:1.2rem;font-size:.875rem;line-height:1.6;color:#e2e8f0}
+.section-title{font-size:1.4rem;font-weight:bold;margin:2.5rem 0 1rem;border-left:4px solid #3b82f6;padding-left:.6rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:1.25rem}
+.card{background:#1e293b;border-radius:.75rem;padding:1.25rem;border:1px solid #334155}
+.card.warning{border-color:#f59e0b;background:#2d2613}
+.card.unavail{border-style:dashed;border-color:#f59e0b;opacity:.85}
+.badge{padding:.2rem .5rem;border-radius:.25rem;font-size:.7rem;font-weight:bold;text-transform:uppercase}
+.badge.high{background:#f97316}.badge.med-high{background:#eab308;color:#000}.badge.med{background:#3b82f6}
+.badge.hold{background:#64748b}.badge.high-risk{background:#ef4444}
+.price-row{display:flex;align-items:baseline;gap:.5rem;margin:.9rem 0;font-size:1.2rem}
+.up{color:#22c55e}.down{color:#ef4444}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;font-size:.8rem;color:#94a3b8}
+.srcnote{margin-top:.75rem;padding-top:.6rem;border-top:1px solid #334155;font-size:.78rem;color:#94a3b8;line-height:1.5}
+.thesis{margin-top:.6rem;font-size:.82rem;color:#cbd5e1;line-height:1.5}
+.news-list{margin-top:.7rem;font-size:.8rem}
+.news-item a{color:#60a5fa;text-decoration:none}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem}
+th,td{text-align:left;padding:.5rem;border-bottom:1px solid #334155}
+th{color:#94a3b8;font-weight:600}
+.footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid #1e293b;text-align:center;color:#64748b;font-size:.85rem}
+</style>
+
+<div class="header">
+<h1>Market Watch &mdash; Sample Report</h1>
+<div class="sub">Session covered: Friday, 2026-08-21 close &nbsp;&middot;&nbsp; Generated: 2026-08-24 07:10 ET (pre-market)</div>
+<div class="mkt-bar">
+<div class="mkt-item"><span style="font-size:.75rem;color:#94a3b8">S&amp;P 500</span>
+<span class="up" style="font-weight:bold">7,674.37 (+0.43%)</span></div><div class="mkt-item"><span style="font-size:.75rem;color:#94a3b8">Nasdaq Composite</span>
+<span class="up" style="font-weight:bold">26,180.45 (+0.43%)</span></div><div class="mkt-item"><span style="font-size:.75rem;color:#94a3b8">Dow Jones</span>
+<span class="up" style="font-weight:bold">53,277.01 (+0.98% (+517.80))</span></div><div class="mkt-item"><span style="font-size:.75rem;color:#94a3b8">VIX</span>
+<span class="down" style="font-weight:bold">15.13 (-5.50%)</span></div>
+</div>
+<div style="margin-top:.75rem;font-size:.875rem;color:#cbd5e1">Indices closed higher Friday, pausing the week's losses after US business activity grew at its fastest pace in more than four years. Bond volatility remained the week's dominant theme.</div>
+</div>
+
+<div class="banner">
+<h3>&#9888; Read this first &mdash; what this sample proves and what it doesn't</h3>
+<p style="margin:0;font-size:.875rem;color:#e2e8f0">This is a <strong>pre-market sample</strong> built on Friday's close, generated to show format and to test what data this environment can actually reach. It surfaced a hard constraint:</p>
+<ul>
+<li><strong>SEC EDGAR is unreachable.</strong> Direct fetches to sec.gov are blocked by the network egress proxy, as are all finance data sites tested (Yahoo, CNBC, stockanalysis, macrotrends, CoinGecko, stooq). Filings can only be <em>discovered</em> through web search, never <em>read</em>. The 10-K / 10-Q / 8-K extraction the playbook specifies cannot be delivered in this environment.</li>
+<li><strong>Equity data is partial and uneven.</strong> 12 of 24 names returned usable figures; 12 returned none. Depth varies wildly &mdash; OKLO yielded 52-week range and full analyst coverage, INTC yielded a bare close.</li>
+<li><strong>Two names produced conflicting or stale figures</strong> (CRCL, H) and are flagged rather than silently printed.</li>
+<li><strong>Crypto is the one clean section.</strong> It used the Crypto.com exchange feed, which is still live in this session. Scheduled runs will not have it.</li>
+</ul>
+</div>
+<div class="section-title">EQUITY WATCHLIST &mdash; DATA RETRIEVED</div><div class="grid"><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">INTC</span> <span style="color:#94a3b8">Intel Corporation</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Semiconductors / foundry</span></div>
+<div class="price-row"><strong>$90.07</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Close:</span> 2026-08-21</div><div><span style="color:#64748b">Source:</span> web search</div></div>
+<div class="srcnote"><strong>Data note:</strong> Close confirmed; volume, market cap and fundamentals not retrievable.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> No change. Turnaround thesis still rests on 18A execution and external foundry wins, none of which moved this session.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">IBM</span> <span style="color:#94a3b8">International Business Machines</span></div>
+<div style="margin-top:.25rem"><span class="badge med-high">Medium-High</span> <span style="font-size:.75rem;color:#94a3b8">Enterprise AI / hybrid cloud / quantum</span></div>
+<div class="price-row"><strong>$235.68</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Close:</span> 2026-08-21</div><div><span style="color:#64748b">Mkt Cap:</span> $220.17B (as of 08-20)</div></div>
+<div class="srcnote"><strong>Data note:</strong> Close and market cap from web search; market cap lags one day.</div>
+<div class="news-list"><div class="news-item">&bull; <a href="https://www.coindesk.com/business/2026/07/27/circle-buys-nearly-1-000-blockchain-patents-from-ibm">Circle acquired IBM&#x27;s blockchain patent portfolio - 680+ patent families, ~1,000 issued patents. Terms undisclosed.</a></div></div>
+<div class="thesis"><strong>Thesis check:</strong> Patent sale is dated 2026-07-27, not this session - several aggregators recycled it as an Aug 21 catalyst. Portfolio covers supply-chain verification, which is directly adjacent to the Nexus Aurea thesis. Watch whether IBM retains licensing economics.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">NVO</span> <span style="color:#94a3b8">Novo Nordisk A/S</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Pharma / GLP-1</span></div>
+<div class="price-row"><strong>$46.74</strong> <span class="up">+$0.60 (+1.30%)</span></div>
+<div class="metrics"><div><span style="color:#64748b">Close:</span> 2026-08-21 4:00 PM EDT</div><div><span style="color:#64748b">Mkt Cap:</span> $203.86B</div></div>
+<div class="srcnote"><strong>Data note:</strong> Cleanest equity print of the run - exact close, change and timestamp.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> Unchanged. Wegovy and oral Wegovy remain the driver; patent cliff sits at 2031-32.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">KTOS</span> <span style="color:#94a3b8">Kratos Defense &amp; Security</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Defense tech / drones / space</span></div>
+<div class="price-row"><strong>$56.23</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Range:</span> $55.25 - $60.75</div><div><span style="color:#64748b">Mkt Cap:</span> $10.55B</div></div>
+<div class="srcnote"><strong>Data note:</strong> Close described as approximate by source; wide intraday range unconfirmed.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> Range of $5.50 on a $56 stock is unusually wide. Worth confirming against a second source before reading anything into it.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">CRSP</span> <span style="color:#94a3b8">CRISPR Therapeutics AG</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Gene editing / biotech</span></div>
+<div class="price-row"><strong>$59.50</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Close:</span> 2026-08-21</div><div><span style="color:#64748b">Mkt Cap:</span> ~$5.3B</div><div><span style="color:#64748b">YTD:</span> +8%</div></div>
+<div class="srcnote"><strong>Data note:</strong> Market cap reported as a Q2 figure, not a session close.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> CASGEVY uptake still cited as the driver. No new clinical or regulatory event this session.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">OKLO</span> <span style="color:#94a3b8">Oklo Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high-risk">High-risk watch</span> <span style="font-size:.75rem;color:#94a3b8">Advanced nuclear / AI power</span></div>
+<div class="price-row"><strong>$42.12</strong> <span class="down">-$0.77 (-1.85%)</span></div>
+<div class="metrics"><div><span style="color:#64748b">Prev Close:</span> $41.66</div><div><span style="color:#64748b">Range:</span> $41.39 - $43.68</div><div><span style="color:#64748b">52-Week:</span> $36.61 - $193.84</div><div><span style="color:#64748b">Analyst Target:</span> $79.88 avg (high $130 / low $14)</div><div><span style="color:#64748b">Ratings:</span> 15 buy / 1 sell</div></div>
+<div class="srcnote"><strong>Data note:</strong> Richest equity result of the run. Change figure and last price disagree slightly across sources.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> Trading near the bottom of a 52-week range that peaked at $193.84 - roughly 78% off the high. The $14-$130 target spread is the real signal: analysts do not agree on whether this company is worth anything. Pre-commercial thesis unchanged; still waiting on first power.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">RGTI</span> <span style="color:#94a3b8">Rigetti Computing, Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high-risk">High-risk watch</span> <span style="font-size:.75rem;color:#94a3b8">Quantum computing</span></div>
+<div class="price-row"><strong>$17.73</strong> <span class="up">+10.52%</span></div>
+<div class="metrics"><div><span style="color:#64748b">Range:</span> $16.30 - $17.87</div><div><span style="color:#64748b">Mkt Cap:</span> $5.97B</div></div>
+<div class="srcnote"><strong>Data note:</strong> Close, change and market cap all retrieved.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> Up 10.5% on sentiment coverage rather than a disclosed contract or technical milestone. A $5.97B market cap on this revenue base remains the core risk.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">SMR</span> <span style="color:#94a3b8">NuScale Power Corporation</span></div>
+<div style="margin-top:.25rem"><span class="badge high-risk">High-risk watch</span> <span style="font-size:.75rem;color:#94a3b8">Small modular reactors</span></div>
+<div class="price-row"><strong>$9.07</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Range:</span> $9.17 - $9.65</div><div><span style="color:#64748b">Mkt Cap:</span> $3.86B</div><div><span style="color:#64748b">52-Week:</span> $7.21 - $57.42</div></div>
+<div class="srcnote"><strong>Data note:</strong> Close reported as previous close and sits below the stated day range - unresolved.</div>
+<div class="news-list"><div class="news-item">&bull; <a href="https://www.sec.gov/Archives/edgar/data/0001822966/000182296626000085/smr-20260630.htm">Form 10-Q, Q2 FY2026 (period ending 2026-06-30) located on EDGAR.</a></div></div>
+<div class="thesis"><strong>Thesis check:</strong> Down roughly 84% from the 52-week high. A Q2 10-Q exists and is the single most important unread document on this watchlist - cash runway and project commitments would come straight out of it.</div>
+</div><div class="card warning">
+<div><span style="font-size:1.25rem;font-weight:bold">CRCL</span> <span style="color:#94a3b8">Circle Internet Group, Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Stablecoin / fintech infrastructure</span></div>
+<div class="price-row"><strong>Unresolved</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Aug-21 Range:</span> $86.36 - $92.97</div><div><span style="color:#64748b">Aug-20 Close:</span> $83.66</div><div><span style="color:#64748b">Mkt Cap:</span> ~$22.32B (intraday)</div></div>
+<div class="srcnote"><strong>Data note:</strong> CONFLICTED. One source gave an Aug-21 close of $83.66 below that day&#x27;s stated low of $86.36; a second search showed $83.66 was in fact the Aug-20 close. Aug-21 close not established.</div>
+<div class="news-list"><div class="news-item">&bull; <a href="https://decrypt.co/374388/circle-ibm-blockchain-patent-estate">Acquired IBM&#x27;s blockchain patent estate; now the largest US blockchain patent holder.</a></div></div>
+<div class="thesis"><strong>Thesis check:</strong> Do not record a close for CRCL from this run. The patent acquisition is real but dated late July, and is being recycled as fresh catalyst coverage.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">H</span> <span style="color:#94a3b8">Hyatt Hotels Corporation</span></div>
+<div style="margin-top:.25rem"><span class="badge med-high">Medium-High</span> <span style="font-size:.75rem;color:#94a3b8">Hospitality / travel infrastructure</span></div>
+<div class="price-row"><strong>~$180.98</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Price As-Of:</span> uncertain - not confirmed as 08-21</div><div><span style="color:#64748b">Mkt Cap:</span> $17.05B (as of 08-14)</div></div>
+<div class="srcnote"><strong>Data note:</strong> Weak. Neither price date nor market cap date matches the session.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> Insufficient data to assess. Employer-related name - filings and public data only.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">COHR</span> <span style="color:#94a3b8">Coherent Corp</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Optical components / AI photonics</span></div>
+<div class="price-row"><strong>$290.03</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">As-Of:</span> 2026-08-20 (not 08-21)</div></div>
+<div class="srcnote"><strong>Data note:</strong> Aug-21 close not retrievable; Aug-20 close shown instead and labelled.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> AI transceiver demand thesis unchanged, but this print is a day stale.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">WQTM</span> <span style="color:#94a3b8">WisdomTree Quantum Computing Fund</span></div>
+<div style="margin-top:.25rem"><span class="badge hold">Hold</span> <span style="font-size:.75rem;color:#94a3b8">Quantum ETF</span></div>
+<div class="price-row"><strong>$29.50</strong> </div>
+<div class="metrics"><div><span style="color:#64748b">Holdings:</span> 53</div><div><span style="color:#64748b">Expense Ratio:</span> 0.45%</div><div><span style="color:#64748b">Foreign Issues:</span> 31.3%</div><div><span style="color:#64748b">Inception:</span> 2025-10-09</div></div>
+<div class="srcnote"><strong>Data note:</strong> Price undated. Fund facts verified this session.</div>
+
+<div class="thesis"><strong>Thesis check:</strong> ETF, not an operating company - files N-PORT / N-CSR / 485BPOS, never a 10-K. Tracks the WisdomTree Classiq Quantum Computing Index.</div>
+</div></div><div class="section-title">EQUITY WATCHLIST &mdash; NO DATA THIS RUN</div><p style="color:#94a3b8;font-size:.875rem">Retained per the playbook rule against silently dropping entries.</p><div class="grid"><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">CARV</span> <span style="color:#94a3b8">Carver Bancorp, Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Banking</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">INFQ</span> <span style="color:#94a3b8">Infleqtion Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Quantum technology</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">LIFE</span> <span style="color:#94a3b8">Ethos Technologies</span></div>
+<div style="margin-top:.25rem"><span class="badge med">Medium</span> <span style="font-size:.75rem;color:#94a3b8">Insurtech / fintech</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">CJMB</span> <span style="color:#94a3b8">Callan JMB Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high-risk">High-risk watch</span> <span style="font-size:.75rem;color:#94a3b8">Cold chain / emergency logistics</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">CYRX</span> <span style="color:#94a3b8">Cryoport, Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Cold chain / life-sciences logistics</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">IPGP</span> <span style="color:#94a3b8">IPG Photonics Corporation</span></div>
+<div style="margin-top:.25rem"><span class="badge med-high">Medium-High</span> <span style="font-size:.75rem;color:#94a3b8">Industrial photonics</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">IYW</span> <span style="color:#94a3b8">iShares U.S. Technology ETF</span></div>
+<div style="margin-top:.25rem"><span class="badge hold">Hold</span> <span style="font-size:.75rem;color:#94a3b8">U.S. technology ETF</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">LITE</span> <span style="color:#94a3b8">Lumentum Holdings</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Optical components / AI photonics</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">SSNLF</span> <span style="color:#94a3b8">Samsung Electronics Co., Ltd.</span></div>
+<div style="margin-top:.25rem"><span class="badge med-high">Medium-High</span> <span style="font-size:.75rem;color:#94a3b8">Semiconductors / memory / devices</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">300308.SZ</span> <span style="color:#94a3b8">Zhongji Innolight Co., Ltd.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Optical transceivers</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">300502.SZ</span> <span style="color:#94a3b8">Eoptolink Technology Inc.</span></div>
+<div style="margin-top:.25rem"><span class="badge high">High</span> <span style="font-size:.75rem;color:#94a3b8">Optical modules / AI photonics</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div><div class="card unavail">
+<div><span style="font-size:1.25rem;font-weight:bold">300394.SZ</span> <span style="color:#94a3b8">Suzhou TFC Optical Communication</span></div>
+<div style="margin-top:.25rem"><span class="badge med">Medium</span> <span style="font-size:.75rem;color:#94a3b8">Fiber optic components</span></div>
+<div class="price-row"><strong style="color:#f59e0b">DATA UNAVAILABLE</strong></div>
+<div class="srcnote">No reliable close retrieved for this session. Search returned quote-page links without extractable figures. Entry retained rather than dropped, per playbook rule.</div>
+</div></div><div class="section-title">CRYPTO / BLOCKCHAIN WATCHLIST</div><p style="color:#94a3b8;font-size:.875rem">Source: Crypto.com exchange feed (live). Percentages are 24-hour. Prices are intraday 2026-08-24, not Friday closes &mdash; crypto trades continuously.</p><div class="grid"><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">BTC</span> <span style="color:#94a3b8">Bitcoin</span></div>
+<div class="price-row"><strong>$77,571.23</strong> <span class="up">+1.03%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 78,048.83</div>
+<div><span style="color:#64748b">24h Low:</span> 76,658.25</div>
+<div><span style="color:#64748b">24h Volume:</span> $374.5M</div>
+<div><span style="color:#64748b">As-Of:</span> 10:58 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, BTC_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">ETH</span> <span style="color:#94a3b8">Ethereum</span></div>
+<div class="price-row"><strong>$2,462.05</strong> <span class="up">+1.88%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 2,489.89</div>
+<div><span style="color:#64748b">24h Low:</span> 2,389.89</div>
+<div><span style="color:#64748b">24h Volume:</span> $299.7M</div>
+<div><span style="color:#64748b">As-Of:</span> 11:06 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, ETH_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">XRP</span> <span style="color:#94a3b8">XRP Ledger</span></div>
+<div class="price-row"><strong>$1.4749</strong> <span class="down">-0.47%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 1.5502</div>
+<div><span style="color:#64748b">24h Low:</span> 1.4529</div>
+<div><span style="color:#64748b">24h Volume:</span> $41.9M</div>
+<div><span style="color:#64748b">As-Of:</span> 11:06 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, XRP_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">LINK</span> <span style="color:#94a3b8">Chainlink</span></div>
+<div class="price-row"><strong>$11.531</strong> <span class="up">+0.72%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 11.739</div>
+<div><span style="color:#64748b">24h Low:</span> 11.262</div>
+<div><span style="color:#64748b">24h Volume:</span> $1.83M</div>
+<div><span style="color:#64748b">As-Of:</span> 11:06 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, LINK_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">HBAR</span> <span style="color:#94a3b8">Hedera</span></div>
+<div class="price-row"><strong>$0.079008</strong> <span class="up">+0.37%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 0.081005</div>
+<div><span style="color:#64748b">24h Low:</span> 0.077447</div>
+<div><span style="color:#64748b">24h Volume:</span> $1.18M</div>
+<div><span style="color:#64748b">As-Of:</span> 10:42 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, HBAR_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">FIL</span> <span style="color:#94a3b8">Filecoin</span></div>
+<div class="price-row"><strong>$0.7583</strong> <span class="up">+0.52%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 0.7822</div>
+<div><span style="color:#64748b">24h Low:</span> 0.7388</div>
+<div><span style="color:#64748b">24h Volume:</span> $27.8K</div>
+<div><span style="color:#64748b">As-Of:</span> 10:42 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, FIL_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">TRAC</span> <span style="color:#94a3b8">OriginTrail</span></div>
+<div class="price-row"><strong>$0.37512</strong> <span class="up">+1.52%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 0.43988</div>
+<div><span style="color:#64748b">24h Low:</span> 0.35373</div>
+<div><span style="color:#64748b">24h Volume:</span> $15.2K</div>
+<div><span style="color:#64748b">As-Of:</span> 10:42 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, TRAC_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">XLM</span> <span style="color:#94a3b8">Stellar</span></div>
+<div class="price-row"><strong>$0.19461</strong> <span class="up">+0.28%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 0.20215</div>
+<div><span style="color:#64748b">24h Low:</span> 0.19185</div>
+<div><span style="color:#64748b">24h Volume:</span> $337.0K</div>
+<div><span style="color:#64748b">As-Of:</span> 11:06 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, XLM_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div><div class="card">
+<div><span style="font-size:1.25rem;font-weight:bold">VET</span> <span style="color:#94a3b8">VeChain</span></div>
+<div class="price-row"><strong>$0.0056757</strong> <span class="up">+0.32%</span></div>
+<div class="metrics">
+<div><span style="color:#64748b">24h High:</span> 0.0058475</div>
+<div><span style="color:#64748b">24h Low:</span> 0.0055667</div>
+<div><span style="color:#64748b">24h Volume:</span> $57.7K</div>
+<div><span style="color:#64748b">As-Of:</span> 10:42 UTC</div>
+</div>
+<div class="srcnote">Crypto.com exchange feed, VET_USD. Market cap, circulating supply and on-chain activity not carried by this feed and not retrieved this run.</div>
+</div></div><div class="section-title">PRIVATE COMPANY SIGNALS</div><div class="grid"><div class="card"><div><span style="font-size:1.15rem;font-weight:bold">Sygaldry Technologies</span></div>
+<div style="margin-top:.25rem;font-size:.75rem;color:#94a3b8">Private quantum-AI infrastructure</div>
+<div class="thesis" style="margin-top:.8rem">No funding, partnership, hiring or product disclosure surfaced this session. Founder-linked to Chad Rigetti; remains an adjacent read on the quantum lane rather than a tradeable signal.</div></div><div class="card"><div><span style="font-size:1.15rem;font-weight:bold">Solidigm</span></div>
+<div style="margin-top:.25rem;font-size:.75rem;color:#94a3b8">NAND flash / SSD storage</div>
+<div class="thesis" style="margin-top:.8rem">No IPO or listing signal surfaced this session. SK Hynix subsidiary; NAND pricing and AI data-center storage demand remain the transmission channel to the public names.</div></div></div><div class="section-title">SECTOR NOTES</div>
+<div class="card" style="max-width:none">
+<table>
+<tr><th>Theme</th><th>Read from this session</th></tr>
+<tr><td>Stablecoin / crypto infrastructure</td><td>Circle now holds IBM's blockchain patent estate, including supply-chain verification claims. The most thesis-relevant item on the board for Nexus Aurea, and it is a July event still circulating as fresh news.</td></tr>
+<tr><td>Advanced nuclear</td><td>Both pre-commercial names sit near 52-week lows &mdash; OKLO ~78% off its high, SMR ~84% off. The sector has de-rated hard while the AI-power narrative stayed intact. Neither has delivered first power.</td></tr>
+<tr><td>Quantum</td><td>RGTI +10.5% on sentiment coverage rather than a disclosed contract. Hype-risk rule applies.</td></tr>
+<tr><td>Optical / AI photonics</td><td>Effectively dark this run &mdash; only COHR returned a figure, and it was a day stale. The entire Chinese optical lane returned nothing.</td></tr>
+<tr><td>Pharma / GLP-1</td><td>NVO quiet and up slightly. No regulatory or trial event.</td></tr>
+<tr><td>Cold chain</td><td>No data for CYRX or CJMB. The logistics lane closest to the Nexus Aurea thesis is the least visible to this data channel.</td></tr>
+</table>
+</div>
+
+<div class="footer">
+<p>Generated 2026-08-24 07:10 ET &middot; sample run, not a scheduled report</p>
+<p>For research/tracking purposes only. Not financial advice.</p>
+</div>

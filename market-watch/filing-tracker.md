@@ -25,6 +25,21 @@ Purpose: Track SEC filings and extract business-relevant findings.
 | 2026-07-05 | INFQ | Infleqtion Inc. | 8-K / S-8 | 2026-02-13 (domestication/uplisting); 2026-04 (S-8) | Completed SPAC domestication from Cayman entity, moved from Nasdaq (CCCX/CCCXW) to NYSE as INFQ; guided FY26 revenue to ~$40M with narrowing losses; Canaccord Genuity initiated Buy, PT $22 | Watch next 10-Q vs. $40M guide; watch for dilutive capital raise (S-1/S-3) |
 | 2026-07-05 | LIFE | Ethos Technologies | S-1/A | Effective 2026-01-28 | IPO priced $19.00/share 1/30/26, net proceeds $82.6M; revenue grew $255M to $388M (2024 to 2025); activated policies grew 127,619 to 198,338; commission-based model, no insurance risk retained; 9 analysts ~87% Buy consensus, avg PT $28.85 vs. current price well below IPO price and 52-wk high | Watch post-IPO lockup expiry (falls within next ~3 months) and next 10-Q for growth confirmation |
 | 2026-07-05 | WQTM | WisdomTree Quantum Computing Fund | N/A | N/A | Confirmed: WQTM is a NYSE-listed ETF (WisdomTree Quantum Computing Fund), not an operating company — does not file 10-Ks/10-Qs/8-Ks. Likely holds INFQ and other quantum-theme names | Reclassify or remove from company filing tracker; not applicable to this checklist |
+| 2026-07-05 | WQTM | WisdomTree Quantum Computing Fund | Verify |  | Confirmed as ETF, not operating company. No SEC company filings to track. | Track holdings and expense ratio, not filings |
+| 2026-07-28 | CJMB | Callan JMB Inc. | Watchlist Start |  | Cold chain / emergency logistics, high-risk microcap | Pull 10-Q, check Nasdaq compliance and going-concern language |
+| 2026-07-28 | CRCL | Circle Internet Group, Inc. | Watchlist Start |  | Stablecoin / payments infrastructure | Pull 10-Q, Form 4, Form 144; check USDC circulation and reserve income |
+| 2026-07-28 | CRSP | CRISPR Therapeutics AG | Watchlist Start |  | Gene editing, CASGEVY commercialization | Pull 10-Q, check CASGEVY patient starts and cash runway |
+| 2026-07-28 | CYRX | Cryoport, Inc. | Watchlist Start |  | Cold chain / life-sciences logistics — closest public comp to Nexus Aurea lane | Pull 10-Q, check margin trend and operating cash flow |
+| 2026-07-28 | H | Hyatt Hotels Corporation | Watchlist Start |  | Employer-related watch; use public filings only | Pull 10-Q, check RevPAR and fee mix. Never use non-public workplace information. |
+| 2026-07-28 | IBM | International Business Machines Corp. | Watchlist Start |  | Enterprise AI / hybrid cloud / quantum | Pull 10-Q, check software growth and free cash flow |
+| 2026-07-28 | INTC | Intel Corporation | Watchlist Start |  | Semiconductor turnaround / foundry | Pull 10-Q, check 18A progress and gross margin |
+| 2026-07-28 | IPGP | IPG Photonics Corporation | Watchlist Start |  | Industrial photonics / advanced manufacturing | Pull 10-Q, check bookings and China exposure |
+| 2026-07-28 | IYW | iShares U.S. Technology ETF | Verify |  | ETF, not operating company. No SEC company filings to track. | Track holdings, concentration, and overlap with QQQ/VGT/XLK |
+| 2026-07-28 | KTOS | Kratos Defense & Security Solutions | Watchlist Start |  | Defense technology / drones / space systems | Pull 10-Q, check backlog and book-to-bill |
+| 2026-07-28 | NVO | Novo Nordisk A/S | Watchlist Start |  | GLP-1 / obesity care. Foreign private issuer — files 20-F, not 10-K. | Pull 20-F and interim reports; check Wegovy share vs Lilly |
+| 2026-07-28 | OKLO | Oklo Inc. | Watchlist Start |  | Pre-commercial advanced nuclear | Pull 10-Q, check cash burn, dilution, NRC/DOE milestones |
+| 2026-07-28 | RGTI | Rigetti Computing, Inc. | Watchlist Start |  | Quantum computing, high-risk | Pull 10-Q, check cash runway, dilution, revenue quality |
+| 2026-07-28 | SMR | NuScale Power Corporation | Watchlist Start |  | SMR / AI power infrastructure, pre-commercial | Pull 10-Q, check binding contracts vs planning agreements |
 
 
 ### Note on WQTM

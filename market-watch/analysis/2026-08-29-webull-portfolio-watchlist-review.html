@@ -1,0 +1,471 @@
+<title>Order Flow vs. The Tape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #F7F6F3;
+    --surface: #FFFFFF;
+    --surface-2: #F1EFEA;
+    --ink: #16181C;
+    --ink-soft: #3D4048;
+    --muted: #5F6169;
+    --rule: #E2E0DA;
+    --rule-strong: #C9C6BD;
+    --accent: #8F6410;
+    --accent-soft: #F0E4CB;
+    --down: #AE3628;
+    --down-soft: #F5E2DE;
+    --up: #2C7550;
+    --up-soft: #DFEDE5;
+    --shadow: 0 1px 2px rgba(22,24,28,.05), 0 8px 24px -16px rgba(22,24,28,.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #141619;
+      --surface: #1C1F24;
+      --surface-2: #23262C;
+      --ink: #E9E8E4;
+      --ink-soft: #C3C4C2;
+      --muted: #93969E;
+      --rule: #2C3037;
+      --rule-strong: #3C424B;
+      --accent: #E0A94F;
+      --accent-soft: #3A2F1B;
+      --down: #EE7A66;
+      --down-soft: #3A2320;
+      --up: #5CBE87;
+      --up-soft: #1D2F26;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #141619;
+    --surface: #1C1F24;
+    --surface-2: #23262C;
+    --ink: #E9E8E4;
+    --ink-soft: #C3C4C2;
+    --muted: #93969E;
+    --rule: #2C3037;
+    --rule-strong: #3C424B;
+    --accent: #E0A94F;
+    --accent-soft: #3A2F1B;
+    --down: #EE7A66;
+    --down-soft: #3A2320;
+    --up: #5CBE87;
+    --up-soft: #1D2F26;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 44px 24px 80px; }
+
+  h1, h2, h3, .ui { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; }
+  .num, .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .eyebrow {
+    font-family: "Archivo", sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 48px); font-weight: 700; line-height: 1.06;
+    letter-spacing: -.022em; margin: 10px 0 0; text-wrap: balance;
+  }
+  .standfirst {
+    font-size: 20px; line-height: 1.5; color: var(--ink-soft);
+    max-width: 62ch; margin: 16px 0 0;
+  }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 26px; }
+  .stamp {
+    display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 20px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted);
+  }
+  .stamp b { color: var(--ink); font-weight: 500; }
+
+  section { margin-top: 54px; }
+  h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 6px; display: flex; align-items: baseline; gap: 12px;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+  .sectionlede {
+    font-size: 22px; font-weight: 400; line-height: 1.38; letter-spacing: -.012em;
+    margin: 0 0 22px; max-width: 60ch; text-wrap: balance;
+    font-family: "Archivo", sans-serif;
+  }
+  p { margin: 0 0 15px; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 500; color: var(--ink); }
+  .prose strong { font-weight: 600; }
+
+  /* account strip */
+  .acct { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .acct div { background: var(--surface); padding: 14px 16px; }
+  .acct .k { font-family:"Archivo",sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
+  .acct .v { font-family:"IBM Plex Mono",monospace; font-size: 21px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
+  /* flow cards */
+  .flowgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px,1fr)); gap: 16px; }
+  .flow {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 18px 18px 16px; box-shadow: var(--shadow);
+  }
+  .flow.hot { border-color: var(--accent); }
+  .flowhead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
+  .tkr { font-family:"Archivo",sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+  .daychg { font-family:"IBM Plex Mono",monospace; font-size: 14px; font-weight: 500; }
+  .flowsub { font-size: 13px; color: var(--muted); font-family:"Archivo",sans-serif; margin-bottom: 14px; }
+  .netbig { font-family:"IBM Plex Mono",monospace; font-size: 27px; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+  .netlbl { font-family:"Archivo",sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+  .flownote { font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); margin-top: 13px; padding-top: 13px; border-top: 1px solid var(--rule); }
+  .neg { color: var(--down); } .pos { color: var(--up); }
+
+  /* 3-day flow sparkbars */
+  .spark { display: flex; gap: 4px; margin-top: 12px; align-items: flex-end; height: 34px; }
+  .sparkcol { flex: 1; display: flex; flex-direction: column; justify-content: center; height: 100%; gap: 2px; }
+  .sparkbar { height: 6px; border-radius: 1px; }
+  .sparkday { font-family:"IBM Plex Mono",monospace; font-size: 9.5px; color: var(--muted); text-align: center; margin-top: 3px; }
+
+  /* tables */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 660px; }
+  thead th {
+    font-family:"Archivo",sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--muted); text-align: right; padding: 11px 14px;
+    border-bottom: 1px solid var(--rule-strong); white-space: nowrap; background: var(--surface-2);
+  }
+  thead th:first-child, thead th.l { text-align: left; }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--rule); text-align: right; font-family:"IBM Plex Mono",monospace; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td.l { text-align: left; }
+  tbody td.name { font-family:"Archivo",sans-serif; font-weight: 600; font-size: 14px; }
+  tbody td.note { font-family:"Newsreader",serif; font-size: 14.5px; color: var(--ink-soft); text-align: left; line-height: 1.42; }
+  tbody tr.band { background: var(--surface-2); }
+
+  /* range bar */
+  .rb { position: relative; width: 100%; min-width: 108px; height: 7px; background: var(--surface-2); border: 1px solid var(--rule); border-radius: 4px; }
+  .rb i { position: absolute; top: -3px; width: 3px; height: 11px; background: var(--accent); border-radius: 1px; }
+  .rb u { position: absolute; top: 0; bottom: 0; left: 0; background: var(--rule-strong); border-radius: 3px 0 0 3px; opacity: .55; }
+
+  .pill {
+    display: inline-block; font-family:"Archivo",sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: .07em; text-transform: uppercase; padding: 2.5px 7px; border-radius: 3px;
+  }
+  .p-down { background: var(--down-soft); color: var(--down); }
+  .p-up { background: var(--up-soft); color: var(--up); }
+  .p-acc { background: var(--accent-soft); color: var(--accent); }
+
+  .callout {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: 3px; padding: 18px 20px; margin: 22px 0;
+  }
+  .callout .eyebrow { color: var(--accent); }
+  .callout p { margin-top: 8px; }
+
+  .twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 18px 20px; }
+  .panel h3 { font-size: 15px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.005em; }
+  .panel .sub { font-family:"IBM Plex Mono",monospace; font-size: 12px; color: var(--muted); margin-bottom: 11px; }
+  .panel p { font-size: 15px; line-height: 1.5; }
+
+  ul.tight { margin: 0; padding-left: 19px; }
+  ul.tight li { margin-bottom: 7px; line-height: 1.5; }
+  ul.tight li:last-child { margin-bottom: 0; }
+
+  footer { margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 13.5px; color: var(--muted); }
+  footer p { max-width: 78ch; margin-bottom: 9px; }
+  code { font-family:"IBM Plex Mono",monospace; font-size: .88em; background: var(--surface-2); padding: 1px 5px; border-radius: 3px; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Nexus Aurea &middot; Market Watch &middot; Position &amp; Watchlist Review</div>
+  <h1>Order Flow vs. The Tape</h1>
+  <p class="standfirst">Friday's close said the market was quiet. The large-order data underneath it says something very different — and the loudest signal sits directly under the one position you actually hold.</p>
+  <div class="stamp">
+    <span>Session <b>Fri 28 Aug 2026</b> (close)</span>
+    <span>Compiled <b>Sat 29 Aug 2026</b></span>
+    <span>Sources <b>Webull Prime</b> &middot; <b>Alpha Vantage</b></span>
+    <span>Universe <b>54 Prime + 24 repo</b></span>
+  </div>
+</header>
+
+<section>
+  <h2>Account</h2>
+  <div class="sectionlede">Three accounts, one position, and $45.42 of dry powder.</div>
+  <div class="acct">
+    <div><span class="k">Net liquidation</span><span class="v">$55.00</span></div>
+    <div><span class="k">Market value</span><span class="v">$9.58</span></div>
+    <div><span class="k">Cash / buying power</span><span class="v">$45.42</span></div>
+    <div><span class="k">Unrealized P/L</span><span class="v neg">-$0.42</span></div>
+    <div><span class="k">Day P/L</span><span class="v">$0.00</span></div>
+  </div>
+
+  <div class="tablewrap" style="margin-top:16px">
+    <table>
+      <thead><tr><th class="l">Account</th><th class="l">Type</th><th>Net liq.</th><th>Positions</th><th class="l">Holding</th></tr></thead>
+      <tbody>
+        <tr><td class="l name">Individual Cash</td><td class="l">CASH</td><td>$55.00</td><td>1</td><td class="l">DRAM &mdash; 0.17214 sh @ $58.09 cost, last $55.83</td></tr>
+        <tr><td class="l name">Crypto</td><td class="l">CRYPTO</td><td>$0.00</td><td>0</td><td class="l">&mdash;</td></tr>
+        <tr><td class="l name">Events Cash</td><td class="l">EVENTS</td><td>$0.00</td><td>0</td><td class="l">&mdash;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:16px">The whole book is <strong>0.17214 shares of DRAM</strong> — the Roundhill Memory ETF — bought for $10.00 at $58.09 and now marked $9.58, down 4.22%. Everything else is cash. At this size the position is a placeholder, not a risk exposure, so the useful work is not "how is my portfolio doing" but <strong>what the paid data says about the one theme you've already put money into, and about the 24 names you've written research rules for.</strong></p>
+</section>
+
+<section>
+  <h2>The setup</h2>
+  <div class="sectionlede">This was not a down market. It was a rotation, and the index masked it.</div>
+
+  <p>The broad tape barely moved on Friday: <span class="num">VTI −0.33%</span>, <span class="num">IYF +0.34%</span>. Underneath, the AI-hardware, power and quantum complex was repriced hard — <span class="num">MRVL −10.3%</span>, <span class="num">INFQ −10.6%</span>, <span class="num">IONQ −7.7%</span>, <span class="num">CRCL −7.5%</span>, <span class="num">LITE −6.4%</span>, <span class="num">CCJ −5.9%</span>, <span class="num">OKLO −5.6%</span>, <span class="num">COHR −5.5%</span> — while money went into software and mega-cap: <span class="num">NOW +4.5%</span>, <span class="num">AMZN +4.0%</span>, <span class="num">TMUS +2.6%</span>.</p>
+
+  <p>Webull's 5-day sector aggregation confirms it is a sustained move rather than one bad afternoon: <strong>Software &amp; IT Services +2.47%</strong> and <strong>Computers &amp; Electronics +2.32%</strong> against <strong>Semiconductors −0.82%</strong>, <strong>Aerospace &amp; Defense −2.03%</strong>, <strong>Pharmaceuticals −2.82%</strong> and <strong>Oil &amp; Gas −3.18%</strong>.</p>
+
+  <div class="callout">
+    <div class="eyebrow">The dispersion is the story</div>
+    <p>VTI sits <strong>1.5% below its 52-week high</strong>. In the same session, SMR sat <strong>83.8% below</strong> its own, OKLO <strong>79.3%</strong>, RGTI <strong>73.2%</strong>, KTOS <strong>61.2%</strong>. The speculative lane of your watchlist has already been through a full bear market while the index printed near record highs. Any read of these names as "down with the market" is wrong — the market is not down.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Order flow — the premium signal</h2>
+  <div class="sectionlede">Capital flow by order size is the one thing here you cannot get from a free quote, and on Friday it disagreed with the price on two names that matter.</div>
+
+  <div class="flowgrid">
+
+    <div class="flow hot">
+      <div class="flowhead"><span class="tkr">MU</span><span class="daychg num">−0.27%</span></div>
+      <div class="flowsub">Micron &middot; $932.86 &middot; memory bellwether</div>
+      <div class="netbig neg">−$1.224B</div>
+      <div class="netlbl">Net large-order flow, 28 Aug</div>
+      <div class="spark">
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--up);width:7%"></div><div class="sparkday">26th<br>+22M</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--up);width:96%"></div><div class="sparkday">27th<br>+1.17B</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--down);width:100%"></div><div class="sparkday">28th<br>−1.22B</div></div>
+      </div>
+      <div class="flownote"><strong>The most important line in this report.</strong> Micron closed essentially flat, so the tape shows nothing. Beneath it, institutions pulled <strong>$1.22B net</strong> out in large orders — the single largest outflow anywhere in your universe — one day after putting $1.17B in. A complete round-trip in 24 hours, fully absorbed by mid- and small-sized orders. <strong>MU is the bellwether for the memory theme, and DRAM is the only thing you own.</strong></div>
+    </div>
+
+    <div class="flow hot">
+      <div class="flowhead"><span class="tkr">MRVL</span><span class="daychg num neg">−10.28%</span></div>
+      <div class="flowsub">Marvell &middot; $216.62 &middot; worst day in the book</div>
+      <div class="netbig pos">+$542.3M</div>
+      <div class="netlbl">Net large-order flow, 28 Aug</div>
+      <div class="spark">
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--up);width:4%"></div><div class="sparkday">26th<br>+17M</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--down);width:87%"></div><div class="sparkday">27th<br>−472M</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--up);width:100%"></div><div class="sparkday">28th<br>+542M</div></div>
+      </div>
+      <div class="flownote">The inverse of Micron, and the cleanest divergence in the set. Marvell fell 10.3% while large orders bought <strong>$542M net</strong>. Note the sequence: large money sold <strong>$472M net on the 27th</strong> — ahead of the drop — then bought the dislocation the next day. Price says capitulation; flow says accumulation.</div>
+    </div>
+
+    <div class="flow">
+      <div class="flowhead"><span class="tkr">NVDA</span><span class="daychg num neg">−4.58%</span></div>
+      <div class="flowsub">Nvidia &middot; $217.55</div>
+      <div class="netbig neg">−$2.41B</div>
+      <div class="netlbl">Net large-order flow, 3 sessions</div>
+      <div class="spark">
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--down);width:100%"></div><div class="sparkday">26th<br>−2.98B</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--up);width:25%"></div><div class="sparkday">27th<br>+757M</div></div>
+        <div class="sparkcol"><div class="sparkbar" style="background:var(--down);width:7%"></div><div class="sparkday">28th<br>−188M</div></div>
+      </div>
+      <div class="flownote">Three sessions, <strong>−$2.41B net</strong> in large orders, and the stock is still only 7.9% off its high. The selling is being distributed into strength rather than dumped. This is the pressure source for the whole AI-hardware complex below it.</div>
+    </div>
+
+    <div class="flow">
+      <div class="flowhead"><span class="tkr">OKLO</span><span class="daychg num neg">−5.62%</span></div>
+      <div class="flowsub">Oklo &middot; $40.14 &middot; 79.3% off high</div>
+      <div class="netbig neg">−$6.40M</div>
+      <div class="netlbl">Net large-order flow, 28 Aug</div>
+      <div class="flownote">The textbook pattern your watchlist rules are meant to catch: <strong>large orders net −$6.40M out, small orders net +$1.22M in.</strong> Institutions distributing to retail on the way down. Same shape, smaller scale, at RGTI (large −$0.56M, small −$1.24M — here even retail is leaving).</div>
+    </div>
+
+    <div class="flow">
+      <div class="flowhead"><span class="tkr">INTC</span><span class="daychg num neg">−2.85%</span></div>
+      <div class="flowsub">Intel &middot; $89.47</div>
+      <div class="netbig neg">−$46.3M</div>
+      <div class="netlbl">Net large-order flow, 28 Aug</div>
+      <div class="flownote">The 27th brought a <strong>+$807M</strong> net large-order surge — the kind of print that looks like a thesis confirming. It reversed the next day to −$46M, with medium and small orders also net negative. One-day spikes in this data are noise until a second day confirms them; this one did not.</div>
+    </div>
+
+    <div class="flow">
+      <div class="flowhead"><span class="tkr">CRCL</span><span class="daychg num neg">−7.53%</span></div>
+      <div class="flowsub">Circle &middot; $87.14</div>
+      <div class="netbig neg">−$7.65M</div>
+      <div class="netlbl">Net large-order flow, 28 Aug</div>
+      <div class="flownote">Outflow across <em>every</em> order-size bucket — large −$7.65M, medium −$5.14M, small −$0.64M. No bid anywhere in the book. Of the names reviewed, Circle is the only one where all three tiers sold simultaneously.</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Where the watchlist actually sits</h2>
+  <div class="sectionlede">Position within the 52-week range, sorted by damage. The marker shows where Friday's close sits between the low and the high.</div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th class="l">Ticker</th><th>Close</th><th>Day</th><th>From 52w high</th><th class="l" style="width:150px">52-week range</th><th class="l">Read</th></tr>
+      </thead>
+      <tbody>
+        <tr class="band"><td class="l name">SMR</td><td>9.29</td><td class="neg">−4.62%</td><td class="neg">−83.8%</td><td class="l"><div class="rb"><u style="width:4.1%"></u><i style="left:4.1%"></i></div></td><td class="note">Revenue estimated <em>down</em> 54% YoY next quarter</td></tr>
+        <tr class="band"><td class="l name">OKLO</td><td>40.14</td><td class="neg">−5.62%</td><td class="neg">−79.3%</td><td class="l"><div class="rb"><u style="width:2.2%"></u><i style="left:2.2%"></i></div></td><td class="note">Distribution to retail; balance sheet is fine</td></tr>
+        <tr class="band"><td class="l name">RGTI</td><td>15.59</td><td class="neg">−5.17%</td><td class="neg">−73.2%</td><td class="l"><div class="rb"><u style="width:6.7%"></u><i style="left:6.7%"></i></div></td><td class="note">Revenue est. +91% YoY, but off $1.9M</td></tr>
+        <tr><td class="l name">QUBT</td><td>8.15</td><td class="neg">−5.78%</td><td class="neg">−68.5%</td><td class="l"><div class="rb"><u style="width:10%"></u><i style="left:10%"></i></div></td><td class="note">Not in repo watchlist</td></tr>
+        <tr><td class="l name">QBTS</td><td>16.99</td><td class="neg">−5.08%</td><td class="neg">−63.7%</td><td class="l"><div class="rb"><u style="width:12.5%"></u><i style="left:12.5%"></i></div></td><td class="note">Not in repo watchlist</td></tr>
+        <tr class="band"><td class="l name">CJMB</td><td>2.15</td><td class="neg">−2.27%</td><td class="neg">−61.7%</td><td class="l"><div class="rb"><u style="width:30.2%"></u><i style="left:30.2%"></i></div></td><td class="note">P/B 17.9 on $12.4M cap; Q2 report due 11 Nov</td></tr>
+        <tr class="band"><td class="l name">KTOS</td><td>52.00</td><td class="neg">−3.15%</td><td class="neg">−61.2%</td><td class="l"><div class="rb"><u style="width:9.8%"></u><i style="left:9.8%"></i></div></td><td class="note">Largest analyst gap in the book: +103%</td></tr>
+        <tr class="band"><td class="l name">CARV</td><td>1.53</td><td class="neg">−7.27%</td><td class="neg">−60.3%</td><td class="l"><div class="rb"><u style="width:16.2%"></u><i style="left:16.2%"></i></div></td><td class="note">517 shares traded all day. Effectively illiquid</td></tr>
+        <tr><td class="l name">IONQ</td><td>39.20</td><td class="neg">−7.68%</td><td class="neg">−53.7%</td><td class="l"><div class="rb"><u style="width:22.7%"></u><i style="left:22.7%"></i></div></td><td class="note">Not in repo watchlist</td></tr>
+        <tr class="band"><td class="l name">INFQ</td><td>12.80</td><td class="neg">−10.61%</td><td class="neg">−53.5%</td><td class="l"><div class="rb"><u style="width:22.6%"></u><i style="left:22.6%"></i></div></td><td class="note">Worst single day; flow was flat, not panicked</td></tr>
+        <tr class="band"><td class="l name">IPGP</td><td>76.53</td><td class="neg">−0.93%</td><td class="neg">−50.9%</td><td class="l"><div class="rb"><u style="width:8.2%"></u><i style="left:8.2%"></i></div></td><td class="note">Held up on a brutal day; near range floor</td></tr>
+        <tr class="band"><td class="l name">CRCL</td><td>87.14</td><td class="neg">−7.53%</td><td class="neg">−45.4%</td><td class="l"><div class="rb"><u style="width:34%"></u><i style="left:34%"></i></div></td><td class="note">Selling in all three order tiers</td></tr>
+        <tr class="band"><td class="l name">INTC</td><td>89.47</td><td class="neg">−2.85%</td><td class="neg">−37.1%</td><td class="l"><div class="rb"><u style="width:55.4%"></u><i style="left:55.4%"></i></div></td><td class="note">32 of 48 analysts on Hold</td></tr>
+        <tr class="band"><td class="l name">COHR</td><td>279.20</td><td class="neg">−5.48%</td><td class="neg">−36.5%</td><td class="l"><div class="rb"><u style="width:54.6%"></u><i style="left:54.6%"></i></div></td><td class="note">Trading at the <em>lowest</em> analyst target</td></tr>
+        <tr><td class="l name">MRVL</td><td>216.62</td><td class="neg">−10.28%</td><td class="neg">−34.3%</td><td class="l"><div class="rb"><u style="width:57.8%"></u><i style="left:57.8%"></i></div></td><td class="note">Bought by size into the crash</td></tr>
+        <tr><td class="l name">DRAM</td><td>55.83</td><td class="neg">−1.76%</td><td class="neg">−31.4%</td><td class="l"><div class="rb"><u style="width:53.8%"></u><i style="left:53.8%"></i></div></td><td class="note"><strong>Your position.</strong> Not in repo watchlist</td></tr>
+        <tr class="band"><td class="l name">IBM</td><td>235.59</td><td class="neg">−1.34%</td><td class="neg">−28.6%</td><td class="l"><div class="rb"><u style="width:28.6%"></u><i style="left:28.6%"></i></div></td><td class="note">Defensive as designed; 2.87% yield</td></tr>
+        <tr class="band"><td class="l name">CRSP</td><td>57.72</td><td class="neg">−2.78%</td><td class="neg">−26.5%</td><td class="l"><div class="rb"><u style="width:39.6%"></u><i style="left:39.6%"></i></div></td><td class="note">Uncorrelated to the AI rotation</td></tr>
+        <tr class="band"><td class="l name">NVO</td><td>45.61</td><td class="neg">−1.41%</td><td class="neg">−25.5%</td><td class="l"><div class="rb"><u style="width:42.2%"></u><i style="left:42.2%"></i></div></td><td class="note">P/E 11.4 — but see the currency note below</td></tr>
+        <tr><td class="l name">MU</td><td>932.86</td><td class="neg">−0.27%</td><td class="neg">−25.7%</td><td class="l"><div class="rb"><u style="width:71.8%"></u><i style="left:71.8%"></i></div></td><td class="note">Flat price, record outflow</td></tr>
+        <tr class="band"><td class="l name">WQTM</td><td>32.06</td><td class="neg">−3.00%</td><td class="neg">−22.5%</td><td class="l"><div class="rb"><u style="width:48.8%"></u><i style="left:48.8%"></i></div></td><td class="note">Quantum basket; fell less than its holdings</td></tr>
+        <tr class="band"><td class="l name">LITE</td><td>895.00</td><td class="neg">−6.39%</td><td class="neg">−17.6%</td><td class="l"><div class="rb"><u style="width:80.3%"></u><i style="left:80.3%"></i></div></td><td class="note">Still high in range despite the drop</td></tr>
+        <tr class="band"><td class="l name">H</td><td>172.25</td><td class="neg">−0.59%</td><td class="neg">−16.7%</td><td class="l"><div class="rb"><u style="width:52.8%"></u><i style="left:52.8%"></i></div></td><td class="note">Employer name — research only</td></tr>
+        <tr class="band"><td class="l name">CYRX</td><td>16.09</td><td class="neg">−2.90%</td><td class="neg">−6.5%</td><td class="l"><div class="rb"><u style="width:88.4%"></u><i style="left:88.4%"></i></div></td><td class="note">The strongest name you track</td></tr>
+        <tr class="band"><td class="l name">LIFE</td><td>38.64</td><td class="neg">−2.03%</td><td class="neg">−5.7%</td><td class="l"><div class="rb"><u style="width:92.6%"></u><i style="left:92.6%"></i></div></td><td class="note">Near 52-week high; 4.1× off its low</td></tr>
+        <tr class="band"><td class="l name">IYW</td><td>251.20</td><td class="neg">−1.03%</td><td class="neg">−3.7%</td><td class="l"><div class="rb"><u style="width:89%"></u><i style="left:89%"></i></div></td><td class="note">Your tech benchmark barely moved</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:14px; font-size:14.5px; color:var(--muted)">Shaded rows are names carried in <code>market-watch/watchlist.md</code>. Unshaded rows are in the Webull <strong>Prime</strong> list but have no research entry.</p>
+</section>
+
+<section>
+  <h2>Consensus vs. price</h2>
+  <div class="sectionlede">Where the gap is wide, check whether the analysts are actually behind it — a big number with no conviction behind it is not a signal.</div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="l">Ticker</th><th>Close</th><th>Mean target</th><th>Implied</th><th>Range</th><th class="l">Analyst conviction</th></tr></thead>
+      <tbody>
+        <tr><td class="l name">KTOS</td><td>52.00</td><td>105.62</td><td class="pos">+103.1%</td><td>60 – 150</td><td class="note"><span class="pill p-up">Strong</span> 14 strong buy, 5 buy, 2 hold, <strong>0 sell</strong> of 21</td></tr>
+        <tr><td class="l name">OKLO</td><td>40.14</td><td>79.88</td><td class="pos">+99.0%</td><td>14 – 130</td><td class="note"><span class="pill p-down">No consensus</span> A 9× spread between low and high target is not a forecast</td></tr>
+        <tr><td class="l name">COHR</td><td>279.20</td><td>416.09</td><td class="pos">+49.0%</td><td>280 – 500</td><td class="note"><span class="pill p-acc">At the floor</span> Price is <em>below</em> the single lowest target on the street</td></tr>
+        <tr><td class="l name">MRVL</td><td>216.62</td><td>278.89</td><td class="pos">+28.7%</td><td>126 – 400</td><td class="note"><span class="pill p-up">Strong</span> 31 strong buy, 8 buy, 5 hold, <strong>0 sell</strong> of 44 — updated 28 Aug</td></tr>
+        <tr><td class="l name">INTC</td><td>89.47</td><td>114.88</td><td class="pos">+28.4%</td><td>75 – 200</td><td class="note"><span class="pill p-down">Weak</span> <strong>32 of 48 on Hold.</strong> Cheap, but nobody wants to be early</td></tr>
+        <tr><td class="l name">CYRX</td><td>16.09</td><td>19.33</td><td class="pos">+20.2%</td><td>15 – 25</td><td class="note"><span class="pill p-acc">Tight</span> Narrowest target band in the book — a real estimate</td></tr>
+        <tr><td class="l name">CRCL</td><td>87.14</td><td>103.55</td><td class="pos">+18.8%</td><td>37 – 243</td><td class="note"><span class="pill p-down">Splitting</span> 11 hold and <strong>3 sell</strong> of 27; targets span 6.5×</td></tr>
+        <tr><td class="l name">NVO</td><td>45.61</td><td>47.21</td><td>+3.5%</td><td>see note</td><td class="note"><span class="pill p-down">Currency trap</span> Target is quoted <strong>DKK 303.75</strong>, not dollars</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="eyebrow">Watch the units on NVO</div>
+    <p>Novo Nordisk's consensus target comes back as <strong>DKK 303.75</strong>. Read as dollars against a $45.61 ADR it looks like a 6× mispricing. Converted at Saturday's rate of <strong>DKK/USD 0.15542</strong> it is <strong>$47.21</strong> — about <strong>3.5% upside</strong>. The stock's P/E of 11.4 makes it look like the cheapest quality name you track; the analysts do not agree that it is cheap. Both facts belong in the file.</p>
+  </div>
+</section>
+
+<section>
+  <h2>The nuclear pair, corrected</h2>
+  <div class="sectionlede">Your watchlist flags OKLO and SMR for "cash burn" and "dilution." The filings say the risk is somewhere else.</div>
+
+  <div class="twocol">
+    <div class="panel">
+      <h3>OKLO — solvency is not the risk</h3>
+      <div class="sub">FY2026 P2 &middot; $40.14 &middot; −79.3% from high</div>
+      <p>Net assets per share of <strong>$17.69</strong> across 186.0M shares imply roughly <strong>$3.3B</strong> of net assets, against operating cash flow of <strong>−$0.257/share</strong> (~$47.8M for the period). Debt-to-assets is <strong>2.5%</strong> — effectively unlevered.</p>
+      <p>The real risk is the price you pay for it: <strong>P/B 2.27</strong> and a price-to-sales ratio of <strong>6,175×</strong>, because revenue is a rounding error. Burn is accelerating (−$0.103/sh the prior period), but this company is not running out of money soon. Re-frame the watch rule from <em>cash runway</em> to <em>valuation and permitting milestones</em>.</p>
+    </div>
+    <div class="panel">
+      <h3>SMR — revenue is going backwards</h3>
+      <div class="sub">FY2026 P2 &middot; $9.29 &middot; −83.8% from high</div>
+      <p>Same balance-sheet picture: net assets per share <strong>$4.80</strong> over 429.7M shares (~<strong>$2.1B</strong>), debt-to-assets <strong>1.7%</strong>, operating cash flow <strong>−$0.135/share</strong>. Funded.</p>
+      <p>But the Q3 estimate, due <strong>4–9 Nov</strong>, is <strong>$3.81M revenue against $8.24M a year ago — a 54% decline.</strong> For a pre-commercial infrastructure name whose entire thesis is proof of deployment, revenue halving is a more serious signal than the 84% drawdown. This is the single most important date on your calendar.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Upcoming catalysts</h2>
+  <div class="sectionlede">Every dated estimate the connector returned for names you track.</div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="l">Window</th><th class="l">Ticker</th><th>Revenue est.</th><th>Year ago</th><th>Change</th><th class="l">Note</th></tr></thead>
+      <tbody>
+        <tr><td class="l">2 – 16 Nov</td><td class="l name">CYRX</td><td>$48.69M</td><td>$44.23M</td><td class="pos">+10.1%</td><td class="note">EPS −0.178 vs −0.18; losses flat, revenue growing</td></tr>
+        <tr><td class="l">4 – 9 Nov</td><td class="l name">SMR</td><td>$3.81M</td><td>$8.24M</td><td class="neg">−53.8%</td><td class="note">The one to watch</td></tr>
+        <tr><td class="l">9 – 13 Nov</td><td class="l name">RGTI</td><td>$3.71M</td><td>$1.95M</td><td class="pos">+90.6%</td><td class="note">Strong growth rate on a tiny base</td></tr>
+        <tr><td class="l">10 – 16 Nov</td><td class="l name">CRCL</td><td>$784.99M</td><td>$739.76M</td><td class="pos">+6.1%</td><td class="note"><strong>EPS est. 0.362 vs 0.64 — down 43%.</strong> Margin compression</td></tr>
+        <tr><td class="l">11 – 16 Nov</td><td class="l name">CARV</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td class="note">FY26 Q2. No analyst estimates published</td></tr>
+        <tr><td class="l">12 – 13 Nov</td><td class="l name">INFQ</td><td>$11.20M</td><td>&mdash;</td><td>&mdash;</td><td class="note">No prior-year comparable — recently public</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:15px">Circle is the one to re-read. Revenue is expected up 6% while EPS is expected down 43% — the business is growing and earning less per share at the same time. That is either cost growth or share count growth, and your watchlist already lists Form 4 and Form 144 tracking as the check. Friday's all-tier selling suggests the market has started pricing it.</p>
+</section>
+
+<section>
+  <h2>The gap between your two watchlists</h2>
+  <div class="sectionlede">The Webull Prime list and the repo file have drifted apart, and the drift includes the position you hold.</div>
+
+  <div class="twocol">
+    <div class="panel">
+      <h3>Tracked in Webull, no research entry</h3>
+      <div class="sub">34 of 54 Prime names</div>
+      <p style="margin-bottom:10px">Most consequential first:</p>
+      <ul class="tight">
+        <li><strong>DRAM</strong> — the ETF you actually own. No entry, no thesis, no risk rule.</li>
+        <li><strong>MU, SKHY, TSEM</strong> — the memory and foundry names that determine what DRAM does. MU just printed the largest outflow in your universe.</li>
+        <li><strong>MRVL, NVDA, SOXX</strong> — the AI-semi core driving the rotation your watchlist names are caught in.</li>
+        <li><strong>IONQ, QBTS, QUBT</strong> — three quantum names, while you carry rules for RGTI and WQTM.</li>
+        <li>Also: PLTR, AMZN, NOW, NBIS, CBRS, CEG, CCJ, VRT, RDW, JOBY, AUR, ASC, TMUS, CHRW, MMM, BLK, UONEK, ETOR, EROC, HLIO, UFO, IYF, VTI, 688825.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>In the research file, not in Webull</h3>
+      <div class="sub">5 of 24 repo names</div>
+      <ul class="tight">
+        <li><strong>LITE</strong> — Lumentum. Priced fine ($895.00, −6.4%) but it is not in any Webull list, so it never appears in your quote screens.</li>
+        <li><strong>SSNLF</strong> — Samsung. No US quote returned at all.</li>
+        <li><strong>300308.SZ, 300502.SZ, 300394.SZ</strong> — the Shenzhen optical transceiver names. Not reachable through the US connector; these need a separate data path or they stay unresearched.</li>
+      </ul>
+      <p style="margin-top:12px">One Prime entry (instrument <code>913260055</code>) returns no symbol at all — likely a delisted or renamed security worth clearing out.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="eyebrow">The one change worth making</div>
+    <p>Your review rules say to treat every holding as an operating thesis with a written risk case. <strong>DRAM is the exception you have not written.</strong> It is a memory-sector basket whose bellwether just saw $1.22B of institutional selling behind a flat price — precisely the kind of divergence the rest of your file is built to catch. Adding a memory entry (DRAM, with MU and SKHY as the read-through) would close the only gap where money is actually at risk. I have not edited <code>watchlist.md</code> — that file is yours to curate.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What the data does not say</h2>
+  <div class="sectionlede">Four limits worth carrying forward.</div>
+  <ul class="tight" style="max-width:70ch">
+    <li><strong>One session is not a trend.</strong> Every flow reading here covers 26–28 August. Intel's +$807M reversing in a day is the demonstration of why a single print should not move a thesis.</li>
+    <li><strong>Order-size buckets are inference, not identity.</strong> "Large order" is a proxy for institutional activity. It is not 13F data, and it does not tell you who traded or why.</li>
+    <li><strong>Net assets are not cash.</strong> The OKLO and SMR balance-sheet figures are derived from per-share indicators and share counts; runway needs the actual cash line from the 10-Q before you rely on it.</li>
+    <li><strong>Analyst targets lag.</strong> Several here were stamped before Friday's move. Coherent's was set 27 August, one day before the stock fell through its lowest target.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><strong>Nexus Aurea Market Watch</strong> — position and watchlist review, compiled 29 August 2026 from Webull Prime connector data at the 28 August close, with the DKK/USD rate from Alpha Vantage. Figures marked as derived were computed from per-share indicators and reported share counts.</p>
+  <p>This folder is for research and education. It is not a trading journal, not a recommendation, and not financial advice. Price movement matters, but filings matter more — read the 10-Q before acting on anything above. Hyatt (H) appears here as a public-filing watch only; nothing in this document draws on non-public workplace information.</p>
+</footer>
+
+</div>

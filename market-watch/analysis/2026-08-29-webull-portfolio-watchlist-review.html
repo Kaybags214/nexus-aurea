@@ -335,7 +335,7 @@
         <tr class="band"><td class="l name">INTC</td><td>89.47</td><td class="neg">−2.85%</td><td class="neg">−37.1%</td><td class="l"><div class="rb"><u style="width:55.4%"></u><i style="left:55.4%"></i></div></td><td class="note">32 of 48 analysts on Hold</td></tr>
         <tr class="band"><td class="l name">COHR</td><td>279.20</td><td class="neg">−5.48%</td><td class="neg">−36.5%</td><td class="l"><div class="rb"><u style="width:54.6%"></u><i style="left:54.6%"></i></div></td><td class="note">Trading at the <em>lowest</em> analyst target</td></tr>
         <tr><td class="l name">MRVL</td><td>216.62</td><td class="neg">−10.28%</td><td class="neg">−34.3%</td><td class="l"><div class="rb"><u style="width:57.8%"></u><i style="left:57.8%"></i></div></td><td class="note">Bought by size into the crash</td></tr>
-        <tr><td class="l name">DRAM</td><td>55.83</td><td class="neg">−1.76%</td><td class="neg">−31.4%</td><td class="l"><div class="rb"><u style="width:53.8%"></u><i style="left:53.8%"></i></div></td><td class="note"><strong>Your position.</strong> Not in repo watchlist</td></tr>
+        <tr><td class="l name">DRAM</td><td>55.83</td><td class="neg">−1.76%</td><td class="neg">−31.4%</td><td class="l"><div class="rb"><u style="width:53.8%"></u><i style="left:53.8%"></i></div></td><td class="note"><strong>Your position.</strong> ~39% swap-based — see below</td></tr>
         <tr class="band"><td class="l name">IBM</td><td>235.59</td><td class="neg">−1.34%</td><td class="neg">−28.6%</td><td class="l"><div class="rb"><u style="width:28.6%"></u><i style="left:28.6%"></i></div></td><td class="note">Defensive as designed; 2.87% yield</td></tr>
         <tr class="band"><td class="l name">CRSP</td><td>57.72</td><td class="neg">−2.78%</td><td class="neg">−26.5%</td><td class="l"><div class="rb"><u style="width:39.6%"></u><i style="left:39.6%"></i></div></td><td class="note">Uncorrelated to the AI rotation</td></tr>
         <tr class="band"><td class="l name">NVO</td><td>45.61</td><td class="neg">−1.41%</td><td class="neg">−25.5%</td><td class="l"><div class="rb"><u style="width:42.2%"></u><i style="left:42.2%"></i></div></td><td class="note">P/E 11.4 — but see the currency note below</td></tr>
@@ -427,7 +427,7 @@
       <div class="sub">34 of 54 Prime names</div>
       <p style="margin-bottom:10px">Most consequential first:</p>
       <ul class="tight">
-        <li><strong>DRAM</strong> — the ETF you actually own. No entry, no thesis, no risk rule.</li>
+        <li><strong>DRAM</strong> — the ETF you actually own. <span class="pill p-up">Added</span> now carries a thesis and risk case in <code>watchlist.md</code>.</li>
         <li><strong>MU, SKHY, TSEM</strong> — the memory and foundry names that determine what DRAM does. MU just printed the largest outflow in your universe.</li>
         <li><strong>MRVL, NVDA, SOXX</strong> — the AI-semi core driving the rotation your watchlist names are caught in.</li>
         <li><strong>IONQ, QBTS, QUBT</strong> — three quantum names, while you carry rules for RGTI and WQTM.</li>
@@ -447,8 +447,35 @@
   </div>
 
   <div class="callout">
-    <div class="eyebrow">The one change worth making</div>
-    <p>Your review rules say to treat every holding as an operating thesis with a written risk case. <strong>DRAM is the exception you have not written.</strong> It is a memory-sector basket whose bellwether just saw $1.22B of institutional selling behind a flat price — precisely the kind of divergence the rest of your file is built to catch. Adding a memory entry (DRAM, with MU and SKHY as the read-through) would close the only gap where money is actually at risk. I have not edited <code>watchlist.md</code> — that file is yours to curate.</p>
+    <div class="eyebrow">Closed — and it was worse than a missing row</div>
+    <p>Your review rules say to treat every holding as an operating thesis with a written risk case. <strong>DRAM was the exception.</strong> It has now been added to <code>watchlist.md</code> — but opening the fund’s holdings to write that entry turned up something the “memory sector basket” label hides completely. See below.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What you actually own</h2>
+  <div class="sectionlede">DRAM is not a basket of memory stocks. Roughly 39% of it is a swap contract, and that changes the risk case.</div>
+
+  <p>Writing the watchlist entry meant opening the holdings file, and the structure is unusual for a retail fund. Most of the exposure is reached <strong>synthetically, through total return swaps maturing in 2027</strong>, offset by a large negative cash line — not by owning the shares:</p>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="l">Exposure</th><th>Weight</th><th class="l">How it is held</th><th class="l">What it means</th></tr></thead>
+      <tbody>
+        <tr><td class="l name">Micron</td><td>~23.2%</td><td class="l"><span class="pill p-down">Swap</span> two contracts, 2027</td><td class="note">Only <strong>~2.6% held directly.</strong> The bellwether of the entire theme is reached almost entirely through derivatives</td></tr>
+        <tr><td class="l name">Samsung Electronics</td><td>~19%</td><td class="l"><span class="pill p-up">Direct</span> plus swap sleeve</td><td class="note">Largest real holding. Already in your file as SSNLF</td></tr>
+        <tr><td class="l name">SK hynix</td><td>~15%</td><td class="l"><span class="pill p-up">Direct</span> plus swap sleeve</td><td class="note">With Samsung, puts roughly <strong>40% of the fund in Korea</strong></td></tr>
+        <tr><td class="l name">CXMT</td><td>~4.7%</td><td class="l"><span class="pill p-down">Swap</span> only, 2027</td><td class="note">Chinese DRAM maker carrying <strong>export-control and sanction risk</strong> — and it already sits in your Prime list as 688825</td></tr>
+        <tr><td class="l name">NAND / storage chain</td><td>~14%</td><td class="l"><span class="pill p-up">Direct</span></td><td class="note">Seagate, SanDisk, Western Digital, Kioxia, Nanya, Winbond, Phison, Macronix</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:16px">Three consequences now written into the file. <strong>Swap counterparty risk is a live factor</strong>, not a footnote — if a counterparty fails, that exposure does not behave like owned stock. The fund is <strong>concentrated in one region</strong>: roughly 40% Korea, with the Chinese sleeve adding policy risk on top. And at a <strong>0.65% expense ratio</strong> with an <strong>inception of 1 April 2026</strong>, it has not yet traded through a full memory pricing cycle — memory being the most cyclical corner of semiconductors.</p>
+
+  <div class="callout">
+    <div class="eyebrow">Why this sharpens the flow signal</div>
+    <p>The Micron outflow at the top of this report is still the right thing to watch — Micron is roughly 23% of your exposure. But note the asymmetry: <strong>you hold that exposure through a swap, not through shares.</strong> The institutional selling in MU tells you about the memory cycle. It tells you nothing about the counterparty on the other side of the contract, and that is a second risk with no ticker to watch it on.</p>
   </div>
 </section>
 

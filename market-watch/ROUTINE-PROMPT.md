@@ -76,6 +76,22 @@ that exist. Link them by CIK using
 and state clearly that the filing was located but its contents were not read. Never summarize a
 filing you have not actually read.
 
+**SEC filings - link construction (do not skip this).** Only ever emit the `browse-edgar` CIK link
+form above, using the real CIK from `COMPANY_OVERVIEW`. Never construct a direct
+`/Archives/edgar/data/<CIK>/<accession>/<file>` URL unless all three values are real and in hand -
+if CIK, accession number, or filename is unknown, drop the filing rather than emit a link containing
+the literal string `None`. Confirm every filing you cite carries *this* company's own CIK, not a
+same-day filing from an unrelated issuer that surfaced in a generic search. (On 2026-09-02, H's card
+cited 93 filings and LIFE's cited 90 in one 48-hour window, every link broken as
+`data/None/.../None` - neither company plausibly files that volume in two days; that pattern means
+the filing list was never scoped to the company at all. Re-derive it from the CIK, not a keyword
+search.)
+
+**News - avoid name collisions.** Search using the company's full legal name and ticker together
+(e.g. `"Ethos Technologies" LIFE`, not a bare `LIFE` keyword search), and discard results that are
+about a different, similarly-named company. (On 2026-09-02, LIFE's news section returned Swiss Life,
+Globe Life, NobleOak Life, and an unrelated baseball headline - none about Ethos Technologies.)
+
 **Crypto - Crypto.com connector** if available: `get_tickers` for price and 24h data,
 `get_candlestick` for 7-day change, `get_book` for spread. Instruments are `<TOKEN>_USD`. The
 `change` field is a fraction, not a percent (0.0152 means +1.52%). If unavailable, use Alpha Vantage
@@ -88,6 +104,27 @@ customer validation, IPO signals.
 Label every figure with its source and as-of date. Never carry a stale price forward. Keep reported
 facts separate from interpretation.
 
+## Step 3.5 - Self-audit before writing (mandatory, do not skip)
+
+Before writing the report file, build two lists and diff them:
+
+1. Every ticker read from the `watchlist.md` Active Watchlist table, plus every token from
+   `blockchain-pharma-watchlist.md`. (Shenzhen-listed and private-signal rows are separate sections -
+   audit those against their own tables the same way.)
+2. Every ticker that will actually get a card in the report you are about to write.
+
+If anything in (1) is missing from (2), you may not silently omit it - either fetch its data now, or
+give it a card with a `DATA UNAVAILABLE: <specific reason>` badge, per Step 1's rule. Do not proceed
+to Step 4 until the two lists match exactly. State the count explicitly in the section header, e.g.
+`Stocks Watchlist (31/31 covered)` - the denominator is always the full watchlist count, never just
+however many cards happened to get written.
+
+This has failed silently for three sessions running (2026-08-31, 09-01, 09-02): MU, NVDA, AVGO,
+MRVL, COHR, LITE, QBTS, SOXX, SSNLF, SKHY, and DRAM all vanished from the report with no
+`DATA UNAVAILABLE` note and no visible count discrepancy - the header just said "18 Assets" as if
+that were the whole watchlist. DRAM is the one held position in the account and MU is its named
+bellwether in the watchlist notes, so this is the single highest-value check in the whole run.
+
 ## Step 4 - Write the report
 
 Write `market-watch/screener-reports/report_YYYY-MM-DD.html` for today's date.
@@ -95,6 +132,13 @@ Write `market-watch/screener-reports/report_YYYY-MM-DD.html` for today's date.
 Self-contained HTML, inline CSS only, dark theme (#0f172a background, #f8fafc text), card grid,
 priority badges, green #22c55e for gains and red #ef4444 for losses. Footer with the ET timestamp
 and: "For research/tracking purposes only. Not financial advice."
+
+**Template stability.** Reuse the same HTML structure, CSS, and class names
+(`card`, `ticker`, `price`, `change pos/neg`, `section-title`, etc.) across runs - copy the skeleton
+from the most recent `report_*.html` rather than regenerating markup from scratch each session. The
+last four sessions (08-29, 08-31, 09-01, 09-02) each used a structurally different template, which
+breaks any downstream tooling that parses the report and is a sign the run isn't actually following
+"match the most recent report format" from Step 1.
 
 Append new filings and insider activity to `market-watch/filing-tracker.md`.
 

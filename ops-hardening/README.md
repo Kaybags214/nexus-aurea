@@ -14,18 +14,20 @@ inspected, or changed. Every node map here is a proposal to review before anythi
 | `01-backup-and-export-sop.md` — run this before any change | complete |
 | `02-hardening-report.md` — findings + proposed node maps, workflow by workflow | complete |
 | `03-review-envelope-contract.md` — the structured output contract | complete |
-| `04-approval-gate/human-approval-exception-gate.draft.json` — importable, inactive, credential-free | complete |
+| `schemas/review-envelope.schema.json` — the contract, enforceable · `schemas/example-envelope-class3-holdaction.json` — worked example | complete |
+| `04-approval-gate/` — `README.md` + `human-approval-exception-gate.draft.json` (importable, inactive, credential-free) | complete |
+| `05-portal-predeploy-checklist.md` — run against the portal before it is deployed | complete |
+| `06-rnd-multifamily-sandbox-concept.md` — design only, nothing built | complete |
 | `07-client-document-custody.md` — where client documents live once real shipper paperwork enters the pipeline | complete |
 
-## Not written yet — session ended early
+## Verification performed
 
-- `schemas/review-envelope.schema.json` and the worked example (referenced by `03`)
-- `04-approval-gate/README.md` — gate spec and reuse notes
-- `05-portal-predeploy-checklist.md` — client-intake portal pre-deployment gate
-- `06-rnd-multifamily-sandbox-concept.md` — Autonomous Multifamily Operations Sandbox concept note
-
-`03-review-envelope-contract.md` §4 and §7 describe the schema and example in enough detail to
-finish them, and `02-hardening-report.md` §7 carries the prohibited-actions policy the gate enforces.
+- The worked example validates against the schema; contract invariants hold (no clearance-shaped
+  status in the vocabulary; no discrepancy without evidence; every evidence item resolves to a
+  declared discrepancy).
+- All four Code node bodies in the gate draft pass `node --check`; all connections resolve; no
+  credential object anywhere; `"active": false`.
+- **Not** verified: behaviour inside a live n8n instance. This session had no n8n access.
 
 ## The five findings that matter most
 

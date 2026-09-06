@@ -15,6 +15,7 @@ inspected, or changed. Every node map here is a proposal to review before anythi
 | `02-hardening-report.md` — findings + proposed node maps, workflow by workflow | complete |
 | `03-review-envelope-contract.md` — the structured output contract | complete |
 | `04-approval-gate/human-approval-exception-gate.draft.json` — importable, inactive, credential-free | complete |
+| `07-client-document-custody.md` — where client documents live once real shipper paperwork enters the pipeline | complete |
 
 ## Not written yet — session ended early
 
@@ -39,6 +40,14 @@ finish them, and `02-hardening-report.md` §7 carries the prohibited-actions pol
 4. **No traceability from artifact to source document** — the header emits a form-field key, not a
    filename or hash. (`00` §3.2 D4, `02` C-4, fix F-3.)
 5. **No backup of any workflow exists anywhere.** (`01`.)
+
+## Before the first real client document
+
+`07-client-document-custody.md` answers the open storage question: the two-tier split (git holds the
+de-identified record, a real document store holds the documents), what 49 CFR 172.201(e) retention
+means for the choice, and why the client agreement covering third-party AI processing has to exist
+before any of it. Its §7 sequence has three steps that can start immediately and do not depend on
+picking a store.
 
 ## The AI layer is sound — do not rebuild it
 

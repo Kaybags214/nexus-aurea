@@ -1,1 +1,6 @@
 .report-worktree/
+
+# n8n exports — raw exports may contain cleartext secrets; see ops-hardening/01-backup-and-export-sop.md
+n8n-exports/
+*.raw.json
+*.credentials.json

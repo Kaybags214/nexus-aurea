@@ -24,6 +24,29 @@ restating it. If a skill contradicts this file, this file wins.
 
 Per `standards-of-precedence.md` section 5 — 🔴 Critical, 🟡 Major, 🟢 Minor.
 
+## Repeating defects across documents
+
+When more than one document from the same submitter is audited in one session, check for
+defects that **repeat**, and report them as one pattern finding rather than separately in each
+report.
+
+A defect on three documents out of three is not three findings. It is a habit, and naming it as
+one tells the submitter something the individual reports cannot: that the cause is a process or
+a template, not a slip.
+
+- [ ] After auditing the set, list every defect appearing on more than one document
+- [ ] State the count plainly — "on 3 of 3 declarations"
+- [ ] Put it in a **Repeating defects** section, above the individual reports or in a covering
+      note, whichever the submission shape allows
+- [ ] Say what the pattern implies: a blank field on every document usually means a template or
+      a step in the filling routine, not carelessness on one form
+
+Order the pattern list by severity, then by how many documents it appears on.
+
+This works in the other direction too. A defect appearing on **one** document out of several
+otherwise-correct ones is evidence it is an outlier — worth saying, because it changes the fix
+from "retrain the process" to "correct this form".
+
 ## Output shape
 
 `audit-report-template.md`. Do not restate that format inside a skill; point at it.

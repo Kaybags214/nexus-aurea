@@ -35,6 +35,9 @@ Run all six. Do not stop at the first failure.
   **"cannot verify — confirm against DGR 67th ed."** and log it as unverified.
 - An unsigned, altered or overwritten form is not correctable in the report. The fix is a
   fresh form.
+- Auditing several declarations from one submitter: report **repeating defects as one pattern
+  finding**, per `skill-contract.md`. Five identical omissions across three forms is a habit,
+  not fifteen findings.
 - Everything in `skill-contract.md` applies.
 
 ## After the run

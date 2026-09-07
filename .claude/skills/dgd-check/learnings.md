@@ -11,6 +11,27 @@ Append after every run. Newest at the top. A few lines each.
 
 ---
 
+## 2026-09-07 — UN1830 and UN3077 practice declarations (same set)
+
+Run after patching the two gaps the first run exposed. Both declarations REJECT, but for a
+completely different reason than the first one.
+
+- **Classification was clean on both.** All columns mutually consistent, packaging described by
+  type and specification code ("1 fibreboard box (4G)"), shipment type and aircraft limitation
+  both correct. The UN3077 entry supplied the technical name in brackets for an n.o.s. entry —
+  the element most often omitted on n.o.s. declarations.
+- **The same five defects appear on all three declarations in the set:** no AWB number, no
+  signature, no signatory title, no place of signing, emergency number without a country code.
+  Five identical omissions across three documents is a **habit, not three mistakes**, and
+  reporting it that way is more useful than three separate reports saying the same thing.
+- **Change to make:** when several documents from one submitter are audited together, the report
+  should carry a short cross-document pattern section naming defects that repeat. A defect on
+  three of three is a different finding from a defect on one of three. Neither `dgd-check` nor
+  `skill-contract.md` currently says to look for this.
+- The patched check 1 shipment-type step was exercised on both and passed cleanly — which is the
+  right outcome, and confirms the first declaration's radioactive marking was an outlier rather
+  than a systematic misunderstanding.
+
 ## 2026-09-07 — Practice DGD, UN1845 + biological substance, IAD-ATL
 
 **First run against a real filled document, unseen by the skill's author.**

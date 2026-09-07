@@ -16,6 +16,7 @@ matches the job.
 | `excursion-assessment` | How far outside its range did this product go, and what does a QP need? |
 | `coa-review` | Is this Certificate of Analysis complete and traceable to the shipment? |
 | `commercial-invoice-review` | Is this invoice sufficient for customs and internally consistent? |
+| `lithium-battery-section-2` | Which UN number, PI and section apply, and does the shipment meet them? |
 
 ## The shape
 
@@ -49,8 +50,8 @@ matches the job.
 
 ## Still to build
 
-`lithium-battery-section-II` (PI 965–970 Section II), `packing-list-review`,
-`bol-review` (ocean), `hs-code-research`, `gdp-record-review`, `cbp-entry-review`.
+`packing-list-review`, `bol-review` (ocean), `hs-code-research`, `gdp-record-review`,
+`cbp-entry-review`.
 
 Copy an existing skill's shape. Router under 60 lines, one file per check group, contract
 cites `skill-contract.md` rather than repeating it.

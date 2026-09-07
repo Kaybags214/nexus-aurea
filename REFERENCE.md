@@ -11,7 +11,8 @@ scaffolded but empty — noted so nobody hunts for a file that is not there.
 | `dgr/05-checklists/dg-checklist-non-radioactive-reference.md` | Pre-tender checklist. **Outranks `dgd-check`** where they differ |
 
 Empty: `01-iata`, `02-49cfr`, `04-lithium-batteries`, `06-practice`.
-The lithium gap matters — there is no `lithium-battery-section-II` skill either.
+`04-lithium-batteries` is still empty, but the `lithium-battery-section-2` skill now exists and
+expects a lane reference to lean on. Filling this folder is the next reference gap to close.
 
 ## Cold chain — `cold-chain/`
 

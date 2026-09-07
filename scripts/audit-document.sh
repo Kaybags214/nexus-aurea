@@ -2,7 +2,15 @@
 #
 # audit-document.sh — run a compliance audit on a document using this repo's skills.
 #
-#   ./scripts/audit-document.sh <image-or-pdf> ["doc type hint"]
+#   ./scripts/audit-document.sh <image-or-pdf> ["doc type hint"]          practice
+#   ./scripts/audit-document.sh --client <image-or-pdf> ["doc type hint"]  real client
+#
+# PRACTICE mode writes the report into the repo and commits it. Use only for invented
+# parties — Apex Inc., ABC Flyers, fixtures.
+#
+# CLIENT mode writes to $NA_CLIENT_DIR (default ~/nexus-aurea-client), commits nothing,
+# and touches git not at all. Use for every real client document.
+# See compliance/02-sops/data-handling.md — the report is as sensitive as the document.
 #
 # Called by the n8n Execute Command node, or by hand from a terminal.
 # Runs Claude Code headlessly so the skills in .claude/skills/ actually load —
@@ -16,11 +24,17 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO"
 
+CLIENT_MODE=0
+if [ "${1:-}" = "--client" ]; then
+  CLIENT_MODE=1
+  shift
+fi
+
 DOC="${1:-}"
 HINT="${2:-}"
 
 if [ -z "$DOC" ]; then
-  echo "usage: $0 <image-or-pdf> [doc type hint]" >&2
+  echo "usage: $0 [--client] <image-or-pdf> [doc type hint]" >&2
   exit 64
 fi
 if [ ! -f "$DOC" ]; then
@@ -35,7 +49,22 @@ fi
 DOC="$(cd "$(dirname "$DOC")" && pwd)/$(basename "$DOC")"   # absolute
 STAMP="$(date +%Y-%m-%d_%H%M%S)"
 LOG="$REPO/compliance-auditor/intake/runs.log"
-mkdir -p "$(dirname "$LOG")" "$REPO/compliance-auditor/audit-reports"
+mkdir -p "$(dirname "$LOG")"
+
+if [ "$CLIENT_MODE" = "1" ]; then
+  OUTDIR="${NA_CLIENT_DIR:-$HOME/nexus-aurea-client}/reports"
+  case "$OUTDIR" in
+    "$REPO"|"$REPO"/*)
+      echo "error: client output directory is inside the repository ($OUTDIR)." >&2
+      echo "       Client reports must never enter git. Set NA_CLIENT_DIR elsewhere." >&2
+      exit 78 ;;
+  esac
+  mkdir -p "$OUTDIR"
+  chmod 700 "$OUTDIR" 2>/dev/null || true
+else
+  OUTDIR="$REPO/compliance-auditor/audit-reports"
+  mkdir -p "$OUTDIR"
+fi
 
 # Permission flag for unattended runs. Headless mode cannot show a prompt, so a
 # run that needs approval will hang. Verify the exact flag on your machine with
@@ -58,7 +87,7 @@ compliance-auditor/standards-of-precedence.md.
 3. If more than one document is submitted for the same shipment, run the
    cross-document check and report repeating defects as one pattern finding.
 4. Write the report to
-   compliance-auditor/audit-reports/audit_${STAMP}_<doctype>.md
+   ${OUTDIR}/audit_${STAMP}_<doctype>.md
    in the shape of compliance-auditor/audit-report-template.md.
 5. Write the sidecar JSON beside it, same basename with .json, per
    skill-contract.md — including the unverified array.
@@ -74,7 +103,11 @@ PASS with an open Critical.
 
 Print ONLY the path of the report file you wrote as the final line of output."
 
-echo "[$STAMP] START  doc=$DOC hint=${HINT:-none}" >> "$LOG"
+if [ "$CLIENT_MODE" = "1" ]; then
+  echo "[$STAMP] START  mode=CLIENT out=$OUTDIR" >> "$LOG"
+else
+  echo "[$STAMP] START  mode=practice doc=$DOC hint=${HINT:-none}" >> "$LOG"
+fi
 
 set +e
 OUT="$(claude -p "$PROMPT" --model "$MODEL" $FLAGS 2>&1)"
@@ -87,7 +120,8 @@ if [ $RC -ne 0 ]; then
   exit $RC
 fi
 
-REPORT="$(printf '%s\n' "$OUT" | tr -d '\r' | grep -E 'audit-reports/.*\.md' | tail -1 || true)"
+REPORT="$(printf '%s\n' "$OUT" | tr -d '\r' | grep -oE '[^[:space:]]*audit_[0-9_-]+_[^[:space:]]*\.md' | tail -1 || true)"
+[ -n "$REPORT" ] && [ ! -f "$REPORT" ] && [ -f "$OUTDIR/$(basename "$REPORT")" ] && REPORT="$OUTDIR/$(basename "$REPORT")"
 
 if [ -z "$REPORT" ] || [ ! -f "$REPORT" ]; then
   echo "[$STAMP] FAIL   no report file produced" >> "$LOG"
@@ -96,14 +130,20 @@ if [ -z "$REPORT" ] || [ ! -f "$REPORT" ]; then
   exit 70
 fi
 
-git add compliance-auditor/audit-reports/ >/dev/null
-if git diff --cached --quiet; then
-  echo "[$STAMP] NOOP   nothing to commit" >> "$LOG"
+if [ "$CLIENT_MODE" = "1" ]; then
+  # Deliberately no git. The report names the client's shipper, consignee, commodity and
+  # value; committing it is the same disclosure as committing the document itself.
+  chmod 600 "$REPORT" 2>/dev/null || true
+  echo "[$STAMP] OK     mode=CLIENT (not committed)" >> "$LOG"
 else
-  git -c user.name="Nexus Aurea Auditor" -c user.email="noreply@anthropic.com" \
-      commit -q -m "audit: $(basename "$REPORT")"
-  git push -q origin HEAD 2>>"$LOG" || echo "[$STAMP] WARN   push failed" >> "$LOG"
+  git add compliance-auditor/audit-reports/ >/dev/null
+  if git diff --cached --quiet; then
+    echo "[$STAMP] NOOP   nothing to commit" >> "$LOG"
+  else
+    git -c user.name="Nexus Aurea Auditor" -c user.email="noreply@anthropic.com" \
+        commit -q -m "audit: $(basename "$REPORT")"
+    git push -q origin HEAD 2>>"$LOG" || echo "[$STAMP] WARN   push failed" >> "$LOG"
+  fi
+  echo "[$STAMP] OK     $REPORT" >> "$LOG"
 fi
-
-echo "[$STAMP] OK     $REPORT" >> "$LOG"
 printf '%s\n' "$REPORT"

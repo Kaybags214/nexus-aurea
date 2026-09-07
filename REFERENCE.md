@@ -47,4 +47,6 @@ Empty: `03-hs-codes`, `06-practice`.
 |---|---|
 | `compliance/05-forms/forms-index.md` | Forms index |
 
-Empty: `01-regulations`, `02-sops`, `03-training`, `04-audit`.
+| `compliance/02-sops/data-handling.md` | What happens to client documents. **Read before real client work** |
+
+Empty: `01-regulations`, `03-training`, `04-audit`.

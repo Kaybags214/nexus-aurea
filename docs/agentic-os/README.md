@@ -62,7 +62,15 @@ Level 1 complete across all four parts, with one level 3 partly built.
 
 ## Visuals
 
-Two pages, two different jobs.
+Three pages, three different jobs.
+
+**`operating-manual.html`** — **start here.** How to run the system day to day: the practice
+vs. client fork, what the severities mean, the rules that don't bend, the weekly fifteen
+minutes, and a troubleshooting table keyed to real exit codes. Written for the operator, not
+the builder.
+
+Published Artifact: https://claude.ai/code/artifact/8631b5ca-d207-42d3-8171-f42a0c53a0f9
+
 
 **`command-center.html`** — the control surface. Modelled on RUBRIC, the dashboard
 shown in the RoboNuggets video: panel columns around a rotating node ring with a

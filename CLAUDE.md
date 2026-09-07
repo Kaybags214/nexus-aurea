@@ -18,12 +18,17 @@ index for the area you need, then the file it names. Do not scan the whole repos
 | **Money** | Form 1120, bookkeeping, CPA questions, deadlines | `MONEY.md` |
 
 The agentic OS itself — architecture, command centre, the ARMS mapping — is documented in
-`docs/agentic-os/README.md`.
+`docs/agentic-os/README.md`. **How to operate it day to day** is
+`docs/agentic-os/operating-manual.html`.
 
 ## Standing rules
 
 1. **Official sources first.** Keep research and speculation separate and labelled.
-2. **Never store unredacted customer documents.** Redact before anything is committed.
+2. **Real client documents never enter this repository — and neither do reports about them.**
+   Redaction is not the control, because redaction destroys the audit: cross-document checking
+   is party matching, so the names are the evidence. Client work lives in an encrypted store
+   outside the repo. See `compliance/02-sops/data-handling.md`. Invented parties
+   (`Apex Inc.`, `ABC Flyers`) are practice material and belong here.
 3. **Compliance work runs through the skills**, not ad-hoc prompting. Six exist in
    `.claude/skills/` — see `AUDIT.md`. They are governed by
    `compliance-auditor/skill-contract.md` and `compliance-auditor/standards-of-precedence.md`.

@@ -11,6 +11,34 @@ Append after every run. Newest at the top. A few lines each.
 
 ---
 
+## 2026-09-07 — Set B, UN1863 "paint related material", handwritten DGD + AWB
+
+**First run where check 6 could actually be performed** — the first submission carrying a
+declaration and its matching Air Waybill. Check 6 found the worst defect in the set: the
+declaration marks passenger-and-cargo aircraft while the AWB says cargo aircraft only.
+
+- **Check 6 justified itself immediately.** Every prior report recorded it as NOT PERFORMED. On
+  its first real run it produced the top Critical. Worth remembering when a check looks like
+  overhead: the pairing acceptance checks first is the pairing that catches this.
+- **Second transposed UN digit in four declarations.** UN1863 against "paint related material"
+  where UN1263 is expected, after UN3393 against "Biological substance, Category B" where
+  UN3373 is expected. Both times the class and packing-group columns were compatible with *both*
+  readings, so the surrounding columns concealed rather than exposed the error. The
+  cross-column reading added to check 2 does not help when the neighbouring columns are
+  genuinely ambiguous. **Change to consider:** check 2 should call out UN-number pairs that are
+  a single transposition apart and share a class, as a known failure mode to look at twice.
+- **Quantity as evidence for aircraft limitation.** 60 L of a Class 3 PG II liquid in one
+  package is what made the AWB's CAO reading obviously the correct one. Check 3 says quantity
+  drives the selection; here quantity also resolved *which of two contradicting documents to
+  believe*. Worth stating in check 6: where two documents disagree, look for a third fact that
+  decides it rather than relying on precedence order alone.
+- **The pattern finding worked as intended.** Three of five repeating defects are fixed since
+  the typed set; the certification block is untouched and now also missing its date. Reporting
+  that as one row of movement is far more useful than four separate reports each listing
+  "unsigned".
+- Improvement noted: this form carries a country code on the emergency number and a signatory
+  title, both of which the earlier three lacked.
+
 ## 2026-09-07 — UN1830 and UN3077 practice declarations (same set)
 
 Run after patching the two gaps the first run exposed. Both declarations REJECT, but for a

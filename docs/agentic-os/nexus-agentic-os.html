@@ -1,425 +1,355 @@
-<title>Nexus Aurea Agentic OS</title>
+<title>ARMS Grid — Nexus Aurea</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 
 <style>
-  :root{
-    --ground:#EEF1F0;
-    --surface:#FFFFFF;
-    --surface-2:#E4E9E9;
-    --line:#C6D0D1;
-    --line-soft:#DCE3E3;
-    --ink:#0E1B20;
-    --muted:#5A6E75;
-    --aurea:#8A6D10;
-    --cryo:#0E7C8C;
-    --caution:#9A6510;
-    --critical:#B22C31;
-    --nominal:#1D7A55;
-    --placard:#0E1B20;
-    --placard-ink:#EEF1F0;
-    --shadow:0 1px 0 rgba(14,27,32,.05), 0 8px 24px -18px rgba(14,27,32,.45);
-
-    --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
-    --f-body:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
-    --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-    --ground:#081216;
-    --surface:#0E1C21;
-    --surface-2:#132930;
-    --line:#223B44;
-    --line-soft:#182C33;
-    --ink:#DAE7EA;
-    --muted:#7A949D;
-    --aurea:#D3AE3A;
-    --cryo:#55D3E2;
-    --caution:#EDA945;
-    --critical:#EC5B60;
-    --nominal:#45C08C;
-    --placard:#DAE7EA;
-    --placard-ink:#081216;
-    --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 32px -20px #000;
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#081216;
-    --surface:#0E1C21;
-    --surface-2:#132930;
-    --line:#223B44;
-    --line-soft:#182C33;
-    --ink:#DAE7EA;
-    --muted:#7A949D;
-    --aurea:#D3AE3A;
-    --cryo:#55D3E2;
-    --caution:#EDA945;
-    --critical:#EC5B60;
-    --nominal:#45C08C;
-    --placard:#DAE7EA;
-    --placard-ink:#081216;
+:root{
+  --ground:#EEF1F0; --surface:#FFFFFF; --surface-2:#E4E9E9;
+  --line:#C6D0D1; --line-soft:#DCE3E3;
+  --ink:#0E1B20; --muted:#5A6E75; --faint:#84969B;
+  --aurea:#8A6D10; --cryo:#0E7C8C;
+  --done:#1D7A55; --next:#9A5410; --idle:#8A949A;
+  --placard:#0E1B20; --placard-ink:#EEF1F0;
+  --shadow:0 1px 0 rgba(14,27,32,.05), 0 8px 24px -18px rgba(14,27,32,.45);
+  --f-d:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-b:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --f-m:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#081216; --surface:#0E1C21; --surface-2:#132930;
+    --line:#223B44; --line-soft:#182C33;
+    --ink:#DAE7EA; --muted:#7A949D; --faint:#5E757D;
+    --aurea:#D3AE3A; --cryo:#55D3E2;
+    --done:#45C08C; --next:#EDA945; --idle:#63757C;
+    --placard:#DAE7EA; --placard-ink:#081216;
     --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 32px -20px #000;
   }
+}
+:root[data-theme="dark"]{
+  --ground:#081216; --surface:#0E1C21; --surface-2:#132930;
+  --line:#223B44; --line-soft:#182C33;
+  --ink:#DAE7EA; --muted:#7A949D; --faint:#5E757D;
+  --aurea:#D3AE3A; --cryo:#55D3E2;
+  --done:#45C08C; --next:#EDA945; --idle:#63757C;
+  --placard:#DAE7EA; --placard-ink:#081216;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 32px -20px #000;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px 72px}
 
-  *{box-sizing:border-box}
-  body{
-    background:var(--ground);
-    color:var(--ink);
-    font-family:var(--f-body);
-    font-size:15px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 72px}
+.rail{display:flex;flex-wrap:wrap;align-items:center;gap:0 24px;border-bottom:1px solid var(--line);
+  padding:14px 0;margin-bottom:36px;font-family:var(--f-m);font-size:11px;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--muted)}
+.rail b{color:var(--ink);font-weight:600}
+.rail .sp{flex:1 1 40px}
 
-  /* ---------- status rail ---------- */
-  .rail{
-    display:flex;flex-wrap:wrap;align-items:center;gap:0 26px;
-    border-bottom:1px solid var(--line);
-    padding:14px 0;margin-bottom:38px;
-    font-family:var(--f-mono);font-size:11px;letter-spacing:.10em;text-transform:uppercase;
-    color:var(--muted);
-  }
-  .rail b{color:var(--ink);font-weight:600}
-  .rail .dot{
-    width:6px;height:6px;border-radius:50%;background:var(--nominal);
-    display:inline-block;margin-right:7px;vertical-align:1px;
-  }
-  .rail .spacer{flex:1 1 40px}
+header.mast{margin-bottom:14px;max-width:none}
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cryo);margin-bottom:14px}
+h1{font-family:var(--f-d);font-variation-settings:"wdth" 112,"wght" 700;
+  font-size:clamp(36px,5.6vw,62px);line-height:1;letter-spacing:-.02em;text-wrap:balance;margin:0 0 18px}
+.lede{max-width:66ch;color:var(--muted);margin:0 0 8px;font-size:16px}
+.lede em{color:var(--ink);font-style:normal;font-weight:500}
 
-  /* ---------- masthead ---------- */
-  header.mast{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:48px;align-items:end;margin-bottom:44px}
-  @media (max-width:840px){header.mast{grid-template-columns:1fr;gap:28px;align-items:start}}
-  .eyebrow{
-    font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--cryo);margin-bottom:14px;
-  }
-  h1{
-    font-family:var(--f-display);
-    font-variation-settings:"wdth" 112,"wght" 700;
-    font-size:clamp(38px,6.2vw,68px);
-    line-height:.98;letter-spacing:-.02em;text-wrap:balance;
-    margin:0 0 16px;
-  }
-  h1 .sub{display:block;font-variation-settings:"wdth" 88,"wght" 400;color:var(--muted);font-size:.34em;letter-spacing:.02em;margin-top:14px;line-height:1.4}
-  .lede{max-width:62ch;color:var(--muted);margin:0}
-  .lede em{color:var(--ink);font-style:normal;font-weight:500}
+.errata{border:1px solid var(--line);border-left:3px solid var(--next);background:var(--surface);
+  padding:16px 18px;margin:26px 0 40px;box-shadow:var(--shadow);max-width:none}
+.errata h2{font-family:var(--f-m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--next);margin:0 0 10px;font-weight:500}
+.errata ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px}
+.errata li{margin-bottom:5px}
+.errata li b{color:var(--ink);font-weight:600}
 
-  .kernel{
-    border:1px solid var(--line);border-left:3px solid var(--aurea);
-    background:var(--surface);padding:18px 20px;box-shadow:var(--shadow);
-  }
-  .kernel .k-label{font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--aurea);margin-bottom:8px}
-  .kernel p{margin:0;font-family:var(--f-display);font-variation-settings:"wdth" 100,"wght" 600;font-size:19px;line-height:1.3}
+.sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px;margin:0 0 22px}
+.sec-head h2{font-family:var(--f-d);font-variation-settings:"wdth" 92,"wght" 700;
+  font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin:0}
+.sec-head span{font-family:var(--f-m);font-size:11px;color:var(--muted);letter-spacing:.05em}
+section{margin-bottom:54px}
 
-  /* ---------- section heads ---------- */
-  .sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:10px;margin:0 0 22px}
-  .sec-head h2{
-    font-family:var(--f-display);font-variation-settings:"wdth" 92,"wght" 700;
-    font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin:0;
-  }
-  .sec-head span{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
-  section{margin-bottom:56px}
+/* ---- the grid ---- */
+.lvl-head{display:grid;grid-template-columns:250px repeat(3,minmax(0,1fr));gap:10px;margin-bottom:8px}
+.lvl-head div{font-family:var(--f-m);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding-left:2px}
+@media (max-width:900px){.lvl-head{display:none}}
 
-  /* ---------- ARMS stack ---------- */
-  .stack{display:flex;flex-direction:column;gap:10px}
-  .stratum{
-    display:grid;grid-template-columns:172px minmax(0,1fr);
-    border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);
-  }
-  @media (max-width:760px){.stratum{grid-template-columns:1fr}}
-  .placard{
-    background:var(--placard);color:var(--placard-ink);
-    padding:16px 18px;display:flex;flex-direction:column;gap:6px;justify-content:center;
-  }
-  .placard .idx{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;opacity:.62}
-  .placard .name{
-    font-family:var(--f-display);font-variation-settings:"wdth" 82,"wght" 700;
-    font-size:26px;letter-spacing:.02em;text-transform:uppercase;line-height:1;
-  }
-  .placard .role{font-size:12px;opacity:.68;line-height:1.35}
-  .body-cell{padding:16px 20px;display:flex;flex-direction:column;gap:12px}
-  .gap-note{font-size:13px;color:var(--muted);max-width:70ch;margin:0}
-  .gap-note strong{color:var(--ink);font-weight:600}
-  .chips{display:flex;flex-wrap:wrap;gap:6px}
-  .chip{
-    font-family:var(--f-mono);font-size:11.5px;letter-spacing:.01em;
-    border:1px solid var(--line-soft);background:var(--surface-2);
-    padding:4px 9px;color:var(--ink);white-space:nowrap;
-  }
-  .chip.built{border-color:color-mix(in srgb,var(--nominal) 45%,transparent);color:var(--nominal)}
-  .chip.todo{border-style:dashed;color:var(--muted)}
-  .legend{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.04em}
-  .legend i{font-style:normal;border-bottom:2px solid;padding-bottom:1px}
-  .legend .l-built{color:var(--nominal)}
-  .legend .l-todo{color:var(--muted)}
+.part{display:grid;grid-template-columns:250px repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px;align-items:stretch}
+@media (max-width:900px){.part{grid-template-columns:1fr}}
 
-  /* ---------- gaps ---------- */
-  .gaps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-  @media (max-width:760px){.gaps{grid-template-columns:1fr}}
-  .gap{background:var(--surface);padding:20px}
-  .gap h3{
-    font-family:var(--f-display);font-variation-settings:"wdth" 88,"wght" 700;
-    font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;color:var(--critical);
-  }
-  .gap p{margin:0;font-size:13.5px;color:var(--muted)}
-  .gap p + p{margin-top:9px;color:var(--ink)}
-  .gap .fix{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--cryo);display:block;margin-bottom:4px}
+.spine{background:var(--placard);color:var(--placard-ink);padding:16px 17px;display:flex;flex-direction:column;gap:8px}
+.spine .top{display:flex;align-items:baseline;gap:10px}
+.spine .ltr{font-family:var(--f-d);font-variation-settings:"wdth" 82,"wght" 800;font-size:38px;line-height:.8}
+.spine .nm{font-family:var(--f-d);font-variation-settings:"wdth" 88,"wght" 700;font-size:17px;letter-spacing:.06em;text-transform:uppercase}
+.spine .ord{font-family:var(--f-m);font-size:9px;letter-spacing:.14em;opacity:.55;margin-left:auto;white-space:nowrap}
+.spine .def{font-size:12.5px;opacity:.78;line-height:1.4}
+.spine .test{font-size:11.5px;opacity:.62;border-top:1px solid rgba(128,128,128,.35);padding-top:8px;margin-top:auto;line-height:1.45}
+.spine .test b{opacity:.9;font-weight:600;display:block;font-family:var(--f-m);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
 
-  /* ---------- telemetry ---------- */
-  .tele{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-  @media (max-width:900px){.tele{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:480px){.tele{grid-template-columns:1fr}}
-  .cell{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:5px}
-  .cell .c-lab{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .cell .c-val{
-    font-family:var(--f-display);font-variation-settings:"wdth" 96,"wght" 600;
-    font-size:23px;font-variant-numeric:tabular-nums;line-height:1.1;
-  }
-  .cell .c-sub{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-  .cell.is-cryo .c-val{color:var(--cryo)}
-  .cell.is-caution .c-val{color:var(--caution)}
-  .cell.is-critical .c-val{color:var(--critical)}
-  .cell.is-nominal .c-val{color:var(--nominal)}
-  .cell .bar{height:3px;background:var(--surface-2);margin-top:4px;position:relative;overflow:hidden}
-  .cell .bar i{position:absolute;inset:0 auto 0 0;display:block}
+.cell{border:1px solid var(--line);background:var(--surface);padding:14px 15px;display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow)}
+.cell .lv{font-family:var(--f-m);font-size:9px;letter-spacing:.14em;color:var(--faint)}
+.cell h3{font-family:var(--f-d);font-variation-settings:"wdth" 100,"wght" 600;font-size:14.5px;margin:0;line-height:1.25;text-wrap:balance}
+.cell p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+.cell .you{font-size:12px;line-height:1.45;border-top:1px dashed var(--line-soft);padding-top:8px;margin-top:auto}
+.cell .you b{font-weight:600}
+.st{font-family:var(--f-m);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;
+  display:inline-block;padding:2px 7px;border:1px solid;align-self:flex-start}
+.st.done{color:var(--done);border-color:var(--done)}
+.st.next{color:var(--next);border-color:var(--next)}
+.st.idle{color:var(--idle);border-color:var(--idle)}
+.st.part{color:var(--cryo);border-color:var(--cryo)}
+.cell.is-next{border-color:var(--next);border-width:2px;padding:13px 14px}
 
-  /* ---------- build order ---------- */
-  .order{width:100%;border-collapse:collapse;font-size:13.5px}
-  .order th,.order td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
-  .order thead th{
-    font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted);border-bottom:1px solid var(--line);font-weight:500;
-  }
-  .order td.step{font-family:var(--f-mono);color:var(--aurea);width:44px;font-variant-numeric:tabular-nums}
-  .order td.what{font-weight:500}
-  .order td.out{color:var(--muted)}
-  .order-scroll{overflow-x:auto}
+/* ---- standing ---- */
+.stand{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:760px){.stand{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sc{background:var(--surface);padding:16px 17px}
+.sc .l{font-family:var(--f-m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sc .pips{display:flex;gap:5px;margin:10px 0 8px}
+.sc .pip{width:100%;height:5px;background:var(--surface-2)}
+.sc .pip.on{background:var(--done)}
+.sc .pip.half{background:var(--cryo)}
+.sc .v{font-size:12.5px;color:var(--muted);line-height:1.4}
+.sc .v b{color:var(--ink);font-weight:600}
 
-  /* ---------- source ---------- */
-  .source{border-top:1px solid var(--line);padding-top:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px}
-  @media (max-width:760px){.source{grid-template-columns:1fr;gap:22px}}
-  .source h3{font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
-  .source p{margin:0 0 9px;font-size:13px;color:var(--muted);max-width:60ch}
-  .source a{color:var(--cryo);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--cryo) 40%,transparent)}
-  .source a:hover{border-bottom-color:var(--cryo)}
-  .source a:focus-visible{outline:2px solid var(--cryo);outline-offset:3px}
-  .flagged{border-left:3px solid var(--caution);padding-left:14px}
-  .flagged strong{color:var(--caution);font-weight:600}
+/* ---- bonus ---- */
+.bonus{border:1px solid var(--line);background:var(--surface);padding:22px 24px;box-shadow:var(--shadow)}
+.bonus .q{font-family:var(--f-d);font-variation-settings:"wdth" 100,"wght" 600;font-size:19px;
+  line-height:1.35;margin:0 0 6px;text-wrap:balance;max-width:44ch}
+.bonus .attr{font-family:var(--f-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+.pr{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 26px;margin-top:4px}
+.pr div{font-size:12.5px;color:var(--muted);line-height:1.45;border-top:1px solid var(--line-soft);padding-top:9px}
+.pr div b{display:block;color:var(--ink);font-weight:600;font-size:13px;margin-bottom:2px}
+
+/* ---- plan ---- */
+table.plan{width:100%;border-collapse:collapse;font-size:13.5px}
+table.plan th{font-family:var(--f-m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);text-align:left;font-weight:500;padding:0 12px 9px 0;border-bottom:1px solid var(--line)}
+table.plan td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.plan td.d{font-family:var(--f-m);font-size:11px;color:var(--faint);white-space:nowrap;width:56px}
+table.plan tr.ok td.d{color:var(--done)}
+table.plan tr.ok td.w{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+table.plan td.w b{font-weight:600}
+.plan-scroll{overflow-x:auto}
+
+.foot{border-top:1px solid var(--line);padding-top:20px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.foot h3{font-family:var(--f-m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 9px;font-weight:500}
+.foot p{margin:0 0 8px;font-size:12.5px;color:var(--muted);max-width:56ch;line-height:1.5}
+.foot a{color:var(--cryo);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--cryo) 40%,transparent)}
+.foot a:hover{border-bottom-color:var(--cryo)}
+.foot a:focus-visible{outline:2px solid var(--cryo);outline-offset:3px}
+code{font-family:var(--f-m);font-size:.88em;background:var(--surface-2);padding:1px 4px}
 </style>
 
 <div class="wrap">
 
   <div class="rail">
-    <span><span class="dot"></span><b>Nexus Aurea</b> command center</span>
-    <span>architecture &mdash; <b>ARMS</b></span>
-    <span>domain &mdash; <b>pharma air freight / IATA DGR</b></span>
-    <span class="spacer"></span>
-    <span>rev <b>2026.09.07</b></span>
+    <span><b>Nexus Aurea</b> &mdash; agentic OS</span>
+    <span>framework &mdash; <b>ARMS</b>, four parts &times; three levels</span>
+    <span class="sp"></span>
+    <span>rev <b>2026.09.07</b> &middot; corrected against the guide</span>
   </div>
 
   <header class="mast">
-    <div>
-      <div class="eyebrow">Agentic OS &mdash; architecture reference</div>
-      <h1>Four layers,
-        built bottom&#8209;up
-        <span class="sub">Memory holds the standard. Skills apply it. Routines run it unattended. Applications hand it to someone who never opens a terminal.</span>
-      </h1>
-      <p class="lede">An agentic OS is not software you install &mdash; it is an <em>assembly order</em>. Nexus Aurea already owns the bottom layer: eleven document lanes of regulatory reference, templates and audit findings. What is missing is everything that turns that reference into <em>repeatable review</em>.</p>
-    </div>
-    <div class="kernel">
-      <div class="k-label">Kernel rule</div>
-      <p>Build the system before chasing the opportunity.</p>
-    </div>
+    <div class="eyebrow">Architecture reference &mdash; corrected edition</div>
+    <h1>Four parts,<br>three levels each</h1>
+    <p class="lede">ARMS is not four layers. It is a <em>4 &times; 3 grid</em> &mdash; each part has a level that works today, a level that scales, and a level where the system runs without you. Build order is bottom-up and starts with Skills, <em>because skills compound into everything else.</em></p>
   </header>
 
-  <section>
-    <div class="sec-head">
-      <h2>The ARMS stack</h2>
-      <span>each layer stands on the one below it</span>
-    </div>
-
-    <div class="stack">
-
-      <div class="stratum">
-        <div class="placard">
-          <span class="idx">L3</span>
-          <span class="name">Applications</span>
-          <span class="role">The surface. No terminal required.</span>
-        </div>
-        <div class="body-cell">
-          <p class="gap-note">Where a shipper, a QA lead or a broker actually touches the system. Photograph a document in, severity&#8209;flagged findings out &mdash; plus the corrected version.</p>
-          <div class="chips">
-            <span class="chip built">compliance-auditor/intake</span>
-            <span class="chip built">n8n webhook (self-hosted)</span>
-            <span class="chip built">severity-flagged findings report</span>
-            <span class="chip todo">corrected-document return</span>
-            <span class="chip todo">client dashboard</span>
-            <span class="chip built">jobs/leave-behind-packets</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stratum">
-        <div class="placard">
-          <span class="idx">L2</span>
-          <span class="name">Routines</span>
-          <span class="role">Scheduled and triggered. Runs while you sleep.</span>
-        </div>
-        <div class="body-cell">
-          <p class="gap-note">Cloud&#8209;run schedules. This is the layer that converts a tool you remember to open into infrastructure that reports to you.</p>
-          <div class="chips">
-            <span class="chip built">watchlist_screener run</span>
-            <span class="chip todo">daily market-watch flow brief</span>
-            <span class="chip todo">weekly cold-chain excursion sweep</span>
-            <span class="chip todo">IATA DGR revision watch (annual, 1 Jan)</span>
-            <span class="chip todo">Form 1120 deadline watch</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stratum">
-        <div class="placard">
-          <span class="idx">L1</span>
-          <span class="name">Skills</span>
-          <span class="role">One task, one defined way. Each keeps a learnings file.</span>
-        </div>
-        <div class="body-cell">
-          <p class="gap-note">The consistency layer. A skill is narrow on purpose &mdash; <strong>&ldquo;verify dry ice net weight per package&rdquo;</strong> is a skill; &ldquo;review this shipment&rdquo; is not. First three now live in <span style="font-family:var(--f-mono);font-size:12px">.claude/skills/</span>, each with its own <span style="font-family:var(--f-mono);font-size:12px">learnings.md</span>.</p>
-          <div class="chips">
-            <span class="chip built">awb-review</span>
-            <span class="chip built">dgd-check</span>
-            <span class="chip built">dry-ice-un1845</span>
-            <span class="chip todo">lithium-battery-section-II</span>
-            <span class="chip todo">commercial-invoice-review</span>
-            <span class="chip todo">coa-review</span>
-            <span class="chip todo">excursion-assessment</span>
-            <span class="chip todo">hs-code-lookup</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stratum">
-        <div class="placard">
-          <span class="idx">L0</span>
-          <span class="name">Memory</span>
-          <span class="role">The substrate. Without it, every session starts from zero.</span>
-        </div>
-        <div class="body-cell">
-          <p class="gap-note">Already built, and further along than this page first credited. Eleven lanes of written standard, plus <span style="font-family:var(--f-mono);font-size:12px">standards-of-precedence.md</span> and the audit engine prompt that governs every review.</p>
-          <div class="chips">
-            <span class="chip built">dgr/</span>
-            <span class="chip built">cold-chain/</span>
-            <span class="chip built">pharma/</span>
-            <span class="chip built">customs/</span>
-            <span class="chip built">compliance/</span>
-            <span class="chip built">templates/</span>
-            <span class="chip built">audit-lab/</span>
-            <span class="chip built">tax-infrastructure/</span>
-            <span class="chip built">market-watch/</span>
-            <span class="chip built">resume/</span>
-            <span class="chip built">docs/</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="legend">
-      <span class="l-built"><i>&nbsp;&nbsp;&nbsp;&nbsp;</i> exists in repo today</span>
-      <span class="l-todo"><i style="border-bottom-style:dashed">&nbsp;&nbsp;&nbsp;&nbsp;</i> to build</span>
-    </div>
-  </section>
+  <div class="errata">
+    <h2>What this page corrects</h2>
+    <ul>
+      <li><b>Order.</b> The first version put Memory at the foundation. Skills comes first.</li>
+      <li><b>Shape.</b> The first version drew four flat layers and missed the three levels per part entirely.</li>
+      <li><b>Applications.</b> Defined here previously as the dashboard for non-technical users. It actually means <b>connectors</b> &mdash; CLI, API or MCP &mdash; and the micro-apps you build when none exists.</li>
+      <li><b>The command centre is not part of ARMS.</b> It is a bonus layer, and the guide puts it at 20&ndash;30% of the value.</li>
+      <li><b>The per-skill <code>learnings.md</code> is ours, not theirs.</b> It appears nowhere in the guide. Kept because it earns its place, but it is our convention.</li>
+    </ul>
+  </div>
 
   <section>
     <div class="sec-head">
-      <h2>The three gaps it closes</h2>
-      <span>why a folder of notes is not yet an OS</span>
+      <h2>The ARMS grid</h2>
+      <span>build order top to bottom &middot; each row progresses left to right</span>
     </div>
-    <div class="gaps">
-      <div class="gap">
-        <h3>Memory gap</h3>
-        <p>The assistant forgets every conversation by default. Yesterday&rsquo;s finding on a UN1845 overpack does not inform today&rsquo;s.</p>
-        <p><span class="fix">Closed by</span>L0 &mdash; a written, versioned reference the agent reads before every review.</p>
-      </div>
-      <div class="gap">
-        <h3>Consistency gap</h3>
-        <p>Ask the same question twice, get two different answers. Fatal in a regulated review: a discrepancy found on Monday must be found on Friday.</p>
-        <p><span class="fix">Closed by</span>L1 &mdash; narrow skills with a fixed method and a standard of precedence.</p>
-      </div>
-      <div class="gap">
-        <h3>Access gap</h3>
-        <p>Only the person at the terminal can run it. The system cannot be handed to a client, a QA lead, or a second reviewer.</p>
-        <p><span class="fix">Closed by</span>L2 + L3 &mdash; schedules that fire on their own, and an intake anyone can use.</p>
-      </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="sec-head">
-      <h2>What the skills layer actually checks</h2>
-      <span>sample thresholds &mdash; illustrative values, not a live shipment</span>
+    <div class="lvl-head">
+      <div></div><div>Level 1 &mdash; works today</div><div>Level 2 &mdash; scales</div><div>Level 3 &mdash; runs without you</div>
     </div>
-    <div class="tele">
-      <div class="cell is-cryo">
-        <span class="c-lab">Product range</span>
-        <span class="c-val">+2 &ndash; +8 &deg;C</span>
-        <span class="c-sub">GDP controlled ambient</span>
-        <span class="bar"><i style="width:100%;background:var(--cryo)"></i></span>
+
+    <!-- SKILLS -->
+    <div class="part">
+      <div class="spine">
+        <div class="top"><span class="ltr">S</span><span class="nm">Skills</span><span class="ord">Part 1</span></div>
+        <div class="def">Your SOPs as commands. The rule: prompt the same task twice, make it a skill.</div>
+        <div class="test"><b>Done when</b>Your most repeated task runs from one named command, and one skill fires from a button, not a chat.</div>
       </div>
-      <div class="cell is-caution">
-        <span class="c-lab">UN1845 dry ice</span>
-        <span class="c-val">2.5 kg / pkg</span>
-        <span class="c-sub">net weight per package &mdash; mandatory on AWB &amp; DGD</span>
-        <span class="bar"><i style="width:62%;background:var(--caution)"></i></span>
+      <div class="cell">
+        <span class="lv">L1</span><h3>Use pre-built skills, then write your own</h3>
+        <p>Start from what the tool ships with; learn <code>skill-creator</code> first.</p>
+        <span class="st done">Done</span>
+        <div class="you"><b>Three built</b> &mdash; <code>awb-review</code>, <code>dgd-check</code>, <code>dry-ice-un1845</code>, each citing the precedence standard.</div>
       </div>
-      <div class="cell is-nominal">
-        <span class="c-lab">Biological, Cat B</span>
-        <span class="c-val">UN3373</span>
-        <span class="c-sub">PI 650 &mdash; no DGD required</span>
-        <span class="bar"><i style="width:100%;background:var(--nominal)"></i></span>
+      <div class="cell is-next">
+        <span class="lv">L2</span><h3>Skills with their own file sets</h3>
+        <p>SKILL.md becomes a short router pointing to sub-files; the agent reads only the one that matches the job.</p>
+        <span class="st next">Next</span>
+        <div class="you">Ours run <b>91&ndash;102 lines</b> against a 60-line target. The checklists and cross-document tables move to sub-files.</div>
       </div>
-      <div class="cell is-critical">
-        <span class="c-lab">Highest-risk miss</span>
-        <span class="c-val">Weight mismatch</span>
-        <span class="c-sub">DGD kg &ne; AWB kg &rarr; hold at acceptance</span>
-        <span class="bar"><i style="width:88%;background:var(--critical)"></i></span>
+      <div class="cell">
+        <span class="lv">L3</span><h3>Trigger skills outside chat</h3>
+        <p>Headless mode runs one prompt and exits, so a skill becomes a button in your own software.</p>
+        <span class="st idle">Not started</span>
+        <div class="you">Needs the laptop. This is what would make the command centre&rsquo;s run buttons real.</div>
+      </div>
+    </div>
+
+    <!-- MEMORY -->
+    <div class="part">
+      <div class="spine">
+        <div class="top"><span class="ltr">M</span><span class="nm">Memory</span><span class="ord">Part 2</span></div>
+        <div class="def">Your workspace and context. The symptom to watch: retrieval slows and tokens climb as clutter grows.</div>
+        <div class="test"><b>Done when</b>A brand-new session finds the right file through the routers on the first hop.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L1</span><h3>A workspace is just a folder</h3>
+        <p>Point the agent at one folder and work there. Fine until the files pile up.</p>
+        <span class="st done">Done</span>
+        <div class="you">Eleven lanes, plus <code>standards-of-precedence.md</code> and the audit engine prompt.</div>
+      </div>
+      <div class="cell is-next">
+        <span class="lv">L2</span><h3>Router files, not neat folders</h3>
+        <p>Agents want a map, not tidiness. A master router names your areas and points each to its own one-page index.</p>
+        <span class="st next">Biggest gap</span>
+        <div class="you">There is <b>no <code>CLAUDE.md</code></b> in the repo. Eleven lanes and nothing telling a cold session which one governs.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L3</span><h3>A visual second brain</h3>
+        <p>One local page showing the workspace as a searchable, living map of how files connect.</p>
+        <span class="st idle">Not started</span>
+        <div class="you">Would double as the client-facing view of the audit lane.</div>
+      </div>
+    </div>
+
+    <!-- ROUTINES -->
+    <div class="part">
+      <div class="spine">
+        <div class="top"><span class="ltr">R</span><span class="nm">Routines</span><span class="ord">Part 3</span></div>
+        <div class="def">Scheduled work &mdash; in practice, a prompt the agent sends itself at a time you set.</div>
+        <div class="test"><b>Done when</b>At least one piece of real work ships on schedule with your computer off.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L1</span><h3>Local routines</h3>
+        <p>Drafted in natural language, output lands where you will see it. Only runs while the machine is on.</p>
+        <span class="st done">Done</span>
+        <div class="you">Market watch fires <b>4:32 PM ET weekdays</b> and the dated flow briefs prove it. <code>run_daily.sh</code> is cron-ready.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L2</span><h3>Always-on, with its own machine</h3>
+        <p>A small cloud box so routines fire with the laptop closed &mdash; and Syncthing so both sides see the same files.</p>
+        <span class="st idle">Not started</span>
+        <div class="you">The cold-chain excursion sweep is the routine that most wants to run without you.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L3</span><h3>The whole agent in the cloud</h3>
+        <p>Agent installed on the cloud machine, all context there, no syncing at all.</p>
+        <span class="st idle">Not started</span>
+        <div class="you">Guide&rsquo;s own note: file security is the hard part; L2 gets the same result today.</div>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="part">
+      <div class="spine">
+        <div class="top"><span class="ltr">A</span><span class="nm">Applications</span><span class="ord">Part 4</span></div>
+        <div class="def">What your agent can actually reach. Connectors come as a CLI, an API, or an MCP server.</div>
+        <div class="test"><b>Done when</b>The apps you live in are reachable, and one tool you built yourself is part of your week.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L1</span><h3>Browse the catalog and connect the obvious</h3>
+        <p>Email, calendar, drive. Fine to start, but hand-browsing is not the efficient way in.</p>
+        <span class="st done">Done</span>
+        <div class="you">Gmail, Drive, Calendar, GitHub, Alpha Vantage and Crypto.com are live. Drive is how the guide reached this session.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L2</span><h3>Have the agent search</h3>
+        <p>Agent hunts official connectors first, then community ones; shortlists, you pick, it vets the code.</p>
+        <span class="st idle">Not started</span>
+        <div class="you">Worth pointing at carrier and forwarder tooling &mdash; tracking, rate, and acceptance systems.</div>
+      </div>
+      <div class="cell">
+        <span class="lv">L3</span><h3>Build your own connectors and apps</h3>
+        <p>When nothing exists, build it: a small CLI, or a micro-app for a job you do weekly.</p>
+        <span class="st part">Partly there</span>
+        <div class="you">The <code>compliance-auditor</code> n8n webhook is exactly this &mdash; a self-built intake for a job with no off-the-shelf tool.</div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head">
-      <h2>Build order</h2>
-      <span>bottom-up &mdash; skipping a step compounds the gap above it</span>
+    <div class="sec-head"><h2>Where Nexus Aurea actually stands</h2><span>level 1 across all four, one level 3 partly built</span></div>
+    <div class="stand">
+      <div class="sc"><div class="l">S &middot; Skills</div>
+        <div class="pips"><i class="pip on"></i><i class="pip"></i><i class="pip"></i></div>
+        <div class="v"><b>L1 complete.</b> L2 is the immediate next move &mdash; trim to routers.</div></div>
+      <div class="sc"><div class="l">M &middot; Memory</div>
+        <div class="pips"><i class="pip on"></i><i class="pip"></i><i class="pip"></i></div>
+        <div class="v"><b>L1 complete.</b> L2 missing entirely &mdash; no master router exists.</div></div>
+      <div class="sc"><div class="l">R &middot; Routines</div>
+        <div class="pips"><i class="pip on"></i><i class="pip"></i><i class="pip"></i></div>
+        <div class="v"><b>L1 complete and proven</b> &mdash; scheduled output already lands daily.</div></div>
+      <div class="sc"><div class="l">A &middot; Applications</div>
+        <div class="pips"><i class="pip on"></i><i class="pip"></i><i class="pip half"></i></div>
+        <div class="v"><b>L1 complete, L3 partly built.</b> L2 skipped &mdash; fine, order is not strict here.</div></div>
     </div>
-    <div class="order-scroll">
-      <table class="order">
-        <thead>
-          <tr><th>Step</th><th>Build</th><th>Layer</th><th>Done when</th></tr>
-        </thead>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>The bonus layer</h2><span>the command centre &mdash; deliberately not part of ARMS</span></div>
+    <div class="bonus">
+      <p class="q">&ldquo;This layer is only 20 to 30% of the value &mdash; but it is the part you see all day&hellip; The look is a skin; ARMS underneath is the product.&rdquo;</p>
+      <div class="attr">ARMS &mdash; The Agentic OS Guide, page 13</div>
+      <div class="pr">
+        <div><b>One page, one address</b>Same local address daily, survives a restart. If it is not always there, you stop opening it.</div>
+        <div><b>Show, do not store</b>The page is a window. Artifacts stay files; truth never lives in the dashboard.</div>
+        <div><b>Every widget earns its place</b>Glanceable summaries and one-click actions. Stop looking at a widget, delete it.</div>
+        <div><b>Artifacts one click away</b>A section listing what the agents made recently, so review is not folder-hunting.</div>
+        <div><b>The second brain is the centrepiece</b>Memory L3 links from the middle of the page.</div>
+        <div><b>Start with three widgets</b>Ship small, grow one prompt at a time.</div>
+        <div><b>Restyle freely</b>The same skeleton wears any brand &mdash; yours, or a client&rsquo;s.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>The seven-day plan, against your position</h2><span>four of seven days are already behind you</span></div>
+    <div class="plan-scroll">
+      <table class="plan">
+        <thead><tr><th>Day</th><th>The guide says</th><th>Your status</th></tr></thead>
         <tbody>
-          <tr><td class="step" style="color:var(--nominal)">01 &#10003;</td><td class="what">Write the standard of precedence as a file the agent reads first</td><td>L0</td><td class="out">Done &mdash; <span style="font-family:var(--f-mono);font-size:12px">compliance-auditor/standards-of-precedence.md</span></td></tr>
-          <tr><td class="step" style="color:var(--nominal)">02 &#10003;</td><td class="what">Cut the first three skills: AWB review, DGD check, dry ice weight</td><td>L1</td><td class="out">Done &mdash; <span style="font-family:var(--f-mono);font-size:12px">.claude/skills/</span>, pending operator review</td></tr>
-          <tr><td class="step" style="color:var(--nominal)">03 &#10003;</td><td class="what">Add <span style="font-family:var(--f-mono);font-size:12px">learnings.md</span> to each skill</td><td>L1</td><td class="out">Seeded &mdash; entries begin on first real run</td></tr>
-          <tr><td class="step">04</td><td class="what">Schedule the excursion sweep and the DGR revision watch</td><td>L2</td><td class="out">A report arrives without anyone opening a terminal</td></tr>
-          <tr><td class="step">05</td><td class="what">Point the n8n intake at the skill set, return the corrected doc</td><td>L3</td><td class="out">A non-technical reviewer completes a full review unaided</td></tr>
+          <tr class="ok"><td class="d">1 &#10003;</td><td class="w">Skills &mdash; turn your most repeated task into a skill</td><td>Three skills built</td></tr>
+          <tr><td class="d">2</td><td class="w"><b>Skills again &mdash; split a thick skill into a file set</b></td><td>Outstanding. 91&ndash;102 lines against a 60-line target</td></tr>
+          <tr><td class="d">3</td><td class="w"><b>Memory &mdash; master router plus one area index</b></td><td>Outstanding. No <code>CLAUDE.md</code> exists</td></tr>
+          <tr class="ok"><td class="d">4 &#10003;</td><td class="w">Routines &mdash; schedule the most annoying weekly chore</td><td>Market watch runs weekdays</td></tr>
+          <tr class="ok"><td class="d">5 &#10003;</td><td class="w">Applications &mdash; connector audit, wire the top pick</td><td>Six connectors live</td></tr>
+          <tr class="ok"><td class="d">6 &#10003;</td><td class="w">Command centre v1 &mdash; three widgets, no more</td><td>Built, six panels &mdash; more than asked for</td></tr>
+          <tr><td class="d">7</td><td class="w"><b>Test day &mdash; run everything once, fix by editing files</b></td><td>Pending days 2 and 3</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <div class="source">
+  <div class="foot">
     <div>
       <h3>Source</h3>
-      <p><em>&ldquo;The NEW Agentic OS standard for Claude 5 Models is here (Full Breakdown)&rdquo;</em> &mdash; RoboNuggets. <a href="https://www.youtube.com/watch?v=8NSyI-npJCU">youtube.com/watch?v=8NSyI-npJCU</a></p>
-      <p>Framework reconstructed from public descriptions of that video. The layer definitions are theirs; the Nexus Aurea mapping, thresholds and build order on this page are not.</p>
+      <p><em>ARMS &mdash; The Agentic OS Guide (Deep Edition)</em>, a RoboNuggets guide by Jay E, 17 pages. Companion to <a href="https://www.youtube.com/watch?v=8NSyI-npJCU">the video</a>.</p>
+      <p>The framework, the level definitions and the seven-day plan are theirs. The Nexus Aurea mapping, the status of each cell, and the errata are ours.</p>
     </div>
     <div>
-      <h3>Open item</h3>
-      <p class="flagged"><strong>The guide PDF is not attached.</strong> It sits behind the free RoboNuggets Skool community rather than a public link. Once downloaded, this mapping should be re&#8209;checked against the actual document &mdash; layer names, ordering and the learnings-file convention are the parts most likely to differ.</p>
+      <h3>Not reproduced here</h3>
+      <p>The guide carries a copy-paste starter prompt for each of the twelve cells, plus the command-centre prompt. Those are the author&rsquo;s work and are not reprinted on this page &mdash; read them in the PDF.</p>
+    </div>
+    <div>
+      <h3>Companion</h3>
+      <p>The control surface built on top of this: <a href="https://claude.ai/code/artifact/f685bfab-eefc-4962-97bb-42940af9fe13">Nexus Aurea Command Center</a>. Skin, not product &mdash; per page 13.</p>
     </div>
   </div>
-
 </div>

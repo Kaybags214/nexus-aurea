@@ -55,8 +55,8 @@ Level 1 complete across all four parts, with one level 3 partly built.
 
 | Part | L1 | L2 | L3 |
 |------|----|----|----|
-| Skills | ✅ three skills in `.claude/skills/` | ⬜ **next** — 91–102 lines vs a 60-line target | ⬜ needs the laptop |
-| Memory | ✅ eleven lanes + precedence standard | ⬜ **biggest gap** — no `CLAUDE.md` router | ⬜ |
+| Skills | ✅ six skills in `.claude/skills/` | ✅ skill trees — routers 40–43 lines | ⬜ needs the laptop |
+| Memory | ✅ eleven lanes + precedence standard | ✅ `CLAUDE.md` + six area indexes | ⬜ visual second brain |
 | Routines | ✅ market watch, 4:32 PM ET weekdays | ⬜ | ⬜ |
 | Applications | ✅ six connectors live | ⬜ | 🟦 `compliance-auditor` n8n webhook |
 

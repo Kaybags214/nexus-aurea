@@ -5,7 +5,7 @@ skills are the same competence cut into narrow units, so the same document revie
 produces the same findings.
 
 Structure follows the ARMS guide's Skills **Level 2** pattern: `SKILL.md` is a short router,
-the detail lives in `checks/`, and the router tells the agent to read **only** the file that
+the detail lives in a `checks/` folder inside the skill, and the router tells the agent to read **only** the file that
 matches the job.
 
 | Skill | One job |
@@ -22,7 +22,7 @@ matches the job.
 ```
 .claude/skills/<name>/
 ├── SKILL.md          router — triggers, check table, the contract. Under 60 lines.
-├── checks/
+├── checks/          one file per check group
 │   ├── 01-....md     one file per check group, read only when reached
 │   └── 02-....md
 └── learnings.md      appended after every run

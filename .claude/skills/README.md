@@ -1,38 +1,56 @@
-# Skills — the L1 layer
+# Skills — the L1/L2 layer
 
-The audit engine in `compliance-auditor/AUDIT-ENGINE-PROMPT.md` is one large prompt that does
-everything. These skills are the same competence cut into narrow, single-purpose units, which is
-what makes the output repeatable: the same document reviewed twice produces the same findings,
-because the method is written down rather than re-improvised each session.
+`compliance-auditor/AUDIT-ENGINE-PROMPT.md` is one large prompt that does everything. These
+skills are the same competence cut into narrow units, so the same document reviewed twice
+produces the same findings.
+
+Structure follows the ARMS guide's Skills **Level 2** pattern: `SKILL.md` is a short router,
+the detail lives in `checks/`, and the router tells the agent to read **only** the file that
+matches the job.
 
 | Skill | One job |
 |---|---|
-| `dry-ice-un1845` | Is the dry ice on this shipment documented correctly? |
 | `awb-review` | Is this Air Waybill complete and internally consistent? |
 | `dgd-check` | Is this Shipper's Declaration complete, correctly classified and signed? |
+| `dry-ice-un1845` | Is the dry ice on this shipment documented correctly? |
+| `excursion-assessment` | How far outside its range did this product go, and what does a QP need? |
+| `coa-review` | Is this Certificate of Analysis complete and traceable to the shipment? |
+| `commercial-invoice-review` | Is this invoice sufficient for customs and internally consistent? |
 
-## Rules these all follow
+## The shape
 
-1. **One task, one defined way.** "Verify dry ice net weight per package" is a skill. "Review
-   this shipment" is not — that is the engine calling several skills.
-2. **Precedence is not restated, it is cited.** `compliance-auditor/standards-of-precedence.md`
-   is the single source. A skill that disagrees with it is wrong.
-3. **Every finding names its standard.** A flag without a cited rule is not a finding.
+```
+.claude/skills/<name>/
+├── SKILL.md          router — triggers, check table, the contract. Under 60 lines.
+├── checks/
+│   ├── 01-....md     one file per check group, read only when reached
+│   └── 02-....md
+└── learnings.md      appended after every run
+```
+
+## Rules all of them follow
+
+1. **One task, one defined way.** "Verify dry ice net weight per package" is a skill.
+   "Review this shipment" is not — that is the engine calling several skills.
+2. **Shared rules are cited, never restated.** `compliance-auditor/skill-contract.md` holds the
+   ground rules and the sidecar-log spec; `standards-of-precedence.md` decides conflicts;
+   `audit-report-template.md` is the output shape. A skill that contradicts them is wrong.
+3. **No regulatory limit from memory.** Packing instruction quantities, specification limits,
+   shelf-life minima: verified against the governing document, or recorded as unverified.
 4. **Unreadable is a valid answer.** "Cannot verify from image" beats a guess, always.
-5. **Nothing clears a shipment.** Skills flag and correct. A qualified person signs.
-6. **Each skill keeps a `learnings.md`.** Append after every run — what surprised you, what the
-   skill missed, what to change. That file is how a skill's second month beats its first.
+5. **Nothing clears, releases or signs.** Skills flag and correct.
+6. **Every report gets a sidecar JSON** — the audit trail that lets a finding be defended later.
 
-## Adding the next one
+## Conventions that are ours, not the guide's
 
-Still to build, in the order the build plan puts them:
+- `learnings.md` per skill
+- The sidecar log, adapted from the `/generate` guide's media log into an audit trail
+- `checks/` as the sub-file name
 
-- `commercial-invoice-review` — value, HS heading, Incoterms consistency
-- `coa-review` — Certificate of Analysis against the product specification
-- `excursion-assessment` — temperature excursion against the product label range
-- `lithium-battery-section-II` — PI 965–970 Section II
-- `hs-code-lookup` — classification research, destination-country first
+## Still to build
 
-Copy an existing skill's shape: frontmatter with `name` and `description` that says when to
-trigger, a stated single job, ordered checks, an explicit "what you may not do", and the output
-shape from `compliance-auditor/audit-report-template.md`.
+`lithium-battery-section-II` (PI 965–970 Section II), `packing-list-review`,
+`bol-review` (ocean), `hs-code-research`, `gdp-record-review`, `cbp-entry-review`.
+
+Copy an existing skill's shape. Router under 60 lines, one file per check group, contract
+cites `skill-contract.md` rather than repeating it.

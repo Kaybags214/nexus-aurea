@@ -286,11 +286,11 @@
           <span class="role">One task, one defined way. Each keeps a learnings file.</span>
         </div>
         <div class="body-cell">
-          <p class="gap-note">The consistency layer. A skill is narrow on purpose &mdash; <strong>&ldquo;verify dry ice net weight per package&rdquo;</strong> is a skill; &ldquo;review this shipment&rdquo; is not. Each appends what it noticed about its own output quality after every run.</p>
+          <p class="gap-note">The consistency layer. A skill is narrow on purpose &mdash; <strong>&ldquo;verify dry ice net weight per package&rdquo;</strong> is a skill; &ldquo;review this shipment&rdquo; is not. First three now live in <span style="font-family:var(--f-mono);font-size:12px">.claude/skills/</span>, each with its own <span style="font-family:var(--f-mono);font-size:12px">learnings.md</span>.</p>
           <div class="chips">
-            <span class="chip todo">awb-review</span>
-            <span class="chip todo">shippers-declaration-check</span>
-            <span class="chip todo">dry-ice-un1845-weight</span>
+            <span class="chip built">awb-review</span>
+            <span class="chip built">dgd-check</span>
+            <span class="chip built">dry-ice-un1845</span>
             <span class="chip todo">lithium-battery-section-II</span>
             <span class="chip todo">commercial-invoice-review</span>
             <span class="chip todo">coa-review</span>
@@ -307,7 +307,7 @@
           <span class="role">The substrate. Without it, every session starts from zero.</span>
         </div>
         <div class="body-cell">
-          <p class="gap-note">Already built. Eleven lanes of written standard, and the precedence rule that decides which one wins when two references disagree.</p>
+          <p class="gap-note">Already built, and further along than this page first credited. Eleven lanes of written standard, plus <span style="font-family:var(--f-mono);font-size:12px">standards-of-precedence.md</span> and the audit engine prompt that governs every review.</p>
           <div class="chips">
             <span class="chip built">dgr/</span>
             <span class="chip built">cold-chain/</span>
@@ -400,9 +400,9 @@
           <tr><th>Step</th><th>Build</th><th>Layer</th><th>Done when</th></tr>
         </thead>
         <tbody>
-          <tr><td class="step">01</td><td class="what">Write the standard of precedence as a file the agent reads first</td><td>L0</td><td class="out">Two conflicting references resolve the same way twice</td></tr>
-          <tr><td class="step">02</td><td class="what">Cut the first three skills: AWB review, DGD check, dry ice weight</td><td>L1</td><td class="out">Same document in &rarr; same findings out, on repeat runs</td></tr>
-          <tr><td class="step">03</td><td class="what">Add <span style="font-family:var(--f-mono);font-size:12px">learnings.md</span> to each skill</td><td>L1</td><td class="out">A skill&rsquo;s second month is measurably better than its first</td></tr>
+          <tr><td class="step" style="color:var(--nominal)">01 &#10003;</td><td class="what">Write the standard of precedence as a file the agent reads first</td><td>L0</td><td class="out">Done &mdash; <span style="font-family:var(--f-mono);font-size:12px">compliance-auditor/standards-of-precedence.md</span></td></tr>
+          <tr><td class="step" style="color:var(--nominal)">02 &#10003;</td><td class="what">Cut the first three skills: AWB review, DGD check, dry ice weight</td><td>L1</td><td class="out">Done &mdash; <span style="font-family:var(--f-mono);font-size:12px">.claude/skills/</span>, pending operator review</td></tr>
+          <tr><td class="step" style="color:var(--nominal)">03 &#10003;</td><td class="what">Add <span style="font-family:var(--f-mono);font-size:12px">learnings.md</span> to each skill</td><td>L1</td><td class="out">Seeded &mdash; entries begin on first real run</td></tr>
           <tr><td class="step">04</td><td class="what">Schedule the excursion sweep and the DGR revision watch</td><td>L2</td><td class="out">A report arrives without anyone opening a terminal</td></tr>
           <tr><td class="step">05</td><td class="what">Point the n8n intake at the skill set, return the corrected doc</td><td>L3</td><td class="out">A non-technical reviewer completes a full review unaided</td></tr>
         </tbody>

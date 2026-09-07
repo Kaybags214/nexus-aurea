@@ -76,6 +76,23 @@ Interface mockup, not a live system. Clocks, week tracker and routine status run
 real time; intake counts, findings and review totals are sample data. Model x effort
 picks persist in browser localStorage only.
 
+### The refresh routine
+
+`Refresh Nexus Aurea Command Center` — trigger `trig_0184ine4nbSXR5ZDmJbKCZAg`.
+Fires **daily at 11:00 UTC (7:00 AM Eastern)** in a fresh session. It re-reads this repository,
+recounts findings, verdicts, skills and memory, rewrites the figures in `command-center.html`,
+republishes to the same Artifact URL, and pushes the change.
+
+A run that finds nothing changed makes no edit and does not republish — a no-op is the correct
+outcome, not a failure. Notifications are off.
+
+It only touches figures. It is instructed not to change layout, not to alter skills or audit
+reports, and not to mark anything live or built that is not.
+
+To pause or change it, use the Routines list in claude.ai, or ask in a session.
+
+---
+
 **`nexus-agentic-os.html`** — the architecture reference. The ARMS stack drawn as
 four layers with the repo mapping and a build order. Explains what to build;
 `command-center.html` shows what it looks like when built.

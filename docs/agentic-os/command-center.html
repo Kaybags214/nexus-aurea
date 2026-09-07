@@ -239,6 +239,15 @@ body.editing .panel.focused .tick{opacity:1}
 .cell.on i{width:7px;height:7px}
 .cell:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
+.planned{font-family:var(--f-m);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dimmer);border:1px solid var(--line-2);padding:1px 4px;margin-left:5px;vertical-align:1px}
+.d.rej{background:var(--crit)}
+.d.hld{background:var(--warn)}
+.verdicts{display:flex;gap:14px;margin-top:11px;font-family:var(--f-m);font-size:9.5px;color:var(--dim)}
+.verdicts i.sw{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px}
+.sw.rej{background:var(--crit)}.sw.hld{background:var(--warn)}.sw.pas{background:#241F1A}
+.rt .ag.live{color:var(--ok)}
+
 /* ---------- routines ---------- */
 .rt{width:100%;border-collapse:collapse;font-size:12px}
 .rt th{
@@ -320,10 +329,15 @@ body.editing .panel.focused .tick{opacity:1}
       <button class="tbtn" id="t-info" aria-pressed="false" title="About this page" data-i="info"></button>
     </div>
     <div class="about" id="about" hidden>
-      <b>This is a working interface mockup, not a live system.</b> The clocks, the week
-      tracker and the routine schedule run on your real local time. Everything else &mdash;
-      intake counts, findings, review totals &mdash; is sample data standing in for what the
-      real system would show. The model &times; effort picks you make are saved in this browser only.
+      <b>The figures on this page are real, read from the Nexus Aurea repository.</b> Findings,
+      verdicts, skill list, memory counts and the market-watch routine all come from files in
+      the repo. Clocks and the week tracker run on your live local time.
+      <br><br>
+      <b>Two things are not live.</b> The figures are a snapshot taken when this page was last
+      published &mdash; the page does not re-read the repo on its own. And anything marked
+      <span class="planned">planned</span> does not exist yet: the micro apps are unbuilt, and
+      four of the five routines are not scheduled. Run buttons do not execute a skill; that needs
+      headless mode on your own machine. Model &times; effort picks save in this browser only.
     </div>
   </div>
 
@@ -368,12 +382,13 @@ body.editing .panel.focused .tick{opacity:1}
       <section class="panel" id="p-lab">
         <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
         <div class="panel-h"><span class="drag">&#8942;&#8942;</span><span class="ico" data-i="shield"></span>
-          <h2>Audit Lab</h2><span class="act">Rolling 30d</span></div>
+          <h2>Audit Lab</h2><span class="act">7 reports</span></div>
         <div class="panel-b">
-          <div class="big">1,284</div>
-          <div class="big-l">Documents reviewed</div>
-          <div class="big-s">96.2% first-pass &middot; 47 critical findings caught</div>
+          <div class="big">62</div>
+          <div class="big-l">Findings raised</div>
+          <div class="big-s">6 real documents &middot; 16 critical &middot; 35 major &middot; 11 minor</div>
           <div class="dots" id="labdots"></div>
+          <div class="verdicts" id="verdicts"></div>
         </div>
       </section>
 
@@ -383,7 +398,7 @@ body.editing .panel.focused .tick{opacity:1}
     <div class="stage">
       <canvas id="core"></canvas>
       <div class="ring" id="ring"></div>
-      <div class="stage-cap">Memory core &nbsp;&middot;&nbsp; <b>11 lanes</b> &nbsp;&middot;&nbsp; <b>1,284 documents</b> &nbsp;&middot;&nbsp; <b>precedence standard v3</b></div>
+      <div class="stage-cap">Memory core &nbsp;&middot;&nbsp; <b>16 lanes</b> &nbsp;&middot;&nbsp; <b>128 documents</b> &nbsp;&middot;&nbsp; <b>7 routers</b> &nbsp;&middot;&nbsp; <b>7 skills, 36 checks</b></div>
     </div>
 
     <!-- ================= RIGHT ================= -->
@@ -392,11 +407,11 @@ body.editing .panel.focused .tick{opacity:1}
       <section class="panel" id="p-intake">
         <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
         <div class="panel-h"><span class="drag">&#8942;&#8942;</span><span class="ico" data-i="inbox"></span>
-          <h2>Intake</h2><span class="act">Synced 02:39</span></div>
+          <h2>Intake</h2><span class="act">7 reports on file</span></div>
         <div class="panel-b">
           <div style="display:flex;align-items:baseline;gap:10px">
-            <span class="big">12</span>
-            <span class="big-l">Docs<br>past 24h</span>
+            <span class="big">16</span>
+            <span class="big-l">Critical<br>open</span>
           </div>
           <div class="next-l">Flagged &middot; needs review</div>
           <div id="flags"></div>
@@ -434,7 +449,7 @@ body.editing .panel.focused .tick{opacity:1}
   </div>
 
   <div class="foot">
-    <span class="sample">Sample data</span>
+    <span class="sample">Snapshot &middot; not live</span>
     <span>Nexus Aurea &middot; rev 2026.09.07</span>
     <span>Look after <a href="https://www.youtube.com/watch?v=8NSyI-npJCU">RUBRIC by RoboNuggets</a></span>
     <span>Architecture: <a href="https://claude.ai/code/artifact/50370611-d383-4c04-9451-8a0ee603bce6">ARMS stack reference</a></span>
@@ -482,14 +497,14 @@ document.querySelectorAll('[data-i]').forEach(function(el){
 /* ---------------- micro apps ---------------- */
 const APPS = [
   ['doc','DGD Builder','Shipper&rsquo;s Declaration, four-copy set'],
-  ['snow','Dry Ice Calculator','UN1845 sublimation rate and net weight per package'],
+  ['snow','Dry Ice Calculator','UN1845 sublimation and net weight per package'],
   ['tag','Label Sheet','Hazard diamonds, CAO, handling and orientation'],
-  ['route','Lane Risk Map','Transit temperature exposure by route and season'],
-  ['list','Packing Instruction Lookup','PI 650 / 954 / 965 by UN number']
+  ['route','Lane Risk Map','Transit temperature exposure by route'],
+  ['list','PI Lookup','PI 650 / 954 / 965 by UN number']
 ];
 document.getElementById('apps').innerHTML = APPS.map(function(a){
   return '<div class="app"><span class="ai">'+svg(a[0])+'</span><div><div class="an">'+a[1]+
-    '</div><div class="ad">'+a[2]+'</div></div></div>';
+    ' <span class="planned">planned</span></div><div class="ad">'+a[2]+'</div></div></div>';
 }).join('');
 
 /* ---------------- clocks ---------------- */
@@ -542,9 +557,9 @@ tickClock(); setInterval(tickClock,1000);
 })();
 
 const BOARD = [
-  ['AWB 020-4471 8823 &middot; acceptance cutoff','15:40'],
-  ['ULD PMC 4471 &middot; dry ice re-ice','17:15'],
-  ['Lane FRA&ndash;BOM &middot; temp forecast review','19:00']
+  ['Verify UN1863 vs UN1263 against DGR 67th ed.','Set B'],
+  ['Confirm AWB 771-221-2765 &mdash; ten digits','Set A'],
+  ['Place of signing &mdash; absent on all five','pattern']
 ];
 document.getElementById('board').innerHTML = BOARD.map(function(b){
   return '<div class="nrow"><span>'+b[0]+'</span><span class="nt">'+b[1]+'</span></div>';
@@ -552,34 +567,39 @@ document.getElementById('board').innerHTML = BOARD.map(function(b){
 
 /* ---------------- audit lab dots ---------------- */
 (function(){
-  const today=new Date().getDay(), out=[];
-  const pat=[3,1,2,0,3,1,3, 2,3,1,3,0,1,2, 3,2,3,1,2,0,3, 1,3,2,3,1,2,0, 2,1,3,0,1,3,2];
-  for(let c=0;c<7;c++){
-    let col='';
-    for(let r=0;r<5;r++){
-      const v=pat[r*7+c];
-      const isToday = (c===today && r===4);
-      col+='<i class="d '+(isToday?'today':v===3?'on':v===2?'mid':'')+'"></i>';
-    }
-    out.push('<div class="dcol">'+col+'</div>');
-  }
-  document.getElementById('labdots').innerHTML=out.join('');
+  // one dot per audit report, coloured by verdict
+  const REPORTS=[
+    ['Set B &middot; UN1863','reject'],['Typed &middot; UN1845/3373','reject'],
+    ['Typed &middot; UN1830','reject'],['Typed &middot; UN3077','reject'],
+    ['Set A &middot; UN1845/3373','hold'],['Set A &middot; invoice','hold'],
+    ['Fixture 001','hold']
+  ];
+  document.getElementById('labdots').innerHTML =
+    '<div class="dcol" style="flex-direction:row;flex-wrap:wrap;gap:6px">' +
+    REPORTS.map(function(r){
+      return '<i class="d '+(r[1]==='reject'?'rej':'hld')+'" title="'+r[0]+' &mdash; '+r[1]+'"></i>';
+    }).join('') + '</div>';
+  document.getElementById('verdicts').innerHTML =
+    '<span><i class="sw rej"></i>4 reject</span><span><i class="sw hld"></i>3 hold</span>' +
+    '<span><i class="sw pas"></i>0 pass</span>';
 })();
 
 /* ---------------- intake ---------------- */
 const FLAGS = [
-  ['AWB 020-4471 8823','Dry ice net weight absent from Nature &amp; Quantity','c','Critical','2h'],
-  ['DGD &middot; UN3373','PI 650 mark missing on outer packaging','c','Critical','4h'],
-  ['CoA lot PH-2291','Excursion +11.4&deg;C for 3h 20m against +2/+8','c','Critical','7h'],
-  ['Invoice 88-2201','HS heading conflicts with packing list','w','Caution','9h'],
-  ['AWB 020-4468 1190','Shipper address truncated, box 1','w','Caution','11h']
+  ['Set B &middot; UN1863','Declaration says passenger &amp; cargo; AWB says cargo aircraft only','c','Critical','open'],
+  ['Set B &middot; UN1863','UN number vs &ldquo;paint related material&rdquo; &mdash; verify against DGR','c','Critical','open'],
+  ['Typed &middot; UN3393','Declared against &ldquo;Biological substance, Category B&rdquo; &mdash; UN3373 expected','c','Critical','open'],
+  ['Typed &middot; UN1845','Shipment type marked RADIOACTIVE','c','Critical','open'],
+  ['Set A &middot; AWB 771-221-2765','Ten digits; eleven required, check digit missing','c','Critical','open'],
+  ['Set A &middot; invoice','Net weight 30kg against 3.0 kg on AWB and DGD','c','Critical','open'],
+  ['All five declarations','Place of signing absent &mdash; repeating defect','w','Major','5 of 5']
 ];
 document.getElementById('flags').innerHTML = FLAGS.map(function(f){
   return '<div class="flag"><span class="fi">'+svg('doc')+'</span><span class="fx"><b>'+f[0]+
     '</b> &mdash; '+f[1]+'<br><span class="sev '+f[2]+'">'+f[3]+'</span></span><span class="fw">'+f[4]+'</span></div>';
 }).join('');
 
-const MIX=[['DGR',5,'#F26B1C'],['Cold chain',4,'#3FC8DC'],['Customs',2,'#E5B23C'],['Pharma',1,'#A78BFA']];
+const MIX=[['Critical',16,'#E8484E'],['Major',35,'#E8A33D'],['Minor',11,'#46B87C']];
 const tot=MIX.reduce(function(s,m){return s+m[1]},0);
 document.getElementById('mixbar').innerHTML = MIX.map(function(m){
   return '<i style="flex:'+m[1]+';background:'+m[2]+'"></i>';
@@ -593,10 +613,13 @@ document.getElementById('mixkey').innerHTML = MIX.map(function(m){
 const MODELS=['HAIKU','SONNET','OPUS','FABLE'];
 const EFFORTS=['LOW','MEDIUM','HIGH','XHIGH','MAX'];
 const SKILLS=[
-  {id:'awb-review',  icon:'plane', model:'SONNET', eff:'MEDIUM'},
-  {id:'dgd-check',   icon:'box',   model:'OPUS',   eff:'XHIGH'},
-  {id:'dry-ice-wt',  icon:'snow',  model:'HAIKU',  eff:'MEDIUM'},
-  {id:'excursion',   icon:'thermo',model:'OPUS',   eff:'HIGH'}
+  {id:'dgd-check',                icon:'box',   model:'OPUS',   eff:'XHIGH'},
+  {id:'awb-review',               icon:'plane', model:'SONNET', eff:'MEDIUM'},
+  {id:'dry-ice-un1845',           icon:'snow',  model:'HAIKU',  eff:'MEDIUM'},
+  {id:'lithium-battery-section-2',icon:'bolt',  model:'OPUS',   eff:'XHIGH'},
+  {id:'excursion-assessment',     icon:'thermo',model:'OPUS',   eff:'HIGH'},
+  {id:'coa-review',               icon:'drop',  model:'SONNET', eff:'HIGH'},
+  {id:'commercial-invoice-review',icon:'doc',   model:'SONNET', eff:'MEDIUM'}
 ];
 let store={};
 try{ store=JSON.parse(localStorage.getItem('na.skills')||'{}'); }catch(e){ store={}; }
@@ -659,12 +682,11 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMatri
 
 /* ---------------- routines ---------------- */
 const ROUTINES=[
-  ['06:00','Lane temperature forecast','HERMES'],
-  ['09:00','Intake queue sweep','HERMES'],
-  ['13:00','Cold-chain excursion review','DESKTOP'],
-  ['15:40','Acceptance cutoff check','HERMES'],
-  ['18:00','Findings digest to client','HERMES'],
-  ['21:00','IATA DGR revision watch','DESKTOP']
+  ['16:32','Market watch flow brief','LIVE'],
+  ['09:00','Intake queue sweep','PLANNED'],
+  ['13:00','Cold-chain excursion review','PLANNED'],
+  ['18:00','Findings digest','PLANNED'],
+  ['21:00','IATA DGR revision watch','PLANNED']
 ];
 (function(){
   const d=new Date(), mins=d.getHours()*60+d.getMinutes();
@@ -674,10 +696,11 @@ const ROUTINES=[
     let cls='',st='Queued';
     if(t<=mins){ cls='fired'; st='Fired'; fired++; }
     else if(!nextFound){ cls='next'; st='Next'; nextFound=true; }
+    if(r[2]==='PLANNED'){ cls='fired'; st='Planned'; }
     return '<tr class="'+cls+'"><td class="tm">'+r[0]+'</td><td class="rn">'+r[1]+
-      ' <span class="ag">&#9670; '+r[2]+'</span></td><td class="st">'+st+'</td></tr>';
+      ' <span class="ag'+(r[2]==='LIVE'?' live':'')+'">&#9670; '+r[2]+'</span></td><td class="st">'+st+'</td></tr>';
   }).join('');
-  document.getElementById('fired-count').textContent = fired+'/'+ROUTINES.length+' fired today';
+  document.getElementById('fired-count').textContent = '1 live \u00b7 4 planned';
 })();
 
 /* ---------------- panel focus / edit ---------------- */

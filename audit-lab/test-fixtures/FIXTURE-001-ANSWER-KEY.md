@@ -4,7 +4,8 @@
 scored: a finding that is not on this list is a false positive, and an item here that the run
 missed is a miss.
 
-Nine defects were planted.
+Nine defects were planted deliberately. Two more (#10, #11) were present without being
+noticed by the fixture author and were added after a run found them — see the note at the end.
 
 | # | Defect | Expected severity | Which skill should catch it |
 |---|---|---|---|
@@ -17,6 +18,19 @@ Nine defects were planted.
 | 7 | **Shipper address truncated** on the AWB — "1400 Innovation Dr, Richmond VA" vs "1400 Innovation Drive, Suite 200, Richmond VA 23219". Suite and postcode dropped | Major | `awb-review` ch.2 / ch.6 |
 | 8 | **Declared value for carriage is blank** — not NVD, not a figure | Major | `awb-review` ch.5 |
 | 9 | **No temperature range in handling information.** "Keep cool. Perishable." is not +2/+8 °C | Major | `dry-ice-un1845` ch.4 / `awb-review` ch.4 |
+
+| 10 | **No document other than the AWB carries the AWB number.** The packing list references `MB-2026-0912` and the invoice `MB-INV-4471`; neither ties back to `020-4471 8823` | Major | `awb-review` ch.6 |
+| 11 | **Declared value contradiction.** The AWB declares `NCV` for customs while the invoice shows `USD 5,760.00` | Major | `awb-review` ch.5 / `commercial-invoice-review` |
+
+## Note on #10 and #11 — the key was wrong before it was right
+
+These were not planted. They were present in the fixture because the author wrote a realistic
+document set without noticing, and a graded run reported them as findings. Under the strict rule
+below they scored as false positives, which was the key's fault, not the run's.
+
+**A finding absent from this list is not automatically a false positive.** Check whether the
+defect is genuinely in the fixture first. A key that penalises correct findings trains the wrong
+behaviour, and a run that reports a real defect is doing its job even when the key is silent.
 
 ## Also present, and correct — should NOT be flagged
 

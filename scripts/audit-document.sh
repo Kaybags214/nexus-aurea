@@ -63,6 +63,10 @@ compliance-auditor/standards-of-precedence.md.
 5. Write the sidecar JSON beside it, same basename with .json, per
    skill-contract.md — including the unverified array.
 6. Redact any telephone number or personal contact detail in the report.
+7. Write ONLY those two files. Do not edit CLAUDE.md, any area index, any skill, or any
+   other file in the repository. The router rule in CLAUDE.md does not apply here: a report
+   landing in an existing folder changes no structure. This run stages only
+   compliance-auditor/audit-reports/, so an edit anywhere else is left dangling and uncommitted.
 
 Rules: never state a regulatory limit from memory — verify or record it as
 unverified. Unreadable is 'cannot verify from image', never a guess. Never issue

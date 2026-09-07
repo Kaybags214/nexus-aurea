@@ -36,7 +36,7 @@ Each is a router: `SKILL.md` plus a `checks/` folder inside each skill, read one
 - `compliance-auditor/n8n-workflow-setup.md` — the older API-node webhook. Runs the monolithic
   prompt, no repo access, no skills. Fallback when the laptop is off
 - `scripts/audit-document.sh` — the headless runner n8n calls
-- `compliance-auditor/audit-reports/` — completed reports land here. **Currently empty**
+- `compliance-auditor/audit-reports/` — completed reports and their sidecar logs land here
 
 ## Proof of work — `audit-lab/`
 

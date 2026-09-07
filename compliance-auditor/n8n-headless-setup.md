@@ -48,18 +48,17 @@ The script runs Claude Code with `-p` (one prompt, then exit), points it at the 
 tells it to pick the matching skill and run every check file, writes the report and sidecar,
 commits and pushes, then prints the report path as its last line.
 
-**Verify the permission flag before the first run.** Headless mode cannot show an approval
-prompt, so a run needing one will hang instead of failing. Check what your version calls it:
+**Permission flag — confirmed working.** `--permission-mode acceptEdits` is correct and is the
+script's default. Verified on the operator's laptop 2026-09-07 against Claude Code as installed
+there; a headless run started and completed the skill chain without stalling on an approval.
+
+It matters because headless mode cannot show an approval prompt: a run that needs one hangs
+rather than failing, which looks like a slow job and isn't. If a future Claude Code version
+renames the flag, check `claude --help | grep -i permission` and override without editing the
+script:
 
 ```bash
-claude --help | grep -i permission
-```
-
-The script defaults to `--permission-mode acceptEdits`. If yours differs, override it — no
-need to edit the script:
-
-```bash
-export CLAUDE_AUDIT_FLAGS="--whatever-your-version-uses"
+export CLAUDE_AUDIT_FLAGS="--whatever-the-new-flag-is"
 ```
 
 n8n does not inherit your shell profile. Set the variable in n8n's own environment (or in the
@@ -93,6 +92,19 @@ compliance-auditor/intake/runs.log
 
 The script redacts contact details **in the report**; the source upload is a separate matter and
 stays out of the repository.
+
+## 6b. What the script accepts as input
+
+The usage line says `<image-or-pdf>`, but the check is `[ -f ]` — any readable file passes,
+including a markdown transcription. That is deliberate: it makes the fixture in
+`audit-lab/test-fixtures/` usable as a smoke test without hunting for a photograph.
+
+**Be aware of what a text fixture does not test.** It exercises the check files and the report
+shape, but never the image-reading path — so the "cannot verify from image" discipline, which
+matters on a real photograph of a form, is not exercised at all. A markdown fixture cannot fail
+that check because there is no image to fail on.
+
+Test with a real photograph before trusting the intake page with one.
 
 ## 7. Exit codes
 

@@ -51,9 +51,25 @@ This repo is already most of L0. The gap is L1 → L3.
 - **L3 Applications** — `compliance-auditor/intake` (chat + n8n webhook), severity-flagged
   findings report, corrected document output, leave-behind packets
 
-## Visual
+## Visuals
 
-`nexus-agentic-os.html` in this folder is the architecture visual.
+Two pages, two different jobs.
+
+**`command-center.html`** — the control surface. Modelled on RUBRIC, the dashboard
+shown in the RoboNuggets video: panel columns around a rotating node ring with a
+particle memory core. Micro apps, live transit clocks (FRA / SIN / MEM), intake
+queue with severity flags, skills deck with a model x effort matrix, and a routine
+schedule that marks NEXT against real local time.
+
+Published Artifact: https://claude.ai/code/artifact/f685bfab-eefc-4962-97bb-42940af9fe13
+
+Interface mockup, not a live system. Clocks, week tracker and routine status run on
+real time; intake counts, findings and review totals are sample data. Model x effort
+picks persist in browser localStorage only.
+
+**`nexus-agentic-os.html`** — the architecture reference. The ARMS stack drawn as
+four layers with the repo mapping and a build order. Explains what to build;
+`command-center.html` shows what it looks like when built.
 
 Published Artifact: https://claude.ai/code/artifact/50370611-d383-4c04-9451-8a0ee603bce6
 

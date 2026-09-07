@@ -80,6 +80,29 @@ bill for it; not enough to disclose anything.
 Documents are read by AI services. That is a disclosure to a third party and clients are
 entitled to know which ones.
 
+### The current list — be able to say this before a client asks
+
+Intake is `kenya@nexusaureainc.com`, which forwards to a Google mailbox. Verified working
+2026-09-06.
+
+| Party | Holds what | Why it is in the chain |
+|---|---|---|
+| **Google (Gmail)** | The document, from the moment the client sends it | Email intake. Google holds it **before anything else touches it** — true regardless of what happens next, and it is a property of using email as the front door |
+| **Anthropic** | Document and findings, during a review | The audit itself |
+| **n8n** | The document in transit | Self-hosted on the operator's own machine — **not** a third party, and worth saying so, because it is the part clients assume is outsourced |
+| **Abacus AI** | Document, if the second-opinion step is kept | A second check. Two vendors doubles what must be explained and contracted for; it should earn that cost |
+
+A client's document reaches Google before the operator has done anything at all. That is not a
+defect to hide — it is the first line of the disclosure.
+
+### Two intake paths, and which to use
+
+- **Reading the mailbox from a cloud session** — fast, good for triage and "what came in today".
+  The document flows through that session.
+- **n8n on the laptop pulling from Gmail**, handing off to local Claude Code, report written to
+  the client store — **this is the path for real client work.** Not because the other is
+  careless, but because the document stays on hardware the operator controls.
+
 - **Name every service** a document passes through. Adding a second one doubles what has to be
   explained and contracted for; it should earn that cost.
 - **Check each vendor's data-retention position** before real client work goes through it, and

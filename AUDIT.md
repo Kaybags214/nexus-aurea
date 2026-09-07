@@ -31,7 +31,9 @@ Each is a router: `SKILL.md` plus a `checks/` folder inside each skill, read one
 ## Intake and output
 
 - `compliance-auditor/intake/` — submission point; `README.md` explains the flow
-- `compliance-auditor/n8n-headless-setup.md` — **wires the intake page to the skills** via
+- `compliance-auditor/gmail-intake-setup.md` — **client documents from `kenya@nexusaureainc.com`
+  into the laptop.** Client store, never git, replies as drafts only
+- `compliance-auditor/n8n-headless-setup.md` — wires the intake page to the skills via
   Claude Code headless on the laptop. The one that actually runs `.claude/skills/`
 - `compliance-auditor/n8n-workflow-setup.md` — the older API-node webhook. Runs the monolithic
   prompt, no repo access, no skills. Fallback when the laptop is off

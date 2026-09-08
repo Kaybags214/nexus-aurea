@@ -37,6 +37,12 @@ The agentic OS itself — architecture, command centre, the ARMS mapping — is 
    unverified. This applies to answers in chat as much as to skill output.
 5. **Nothing here clears, certifies, releases or signs.** A qualified person does that.
 6. **Build the system before chasing the opportunity.**
+7. **No automated agent writes to this repository unsupervised.** Review bots may comment;
+   they may not commit, and their fixes are not applied on their say-so. Every finding is
+   verified against the file before anything changes, and a regulatory claim from a bot is
+   subject to rule 4 like any other — including when it is correcting us. Do not invoke
+   `@codex address that feedback` or any equivalent. See the 2026-09-08 entries in
+   `docs/agentic-os/second-brain.md` for why.
 
 ## The router rule
 

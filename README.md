@@ -40,6 +40,14 @@ Master resume and targeted resumes for logistics compliance, dispatcher, and tra
 
 Proof-of-work folder for document review practice, discrepancy findings, dry ice / UN1845 checks, lithium battery review, commercial invoice review, AWB review, and cold-chain excursion practice.
 
+### Compliance Auditor
+
+Agentic document-review workflow: photograph a shipping/compliance document (AWB, Shipper's Declaration, commercial invoice, packing list, ocean Bill of Lading, dry ice docs, cold-chain temp log, CoA, GDP/GMP record, biological-substance paperwork, CBP entry) and get back a severity-flagged findings report plus a corrected version. Runs in chat or as a self-hosted n8n webhook. Governed by a written standard of precedence.
+
+### Pharma
+
+GDP/GMP shipping-record review, Certificate of Analysis review, and biological / infectious substances (UN2814 / UN2900 / UN3373) shipping references.
+
 ## Operating Rule
 
 Build the system before chasing the opportunity.

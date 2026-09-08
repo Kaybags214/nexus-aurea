@@ -18,6 +18,12 @@ implementing it. Read before quoting a client.
 | `compliance-auditor/audit-report-template.md` | The exact output shape every audit produces |
 | `compliance-auditor/AUDIT-ENGINE-PROMPT.md` | The system prompt for chat and the n8n vision node |
 
+## What the system has learned
+
+`docs/agentic-os/second-brain.md` — Memory L3. The lessons that changed how the skills behave,
+the judgment calls already settled, and the mistakes this system has made. Read it before an
+audit; promote to it after one. Per-skill raw notes stay in each skill's `learnings.md`.
+
 ## Skills — `.claude/skills/`
 
 Each is a router: `SKILL.md` plus a `checks/` folder inside each skill, read one at a time.

@@ -19,7 +19,8 @@ index for the area you need, then the file it names. Do not scan the whole repos
 
 The agentic OS itself — architecture, command centre, the ARMS mapping — is documented in
 `docs/agentic-os/README.md`. **How to operate it day to day** is
-`docs/agentic-os/operating-manual.html`.
+`docs/agentic-os/operating-manual.html`. **What the system has learned from doing the work** is
+`docs/agentic-os/second-brain.md` — read it before an audit, append to it after one.
 
 ## Standing rules
 

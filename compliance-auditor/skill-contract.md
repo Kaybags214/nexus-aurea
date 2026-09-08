@@ -47,6 +47,16 @@ This works in the other direction too. A defect appearing on **one** document ou
 otherwise-correct ones is evidence it is an outlier — worth saying, because it changes the fix
 from "retrain the process" to "correct this form".
 
+## After the run — learning
+
+1. **Append to the skill's `learnings.md`.** Every run, newest at the top: what the document did
+   that the skill did not expect, what the skill missed, what to change.
+2. **Promote what reaches beyond this skill** to `docs/agentic-os/second-brain.md` — a lesson
+   that would change another skill's behaviour, a judgment call that must not be re-argued, a
+   mistake this system made, or a limit on what it may claim. That file states the rule.
+3. Neither file carries client facts or regulatory limits. Patterns, not parties; pointers, not
+   numbers.
+
 ## Output shape
 
 `audit-report-template.md`. Do not restate that format inside a skill; point at it.

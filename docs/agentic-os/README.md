@@ -51,12 +51,13 @@ get re-introduced:
 
 ## Where Nexus Aurea stands
 
-Level 1 complete across all four parts, with one level 3 partly built.
+Level 1 complete across all four parts. Skills is complete through level 3; Memory's level 3 is
+half built — the ledger exists, the visual half does not.
 
 | Part | L1 | L2 | L3 |
 |------|----|----|----|
-| Skills | ✅ six skills in `.claude/skills/` | ✅ skill trees — routers 40–43 lines | ⬜ needs the laptop |
-| Memory | ✅ eleven lanes + precedence standard | ✅ `CLAUDE.md` + six area indexes | ⬜ visual second brain |
+| Skills | ✅ eight skills in `.claude/skills/` | ✅ skill trees — routers 40–43 lines | ✅ headless on the laptop, `scripts/audit-document.sh` |
+| Memory | ✅ eleven lanes + precedence standard | ✅ `CLAUDE.md` + six area indexes | 🟦 ledger in `second-brain.md`; visual half to build |
 | Routines | ✅ market watch, 4:32 PM ET weekdays | ⬜ | ⬜ |
 | Applications | ✅ six connectors live | ⬜ | 🟦 `compliance-auditor` n8n webhook |
 

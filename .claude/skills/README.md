@@ -45,7 +45,8 @@ matches the job.
 
 ## Conventions that are ours, not the guide's
 
-- `learnings.md` per skill
+- `learnings.md` per skill, rolled up into `docs/agentic-os/second-brain.md` when a lesson
+  reaches beyond the skill that found it
 - The sidecar log, adapted from the `/generate` guide's media log into an audit trail
 - `checks/` as the sub-file name
 

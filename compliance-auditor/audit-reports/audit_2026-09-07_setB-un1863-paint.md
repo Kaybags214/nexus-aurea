@@ -26,11 +26,25 @@
   loading decision follows the declaration. A package barred from a passenger aircraft can be
   loaded onto one on the strength of whichever document is read first.
 
-  **The quantity indicates the AWB is right and the declaration is wrong.** 60 L of a Class 3
-  PG II liquid in a single package is far above any plausible passenger-aircraft limit.
-  **Fix:** correct the declaration to cargo aircraft only, and confirm the Cargo Aircraft Only
-  label is on the drum. *Confirm the passenger limit for Class 3 PG II against the DGR 67th ed.
-  before relying on this reasoning.*
+  **Which document is wrong is NOT established, and no correction is prescribed.**
+
+  An earlier version of this finding said the quantity showed the AWB was right and the
+  declaration wrong, and instructed the shipper to alter the declaration. That was withdrawn on
+  review, for two reasons:
+
+  - It rested on 60 L being "above any plausible passenger-aircraft limit" — a limit that was
+    never verified. `skill-contract.md` rule 3 forbids resting a finding on a remembered figure,
+    and a prescribed correction is the strongest form of resting on one.
+  - It contradicted the standard it cited. `standards-of-precedence.md` §4 places the Shipper's
+    Declaration **above** the Air Waybill. Absent physical evidence from the package, that order
+    points the opposite way to the conclusion drawn.
+
+  **Fix:** do not tender. Establish, in this order: (1) the Class 3 PG II passenger-aircraft
+  quantity limit for this packing instruction in the DGR 67th ed., together with any state or
+  operator variation on the routing; (2) what is physically on the drum — the package marking and
+  whether a Cargo Aircraft Only label is affixed. Whichever document those two facts contradict
+  is the one to correct. Until then the shipment is held on the contradiction itself, which is
+  disqualifying regardless of which side is at fault.
 
 - **[C-2] The declaration is unsigned.** Signature box empty.
   **Standard:** IATA DGR 67th ed. certification; `dgd-check` check 4.

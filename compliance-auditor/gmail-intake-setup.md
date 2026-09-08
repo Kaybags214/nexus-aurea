@@ -11,6 +11,7 @@ Read `compliance/02-sops/data-handling.md` first. The one rule that shapes every
 Client emails kenya@nexusaureainc.com
   → [Gmail Trigger]        new mail, has attachment
   → [Filter]               is it actually a document?
+  → [Code: sanitise]       safe filename + hint; the sender wrote both
   → [Write Binary File]    into the CLIENT store, outside the repo
   → [Execute Command]      audit-document.sh --client
   → [Read File]            the report
@@ -55,32 +56,71 @@ Drop anything that is not a document before it reaches the audit:
 
 A junk attachment costs an audit run and clutters the client store.
 
-## 3. Write Binary File — into the client store
+## 3. Code node — sanitise, because the sender wrote all of this
+
+**Anyone who can send email to a published address controls the attachment filename and the
+subject line.** Neither may reach a shell or a prompt as written. This node is the same guard as
+in `n8n-headless-setup.md` §2, pointed at the client store instead of the repo.
+
+```javascript
+// Runs once for each item.
+const STORE = `${$env.HOME}/nexus-aurea-client/incoming`;
+
+// --- filename: keep the extension, discard whatever the sender chose ---
+const raw = ($binary?.data?.fileName ?? 'attachment').toString();
+const base = raw.split(/[\\/]/).pop();                 // defeat ../ and \ traversal
+const ext  = (base.match(/\.[A-Za-z0-9]{1,8}$/) || ['.bin'])[0].toLowerCase();
+const ALLOWED_EXT = ['.pdf','.png','.jpg','.jpeg','.webp','.heic','.md','.txt'];
+if (!ALLOWED_EXT.includes(ext)) {
+  throw new Error('Unsupported attachment type: ' + ext);
+}
+const stem = base.slice(0, base.length - ext.length)
+                 .replace(/[^A-Za-z0-9._-]/g, '_')
+                 .slice(0, 60) || 'attachment';
+const filePath = `${STORE}/${$execution.id}-${stem}${ext}`;
+
+// --- subject as the doc-type hint: allowlist, not escape ---
+const subjRaw = ($json.subject ?? '').toString();
+const docType = /^[A-Za-z0-9 ._-]{0,40}$/.test(subjRaw) ? subjRaw.trim() : '';
+
+return [{ json: { filePath, docType }, binary: $binary }];
+```
+
+A subject line that does not survive the allowlist is simply dropped — the audit runs without a
+hint, which costs nothing, because the skill identifies the document type itself. Losing a hint
+is not a failure; passing `$(...)` to a shell is.
+
+## 4. Write Binary File — into the client store
 
 ```
-{{ $env.HOME }}/nexus-aurea-client/incoming/{{ $execution.id }}-{{ $binary.data.fileName }}
+{{ $json.filePath }}
 ```
 
 **Not** `compliance-auditor/intake/incoming/`. That path is inside the repository and is for
-practice material.
+practice material. The Code node has already forced the path into the client store.
 
-## 4. Execute Command — the audit
+## 5. Execute Command — the audit
 
 ```
-/home/kaybags/nexus-aurea/scripts/audit-document.sh --client "{{ $json.fileName }}" "{{ $json.subject }}"
+/home/kaybags/nexus-aurea/scripts/audit-document.sh --client "{{ $json.filePath }}" "{{ $json.docType }}"
 ```
 
 `--client` is the whole point: report to the client store, **nothing committed, git never
-touched.** The email subject is passed as the document-type hint — clients usually say what
-they are sending.
+touched.**
+
+Both values come from the Code node. They previously came straight from the email: `$json.subject`
+was interpolated into this command line, so a subject containing `$(...)` ran as a shell command
+on the laptop, as whoever runs n8n, triggered by nothing more than sending mail to a published
+address. `$json.fileName` was never assigned by any node either, so the script received an empty
+path and exited 66.
 
 Raise the node timeout to several minutes. A full skill run is not fast.
 
-## 5. Read the report
+## 6. Read the report
 
 The script prints the report path on its last line. Read that file.
 
-## 6. Reply to the client — **as a draft, never sent**
+## 7. Reply to the client — **as a draft, never sent**
 
 Use **Gmail: Create Draft**, not Send. This is not caution for its own sake:
 
@@ -93,7 +133,7 @@ Use **Gmail: Create Draft**, not Send. This is not caution for its own sake:
 **Nothing reaches a client until a person has read it.** If any node in this workflow is ever
 switched from Draft to Send, that property is gone.
 
-## 7. Notify yourself
+## 8. Notify yourself
 
 A short Gmail send **to yourself** — sender, document type, verdict, how many Criticals. That is
 the alert. The draft is waiting; go read it.

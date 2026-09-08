@@ -11,6 +11,24 @@ Append after every run. Newest at the top. A few lines each.
 
 ---
 
+## 2026-09-08 — Check 4 was making a worldwide rule out of a variation
+
+Automated review of PR #7. Check 4 listed the 24-hour emergency response number as a flat
+requirement and made its absence an automatic Critical, with no step establishing that the
+routing requires one.
+
+- **Where it applies is variation-driven** — origin, transit, destination and operator — which
+  `standards-of-precedence.md` §1 already ranks at the top. The check ignored the standard its
+  own skill is governed by.
+- **Consequence if unfixed:** compliant shipments placed on hold, on the strongest severity the
+  system has. A false Critical is not a small error; it is the finding an operator acts on first.
+- **Change made:** applicability is now established before presence is checked. Where the
+  variations cannot be resolved, the finding is that the routing needs checking — not that the
+  declaration is defective.
+- **What this cost retroactively:** M-3 on the Set A report graded a malformed emergency number
+  without establishing applicability. Recorded in that report's sidecar rather than rewritten,
+  so the record shows what the check actually did.
+
 ## 2026-09-07 — Set B, UN1863 "paint related material", handwritten DGD + AWB
 
 **First run where check 6 could actually be performed** — the first submission carrying a

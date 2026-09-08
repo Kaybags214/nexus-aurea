@@ -51,15 +51,44 @@ STAMP="$(date +%Y-%m-%d_%H%M%S)"
 LOG="$REPO/compliance-auditor/intake/runs.log"
 mkdir -p "$(dirname "$LOG")"
 
+# Resolve a path to its canonical form — symlinks and .. segments removed. The
+# containment check below is the confidentiality boundary, so it must compare where
+# a path actually lands, not how it was spelled.
+canon() {
+  if command -v realpath >/dev/null 2>&1; then
+    realpath "$1"
+  else
+    ( cd "$1" >/dev/null 2>&1 && pwd -P )
+  fi
+}
+
 if [ "$CLIENT_MODE" = "1" ]; then
   OUTDIR="${NA_CLIENT_DIR:-$HOME/nexus-aurea-client}/reports"
-  case "$OUTDIR" in
-    "$REPO"|"$REPO"/*)
-      echo "error: client output directory is inside the repository ($OUTDIR)." >&2
+  if ! mkdir -p "$OUTDIR" 2>/dev/null; then
+    echo "error: cannot create the client output directory ($OUTDIR)." >&2
+    echo "       Check NA_CLIENT_DIR — a dangling symlink or an unwritable parent" >&2
+    echo "       will do this. Refusing to continue." >&2
+    exit 78
+  fi
+
+  # Canonicalise BOTH sides before comparing. "/tmp/../repo/x" and a symlink pointing
+  # into the repository both spell as outside while landing inside.
+  OUTDIR_REAL="$(canon "$OUTDIR")"
+  REPO_REAL="$(canon "$REPO")"
+  if [ -z "$OUTDIR_REAL" ] || [ -z "$REPO_REAL" ]; then
+    echo "error: could not resolve the client output directory ($OUTDIR)." >&2
+    echo "       Refusing to write a client report to an unresolved path." >&2
+    exit 78
+  fi
+  case "$OUTDIR_REAL" in
+    "$REPO_REAL"|"$REPO_REAL"/*)
+      echo "error: client output directory resolves inside the repository." >&2
+      echo "         given: $OUTDIR" >&2
+      echo "       resolves: $OUTDIR_REAL" >&2
       echo "       Client reports must never enter git. Set NA_CLIENT_DIR elsewhere." >&2
       exit 78 ;;
   esac
-  mkdir -p "$OUTDIR"
+  OUTDIR="$OUTDIR_REAL"
   chmod 700 "$OUTDIR" 2>/dev/null || true
 else
   OUTDIR="$REPO/compliance-auditor/audit-reports"
@@ -130,10 +159,36 @@ if [ -z "$REPORT" ] || [ ! -f "$REPORT" ]; then
   exit 70
 fi
 
+# The sidecar is the audit trail — how a finding gets defended months later.
+# skill-contract.md makes it mandatory, and makes its "unverified" array mandatory.
+# A report without one is an incomplete run, not a successful one.
+SIDECAR="${REPORT%.md}.json"
+if [ ! -f "$SIDECAR" ]; then
+  echo "[$STAMP] FAIL   report written but no sidecar: $SIDECAR" >> "$LOG"
+  echo "error: the run wrote $REPORT but no sidecar JSON beside it." >&2
+  echo "       skill-contract.md requires one. Treating the run as incomplete." >&2
+  exit 71
+fi
+if command -v python3 >/dev/null 2>&1; then
+  if ! python3 - "$SIDECAR" <<'PYEOF'
+import json, sys
+with open(sys.argv[1]) as fh:
+    doc = json.load(fh)
+if "unverified" not in doc:
+    sys.exit("sidecar has no 'unverified' array")
+PYEOF
+  then
+    echo "[$STAMP] FAIL   sidecar invalid: $SIDECAR" >> "$LOG"
+    echo "error: $SIDECAR is not valid JSON, or is missing the required" >&2
+    echo "       'unverified' array. Treating the run as incomplete." >&2
+    exit 71
+  fi
+fi
+
 if [ "$CLIENT_MODE" = "1" ]; then
   # Deliberately no git. The report names the client's shipper, consignee, commodity and
   # value; committing it is the same disclosure as committing the document itself.
-  chmod 600 "$REPORT" 2>/dev/null || true
+  chmod 600 "$REPORT" "$SIDECAR" 2>/dev/null || true
   echo "[$STAMP] OK     mode=CLIENT (not committed)" >> "$LOG"
 else
   git add compliance-auditor/audit-reports/ >/dev/null

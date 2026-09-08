@@ -47,6 +47,57 @@ ledger is a staging area, not an archive.
 
 Newest at the top. Each entry: what happened, what it changes, where it applies.
 
+## 2026-09-08 — An unconditional requirement is a claim, and this system kept making them
+An automated review of PR #7 found three checks asserting a regulatory requirement with no
+condition and no verification pointer: the lithium battery mark as universal for Section II, a
+telephone number as mandatory mark content, and a 24-hour emergency number as an automatic
+Critical worldwide. Each would reject a compliant shipment.
+**Changes:** a check may state *what to verify*; it may not state *what the rule is*. Any check
+line that reads as an absolute — "X is required", "a Y without Z is incomplete" — is a rule-4
+violation unless it carries a verification step or a pointer. Applies to all eight skills, and
+to every skill still to be written.
+**Note on the fix:** the reviewer's own account of the exceptions was *not* written in as fact
+either. Swapping a remembered rule for a differently-remembered rule is the same error. The
+checks now say what to go and confirm.
+
+## 2026-09-08 — Prescribing a correction is the strongest claim a report can make
+The Set B report ruled the AWB right and the declaration wrong, and told the shipper to alter
+the declaration — on a passenger-aircraft limit it had never verified, and against
+`standards-of-precedence.md` §4, which ranks the declaration *above* the AWB. It cited that
+section while contradicting it.
+**Changes:** a contradiction between documents is reportable on its own; naming the document at
+fault is a separate finding needing its own evidence, and prescribing the correction needs more
+still. Where the deciding fact is unverified, hold on the contradiction and say what would
+settle it. Applies to every cross-document check.
+**This also refines the 2026-09-07 "third fact" entry:** a third fact only decides the question
+if the third fact is itself verified. That entry was silent on this and read as licence.
+
+## 2026-09-08 — Everything the sender wrote is hostile until filtered
+Both documented intake paths built a shell command by interpolating values the submitter
+controls — `doc_type` from the webhook, and the **subject line** of an email to a published
+address. A value containing `$(...)` executes before the audit script starts, as the n8n service
+account. Both paths also failed to pass the saved file path between nodes, so the audit exited
+66 without reading anything.
+**Changes:** no submitter-controlled value reaches a shell or a model prompt without an
+allowlist — an allowlist, not an escape, because the safe set here is small and knowable. Any
+future intake path (portal upload, API, SFTP drop) inherits this.
+
+## 2026-09-08 — A guard that compares spellings is not a guard
+The client-mode containment check compared `$OUTDIR` against `$REPO` as literal strings, so
+`/tmp/../<repo>` or a symlink pointing inside passed it and would have written a real client
+report into git. This is the confidentiality boundary from the 2026-09-07 entry below — stated
+correctly, implemented weakly.
+**Changes:** any check on a path canonicalises both sides first (`realpath`) and compares the
+resolved result. A policy is only as good as the resolution it does before comparing.
+
+## 2026-09-08 — A run that skips its audit trail must fail, not pass
+Two of seven reports had no sidecar JSON. The contract calls it mandatory; nothing enforced it,
+so the script committed and exited 0. The two have been reconstructed from their report text and
+are **flagged `"reconstructed": true`** — a reconstruction is not a run log and must never be
+read as one.
+**Changes:** `audit-document.sh` now exits 71 unless the sidecar exists, parses, and carries the
+`unverified` array. A stated requirement with nothing checking it is a preference.
+
 ## 2026-09-07 — Cross-column reading beats any single field
 Two declarations carried a UN number one digit-transposition away from the right one
 (3393 for 3373; 1863 for 1263). Both times the *neighbouring* columns exposed it — the class and
@@ -63,6 +114,9 @@ it was neither document — it was 60 L of a Class 3 PG II liquid in one package
 **Changes:** in any cross-document check, resolve a conflict with an independent fact before
 falling back to `standards-of-precedence.md`. Precedence decides which *rule* wins; it does not
 tell you which document was filled in wrong.
+**Amended 2026-09-08:** only a *verified* third fact decides it. As first written this entry was
+used to justify naming a document at fault on an unverified quantity limit — see the entry above.
+An unverified third fact leaves the conflict open.
 
 ## 2026-09-07 — Repeated defects across a set are one finding → graduated
 Five identical omissions across three declarations from one submitter is a habit, not fifteen

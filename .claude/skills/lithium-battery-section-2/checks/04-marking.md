@@ -2,16 +2,36 @@
 
 ## The lithium battery mark
 
-Section II shipments require the **lithium battery mark** on the outer package.
+**Establish whether the mark is required here before checking whether it is present.** Under
+PI 965–970 the requirement is not universal: the packing instruction and section decide it, and
+some contained-in-equipment and small-cell consignments are excepted. An earlier version of this
+file stated the requirement unconditionally, which would reject compliant equipment shipments.
 
-- [ ] Mark present on the package
-- [ ] **UN number(s)** shown on the mark — UN3480, UN3481, UN3090 or UN3091 as applicable
-- [ ] **Telephone number** for additional information shown on the mark
-- [ ] Mark dimensions meet the requirement — **verify size against the DGR 67th ed.**
-- [ ] Mark is legible, durable, and contrasts with the package
+- [ ] **Which packing instruction and section applies** — from check 1, not assumed
+- [ ] **Whether that section requires the mark for this consignment**, including any exception
+      for batteries contained in equipment or for small cells —
+      **verify against the DGR 67th ed. for the PI and section identified.** If no copy is to
+      hand, this is `unverified`, and no finding is raised on the mark's absence
+- [ ] Where the mark is required: present on the outer package
+- [ ] Where the mark is required: **UN number(s)** shown — UN3480, UN3481, UN3090 or UN3091
+      as applicable
+- [ ] Where the mark is required: dimensions meet the requirement —
+      **verify size against the DGR 67th ed.**
+- [ ] Where the mark is required: legible, durable, and contrasts with the package
 
-The telephone number is part of the mark, not optional decoration. A mark without one is
-incomplete.
+### The additional-information telephone number
+
+Do **not** treat a telephone number on the mark as mandatory without checking. The mark's
+required content has changed across editions, and a review of this file flagged the number as no
+longer required by the edition this skill targets. **That claim is itself unverified here** —
+neither it nor the opposite may be asserted from memory.
+
+- [ ] **Verify whether the 67th edition requires a telephone number on the mark.** Until
+      verified: record it in `unverified`, raise no finding on its absence, and do not tell an
+      operator to add one.
+
+Until someone with a DGR copy settles it, a mark carrying a telephone number and a mark without
+one are both reported as "content not verified against the edition", never as a defect.
 
 ## Class 9 lithium battery label
 

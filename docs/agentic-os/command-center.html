@@ -175,6 +175,22 @@ body.editing .panel.focused .tick{opacity:1}
 .d.mid{background:#6E4A2C}
 .d.today{background:transparent;box-shadow:0 0 0 1.5px var(--accent);width:8px;height:8px}
 
+/* ---------- second brain ---------- */
+.tier{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.tier:first-child{border-top:0}
+.tier .tn{font-family:var(--f-m);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--dimmer);width:70px;flex:none}
+.tier.up .tn{color:var(--accent)}
+.tier .tc{font-family:var(--f-m);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;
+  width:20px;text-align:right;flex:none}
+.tier.up .tc{color:var(--accent)}
+.tier .td{font-size:11px;color:var(--dimmer);line-height:1.35;min-width:0}
+.brain-note{font-family:var(--f-m);font-size:9px;letter-spacing:.06em;color:var(--dimmer);
+  padding-top:10px;margin-top:2px;border-top:1px solid var(--line);line-height:1.6}
+.orow{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:12px}
+.orow .ot{font-family:var(--f-m);font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--warn);white-space:nowrap}
+
 /* ---------- intake ---------- */
 .flag{display:flex;gap:9px;align-items:flex-start;padding:6px 0;font-size:12px}
 .flag .fi{color:var(--accent);flex:none;display:flex;margin-top:2px}
@@ -336,7 +352,7 @@ body.editing .panel.focused .tick{opacity:1}
       <b>Two things are not live.</b> The figures are a snapshot taken when this page was last
       published &mdash; the page does not re-read the repo on its own. And anything marked
       <span class="planned">planned</span> does not exist yet: the micro apps are unbuilt, and
-      four of the five routines are not scheduled. Run buttons do not execute a skill; that needs
+      four of the six routines are not scheduled. Run buttons do not execute a skill; that needs
       headless mode on your own machine. Model &times; effort picks save in this browser only.
     </div>
   </div>
@@ -392,13 +408,29 @@ body.editing .panel.focused .tick{opacity:1}
         </div>
       </section>
 
+      <section class="panel" id="p-brain">
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <div class="panel-h"><span class="drag">&#8942;&#8942;</span><span class="ico" data-i="stack"></span>
+          <h2>Second Brain</h2><span class="act">Memory L3</span></div>
+        <div class="panel-b">
+          <div class="big">9</div>
+          <div class="big-l">Lessons promoted</div>
+          <div class="big-s">What the system learned by doing the work</div>
+          <div style="margin-top:13px" id="tiers"></div>
+          <div class="next-l">Open &mdash; needs a person, not a model</div>
+          <div id="openq"></div>
+          <div class="brain-note">docs/agentic-os/second-brain.md<br>
+            Patterns, not parties &middot; pointers, not regulatory numbers</div>
+        </div>
+      </section>
+
     </div>
 
     <!-- ================= CENTER ================= -->
     <div class="stage">
       <canvas id="core"></canvas>
       <div class="ring" id="ring"></div>
-      <div class="stage-cap">Memory core &nbsp;&middot;&nbsp; <b>16 lanes</b> &nbsp;&middot;&nbsp; <b>128 documents</b> &nbsp;&middot;&nbsp; <b>7 routers</b> &nbsp;&middot;&nbsp; <b>7 skills, 36 checks</b></div>
+      <div class="stage-cap">Memory core &nbsp;&middot;&nbsp; <b>16 lanes</b> &nbsp;&middot;&nbsp; <b>128 documents</b> &nbsp;&middot;&nbsp; <b>7 routers</b> &nbsp;&middot;&nbsp; <b>8 skills, 40 checks</b></div>
     </div>
 
     <!-- ================= RIGHT ================= -->
@@ -450,7 +482,7 @@ body.editing .panel.focused .tick{opacity:1}
 
   <div class="foot">
     <span class="sample">Snapshot &middot; not live</span>
-    <span>Nexus Aurea &middot; rev 2026.09.07</span>
+    <span>Nexus Aurea &middot; rev 2026.09.08</span>
     <span>Look after <a href="https://www.youtube.com/watch?v=8NSyI-npJCU">RUBRIC by RoboNuggets</a></span>
     <span>Architecture: <a href="https://claude.ai/code/artifact/50370611-d383-4c04-9451-8a0ee603bce6">ARMS stack reference</a></span>
   </div>
@@ -484,7 +516,8 @@ const P = {
   cube:'M12 2.8 21 7v10l-9 4.2L3 17V7z',
   scan:'M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4M7 12h10',
   drop:'M12 3s6 6.6 6 10.4A6 6 0 016 13.4C6 9.6 12 3 12 3z',
-  route:'M6 4a2.4 2.4 0 100 4.8A2.4 2.4 0 006 4zM18 15.2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zM6 8.8V13a4.4 4.4 0 004.4 4.4H16'
+  route:'M6 4a2.4 2.4 0 100 4.8A2.4 2.4 0 006 4zM18 15.2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zM6 8.8V13a4.4 4.4 0 004.4 4.4H16',
+  stack:'M12 3l9 4.5L12 12 3 7.5zM3 12l9 4.5L21 12M3 16.5 12 21l9-4.5'
 };
 function svg(k,fill){
   return '<svg viewBox="0 0 24 24" fill="'+(fill?'currentColor':'none')+'" stroke="currentColor" '+
@@ -619,7 +652,8 @@ const SKILLS=[
   {id:'lithium-battery-section-2',icon:'bolt',  model:'OPUS',   eff:'XHIGH'},
   {id:'excursion-assessment',     icon:'thermo',model:'OPUS',   eff:'HIGH'},
   {id:'coa-review',               icon:'drop',  model:'SONNET', eff:'HIGH'},
-  {id:'commercial-invoice-review',icon:'doc',   model:'SONNET', eff:'MEDIUM'}
+  {id:'commercial-invoice-review',icon:'doc',   model:'SONNET', eff:'MEDIUM'},
+  {id:'corrected-package-review',  icon:'scan',  model:'OPUS',   eff:'HIGH'}
 ];
 let store={};
 try{ store=JSON.parse(localStorage.getItem('na.skills')||'{}'); }catch(e){ store={}; }
@@ -682,6 +716,7 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMatri
 
 /* ---------------- routines ---------------- */
 const ROUTINES=[
+  ['07:00','Dashboard figures refresh','LIVE'],
   ['16:32','Market watch flow brief','LIVE'],
   ['09:00','Intake queue sweep','PLANNED'],
   ['13:00','Cold-chain excursion review','PLANNED'],
@@ -700,8 +735,28 @@ const ROUTINES=[
     return '<tr class="'+cls+'"><td class="tm">'+r[0]+'</td><td class="rn">'+r[1]+
       ' <span class="ag'+(r[2]==='LIVE'?' live':'')+'">&#9670; '+r[2]+'</span></td><td class="st">'+st+'</td></tr>';
   }).join('');
-  document.getElementById('fired-count').textContent = '1 live \u00b7 4 planned';
+  document.getElementById('fired-count').textContent = '2 live \u00b7 4 planned';
 })();
+
+/* ---------------- second brain ---------------- */
+const TIERS=[
+  ['Raw',      8, 'One <b>learnings.md</b> per skill &mdash; everything a run taught'],
+  ['Promoted', 9, 'Changes behaviour beyond the skill that found it'],
+  ['Settled',  2, 'Graduated into a standing rule or the contract']
+];
+document.getElementById('tiers').innerHTML = TIERS.map(function(t,i){
+  return '<div class="tier'+(i===1?' up':'')+'"><span class="tn">'+t[0]+'</span>'+
+    '<span class="tc">'+t[1]+'</span><span class="td">'+t[2]+'</span></div>';
+}).join('');
+
+const OPENQ=[
+  ['Dry ice against a +2/+8 &deg;C label','C-7'],
+  ['No certified review of the eight skills','open'],
+  ['Image intake path never tested end to end','open']
+];
+document.getElementById('openq').innerHTML = OPENQ.map(function(o){
+  return '<div class="orow"><span>'+o[0]+'</span><span class="ot">'+o[1]+'</span></div>';
+}).join('');
 
 /* ---------------- panel focus / edit ---------------- */
 document.querySelectorAll('.panel-h').forEach(function(h){

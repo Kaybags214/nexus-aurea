@@ -1,0 +1,427 @@
+{
+  "name": "Human Approval & Exception Gate (DRAFT - do not activate)",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "workflowInputs",
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "workflow_name",
+              "type": "string"
+            },
+            {
+              "name": "submission_id",
+              "type": "string"
+            },
+            {
+              "name": "review_type",
+              "type": "string"
+            },
+            {
+              "name": "system_status",
+              "type": "string"
+            },
+            {
+              "name": "confidence",
+              "type": "number"
+            },
+            {
+              "name": "discrepancies",
+              "type": "array"
+            },
+            {
+              "name": "missing_information",
+              "type": "array"
+            },
+            {
+              "name": "evidence",
+              "type": "array"
+            },
+            {
+              "name": "recommended_human_action",
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "id": "b39af642-41ec-43fb-ab38-7bbe1505d08d",
+      "name": "Gate Input (Execute Workflow Trigger)",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -200,
+        300
+      ],
+      "notes": "Called by Class 3 / 8 / 9 review, Physical AI shipment capture, and future multifamily maintenance alerts. All nine inputs are mandatory."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Human Approval & Exception Gate — input validation.\n// Hard-fails on incomplete input. The gate must never open on partial data.\n\nconst REQUIRED = [\n  'workflow_name', 'submission_id', 'review_type', 'system_status', 'confidence',\n  'discrepancies', 'missing_information', 'evidence', 'recommended_human_action',\n];\n\n// Deliberately excludes PASS / CLEARED / APPROVED / CERTIFIED. This gate never\n// receives, and never emits, a word that reads as a clearance.\nconst ALLOWED_STATUS = [\n  'HOLD',\n  'HUMAN_REVIEW_REQUIRED',\n  'REVIEW_COMPLETE_NO_DISCREPANCIES_FOUND',\n  'REJECT_INTAKE',\n];\n\nconst out = [];\n\nfor (const item of $input.all()) {\n  const j = item.json;\n\n  const missing = REQUIRED.filter(\n    (k) => j[k] === undefined || j[k] === null || j[k] === ''\n  );\n  if (missing.length) {\n    throw new Error(\n      'Approval gate input invalid - missing required field(s): ' +\n      missing.join(', ') +\n      '. The gate refuses to open on incomplete input.'\n    );\n  }\n\n  if (!ALLOWED_STATUS.includes(j.system_status)) {\n    throw new Error(\n      'Approval gate input invalid - system_status ' + JSON.stringify(j.system_status) +\n      ' is not in the allowed vocabulary: ' + ALLOWED_STATUS.join(', ') +\n      '. Clearance-shaped words (PASS, CLEARED, APPROVED, CERTIFIED) are rejected by design.'\n    );\n  }\n\n  const confidence = Number(j.confidence);\n  if (!Number.isFinite(confidence) || confidence < 0 || confidence > 1) {\n    throw new Error(\n      'Approval gate input invalid - confidence must be a number between 0 and 1. Received: ' +\n      JSON.stringify(j.confidence)\n    );\n  }\n\n  for (const k of ['discrepancies', 'missing_information', 'evidence']) {\n    if (!Array.isArray(j[k])) {\n      throw new Error(\n        'Approval gate input invalid - \"' + k +\n        '\" must be an array. Send [] when there are none; never omit it.'\n      );\n    }\n  }\n\n  // An empty evidence array alongside asserted discrepancies is itself a defect:\n  // a finding with no evidence locator cannot be reviewed.\n  if (j.discrepancies.length > 0 && j.evidence.length === 0) {\n    throw new Error(\n      'Approval gate input invalid - ' + j.discrepancies.length +\n      ' discrepancy/discrepancies were asserted with zero evidence items. ' +\n      'Every finding must carry an evidence locator before a human is asked to review it.'\n    );\n  }\n\n  out.push({\n    json: {\n      ...j,\n      confidence,\n      gate_input_validated_at: new Date().toISOString(),\n    },\n  });\n}\n\nreturn out;"
+      },
+      "id": "2f35787d-1261-4d7b-a493-98b2077e84c3",
+      "name": "Validate Gate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        40,
+        300
+      ],
+      "onError": "stopWorkflow",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "notes": "Hard-fails on incomplete or clearance-shaped input. Never continue-on-fail."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the human-readable packet the reviewer actually sees, and a stable\n// fingerprint of it so the recorded decision binds to what was shown.\n\nfunction fnv1a(str) {\n  let h = 0x811c9dc5;\n  for (let i = 0; i < str.length; i++) {\n    h ^= str.charCodeAt(i);\n    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;\n  }\n  return ('00000000' + h.toString(16)).slice(-8);\n}\n\nconst sev = (d) => String(d.severity || 'unspecified').toLowerCase();\nconst out = [];\n\nfor (const item of $input.all()) {\n  const j = item.json;\n\n  const critical = j.discrepancies.filter((d) => sev(d) === 'critical');\n  const major    = j.discrepancies.filter((d) => sev(d) === 'major');\n  const minor    = j.discrepancies.filter((d) => sev(d) === 'minor');\n  const blocking = j.missing_information.filter((m) => m.blocking === true);\n\n  const fmtDisc = (d, i) =>\n    '  ' + (i + 1) + '. [' + sev(d).toUpperCase() + '] ' + (d.field || 'unspecified field') +\n    '\\n     observed: ' + (d.observed ?? 'n/a') +\n    '\\n     expected: ' + (d.expected ?? 'n/a') +\n    '\\n     standard: ' + (d.standard || 'NOT CITED - treat as unsupported') +\n    '\\n     read confidence: ' + (d.confidence || 'unstated');\n\n  const fmtMissing = (m, i) =>\n    '  ' + (i + 1) + '. ' + (m.item || 'unspecified') +\n    (m.blocking === true ? '  [BLOCKING]' : '') +\n    (m.why_it_matters ? '\\n     why: ' + m.why_it_matters : '');\n\n  const fmtEvidence = (e, i) =>\n    '  ' + (i + 1) + '. ' + (e.discrepancy_id || 'unlinked') +\n    ' @ ' + (e.locator || 'no locator') +\n    '\\n     legibility: ' + (e.legibility || 'unstated') +\n    (e.document_sha256 ? '\\n     document: ' + e.document_sha256 : '');\n\n  const rha = j.recommended_human_action || {};\n  const steps = Array.isArray(rha.steps) ? rha.steps : [];\n  const doNot = Array.isArray(rha.do_not) ? rha.do_not : [];\n\n  const packet_text = [\n    'HUMAN APPROVAL & EXCEPTION GATE',\n    'This gate records a review decision. It does not certify, clear, sign,',\n    'tender, send to a client, or take any operational action.',\n    '',\n    'Workflow:          ' + j.workflow_name,\n    'Submission ID:     ' + j.submission_id,\n    'Review type:       ' + j.review_type,\n    'System status:     ' + j.system_status,\n    'System confidence: ' + j.confidence,\n    '',\n    'DISCREPANCIES (' + j.discrepancies.length + ' total - ' +\n      critical.length + ' critical, ' + major.length + ' major, ' + minor.length + ' minor)',\n    j.discrepancies.length ? j.discrepancies.map(fmtDisc).join('\\n') : '  none asserted',\n    '',\n    'MISSING INFORMATION (' + j.missing_information.length + ' total - ' +\n      blocking.length + ' blocking)',\n    j.missing_information.length ? j.missing_information.map(fmtMissing).join('\\n') : '  none asserted',\n    '',\n    'EVIDENCE (' + j.evidence.length + ' items)',\n    j.evidence.length ? j.evidence.map(fmtEvidence).join('\\n') : '  none supplied',\n    '',\n    'RECOMMENDED HUMAN ACTION',\n    '  ' + (rha.summary || 'none supplied'),\n    steps.length ? steps.map((s, i) => '  ' + (i + 1) + '. ' + s).join('\\n') : '',\n    doNot.length ? '\\n  DO NOT:\\n' + doNot.map((s) => '   - ' + s).join('\\n') : '',\n    rha.required_qualification ? '\\n  Reviewer must hold: ' + rha.required_qualification : '',\n  ].join('\\n');\n\n  out.push({\n    json: {\n      ...j,\n      packet_text,\n      counts: {\n        discrepancies: j.discrepancies.length,\n        critical: critical.length,\n        major: major.length,\n        minor: minor.length,\n        missing_information: j.missing_information.length,\n        blocking_missing_information: blocking.length,\n        evidence: j.evidence.length,\n      },\n      // Change-detection aid that binds the decision to the packet shown.\n      // Not a cryptographic seal - the append-only audit store is the\n      // authoritative integrity control.\n      packet_fingerprint_fnv1a: fnv1a(packet_text),\n      approval_id: 'APR-' + j.submission_id + '-' + fnv1a(packet_text),\n      gate_opened_at: new Date().toISOString(),\n      gate_version: '1.0.0-draft',\n    },\n  });\n}\n\nreturn out;"
+      },
+      "id": "dc42f428-be45-4900-91f3-2c5f8c928d54",
+      "name": "Build Review Packet",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        300
+      ],
+      "onError": "stopWorkflow",
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "resume": "form",
+        "formTitle": "Human Approval & Exception Gate",
+        "formDescription": "Record your review decision. This form does not certify, clear, sign, tender, or send anything. Read the packet below before deciding.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Review packet",
+              "fieldType": "textarea",
+              "requiredField": false,
+              "placeholder": "={{ $json.packet_text }}"
+            },
+            {
+              "fieldLabel": "Reviewer name",
+              "fieldType": "text",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Reviewer role or qualification",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "e.g. current IATA DGR-trained person, cert expiry 2027-04"
+            },
+            {
+              "fieldLabel": "Decision",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Acknowledge and continue review"
+                  },
+                  {
+                    "option": "Return for correction"
+                  },
+                  {
+                    "option": "Escalate"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Comments",
+              "fieldType": "textarea",
+              "requiredField": false,
+              "placeholder": "Mandatory for Return for correction and Escalate."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e9ec6245-ef7c-4cfd-877c-523008d43249",
+      "name": "Wait for Reviewer Decision",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        300
+      ],
+      "webhookId": "08678aa6-aedd-4ead-93cf-6a0ad0548851",
+      "notes": "No wait limit is set. A reviewer timeout must never resume as an approval - if you add a limit, route the expiry branch to Escalate."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Records reviewer identity, decision, timestamp and comments.\n// Rejects anonymous, unqualified, or unexplained decisions.\n\nconst ALLOWED_DECISIONS = [\n  'Acknowledge and continue review',\n  'Return for correction',\n  'Escalate',\n];\n\nconst out = [];\n\nfor (const item of $input.all()) {\n  const form = item.json;\n  const packet = $('Build Review Packet').first().json;\n\n  const reviewer_name = String(form['Reviewer name'] || '').trim();\n  const reviewer_role = String(form['Reviewer role or qualification'] || '').trim();\n  const decision      = String(form['Decision'] || '').trim();\n  const comments      = String(form['Comments'] || '').trim();\n\n  if (!reviewer_name) {\n    throw new Error('Gate cannot record a decision without a named reviewer.');\n  }\n  if (!reviewer_role) {\n    throw new Error(\n      'Gate cannot record a decision without the reviewer role/qualification - ' +\n      'it is the competence evidence for this review type.'\n    );\n  }\n  if (!ALLOWED_DECISIONS.includes(decision)) {\n    throw new Error('Unrecognised reviewer decision: ' + JSON.stringify(decision));\n  }\n  if (decision !== 'Acknowledge and continue review' && !comments) {\n    throw new Error(\n      'Comments are mandatory for the decision \"' + decision + '\". ' +\n      'Record the reason on the audit trail.'\n    );\n  }\n\n  out.push({\n    json: {\n      approval_record: {\n        approval_id: packet.approval_id,\n        gate_version: packet.gate_version,\n\n        // What was reviewed\n        workflow_name: packet.workflow_name,\n        submission_id: packet.submission_id,\n        review_type: packet.review_type,\n        system_status: packet.system_status,\n        system_confidence: packet.confidence,\n        counts: packet.counts,\n        packet_fingerprint_fnv1a: packet.packet_fingerprint_fnv1a,\n\n        // Who decided\n        reviewer_name,\n        reviewer_role,\n        // The default n8n form is unauthenticated: the name is asserted by the\n        // person filling it in, not proven. Front the form with SSO/proxy auth\n        // (or swap the Wait node for an authenticated sendAndWait channel) and\n        // set this to \"authenticated\" before this gate carries real reviews.\n        reviewer_identity_assurance: 'self_declared',\n\n        // What they decided\n        decision,\n        comments: comments || null,\n        gate_opened_at: packet.gate_opened_at,\n        decided_at: new Date().toISOString(),\n      },\n    },\n  });\n}\n\nreturn out;"
+      },
+      "id": "e14b9452-e422-4c1e-9c36-6eb073120aa7",
+      "name": "Record Reviewer Decision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        300
+      ],
+      "onError": "stopWorkflow",
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "jsCode": "// Boundary assertion. This node exists so the \"does nothing operational\"\n// property is enforced in code rather than left as a comment.\n\nconst out = [];\n\nfor (const item of $input.all()) {\n  const rec = item.json.approval_record;\n\n  const gate_result = {\n    ...rec,\n\n    // Constant, in every branch, for every decision. A reviewer acknowledging\n    // a review is not an authorisation to act on it.\n    authorizes_operational_action: false,\n    next_step_owner: 'human',\n\n    boundary: {\n      certifies: false,\n      clears: false,\n      signs: false,\n      tenders: false,\n      sends_to_client: false,\n      releases_shipment: false,\n      dispatches_work: false,\n      makes_financial_commitment: false,\n    },\n\n    boundary_statement:\n      'This record captures a human review decision only. It does not certify, ' +\n      'clear, sign, tender, send to a client, release a shipment, dispatch work, ' +\n      'or commit funds. Any such action requires a separate, explicitly authorised ' +\n      'step performed by a qualified person.',\n  };\n\n  // Fail loudly rather than silently emitting a permissive record.\n  for (const [k, v] of Object.entries(gate_result.boundary)) {\n    if (v !== false) {\n      throw new Error('Gate boundary violated: \"' + k + '\" was set to ' + JSON.stringify(v));\n    }\n  }\n  if (gate_result.authorizes_operational_action !== false) {\n    throw new Error('Gate boundary violated: authorizes_operational_action was not false.');\n  }\n\n  out.push({ json: { gate_result } });\n}\n\nreturn out;"
+      },
+      "id": "af5eb058-4c67-4a15-a580-e1178225efdc",
+      "name": "Enforce No-Op Boundary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        300
+      ],
+      "onError": "stopWorkflow",
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e2f0c9bf-860f-4120-9063-a71429c97edc",
+                    "leftValue": "={{ $json.gate_result.decision }}",
+                    "rightValue": "Acknowledge and continue review",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Acknowledged"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d0610d4c-6cc7-49c4-84b9-79474c3f34f9",
+                    "leftValue": "={{ $json.gate_result.decision }}",
+                    "rightValue": "Return for correction",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Returned for correction"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3cb400d7-7d18-4b31-a121-6ac112d7e8ba",
+                    "leftValue": "={{ $json.gate_result.decision }}",
+                    "rightValue": "Escalate",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Escalated"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Unrecognised - treat as Escalate"
+        }
+      },
+      "id": "29bead2a-9b3d-4b07-8a56-f7c7dbd21e2b",
+      "name": "Branch on Decision",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1240,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "59411844-d071-40a7-89b0-916e075afb6c",
+      "name": "Acknowledged (return to caller)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        140
+      ],
+      "notes": "Returns the record. The CALLING workflow decides what happens next - and still may not act automatically."
+    },
+    {
+      "parameters": {},
+      "id": "a53cd528-0d70-4684-ab44-b26d202da70a",
+      "name": "Returned for correction (return to caller)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "cbe26c88-4205-4785-8f14-121dd58efabe",
+      "name": "Escalated (return to caller)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        460
+      ]
+    }
+  ],
+  "connections": {
+    "Gate Input (Execute Workflow Trigger)": {
+      "main": [
+        [
+          {
+            "node": "Validate Gate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Gate Input": {
+      "main": [
+        [
+          {
+            "node": "Build Review Packet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Review Packet": {
+      "main": [
+        [
+          {
+            "node": "Wait for Reviewer Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Reviewer Decision": {
+      "main": [
+        [
+          {
+            "node": "Record Reviewer Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Record Reviewer Decision": {
+      "main": [
+        [
+          {
+            "node": "Enforce No-Op Boundary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enforce No-Op Boundary": {
+      "main": [
+        [
+          {
+            "node": "Branch on Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Branch on Decision": {
+      "main": [
+        [
+          {
+            "node": "Acknowledged (return to caller)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Returned for correction (return to caller)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Escalated (return to caller)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Escalated (return to caller)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "all",
+    "saveExecutionProgress": false,
+    "timezone": "America/New_York"
+  },
+  "pinData": {},
+  "tags": [],
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

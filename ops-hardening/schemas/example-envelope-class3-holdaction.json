@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0.0",
+  "workflow_name": "class-3-flammable-liquids",
+  "submission_id": "018f3c2a-7b41-4d90-9e55-2c1a6f8b0d33",
+  "review_type": "dg_document_review",
+  "environment": "production",
+  "received_at": "2026-09-05T20:36:58Z",
+  "completed_at": "2026-09-05T20:37:37Z",
+  "engine": {
+    "model": "<vision model id>",
+    "prompt_version": "dg-review-2026-09"
+  },
+  "documents": [
+    {
+      "field_key": "sdoc",
+      "filename": "<REDACTED - placeholder>",
+      "sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "bytes": 412774,
+      "mime": "application/pdf",
+      "pages": 1
+    }
+  ],
+  "declared_scope": {
+    "class": "3"
+  },
+  "observed_scope": {
+    "classes": [
+      "9",
+      "6.2"
+    ],
+    "un_numbers": [
+      "UN1845",
+      "UN3393"
+    ],
+    "unreadable": false
+  },
+  "system_status": "HOLD",
+  "confidence": 0.42,
+  "confidence_basis": "Class-scope mismatch plus two illegible deletion boxes plus two blocking absent fields. Confidence reflects the review as a whole, not individual field reads.",
+  "discrepancies": [
+    {
+      "id": "D1",
+      "severity": "critical",
+      "field": "CLASS_SCOPE_MISMATCH",
+      "observed": "Document carries Class 9 (UN1845) and Division 6.2 entries only",
+      "expected": "At least one Class 3 entry, for a Class 3 review queue",
+      "standard": "Nexus Aurea class-scope gate (02-hardening-report.md F-5)",
+      "precedence_level": "Workflow routing control",
+      "confidence": "high"
+    },
+    {
+      "id": "D2",
+      "severity": "critical",
+      "field": "Line 2 - UN number vs proper shipping name",
+      "observed": "UN3393 paired with 'Biological Substances category B' and PI 650",
+      "expected": "Verify against current DGR - Biological Substance, Category B is UN3373 with PI 650; UN3393 is a different entry",
+      "standard": "IATA DGR 67th ed. - UN number must match the proper shipping name",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "high"
+    },
+    {
+      "id": "D3",
+      "severity": "major",
+      "field": "Line 1 - Packing Group",
+      "observed": "PG II entered against 'Carbon Dioxide, solid' Class 9",
+      "expected": "Verify whether a packing group applies to this entry",
+      "standard": "IATA DGR 67th ed. - packing group assignment",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "high"
+    },
+    {
+      "id": "D4",
+      "severity": "major",
+      "field": "Line 2 - Packing Group",
+      "observed": "PG I entered against a Division 6.2 entry",
+      "expected": "Verify whether a packing group applies to Division 6.2",
+      "standard": "IATA DGR 67th ed. - packing group assignment",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "high"
+    },
+    {
+      "id": "D5",
+      "severity": "major",
+      "field": "Signature block",
+      "observed": "No signature mark visible; signatory name and date are entered",
+      "expected": "A signature from the certifying person",
+      "standard": "IATA DGR 67th ed. - Shipper's Declaration signature requirement",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "medium"
+    },
+    {
+      "id": "D6",
+      "severity": "major",
+      "field": "Aircraft limitation",
+      "observed": "Deletion marks overlap the printed options; intended selection not readable",
+      "expected": "Exactly one option legibly deleted",
+      "standard": "IATA DGR 67th ed. - aircraft limitation must be unambiguous",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "low"
+    },
+    {
+      "id": "D7",
+      "severity": "minor",
+      "field": "Line 1 - number and type of packages",
+      "observed": "'2 packaging' - no package type stated",
+      "expected": "Number and the specific package type",
+      "standard": "IATA DGR 67th ed. - number and type of packages",
+      "precedence_level": "DG chain level 3 (IATA DGR)",
+      "confidence": "medium"
+    },
+    {
+      "id": "D8",
+      "severity": "minor",
+      "field": "Additional Handling Information",
+      "observed": "Spelling error in the printed text",
+      "expected": "Correct spelling",
+      "standard": "Legibility / best practice",
+      "precedence_level": "Advisory",
+      "confidence": "high"
+    }
+  ],
+  "missing_information": [
+    {
+      "id": "M1",
+      "item": "Air Waybill number",
+      "why_it_matters": "Blank on the declaration. Nothing ties this declaration to a shipment, and no cross-document check is possible without it.",
+      "blocking": true
+    },
+    {
+      "id": "M2",
+      "item": "Gross weight",
+      "why_it_matters": "No field labelled gross weight exists on this form version. It must not be derived, and the litre values must never be converted to kg.",
+      "blocking": true
+    },
+    {
+      "id": "M3",
+      "item": "Companion documents (AWB, commercial invoice, packing list)",
+      "why_it_matters": "Only one document was submitted, so every cross-document consistency check returned CANNOT COMPARE.",
+      "blocking": true
+    },
+    {
+      "id": "M4",
+      "item": "Meaning of the second figure in the quantity column on each line",
+      "why_it_matters": "Whether it is a gross weight, a total net quantity, or something else is not determinable from the printed column labels.",
+      "blocking": false
+    }
+  ],
+  "evidence": [
+    {
+      "discrepancy_id": "D1",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, dangerous goods table, lines 1-2 (UN number column)",
+      "legibility": "high"
+    },
+    {
+      "discrepancy_id": "D2",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, dangerous goods table, line 2 (UN number and proper shipping name columns)",
+      "legibility": "high"
+    },
+    {
+      "discrepancy_id": "D3",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, dangerous goods table, line 1 (packing group column)",
+      "legibility": "high"
+    },
+    {
+      "discrepancy_id": "D4",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, dangerous goods table, line 2 (packing group column)",
+      "legibility": "high"
+    },
+    {
+      "discrepancy_id": "D5",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, signature block",
+      "legibility": "medium"
+    },
+    {
+      "discrepancy_id": "D6",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, aircraft limitation box (upper right)",
+      "legibility": "low"
+    },
+    {
+      "discrepancy_id": "D7",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, dangerous goods table, line 1 (quantity and type of packing column)",
+      "legibility": "medium"
+    },
+    {
+      "discrepancy_id": "D8",
+      "document_sha256": "3f1a9c7e2b8d4056a1e93c7f5d2b8046e7a1c93f5d2b8046e7a1c93f5d2b8046",
+      "locator": "page 1, additional handling information block",
+      "legibility": "high"
+    }
+  ],
+  "recommended_human_action": {
+    "summary": "HOLD. A Class 3 queue received a document carrying no Class 3 goods, and two blocking fields are absent. Do not process until routing is corrected and the companion documents are obtained.",
+    "steps": [
+      "Confirm which review queue this document belongs in - the entries read are Class 9 and Division 6.2, not Class 3.",
+      "Obtain the Air Waybill and any commercial invoice / packing list so cross-document checks can actually run.",
+      "Verify line 2 independently against the current IATA DGR: correct UN number for Biological Substance, Category B, and whether a packing group applies to Division 6.2.",
+      "Verify line 1 independently: whether a packing group applies to Carbon Dioxide, solid, and the PI 954 requirements.",
+      "Obtain a clean re-scan where the aircraft limitation and shipment type deletions are unambiguous.",
+      "Ask the shipper to state, in writing, what the second figure in each quantity column represents.",
+      "Require a legible signature in the signature block before any acceptance step."
+    ],
+    "required_qualification": "Current IATA DGR-trained dangerous goods person",
+    "do_not": [
+      "Do not tender this shipment.",
+      "Do not sign as the certifying shipper.",
+      "Do not infer or convert any unit - the litre values must not be converted to kg.",
+      "Do not treat agreement between documents, once obtained, as establishing correctness."
+    ]
+  },
+  "automation_boundary": {
+    "certifies": false,
+    "clears": false,
+    "signs": false,
+    "tenders": false,
+    "sends_to_client": false
+  }
+}

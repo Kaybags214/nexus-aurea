@@ -20,6 +20,14 @@ Business development, the job search, and the documents that go out to people.
 | `resume/trade-compliance-resume.md` | Trade compliance roles |
 | `resume/dispatcher-resume.md` | Dispatcher roles |
 
+## The service offer
+
+`nexusaureainc.com` — documentation review, $250 per shipment-document package (up to five
+documents), $100 corrected-package re-review. Intake `kenya@nexusaureainc.com`.
+
+**The site is a specification.** `compliance-auditor/service-coverage.md` tracks where the skills
+do not yet meet it — check it before quoting anything.
+
 ## Rule
 
 Targeted resumes derive from the master. Change the master first, then propagate — otherwise

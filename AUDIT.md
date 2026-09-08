@@ -3,6 +3,12 @@
 The working document-review system. Start here for anything about reviewing a shipping or
 pharma document.
 
+## What is sold vs what is built
+
+`compliance-auditor/service-coverage.md` — the website's promises checked against the skills.
+Three promised document types have no skill, and the $100 re-review is priced with nothing
+implementing it. Read before quoting a client.
+
 ## Governance — read before any review
 
 | File | What it decides |

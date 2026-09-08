@@ -17,6 +17,7 @@ matches the job.
 | `coa-review` | Is this Certificate of Analysis complete and traceable to the shipment? |
 | `commercial-invoice-review` | Is this invoice sufficient for customs and internally consistent? |
 | `lithium-battery-section-2` | Which UN number, PI and section apply, and does the shipment meet them? |
+| `corrected-package-review` | Were the prior findings actually closed, and did fixing them break anything? |
 
 ## The shape
 
@@ -50,8 +51,9 @@ matches the job.
 
 ## Still to build
 
-`packing-list-review`, `bol-review` (ocean), `hs-code-research`, `gdp-record-review`,
-`cbp-entry-review`.
+`packing-list-review`, `sds-review`, `chain-of-custody-review` — all three promised on the
+website with nothing behind them, see `compliance-auditor/service-coverage.md`. Then
+`bol-review` (ocean), `hs-code-research`, `gdp-record-review`, `cbp-entry-review`.
 
 Copy an existing skill's shape. Router under 60 lines, one file per check group, contract
 cites `skill-contract.md` rather than repeating it.

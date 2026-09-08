@@ -1,5 +1,9 @@
 # Reference — index
 
+**What to write next: `REFERENCE-BUILD-PLAN.md`**, ordered by what the business sells. Read the
+"do not copy the DGR" note at the top of it before writing anything into these lanes.
+
+
 Regulatory knowledge by lane. These are the sources the skills cite. Several lanes are
 scaffolded but empty — noted so nobody hunts for a file that is not there.
 

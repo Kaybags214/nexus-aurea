@@ -29,7 +29,7 @@ The agentic OS itself — architecture, command centre, the ARMS mapping — is 
    is party matching, so the names are the evidence. Client work lives in an encrypted store
    outside the repo. See `compliance/02-sops/data-handling.md`. Invented parties
    (`Apex Inc.`, `ABC Flyers`) are practice material and belong here.
-3. **Compliance work runs through the skills**, not ad-hoc prompting. Six exist in
+3. **Compliance work runs through the skills**, not ad-hoc prompting. Eight exist in
    `.claude/skills/` — see `AUDIT.md`. They are governed by
    `compliance-auditor/skill-contract.md` and `compliance-auditor/standards-of-precedence.md`.
 4. **No regulatory limit from memory.** Verify against the governing document, or record it as

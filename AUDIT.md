@@ -30,6 +30,7 @@ Each is a router: `SKILL.md` plus a `checks/` folder inside each skill, read one
 | `excursion-assessment` | Cold-chain excursion against the labelled range; decision package |
 | `coa-review` | Certificate of Analysis completeness and lot traceability |
 | `commercial-invoice-review` | Customs sufficiency, arithmetic, Incoterms, HS plausibility |
+| `corrected-package-review` | Closure of prior findings, and regressions the correction introduced |
 | `lithium-battery-section-2` | PI 965-970, which section applies, state of charge, lithium battery mark |
 
 `.claude/skills/README.md` covers the shape and what is still to build.

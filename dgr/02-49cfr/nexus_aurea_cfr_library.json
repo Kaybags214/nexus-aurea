@@ -1,0 +1,708 @@
+{
+  "library_meta": {
+    "name": "Nexus Aurea Inc. — 49 CFR Compliance Reference Library",
+    "version": "1.0",
+    "built": "2026-09-09",
+    "source_authority": "49 CFR — Title 49, Code of Federal Regulations, Pipeline and Hazardous Materials Safety Administration (PHMSA), U.S. Department of Transportation",
+    "source_url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C",
+    "scope": "U.S. domestic hazardous materials transport — DG Classes 3, 8, 9 and pharmaceutical/temperature-sensitive shipments",
+    "audit_classes_active": ["Class 3", "Class 8", "Class 9", "Pharma/Temperature-Sensitive"],
+    "audit_classes_reference_only": ["Class 1", "Class 2", "Class 4", "Class 5", "Class 6", "Class 7"],
+    "standing_rules": [
+      "All findings are DRAFT. Human review required before any action is taken.",
+      "Never issue 'clearance', 'approved', or 'safe to ship' conclusions.",
+      "Mark each finding: Pass / Fail / Warning / Unable to Verify.",
+      "Cite the specific regulatory section for every finding.",
+      "Never invent a missing regulation, shipping name, weight, or approval.",
+      "Findings must identify discrepancies and missing data only."
+    ],
+    "pending_sources": [
+      "IATA DGR 67th Edition (2026) — user has licensed copy; to be added",
+      "IMDG Code — user will provide this week",
+      "IATA DGR 66th Edition — user will provide this week",
+      "ICAO Technical Instructions — under consideration",
+      "WHO Guidelines — under consideration (pharma)"
+    ]
+  },
+
+  "parts": {
+
+    "part_171": {
+      "title": "49 CFR Part 171 — General Information, Regulations, and Definitions",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-171",
+      "key_definitions": {
+        "source": "49 CFR §171.8",
+        "definitions": [
+          {
+            "term": "Elevated temperature material",
+            "definition": "A material that, when offered for transportation or transported in a bulk packaging, is in a liquid phase and at a temperature at or above 100°C (212°F); or a material that is in a liquid phase with a flash point at or above 37.8°C (100°F) that is intentionally heated and offered for transportation or transported at or above its flash point; or in a solid phase and at a temperature at or above 240°C (464°F).",
+            "relevance": "Triggers Class 9 classification and special shipping paper notations (HOT)."
+          },
+          {
+            "term": "Hazardous substance",
+            "definition": "A material, including its mixtures and solutions, that is listed in the appendix to §172.101, is in a quantity in one package that equals or exceeds the reportable quantity (RQ) listed in that appendix, and when in a mixture or solution, is in a concentration by weight which equals or exceeds the concentration listed in §171.8.",
+            "relevance": "Requires RQ notation on shipping papers."
+          },
+          {
+            "term": "Marine pollutant",
+            "definition": "A material listed in the appendix to §172.101 with a 'P' in column 1.",
+            "relevance": "Requires 'Marine Pollutant' notation on shipping papers; special segregation requirements."
+          },
+          {
+            "term": "Packing group",
+            "definition": "A grouping (PG I, II, or III) according to the degree of danger presented by hazardous materials. PG I = great danger; PG II = medium danger; PG III = minor danger.",
+            "relevance": "Must be verified on shipping paper and matches §172.101 table."
+          },
+          {
+            "term": "Proper shipping name",
+            "definition": "The primary name of the hazardous material as listed in §172.101 Table, Column 2.",
+            "relevance": "Must appear on shipping paper exactly as listed; no abbreviations unless authorized."
+          }
+        ]
+      }
+    },
+
+    "part_172_subpart_c": {
+      "title": "49 CFR Part 172, Subpart C — Shipping Papers",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-172/subpart-C",
+      "sections": [
+        {
+          "section": "§172.200",
+          "title": "Applicability",
+          "rule": "Every person offering a hazardous material for transportation must describe it on shipping papers as required by this subpart.",
+          "exceptions": [
+            "Materials marked 'A' in §172.101 Table Column 1 (except air transport)",
+            "Materials marked 'W' in §172.101 Table Column 1 (except water transport)",
+            "Limited quantity packages (except air or vessel transport)",
+            "Category B infectious substances per §173.199"
+          ],
+          "audit_check": {
+            "question": "Is a shipping paper present for this DG shipment?",
+            "pass": "Shipping paper is present and covers all HM entries.",
+            "fail": "No shipping paper present for a regulated hazardous material.",
+            "warning": "Shipping paper present but may be missing required entries — check §172.202.",
+            "unable_to_verify": "Document not legible or not provided."
+          }
+        },
+        {
+          "section": "§172.201",
+          "title": "Preparation and Retention of Shipping Papers",
+          "rules": [
+            {
+              "rule_id": "172.201.a.1",
+              "rule": "Hazardous material descriptions must appear first on the shipping paper OR be in a contrasting color OR be marked with 'X' or 'RQ' in a column captioned 'HM'.",
+              "audit_check": {
+                "question": "Is the HM description clearly distinguished from non-HM entries on the shipping paper?",
+                "pass": "HM entry is first, contrasting color, or 'X'/'RQ' marked in HM column.",
+                "fail": "HM entries are not distinguishable from non-HM entries.",
+                "warning": "Unclear presentation — verify HM column or ordering."
+              }
+            },
+            {
+              "rule_id": "172.201.a.2",
+              "rule": "The shipping paper and all copies must be legible and printed in English.",
+              "audit_check": {
+                "question": "Is the shipping paper legible and in English?",
+                "pass": "Legible, printed in English.",
+                "fail": "Not in English or not legible.",
+                "warning": "Partially legible or bilingual — English portion must contain all required fields."
+              }
+            },
+            {
+              "rule_id": "172.201.a.3",
+              "rule": "No codes or abbreviations unless specifically authorized.",
+              "audit_check": {
+                "question": "Does the shipping paper use any unauthorized codes or abbreviations?",
+                "pass": "No unauthorized codes or abbreviations found.",
+                "fail": "Unauthorized abbreviations or codes are present.",
+                "warning": "Abbreviations present — verify each is specifically authorized."
+              }
+            },
+            {
+              "rule_id": "172.201.d",
+              "rule": "Emergency response telephone number required on shipping paper.",
+              "audit_check": {
+                "question": "Is an emergency response telephone number present on the shipping paper?",
+                "pass": "Emergency response number is present.",
+                "fail": "No emergency response telephone number on shipping paper.",
+                "warning": "Number present but may not be 24-hr accessible — flag for review."
+              }
+            },
+            {
+              "rule_id": "172.201.e",
+              "rule": "Shipping papers must be retained for 2 years (3 years for hazardous waste) after acceptance by initial carrier. Must include acceptance date.",
+              "audit_check": {
+                "question": "Is the date of carrier acceptance noted on the shipping paper?",
+                "pass": "Acceptance date is present.",
+                "fail": "No acceptance date noted.",
+                "warning": "Date present but format is unclear."
+              }
+            }
+          ]
+        },
+        {
+          "section": "§172.202",
+          "title": "Description of Hazardous Material on Shipping Papers — Required Basic Description",
+          "rule": "The basic description must appear in this exact sequence: (1) UN/NA ID Number, (2) Proper Shipping Name, (3) Hazard Class or Division, (4) Packing Group (in Roman numerals). No additional information may be interspersed.",
+          "required_elements": [
+            {
+              "element": "UN/NA Identification Number",
+              "source": "§172.101 Table, Column 4",
+              "format": "UN#### or NA####",
+              "audit_check": {
+                "question": "Is a valid UN/NA ID number present and correctly formatted?",
+                "pass": "UN/NA number present and matches §172.101 Table for the stated material.",
+                "fail": "UN/NA number absent, incorrect, or does not match the proper shipping name.",
+                "warning": "Number present but not verified against §172.101 — flag for cross-check."
+              }
+            },
+            {
+              "element": "Proper Shipping Name (PSN)",
+              "source": "§172.101 Table, Column 2",
+              "format": "Must be the primary listed name; technical name in parentheses if 'G' in Column 1",
+              "audit_check": {
+                "question": "Is the proper shipping name correct, unabbreviated, and matching the §172.101 Table?",
+                "pass": "PSN matches §172.101 Table exactly for the stated UN number.",
+                "fail": "PSN is missing, abbreviated, or does not match the UN number.",
+                "warning": "PSN present but uses 'n.o.s.' without a required technical name in parentheses."
+              }
+            },
+            {
+              "element": "Hazard Class or Division Number",
+              "source": "§172.101 Table, Column 3",
+              "format": "Primary class followed by subsidiary class(es) in parentheses if required",
+              "audit_check": {
+                "question": "Is the primary hazard class and any required subsidiary hazard class present and correct?",
+                "pass": "Hazard class matches §172.101 Table; subsidiary classes correctly noted in parentheses.",
+                "fail": "Hazard class missing, incorrect, or subsidiary class omitted when required.",
+                "warning": "Hazard class present but subsidiary class notation unclear."
+              }
+            },
+            {
+              "element": "Packing Group",
+              "source": "§172.101 Table, Column 5",
+              "format": "Roman numerals: PG I, PG II, or PG III (may be preceded by 'PG')",
+              "exceptions": ["Class 1 explosives", "Self-reactive substances", "Division 5.2", "Entries with no assigned packing group"],
+              "audit_check": {
+                "question": "Is the packing group present in Roman numerals and correct for this material?",
+                "pass": "Packing group is present in Roman numerals and matches §172.101 Table.",
+                "fail": "Packing group missing or incorrect.",
+                "warning": "Packing group present but not in Roman numeral format — flag."
+              }
+            },
+            {
+              "element": "Total Quantity",
+              "source": "§172.202(a)(5) — ground/rail/sea; §172.202(a)(6) — air",
+              "format": "Ground: total quantity with unit of measure (e.g., '200 kg', '50 L'). Air: net mass per package or gross mass if indicated.",
+              "audit_check": {
+                "question": "Is the total quantity of hazardous material stated with correct units?",
+                "pass": "Quantity and unit of measure are present and appropriate for the mode of transport.",
+                "fail": "Quantity missing or unit of measure absent.",
+                "warning": "Quantity present but unit of measure may not match the mode of transport requirements."
+              }
+            },
+            {
+              "element": "Number and Type of Packages",
+              "source": "§172.202(a)(7)",
+              "format": "e.g., '12 drums', '3 cylinders', '1 IBC'",
+              "audit_check": {
+                "question": "Is the number and type of packages stated?",
+                "pass": "Number and type of packages clearly stated.",
+                "fail": "Package count or type is missing.",
+                "warning": "Package type abbreviated — verify abbreviation is commonly accepted."
+              }
+            }
+          ],
+          "sequence_check": {
+            "rule": "Basic description must appear in order: UN/NA Number → PSN → Hazard Class → Packing Group. No information may be inserted between these four elements.",
+            "example_correct": "UN2744, Cyclobutyl chloroformate, 6.1, (8, 3), PG II",
+            "example_incorrect": "Cyclobutyl chloroformate, UN2744, Corrosive, PG II",
+            "audit_check": {
+              "question": "Is the basic description in the correct required sequence?",
+              "pass": "UN number, PSN, hazard class, PG appear in correct order with no interspersed data.",
+              "fail": "Elements are out of sequence or information is inserted between required elements.",
+              "warning": "Sequence appears correct but technical name placement needs verification."
+            }
+          }
+        },
+        {
+          "section": "§172.203",
+          "title": "Additional Description Requirements",
+          "additional_fields": [
+            {
+              "field": "Special Permit Notation",
+              "rule": "Must show 'DOT-SP' followed by special permit number when shipment is under a special permit.",
+              "audit_check": {
+                "question": "If a special permit applies, is 'DOT-SP [number]' noted on the shipping paper?",
+                "pass": "DOT-SP notation present and associated with the correct description.",
+                "fail": "Special permit shipment has no DOT-SP notation.",
+                "warning": "DOT-SP notation present but number is not readable.",
+                "not_applicable": "No special permit involved."
+              }
+            },
+            {
+              "field": "Limited Quantity",
+              "rule": "Must include 'Limited Quantity' or 'Ltd Qty' following the basic description.",
+              "audit_check": {
+                "question": "If offered as limited quantity, is 'Limited Quantity' or 'Ltd Qty' noted?",
+                "pass": "LQ designation present following basic description.",
+                "fail": "LQ shipment has no LQ notation on shipping paper.",
+                "not_applicable": "Not a limited quantity shipment."
+              }
+            },
+            {
+              "field": "Reportable Quantity (RQ)",
+              "rule": "The letters 'RQ' must appear before or after the basic description for each hazardous substance meeting RQ threshold.",
+              "audit_check": {
+                "question": "If this is a hazardous substance meeting RQ, is 'RQ' noted on the shipping paper?",
+                "pass": "'RQ' present before or after basic description.",
+                "fail": "RQ threshold met but 'RQ' notation missing.",
+                "not_applicable": "Material does not meet RQ threshold."
+              }
+            },
+            {
+              "field": "Air Transport Statement",
+              "rule": "For air shipments, must state whether the shipment is within limitations for passenger and cargo aircraft OR cargo aircraft only.",
+              "source": "§172.203(f)",
+              "audit_check": {
+                "question": "For air shipments, is the passenger/cargo or cargo-only aircraft statement present?",
+                "pass": "Statement present and correct for the material's air eligibility.",
+                "fail": "Air transport statement missing from air shipment documentation.",
+                "warning": "Statement present but does not clearly specify passenger+cargo vs. cargo-only."
+              }
+            },
+            {
+              "field": "Elevated Temperature Material (HOT)",
+              "rule": "If a liquid meets elevated temperature definition and 'Molten' or 'Elevated temperature' is not in the PSN, the word 'HOT' must immediately precede the PSN.",
+              "source": "§172.203(n)",
+              "audit_check": {
+                "question": "For elevated temperature liquids, does 'HOT' precede the PSN if not already in the name?",
+                "pass": "'HOT' is present preceding the PSN, or 'Molten'/'Elevated temperature' is in the PSN.",
+                "fail": "Elevated temperature liquid with no 'HOT' notation and no indication in PSN.",
+                "not_applicable": "Material is not an elevated temperature material."
+              }
+            },
+            {
+              "field": "Marine Pollutant",
+              "rule": "Words 'Marine Pollutant' shall appear in association with the basic description. For n.o.s. entries, the name of the pollutant component must appear in parentheses.",
+              "source": "§172.203(l)",
+              "audit_check": {
+                "question": "If material is a marine pollutant, are 'Marine Pollutant' words and component name present?",
+                "pass": "'Marine Pollutant' noted; component name in parentheses if n.o.s. entry.",
+                "fail": "Marine pollutant designation missing from shipping paper.",
+                "not_applicable": "Material is not a marine pollutant."
+              }
+            },
+            {
+              "field": "Technical Name for n.o.s. Entries",
+              "rule": "If PSN is marked 'G' in §172.101 Column 1, the technical name of the hazardous constituent must appear in parentheses in association with the basic description.",
+              "source": "§172.203(k)",
+              "audit_check": {
+                "question": "For 'G'-marked n.o.s. entries, is the technical name in parentheses with the description?",
+                "pass": "Technical name in parentheses correctly identifies the hazardous constituent.",
+                "fail": "n.o.s. entry with 'G' designation has no technical name in parentheses.",
+                "warning": "Technical name present but may not identify the primary hazardous constituent."
+              }
+            }
+          ]
+        },
+        {
+          "section": "§172.204",
+          "title": "Shipper's Certification",
+          "rule": "For most shipments, the shipper must certify on the shipping paper that the material is properly classified, described, packaged, marked, and labeled and is in proper condition for transport.",
+          "certification_text_ground": "This is to certify that the above-named materials are properly classified, described, packaged, marked, and labeled, and are in proper condition for transportation according to the applicable regulations of the Department of Transportation.",
+          "certification_text_air": "I hereby declare that the contents of this consignment are fully and accurately described above by the proper shipping name, and are classified, packaged, marked and labeled/placarded, and are in all respects in proper condition for transport according to applicable international and national governmental regulations.",
+          "audit_check": {
+            "question": "Is the shipper's certification present and complete on the shipping paper?",
+            "pass": "Certification present, signed, and contains required language for the mode of transport.",
+            "fail": "Certification missing, unsigned, or uses incorrect language.",
+            "warning": "Certification present but signature, date, or company name is missing."
+          }
+        }
+      ]
+    },
+
+    "part_173_class_3": {
+      "title": "49 CFR Part 173 — Class 3: Flammable Liquids",
+      "section": "§173.120",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.120",
+      "effective_date": "Amended 76 FR 3371, Jan. 19, 2011 (most recent amendment cited)",
+      "definition": {
+        "class_3_flammable_liquid": "A liquid having a flash point of not more than 60°C (140°F), OR any material in liquid phase with a flash point at or above 37.8°C (100°F) that is intentionally heated and offered for transport at or above its flash point in a bulk packaging.",
+        "flash_point_definition": "The minimum temperature at which a liquid gives off vapor in sufficient concentration to form an ignitable mixture with air near the surface of the liquid.",
+        "combustible_liquid": "A liquid with a flash point above 60°C (140°F) and below 93°C (200°F) that does not meet any other hazard class definition."
+      },
+      "exceptions_from_class_3": [
+        "Liquid meeting another hazard class definition per §173.115",
+        "Mixture with ≥99% components having flash point ≥60°C not transported at or above flash point",
+        "Liquid with flash point >35°C that does not sustain combustion per ASTM D4206 or Appendix H",
+        "Liquid with flash point >35°C and fire point >100°C per ISO 2592",
+        "Liquid with flash point >35°C in water-miscible solution with >90% water by mass"
+      ],
+      "packing_groups": {
+        "source": "§172.101 Table, Column 5",
+        "groups": [
+          {"group": "PG I", "flash_point": "Below -18°C (0°F)", "initial_boiling_point": "≤35°C (95°F)"},
+          {"group": "PG II", "flash_point": "Below 23°C (73°F)", "initial_boiling_point": ">35°C (95°F)"},
+          {"group": "PG III", "flash_point": "23°C-60°C (73°F-140°F)", "initial_boiling_point": ">35°C (95°F)"}
+        ]
+      },
+      "audit_checklist": [
+        {
+          "check_id": "C3-001",
+          "check": "Flash point verification",
+          "question": "Does the declared flash point on the shipping document match the SDS flash point for this material?",
+          "pass": "Flash point on document matches SDS within acceptable test method variance.",
+          "fail": "Flash point on document does not match SDS; or flash point is missing from documents.",
+          "warning": "Flash point present on document but SDS not available for cross-reference.",
+          "unable_to_verify": "Neither document nor SDS provides flash point data.",
+          "source": "49 CFR §173.120(a)"
+        },
+        {
+          "check_id": "C3-002",
+          "check": "Correct packing group assigned",
+          "question": "Is the stated packing group (PG I, II, or III) correct for the flash point and boiling point of this material?",
+          "pass": "Packing group matches the flash point criteria for the assigned group.",
+          "fail": "Packing group does not correspond to the stated flash point.",
+          "warning": "Packing group present but flash point data is not sufficient to verify.",
+          "source": "49 CFR §172.101 Table"
+        },
+        {
+          "check_id": "C3-003",
+          "check": "Proper shipping name matches UN number",
+          "question": "Does the proper shipping name correspond to the UN number in the §172.101 Table?",
+          "pass": "PSN and UN number match §172.101 Table.",
+          "fail": "PSN and UN number do not correspond in §172.101 Table.",
+          "source": "49 CFR §172.101, §172.202"
+        },
+        {
+          "check_id": "C3-004",
+          "check": "Flash point notation for water shipments",
+          "question": "For shipments by water, is the minimum flash point (if ≤60°C) noted on the shipping paper?",
+          "pass": "Flash point noted in association with basic description for water shipment.",
+          "fail": "Flash point not noted on shipping paper for water transport.",
+          "not_applicable": "Shipment is not by water.",
+          "source": "49 CFR §172.203(i)(2)"
+        },
+        {
+          "check_id": "C3-005",
+          "check": "Elevated temperature liquid — HOT notation",
+          "question": "If this Class 3 material is transported at or above its flash point in bulk, is the word 'HOT' preceding the PSN?",
+          "pass": "'HOT' precedes the PSN, or 'Molten'/'Elevated temperature' is included in the PSN.",
+          "fail": "Elevated temperature Class 3 bulk shipment missing 'HOT' notation.",
+          "not_applicable": "Material not transported at or above flash point.",
+          "source": "49 CFR §172.203(n), §173.120(a)"
+        },
+        {
+          "check_id": "C3-006",
+          "check": "Combustible liquid reclassification",
+          "question": "If material has flash point 38°C-60°C and no other hazard class applies, has it been reclassed as combustible liquid?",
+          "pass": "Reclassification properly noted or not applicable.",
+          "fail": "Material meets combustible liquid criteria but is classified as Class 3 without justification.",
+          "warning": "Reclassification may apply — flag for shipper review.",
+          "note": "Reclassification as combustible liquid does not apply to vessel or aircraft transport.",
+          "source": "49 CFR §173.120(b)(2)"
+        }
+      ]
+    },
+
+    "part_173_class_8": {
+      "title": "49 CFR Part 173 — Class 8: Corrosive Materials",
+      "section": "§173.136",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.136",
+      "effective_date": "Amended 85 FR 27880, May 11, 2020",
+      "definition": "A liquid or solid that causes irreversible damage to human skin at the site of contact within a specified period of time. Also includes liquids or solids that have a severe corrosion rate on steel or aluminum exceeding 6.25 mm/year at 55°C.",
+      "packing_group_criteria": {
+        "source": "49 CFR §173.137",
+        "groups": [
+          {
+            "group": "PG I",
+            "criteria": "Causes irreversible damage to intact skin within observation period of up to 60 minutes, starting after exposure of 3 minutes or less."
+          },
+          {
+            "group": "PG II",
+            "criteria": "Causes irreversible damage to intact skin within observation period of up to 14 days, starting after exposure of more than 3 minutes but not more than 60 minutes."
+          },
+          {
+            "group": "PG III",
+            "criteria": "Causes irreversible damage to intact skin within observation period of up to 14 days after exposure of more than 60 minutes but not more than 4 hours; OR exhibits corrosion rate on steel or aluminum exceeding 6.25 mm/year at 55°C."
+          }
+        ]
+      },
+      "test_methods_accepted": [
+        "OECD Guideline Test No. 404 — Acute Dermal Irritation/Corrosion",
+        "OECD Guideline Test No. 430 — In Vitro Skin Corrosion (TER)",
+        "OECD Guideline Test No. 431 — In Vitro Skin Corrosion (RHE)",
+        "OECD Guideline Test No. 435 — In Vitro Membrane Barrier Test",
+        "OECD Guideline Test No. 439 — In Vitro Skin Irritation (RHE)"
+      ],
+      "audit_checklist": [
+        {
+          "check_id": "C8-001",
+          "check": "Corrosive material identification",
+          "question": "Is the material correctly identified as Class 8 based on skin corrosion or metal corrosion rate criteria?",
+          "pass": "Material meets Class 8 definition per §173.136; classification is supported by SDS or test data.",
+          "fail": "Material classified as Class 8 but SDS or test data does not support this classification.",
+          "warning": "Classification not verifiable from documents provided — SDS not available.",
+          "source": "49 CFR §173.136(a)"
+        },
+        {
+          "check_id": "C8-002",
+          "check": "Packing group assignment — Class 8",
+          "question": "Is the assigned packing group (PG I, II, or III) correct for the corrosivity data of this material?",
+          "pass": "Packing group matches §173.137 criteria for the documented exposure time/corrosion rate.",
+          "fail": "Packing group does not correspond to the corrosivity data available.",
+          "warning": "Packing group present on document but corrosivity test data not available to verify.",
+          "source": "49 CFR §173.137"
+        },
+        {
+          "check_id": "C8-003",
+          "check": "Proper shipping name and UN number match",
+          "question": "Does the proper shipping name and UN number correspond correctly in the §172.101 Table?",
+          "pass": "PSN and UN number are consistent with §172.101 Table.",
+          "fail": "PSN or UN number does not match §172.101 Table for this Class 8 material.",
+          "source": "49 CFR §172.101, §172.202"
+        },
+        {
+          "check_id": "C8-004",
+          "check": "Subsidiary hazard class notation",
+          "question": "If a subsidiary hazard applies (e.g., flammable, toxic), is it noted in parentheses after the primary class on the shipping paper?",
+          "pass": "Subsidiary hazard class noted correctly in parentheses following primary class.",
+          "fail": "Subsidiary hazard is present per §172.101 Table but not noted on shipping paper.",
+          "not_applicable": "No subsidiary hazard for this material.",
+          "source": "49 CFR §172.202(a)(3)"
+        },
+        {
+          "check_id": "C8-005",
+          "check": "Skin corrosion data currency",
+          "question": "If legacy test data (pre-September 30, 1995) is referenced, is it properly authorized under §173.136(c)?",
+          "pass": "Legacy data cited and falls within authorized use per §173.136(c).",
+          "fail": "Legacy data cited outside of authorized parameters.",
+          "not_applicable": "No legacy data referenced.",
+          "source": "49 CFR §173.136(c)"
+        }
+      ]
+    },
+
+    "part_173_class_9": {
+      "title": "49 CFR Part 173 — Class 9: Miscellaneous Hazardous Materials",
+      "section": "§173.140",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.140",
+      "effective_date": "Amended 58 FR 33305, June 16, 1993",
+      "definition": "A material which presents a hazard during transport but does not meet the definition of any other hazard class.",
+      "class_9_includes": [
+        {
+          "category": "Aviation hazard",
+          "description": "Any material with anesthetic, noxious, or similar properties that could cause extreme annoyance or discomfort to a flight crew member so as to prevent correct performance of assigned duties.",
+          "source": "§173.140(a)"
+        },
+        {
+          "category": "Elevated temperature material",
+          "description": "Material meeting the definition in §171.8 for an elevated temperature material.",
+          "source": "§173.140(b)"
+        },
+        {
+          "category": "Hazardous substance",
+          "description": "Material meeting the definition in §171.8 for a hazardous substance (RQ threshold).",
+          "source": "§173.140(b)"
+        },
+        {
+          "category": "Hazardous waste",
+          "description": "Material meeting the definition in §171.8 for a hazardous waste.",
+          "source": "§173.140(b)"
+        },
+        {
+          "category": "Marine pollutant",
+          "description": "Material meeting the definition in §171.8 for a marine pollutant.",
+          "source": "§173.140(b)"
+        }
+      ],
+      "common_class_9_materials": [
+        {"name": "Dry Ice (Carbon Dioxide, Solid)", "un_number": "UN1845", "packing_group": "Not assigned", "note": "Common in pharma cold-chain shipments."},
+        {"name": "Lithium ion batteries", "un_number": "UN3480 / UN3481", "packing_group": "Not assigned", "note": "Transported with or without equipment."},
+        {"name": "Environmentally hazardous substances, liquid", "un_number": "UN3082", "packing_group": "PG III", "note": "Marine pollutant designation common."},
+        {"name": "Environmentally hazardous substances, solid", "un_number": "UN3077", "packing_group": "PG III", "note": "Marine pollutant designation common."},
+        {"name": "Elevated temperature liquid, n.o.s.", "un_number": "UN3257", "packing_group": "PG III", "note": "Liquid at or above 100°C."},
+        {"name": "Elevated temperature solid, n.o.s.", "un_number": "UN3258", "packing_group": "PG III", "note": "Solid at or above 240°C."}
+      ],
+      "audit_checklist": [
+        {
+          "check_id": "C9-001",
+          "check": "Class 9 material identification",
+          "question": "Is the material correctly identified as Class 9 — does it meet a Class 9 subcategory and not another primary hazard class?",
+          "pass": "Material meets one of the Class 9 categories in §173.140 and is not better classified under another class.",
+          "fail": "Material classified as Class 9 but may belong to another hazard class.",
+          "warning": "Class 9 assigned — verify material does not meet criteria for Class 3, 6, or 8.",
+          "source": "49 CFR §173.140"
+        },
+        {
+          "check_id": "C9-002",
+          "check": "UN1845 Dry Ice — documentation requirements",
+          "question": "For dry ice shipments: Is UN1845 correctly stated? Is net weight of dry ice declared? Is packaging marked 'DRY ICE' or 'CARBON DIOXIDE, SOLID'?",
+          "pass": "UN1845 stated; net weight declared; packaging marked correctly.",
+          "fail": "UN1845 missing, net weight not declared, or packaging not marked.",
+          "warning": "Dry ice present in pharma shipment but UN1845 declaration not found — check if RQ threshold applies.",
+          "not_applicable": "No dry ice in this shipment.",
+          "source": "49 CFR §173.140(b), §175.10(a)(10)"
+        },
+        {
+          "check_id": "C9-003",
+          "check": "Marine pollutant notation",
+          "question": "If material is a Class 9 marine pollutant, are 'Marine Pollutant' words and component name present on the shipping paper?",
+          "pass": "'Marine Pollutant' noted; component name in parentheses for n.o.s. entries.",
+          "fail": "Marine pollutant designation missing from shipping paper.",
+          "not_applicable": "Material is not a marine pollutant.",
+          "source": "49 CFR §172.203(l), §173.140(b)"
+        },
+        {
+          "check_id": "C9-004",
+          "check": "Elevated temperature notation",
+          "question": "For elevated temperature Class 9 materials, is 'HOT' preceding the PSN (if not already in the name)?",
+          "pass": "'HOT' precedes the PSN, or 'Elevated temperature' is in the PSN.",
+          "fail": "Elevated temperature Class 9 material missing 'HOT' notation.",
+          "not_applicable": "Material is not an elevated temperature material.",
+          "source": "49 CFR §172.203(n), §173.140(b)"
+        },
+        {
+          "check_id": "C9-005",
+          "check": "Hazardous waste — EPA waste code",
+          "question": "For hazardous waste classified as Class 9, is the EPA hazardous waste number included on the shipping paper?",
+          "pass": "EPA waste code (e.g., D001) present on shipping paper in association with basic description.",
+          "fail": "EPA waste code missing from hazardous waste shipment.",
+          "not_applicable": "Material is not a hazardous waste.",
+          "source": "49 CFR §172.203(c)(1), §173.140(b)"
+        }
+      ]
+    },
+
+    "pharma_temperature_sensitive": {
+      "title": "49 CFR — Pharmaceutical / Temperature-Sensitive Shipments",
+      "note": "No single 49 CFR section governs all pharma shipments. Compliance draws from multiple sections. IATA DGR 67th Edition (and GDP guidelines) govern air transport of temperature-sensitive pharmaceuticals. This section captures the 49 CFR elements relevant to pharma documentation review.",
+      "relevant_sections": [
+        "§173.140 (Class 9 — dry ice, elevated temperature)",
+        "§172.202 (shipping paper basic description)",
+        "§172.203 (additional description — RQ, elevated temp, marine pollutant)",
+        "§175.10 (air transport exceptions — dry ice passenger limits)"
+      ],
+      "audit_checklist": [
+        {
+          "check_id": "PH-001",
+          "check": "Dry ice (UN1845) declaration — pharma cold-chain",
+          "question": "Is UN1845 declared on all shipping documents where dry ice is used as a refrigerant?",
+          "pass": "UN1845 declared; net weight of dry ice stated; packaging marked 'DRY ICE' or 'CARBON DIOXIDE, SOLID'.",
+          "fail": "Dry ice confirmed in shipment but UN1845 declaration is absent from all documents.",
+          "warning": "Dry ice mentioned on commercial invoice or packing list but not declared on the shipping paper.",
+          "source": "49 CFR §173.140, §175.10(a)(10)"
+        },
+        {
+          "check_id": "PH-002",
+          "check": "Temperature control requirements documented",
+          "question": "Are temperature handling/storage requirements documented in the shipment record (e.g., GDP temperature instructions, temperature monitoring records)?",
+          "pass": "Temperature requirements present in shipment documentation.",
+          "fail": "Temperature-sensitive pharmaceutical shipment with no temperature control documentation.",
+          "warning": "Temperature requirements referenced on commercial invoice only — not on all required documents.",
+          "unable_to_verify": "Temperature control documents not included in the package submitted for review.",
+          "source": "GDP guidelines (not 49 CFR); flag for IATA DGR review when air transport."
+        },
+        {
+          "check_id": "PH-003",
+          "check": "Chain-of-custody documentation present",
+          "question": "Is a chain-of-custody document present for this pharmaceutical shipment?",
+          "pass": "Chain-of-custody document present, signed, and covers the shipment period.",
+          "fail": "No chain-of-custody document present.",
+          "warning": "Chain-of-custody document referenced but not included in the document package.",
+          "unable_to_verify": "Document not provided for review.",
+          "source": "GDP / pharma SOP requirement — flag for human review."
+        },
+        {
+          "check_id": "PH-004",
+          "check": "Certificate of Analysis / Conformance",
+          "question": "If provided, does the Certificate of Analysis or Conformance match the product described on the shipping paper?",
+          "pass": "Certificate product name, lot number, and quantity match shipping paper.",
+          "fail": "Certificate does not match shipping paper — discrepancy in name, lot, or quantity.",
+          "warning": "Certificate present but lot number or quantity not clearly legible.",
+          "not_applicable": "No certificate provided or required for this shipment.",
+          "source": "Nexus Aurea audit scope — document cross-check"
+        },
+        {
+          "check_id": "PH-005",
+          "check": "Air waybill temperature notation",
+          "question": "For air transport of temperature-sensitive pharma, does the air waybill include special handling instructions (e.g., 'KEEP FROZEN', 'KEEP REFRIGERATED', temperature range)?",
+          "pass": "Air waybill contains appropriate temperature handling instructions.",
+          "fail": "Temperature-sensitive pharma on air waybill with no handling instructions.",
+          "warning": "Handling instructions present but temperature range not specified.",
+          "not_applicable": "Not an air shipment.",
+          "source": "IATA DGR 67th Edition — to be added when source is integrated."
+        }
+      ]
+    },
+
+    "part_175_air_transport": {
+      "title": "49 CFR Part 175 — Carriage by Aircraft",
+      "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-175",
+      "note": "Part 175 governs U.S. domestic air transport of hazardous materials. For international air, IATA DGR 67th Edition governs and will be integrated as a separate library module.",
+      "key_sections": [
+        {
+          "section": "§175.10",
+          "title": "Exceptions for Passengers, Crewmembers, and Air Operators",
+          "relevance": "Defines what hazardous materials are permissible in carry-on or checked baggage. Critical for pharma shipments involving dry ice or personal use medical devices.",
+          "dry_ice_rule": {
+            "rule": "Dry ice (UN1845) for perishables may be carried by passengers: maximum 2.5 kg (5.5 lbs) per person. Package must permit release of CO2 gas. Checked baggage must be marked 'DRY ICE' or 'CARBON DIOXIDE, SOLID' with net weight.",
+            "source": "§175.10(a)(10)",
+            "audit_check": {
+              "question": "For passenger-carried dry ice: is quantity within 2.5 kg limit and is packaging marked correctly?",
+              "pass": "Quantity ≤2.5 kg; packaging marked 'DRY ICE' or 'CARBON DIOXIDE, SOLID' with net weight.",
+              "fail": "Quantity exceeds 2.5 kg limit or packaging not correctly marked.",
+              "not_applicable": "Dry ice is not passenger-carried in this shipment."
+            }
+          }
+        }
+      ],
+      "air_transport_shipping_paper_requirements": {
+        "rule": "For all air shipments, shipping paper must state whether shipment is within limitations for: (a) Passenger and cargo aircraft, OR (b) Cargo aircraft only.",
+        "source": "49 CFR §172.203(f)",
+        "audit_check": {
+          "check_id": "AIR-001",
+          "question": "Is the passenger/cargo or cargo-only aircraft authorization statement present on the air shipping paper?",
+          "pass": "Statement present and consistent with the material's authorized air eligibility.",
+          "fail": "Statement missing from air shipment shipping paper.",
+          "warning": "Statement present but does not clearly specify which aircraft type is authorized."
+        }
+      },
+      "quantity_per_package_air": {
+        "rule": "For air transport, the total net mass per package (not total shipment) must be shown on the shipping paper, unless gross mass is specified in §172.101 Table Columns 9A or 9B.",
+        "source": "49 CFR §172.202(a)(6)",
+        "audit_check": {
+          "check_id": "AIR-002",
+          "question": "Does the air shipping paper show net mass per package (or authorized gross mass per package)?",
+          "pass": "Net mass or authorized gross mass per package is stated on the shipping paper.",
+          "fail": "Air shipping paper shows only total shipment quantity, not per-package quantity.",
+          "warning": "Quantity present but unclear whether it is per-package or total."
+        }
+      }
+    }
+  },
+
+  "document_audit_scope": {
+    "title": "Standard Documents to Check per Shipment",
+    "documents": [
+      {"doc": "Air Waybill (AWB)", "required_for": "All air shipments", "key_checks": ["Shipper/consignee details", "Cargo description matches shipping paper", "Special handling codes", "Temperature instructions for pharma"]},
+      {"doc": "Shipper's Declaration for Dangerous Goods", "required_for": "DG air shipments", "key_checks": ["Basic description sequence", "Packing group", "Quantity per package", "Passenger/cargo aircraft statement", "Shipper certification"]},
+      {"doc": "Commercial Invoice", "required_for": "All shipments", "key_checks": ["Product description consistency with shipping paper", "Quantity/weight consistency"]},
+      {"doc": "Packing List", "required_for": "All shipments", "key_checks": ["Package count matches shipping paper", "Contents consistent with declared commodity"]},
+      {"doc": "UN1845 Dry Ice Declaration", "required_for": "Shipments with dry ice", "key_checks": ["UN1845 present", "Net weight of dry ice declared", "Packaging marking"]},
+      {"doc": "GDP Temperature-Handling Instructions", "required_for": "Temperature-sensitive pharma", "key_checks": ["Temperature range specified", "Handling instructions present"]},
+      {"doc": "Temperature Monitoring Records", "required_for": "Temperature-sensitive pharma (when provided)", "key_checks": ["Continuous record", "No excursions or excursions documented"]},
+      {"doc": "Chain-of-Custody Document", "required_for": "Pharmaceutical shipments (Nexus Aurea SOP)", "key_checks": ["Signature chain complete", "Dates/times consistent", "No unaccounted gaps"]},
+      {"doc": "Certificate of Analysis / Conformance", "required_for": "When provided by shipper", "key_checks": ["Product name, lot number, quantity match shipping paper", "Issued by authorized party"]}
+    ]
+  },
+
+  "finding_status_definitions": {
+    "Pass": "Document element is present, correct, and consistent with the cited regulation.",
+    "Fail": "Document element is missing, incorrect, or inconsistent with the cited regulation. Requires immediate flagging for human review.",
+    "Warning": "Document element is present but contains an anomaly or ambiguity that requires human verification before release.",
+    "Unable_to_Verify": "The required document or data element was not provided or is not legible. Cannot confirm compliance or non-compliance.",
+    "Not_Applicable": "The rule or check does not apply to this shipment type, mode, or material."
+  }
+}

@@ -1,6 +1,8 @@
 # Audit Findings — 49 CFR Compliance Reference Library v1.0
 
 **Document under review:** `dgr/02-49cfr/nexus-aurea-cfr-library-v1.0.md` (v1.0, built 2026-09-09)
+**Companion report:** `cfr-library-json-vs-md-delta.md` — the JSON artifact is not a
+serialization of this Markdown; the two diverge, including in their standing rules.
 **Review date:** 2026-09-09
 **Status of this report:** DRAFT — human review required before any action is taken.
 **Disposition of v1.0:** NOT RELEASED FOR AUDIT USE pending remediation of F-01 through F-08.
@@ -39,8 +41,8 @@ self-contradiction) and require no external source.
 | F-10 | §172.200 exception list omits the hazardous waste / hazardous substance carve-out | ❓ Unable to Verify | High |
 | F-11 | §173.27 (general air packaging requirements) absent | ❌ Fail | High |
 | F-12 | OECD 439 listed as an accepted corrosivity test method | ❓ Unable to Verify | High |
-| F-13 | Internal citation conflict: §172.202(a)(6) vs (a)(7) | ❌ Fail | High |
-| F-14 | "ERG number" used for the emergency response telephone number | ❌ Fail | Medium |
+| F-13 | §172.202 quantity/package paragraph assignments unconfirmed | ❓ Unable to Verify | High |
+| F-14 | "ERG number" used for the emergency response telephone number | ❌ Fail (Markdown only) | Medium |
 | F-15 | Hazardous waste: EPA code cited to HMR; mandatory "Waste" prefix never checked | ❓ Unable to Verify | Medium |
 | F-16 | Class 6.2 (UN3373) and Class 2.2 cryogenic absent from a pharma library | ❌ Fail | Medium |
 | F-17 | No document control block — uncontrolled document generating audit findings | ❌ Fail | Medium |
@@ -255,18 +257,22 @@ Confirm the exact list in §173.137.
 The PG I/II/III exposure-time and observation-period criteria at lines 178–182 appear
 consistent with the reviewer's understanding of §173.137 and are not challenged.
 
-### F-13 — Internal citation conflict within §172.202
-**Status:** ❌ Fail | **Location:** Lines 109 and 260
+### F-13 — §172.202 quantity and package paragraph assignments unconfirmed
+**Status:** ❓ Unable to Verify — **downgraded from ❌ Fail, see correction below** | **Location:** Lines 109 and 260
 
 Line 109 cites **§172.202(a)(7)** for number and type of packages.
 Line 260 cites **§172.202(a)(6)** for net mass per package on air shipments.
 Line 101 describes total quantity as a separate element with no paragraph cited.
 
-These three cannot all be correct as assigned. The document contradicts itself on the
-paragraph structure of its most-used section. Reconcile all three against §172.202(a).
+**Correction (2026-09-09):** this finding originally stated that the three assignments "cannot
+all be correct." That was overstated — three distinct paragraphs can each be correct, and the
+JSON artifact assigns them cleanly as (a)(5) ground, (a)(6) air, (a)(7) packages. There is no
+internal contradiction. What remains is an unverified three-way claim: the reviewer's residual
+concern is that §172.202(a)(5) may carry total quantity for all modes with no separate air
+paragraph at (a)(6). Confirm against §172.202(a). See `cfr-library-json-vs-md-delta.md`.
 
 ### F-14 — "ERG number" used for the emergency response telephone number
-**Status:** ❌ Fail | **Location:** Line 61
+**Status:** ❌ Fail — **Markdown only; resolved in the JSON artifact** | **Location:** Line 61
 
 ERG is the Emergency Response Guidebook. The requirement is an **emergency response telephone
 number**, subject to monitoring requirements in Subpart G (§172.604) — the number must be
@@ -275,7 +281,9 @@ material or with immediate access to someone who is. v1.0 checks only that a num
 "present."
 
 Conflating a guidebook with a monitored 24-hour contact number in a safety-critical checklist
-is a terminology defect that will propagate into findings. Related: §172.602 emergency
+is a terminology defect that will propagate into findings. The JSON artifact names this
+correctly and cites §172.201(d); the finding is closed against the JSON and open against the
+Markdown. Neither artifact cites §172.604, so the monitoring criteria stay unchecked in both. Related: §172.602 emergency
 response **information** accompanying the shipping paper is not checked at all (see F-06).
 
 ### F-15 — Hazardous waste: EPA code cited to the HMR; the "Waste" prefix is never checked

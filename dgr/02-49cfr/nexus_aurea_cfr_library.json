@@ -1,32 +1,72 @@
 {
   "library_meta": {
     "name": "Nexus Aurea Inc. — 49 CFR Compliance Reference Library",
-    "version": "1.0",
+    "version": "1.0.1",
     "built": "2026-09-09",
+    "last_updated": "2026-09-09",
+    "schema_version": "1.0",
+    "source_of_record": "This JSON file is the source of record. The Markdown rendering (nexus-aurea-cfr-library.md) is GENERATED from this file by tools/build_library.py and must never be edited by hand. Run `python3 tools/build_library.py --check` to detect drift.",
+    "release_status": "NOT RELEASED FOR AUDIT USE. v1.0.1 is a DOCUMENT-CONTROL release: it corrects how this library is versioned, sourced, cited and flagged. It adds NO regulatory coverage. The coverage gaps listed under open_findings remain open and block release.",
+    "cfr_verification_status": "NOT VERIFIED. No citation in this library has been checked against primary source. ecfr.gov, govinfo.gov and law.cornell.edu were unreachable from the build environment (blocked by network egress policy) when v1.0 and v1.0.1 were produced. Do not represent any citation herein as current. A primary-source pass is required before release.",
     "source_authority": "49 CFR — Title 49, Code of Federal Regulations, Pipeline and Hazardous Materials Safety Administration (PHMSA), U.S. Department of Transportation",
     "source_url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C",
-    "scope": "U.S. domestic hazardous materials transport — DG Classes 3, 8, 9 and pharmaceutical/temperature-sensitive shipments",
-    "audit_classes_active": ["Class 3", "Class 8", "Class 9", "Pharma/Temperature-Sensitive"],
-    "audit_classes_reference_only": ["Class 1", "Class 2", "Class 4", "Class 5", "Class 6", "Class 7"],
+    "scope": "Documentation review for U.S. domestic hazardous materials transport under 49 CFR — DG Classes 3, 8, 9 and pharmaceutical/temperature-sensitive shipments. INTERNATIONAL AIR IS OUT OF SCOPE for this module: it is governed by the IATA DGR 67th Edition, which is not yet integrated (see pending_sources). Findings on international air consignments must not be issued from this library alone.",
+    "audit_classes_active": [
+      "Class 3",
+      "Class 8",
+      "Class 9",
+      "Pharma/Temperature-Sensitive"
+    ],
+    "audit_classes_reference_only": [
+      "Class 1",
+      "Class 2",
+      "Class 4",
+      "Class 5",
+      "Class 6",
+      "Class 7"
+    ],
     "standing_rules": [
       "All findings are DRAFT. Human review required before any action is taken.",
       "Never issue 'clearance', 'approved', or 'safe to ship' conclusions.",
-      "Mark each finding: Pass / Fail / Warning / Unable to Verify.",
+      "Mark each finding: Pass / Fail / Warning / Unable to Verify / Not Applicable.",
       "Cite the specific regulatory section for every finding.",
       "Never invent a missing regulation, shipping name, weight, or approval.",
-      "Findings must identify discrepancies and missing data only."
+      "Findings must identify discrepancies and missing data only.",
+      "Never state or imply that a citation in this library has been verified against primary source while cfr_verification_status reads NOT VERIFIED.",
+      "A check whose source is marked PENDING is not an active check. It returns Unable to Verify and must not be scored Pass or Fail."
     ],
+    "document_control": {
+      "document_number": "NA-DGR-REF-49CFR-001",
+      "author": "Abacus (v1.0 content build)",
+      "technical_reviewer": "Claude Code — structural and citation audit, PR #8 (see change history)",
+      "approver": "UNASSIGNED — requires named human approver before release",
+      "effective_date": "NOT EFFECTIVE — document not released",
+      "review_cycle": "Every CFR annual edition, and on each IATA DGR edition change",
+      "change_history": [
+        {
+          "version": "1.0",
+          "date": "2026-09-09",
+          "change": "Initial build. 49 CFR Parts 171, 172 Subpart C, 173 (Classes 3/8/9), 175; pharma section; document audit scope.",
+          "by": "Abacus"
+        },
+        {
+          "version": "1.0.1",
+          "date": "2026-09-09",
+          "change": "Document-control release. JSON designated source of record with generated Markdown; standing rules reconciled with the status vocabulary; false and stale citation-currency claims removed; unsourced cargo dry ice citations withdrawn and held pending; PH-005 moved to pending; open findings register embedded; missing-section stubs added. No regulatory coverage added.",
+          "by": "Claude Code"
+        }
+      ]
+    },
     "pending_sources": [
       "IATA DGR 67th Edition (2026) — user has licensed copy; to be added",
       "IMDG Code — user will provide this week",
       "IATA DGR 66th Edition — user will provide this week",
       "ICAO Technical Instructions — under consideration",
       "WHO Guidelines — under consideration (pharma)"
-    ]
+    ],
+    "footer": "This library is a working reference only. All findings produced using it are DRAFT and require human review. NOT RELEASED FOR AUDIT USE — see release_status and open_findings. No citation herein has been verified against primary source."
   },
-
   "parts": {
-
     "part_171": {
       "title": "49 CFR Part 171 — General Information, Regulations, and Definitions",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-171",
@@ -61,7 +101,6 @@
         ]
       }
     },
-
     "part_172_subpart_c": {
       "title": "49 CFR Part 172, Subpart C — Shipping Papers",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-172/subpart-C",
@@ -182,7 +221,12 @@
               "element": "Packing Group",
               "source": "§172.101 Table, Column 5",
               "format": "Roman numerals: PG I, PG II, or PG III (may be preceded by 'PG')",
-              "exceptions": ["Class 1 explosives", "Self-reactive substances", "Division 5.2", "Entries with no assigned packing group"],
+              "exceptions": [
+                "Class 1 explosives",
+                "Self-reactive substances",
+                "Division 5.2",
+                "Entries with no assigned packing group"
+              ],
               "audit_check": {
                 "question": "Is the packing group present in Roman numerals and correct for this material?",
                 "pass": "Packing group is present in Roman numerals and matches §172.101 Table.",
@@ -216,13 +260,14 @@
           "sequence_check": {
             "rule": "Basic description must appear in order: UN/NA Number → PSN → Hazard Class → Packing Group. No information may be inserted between these four elements.",
             "example_correct": "UN2744, Cyclobutyl chloroformate, 6.1, (8, 3), PG II",
-            "example_incorrect": "Cyclobutyl chloroformate, UN2744, Corrosive, PG II",
+            "example_incorrect": "Cyclobutyl chloroformate, UN2744, 6.1, (8, 3), PG II",
             "audit_check": {
               "question": "Is the basic description in the correct required sequence?",
               "pass": "UN number, PSN, hazard class, PG appear in correct order with no interspersed data.",
               "fail": "Elements are out of sequence or information is inserted between required elements.",
               "warning": "Sequence appears correct but technical name placement needs verification."
-            }
+            },
+            "example_note": "The incorrect example varies SEQUENCE only — the UN number and the proper shipping name are transposed. Hazard class and packing group are unchanged so the teaching point is unambiguous."
           }
         },
         {
@@ -319,14 +364,42 @@
             "warning": "Certification present but signature, date, or company name is missing."
           }
         }
-      ]
+      ],
+      "missing_sections": {
+        "note": "Part 172 coverage stops at Subpart C. The subparts below are NOT integrated. Note that §172.204 certifies the consignment is \"marked and labeled/placarded\" — this library cannot currently audit any of that.",
+        "sections": [
+          {
+            "section": "Subpart D (§172.301 et seq.)",
+            "covers": "Marking — UN number and PSN on package, orientation arrows",
+            "finding": "F-06"
+          },
+          {
+            "section": "Subpart E (§172.400 et seq.)",
+            "covers": "Labeling — Class 9 label, subsidiary labels, CARGO AIRCRAFT ONLY",
+            "finding": "F-06"
+          },
+          {
+            "section": "Subpart F (§172.500 et seq.)",
+            "covers": "Placarding — road leg to the gateway",
+            "finding": "F-06"
+          },
+          {
+            "section": "Subpart G (§172.600–606)",
+            "covers": "Emergency response information and telephone number monitoring",
+            "finding": "F-06"
+          },
+          {
+            "section": "Subpart H (§172.700–704)",
+            "covers": "HazMat employee training, recurrent every three years, records",
+            "finding": "F-06"
+          }
+        ]
+      }
     },
-
     "part_173_class_3": {
       "title": "49 CFR Part 173 — Class 3: Flammable Liquids",
       "section": "§173.120",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.120",
-      "effective_date": "Amended 76 FR 3371, Jan. 19, 2011 (most recent amendment cited)",
       "definition": {
         "class_3_flammable_liquid": "A liquid having a flash point of not more than 60°C (140°F), OR any material in liquid phase with a flash point at or above 37.8°C (100°F) that is intentionally heated and offered for transport at or above its flash point in a bulk packaging.",
         "flash_point_definition": "The minimum temperature at which a liquid gives off vapor in sufficient concentration to form an ignitable mixture with air near the surface of the liquid.",
@@ -342,10 +415,23 @@
       "packing_groups": {
         "source": "§172.101 Table, Column 5",
         "groups": [
-          {"group": "PG I", "flash_point": "Below -18°C (0°F)", "initial_boiling_point": "≤35°C (95°F)"},
-          {"group": "PG II", "flash_point": "Below 23°C (73°F)", "initial_boiling_point": ">35°C (95°F)"},
-          {"group": "PG III", "flash_point": "23°C-60°C (73°F-140°F)", "initial_boiling_point": ">35°C (95°F)"}
-        ]
+          {
+            "group": "PG I",
+            "flash_point": "Below -18°C (0°F)",
+            "initial_boiling_point": "≤35°C (95°F)"
+          },
+          {
+            "group": "PG II",
+            "flash_point": "Below 23°C (73°F)",
+            "initial_boiling_point": ">35°C (95°F)"
+          },
+          {
+            "group": "PG III",
+            "flash_point": "23°C-60°C (73°F-140°F)",
+            "initial_boiling_point": ">35°C (95°F)"
+          }
+        ],
+        "warning": "UNVERIFIED AND DISPUTED. The packing group criteria for Class 3 are assigned by §173.121, which this library does not yet contain (finding F-09); the source below points at the Hazardous Materials Table, which lists assignments rather than criteria. The PG I flash point threshold shown is disputed — reviewer understanding is that §173.121 assigns PG I on initial boiling point alone. Do not score C3-002 from this table until §173.121 is integrated."
       },
       "audit_checklist": [
         {
@@ -403,14 +489,23 @@
           "note": "Reclassification as combustible liquid does not apply to vessel or aircraft transport.",
           "source": "49 CFR §173.120(b)(2)"
         }
-      ]
+      ],
+      "citation_verification": "UNVERIFIED — not checked against eCFR. The v1.0 build carried a Federal Register amendment date here; it was removed because it was unverified and, for §173.140, implausible (asserted unamended since 1993). No currency date will be recorded until a primary-source pass is run.",
+      "missing_sections": {
+        "note": "Required section NOT integrated.",
+        "sections": [
+          {
+            "section": "§173.121",
+            "covers": "Class 3 — assignment of packing group (the criteria, not the assignments)",
+            "finding": "F-09"
+          }
+        ]
+      }
     },
-
     "part_173_class_8": {
       "title": "49 CFR Part 173 — Class 8: Corrosive Materials",
       "section": "§173.136",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.136",
-      "effective_date": "Amended 85 FR 27880, May 11, 2020",
       "definition": "A liquid or solid that causes irreversible damage to human skin at the site of contact within a specified period of time. Also includes liquids or solids that have a severe corrosion rate on steel or aluminum exceeding 6.25 mm/year at 55°C.",
       "packing_group_criteria": {
         "source": "49 CFR §173.137",
@@ -433,8 +528,7 @@
         "OECD Guideline Test No. 404 — Acute Dermal Irritation/Corrosion",
         "OECD Guideline Test No. 430 — In Vitro Skin Corrosion (TER)",
         "OECD Guideline Test No. 431 — In Vitro Skin Corrosion (RHE)",
-        "OECD Guideline Test No. 435 — In Vitro Membrane Barrier Test",
-        "OECD Guideline Test No. 439 — In Vitro Skin Irritation (RHE)"
+        "OECD Guideline Test No. 435 — In Vitro Membrane Barrier Test"
       ],
       "audit_checklist": [
         {
@@ -481,14 +575,19 @@
           "not_applicable": "No legacy data referenced.",
           "source": "49 CFR §173.136(c)"
         }
-      ]
+      ],
+      "citation_verification": "UNVERIFIED — not checked against eCFR. The v1.0 build carried a Federal Register amendment date here; it was removed because it was unverified and, for §173.140, implausible (asserted unamended since 1993). No currency date will be recorded until a primary-source pass is run.",
+      "test_methods_under_review": {
+        "note": "OECD TG 439 is an in vitro skin IRRITATION method and does not determine corrosivity, so it cannot support a Class 8 packing group assignment. It was listed under accepted methods in v1.0. It is moved here rather than deleted because finding F-12 is Unable to Verify: the accepted list in §173.137 has not been checked against primary source. Do not accept a TG 439 study as classification evidence.",
+        "methods": [
+          "OECD Guideline Test No. 439 — In Vitro Skin Irritation (RHE) — NOT a corrosivity method"
+        ]
+      }
     },
-
     "part_173_class_9": {
       "title": "49 CFR Part 173 — Class 9: Miscellaneous Hazardous Materials",
       "section": "§173.140",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-173/section-173.140",
-      "effective_date": "Amended 58 FR 33305, June 16, 1993",
       "definition": "A material which presents a hazard during transport but does not meet the definition of any other hazard class.",
       "class_9_includes": [
         {
@@ -518,12 +617,42 @@
         }
       ],
       "common_class_9_materials": [
-        {"name": "Dry Ice (Carbon Dioxide, Solid)", "un_number": "UN1845", "packing_group": "Not assigned", "note": "Common in pharma cold-chain shipments."},
-        {"name": "Lithium ion batteries", "un_number": "UN3480 / UN3481", "packing_group": "Not assigned", "note": "Transported with or without equipment."},
-        {"name": "Environmentally hazardous substances, liquid", "un_number": "UN3082", "packing_group": "PG III", "note": "Marine pollutant designation common."},
-        {"name": "Environmentally hazardous substances, solid", "un_number": "UN3077", "packing_group": "PG III", "note": "Marine pollutant designation common."},
-        {"name": "Elevated temperature liquid, n.o.s.", "un_number": "UN3257", "packing_group": "PG III", "note": "Liquid at or above 100°C."},
-        {"name": "Elevated temperature solid, n.o.s.", "un_number": "UN3258", "packing_group": "PG III", "note": "Solid at or above 240°C."}
+        {
+          "name": "Dry Ice (Carbon Dioxide, Solid)",
+          "un_number": "UN1845",
+          "packing_group": "Not assigned",
+          "note": "Common in pharma cold-chain shipments."
+        },
+        {
+          "name": "Lithium ion batteries",
+          "un_number": "UN3480 / UN3481",
+          "packing_group": "Not assigned",
+          "note": "Transported with or without equipment."
+        },
+        {
+          "name": "Environmentally hazardous substances, liquid",
+          "un_number": "UN3082",
+          "packing_group": "PG III",
+          "note": "Marine pollutant designation common."
+        },
+        {
+          "name": "Environmentally hazardous substances, solid",
+          "un_number": "UN3077",
+          "packing_group": "PG III",
+          "note": "Marine pollutant designation common."
+        },
+        {
+          "name": "Elevated temperature liquid, n.o.s.",
+          "un_number": "UN3257",
+          "packing_group": "PG III",
+          "note": "Liquid at or above 100°C."
+        },
+        {
+          "name": "Elevated temperature solid, n.o.s.",
+          "un_number": "UN3258",
+          "packing_group": "PG III",
+          "note": "Solid at or above 240°C."
+        }
       ],
       "audit_checklist": [
         {
@@ -543,7 +672,9 @@
           "fail": "UN1845 missing, net weight not declared, or packaging not marked.",
           "warning": "Dry ice present in pharma shipment but UN1845 declaration not found — check if RQ threshold applies.",
           "not_applicable": "No dry ice in this shipment.",
-          "source": "49 CFR §173.140(b), §175.10(a)(10)"
+          "source": "PENDING — see source_note",
+          "source_note": "PENDING — no verified authority. §175.10 was withdrawn from this check in v1.0.1: it is the passenger, crewmember and air operator exceptions section and is not authority for a commercial cargo consignment. The correct authority is §173.217 (Carbon dioxide, solid) plus §172.202/§172.203 for the shipping paper description, and IATA DGR PI 954 for air. §173.217 is not yet integrated (finding F-02). Until it is, this check returns Unable to Verify.",
+          "unable_to_verify": "Default outcome while source is PENDING. Do not score this check Pass or Fail."
         },
         {
           "check_id": "C9-003",
@@ -572,9 +703,24 @@
           "not_applicable": "Material is not a hazardous waste.",
           "source": "49 CFR §172.203(c)(1), §173.140(b)"
         }
-      ]
+      ],
+      "citation_verification": "UNVERIFIED — not checked against eCFR. The v1.0 build carried a Federal Register amendment date here; it was removed because it was unverified and, for §173.140, implausible (asserted unamended since 1993). No currency date will be recorded until a primary-source pass is run.",
+      "missing_sections": {
+        "note": "These sections are required for the material types this library already names as in scope. They are NOT integrated. Any check that would depend on them returns Unable to Verify.",
+        "sections": [
+          {
+            "section": "§173.217",
+            "covers": "Carbon dioxide, solid (dry ice) — packaging, venting, marking, quantity",
+            "finding": "F-02"
+          },
+          {
+            "section": "§173.185",
+            "covers": "Lithium cells and batteries — UN3480/UN3481, state of charge, Section IA/IB/II",
+            "finding": "F-03"
+          }
+        ]
+      }
     },
-
     "pharma_temperature_sensitive": {
       "title": "49 CFR — Pharmaceutical / Temperature-Sensitive Shipments",
       "note": "No single 49 CFR section governs all pharma shipments. Compliance draws from multiple sections. IATA DGR 67th Edition (and GDP guidelines) govern air transport of temperature-sensitive pharmaceuticals. This section captures the 49 CFR elements relevant to pharma documentation review.",
@@ -582,7 +728,7 @@
         "§173.140 (Class 9 — dry ice, elevated temperature)",
         "§172.202 (shipping paper basic description)",
         "§172.203 (additional description — RQ, elevated temp, marine pollutant)",
-        "§175.10 (air transport exceptions — dry ice passenger limits)"
+        "§173.217 (Carbon dioxide, solid — dry ice packaging) — REQUIRED, NOT YET INTEGRATED (F-02)"
       ],
       "audit_checklist": [
         {
@@ -592,7 +738,9 @@
           "pass": "UN1845 declared; net weight of dry ice stated; packaging marked 'DRY ICE' or 'CARBON DIOXIDE, SOLID'.",
           "fail": "Dry ice confirmed in shipment but UN1845 declaration is absent from all documents.",
           "warning": "Dry ice mentioned on commercial invoice or packing list but not declared on the shipping paper.",
-          "source": "49 CFR §173.140, §175.10(a)(10)"
+          "source": "PENDING — see source_note",
+          "source_note": "PENDING — no verified authority. §175.10 was withdrawn from this check in v1.0.1: it is the passenger, crewmember and air operator exceptions section and is not authority for a commercial cargo consignment. The correct authority is §173.217 (Carbon dioxide, solid) plus §172.202/§172.203 for the shipping paper description, and IATA DGR PI 954 for air. §173.217 is not yet integrated (finding F-02). Until it is, this check returns Unable to Verify.",
+          "unable_to_verify": "Default outcome while source is PENDING. Do not score this check Pass or Fail."
         },
         {
           "check_id": "PH-002",
@@ -623,20 +771,39 @@
           "warning": "Certificate present but lot number or quantity not clearly legible.",
           "not_applicable": "No certificate provided or required for this shipment.",
           "source": "Nexus Aurea audit scope — document cross-check"
-        },
-        {
-          "check_id": "PH-005",
-          "check": "Air waybill temperature notation",
-          "question": "For air transport of temperature-sensitive pharma, does the air waybill include special handling instructions (e.g., 'KEEP FROZEN', 'KEEP REFRIGERATED', temperature range)?",
-          "pass": "Air waybill contains appropriate temperature handling instructions.",
-          "fail": "Temperature-sensitive pharma on air waybill with no handling instructions.",
-          "warning": "Handling instructions present but temperature range not specified.",
-          "not_applicable": "Not an air shipment.",
-          "source": "IATA DGR 67th Edition — to be added when source is integrated."
         }
-      ]
+      ],
+      "missing_sections": {
+        "note": "Required coverage NOT integrated. Until these are added this section cannot detect a wrong temperature, an undeclared battery, or a cross-document weight mismatch — only whether a field is blank.",
+        "sections": [
+          {
+            "section": "Temperature reference values",
+            "covers": "2–8 °C, −20 °C, −70/−80 °C, CRT 15–25 °C, dry ice −78.5 °C, excursion and MKT definitions",
+            "finding": "F-04"
+          },
+          {
+            "section": "Cross-document reconciliation",
+            "covers": "Dry ice net weight identical across AWB, DGD, package marking and packing list; mandatory unit of measure (kg)",
+            "finding": "F-05"
+          },
+          {
+            "section": "Pharma authorities",
+            "covers": "EU GDP 2013/C 343/01, WHO TRS 961 Annex 9, USP <1079>, 21 CFR 205.50 — to replace \"GDP guidelines\" and \"Nexus Aurea audit scope\"",
+            "finding": "F-08"
+          },
+          {
+            "section": "§173.199",
+            "covers": "Division 6.2 Category B infectious substances (UN3373) — relied on as an exception, never covered",
+            "finding": "F-16"
+          },
+          {
+            "section": "§173.320",
+            "covers": "Class 2.2 cryogenic liquids — liquid nitrogen dry shippers",
+            "finding": "F-16"
+          }
+        ]
+      }
     },
-
     "part_175_air_transport": {
       "title": "49 CFR Part 175 — Carriage by Aircraft",
       "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-I/subchapter-C/part-175",
@@ -655,7 +822,8 @@
               "fail": "Quantity exceeds 2.5 kg limit or packaging not correctly marked.",
               "not_applicable": "Dry ice is not passenger-carried in this shipment."
             }
-          }
+          },
+          "scope_warning": "This section governs PASSENGER and crewmember baggage only. It is NOT authority for commercial cargo consignments. Do not cite it on a cargo finding."
         }
       ],
       "air_transport_shipping_paper_requirements": {
@@ -679,30 +847,312 @@
           "fail": "Air shipping paper shows only total shipment quantity, not per-package quantity.",
           "warning": "Quantity present but unclear whether it is per-package or total."
         }
+      },
+      "missing_sections": {
+        "note": "Part 175 coverage is limited to §175.10, which is a passenger exception. The core air carrier sections below are NOT integrated.",
+        "sections": [
+          {
+            "section": "§175.30",
+            "covers": "Acceptance requirements — carrier acceptance check",
+            "finding": "F-07"
+          },
+          {
+            "section": "§175.33",
+            "covers": "Notification to pilot-in-command (NOTOC) — dry ice must appear on it",
+            "finding": "F-07"
+          },
+          {
+            "section": "§175.75",
+            "covers": "Quantity limitations and cargo location — dry ice loading limits",
+            "finding": "F-07"
+          },
+          {
+            "section": "§173.27",
+            "covers": "General requirements for transportation by aircraft — pressure differential, closures",
+            "finding": "F-11"
+          }
+        ]
       }
     }
   },
-
   "document_audit_scope": {
     "title": "Standard Documents to Check per Shipment",
     "documents": [
-      {"doc": "Air Waybill (AWB)", "required_for": "All air shipments", "key_checks": ["Shipper/consignee details", "Cargo description matches shipping paper", "Special handling codes", "Temperature instructions for pharma"]},
-      {"doc": "Shipper's Declaration for Dangerous Goods", "required_for": "DG air shipments", "key_checks": ["Basic description sequence", "Packing group", "Quantity per package", "Passenger/cargo aircraft statement", "Shipper certification"]},
-      {"doc": "Commercial Invoice", "required_for": "All shipments", "key_checks": ["Product description consistency with shipping paper", "Quantity/weight consistency"]},
-      {"doc": "Packing List", "required_for": "All shipments", "key_checks": ["Package count matches shipping paper", "Contents consistent with declared commodity"]},
-      {"doc": "UN1845 Dry Ice Declaration", "required_for": "Shipments with dry ice", "key_checks": ["UN1845 present", "Net weight of dry ice declared", "Packaging marking"]},
-      {"doc": "GDP Temperature-Handling Instructions", "required_for": "Temperature-sensitive pharma", "key_checks": ["Temperature range specified", "Handling instructions present"]},
-      {"doc": "Temperature Monitoring Records", "required_for": "Temperature-sensitive pharma (when provided)", "key_checks": ["Continuous record", "No excursions or excursions documented"]},
-      {"doc": "Chain-of-Custody Document", "required_for": "Pharmaceutical shipments (Nexus Aurea SOP)", "key_checks": ["Signature chain complete", "Dates/times consistent", "No unaccounted gaps"]},
-      {"doc": "Certificate of Analysis / Conformance", "required_for": "When provided by shipper", "key_checks": ["Product name, lot number, quantity match shipping paper", "Issued by authorized party"]}
+      {
+        "doc": "Air Waybill (AWB)",
+        "required_for": "All air shipments",
+        "key_checks": [
+          "Shipper/consignee details",
+          "Cargo description matches shipping paper",
+          "Special handling codes",
+          "Temperature instructions for pharma"
+        ]
+      },
+      {
+        "doc": "Shipper's Declaration for Dangerous Goods",
+        "required_for": "DG air shipments",
+        "key_checks": [
+          "Basic description sequence",
+          "Packing group",
+          "Quantity per package",
+          "Passenger/cargo aircraft statement",
+          "Shipper certification"
+        ]
+      },
+      {
+        "doc": "Commercial Invoice",
+        "required_for": "All shipments",
+        "key_checks": [
+          "Product description consistency with shipping paper",
+          "Quantity/weight consistency"
+        ]
+      },
+      {
+        "doc": "Packing List",
+        "required_for": "All shipments",
+        "key_checks": [
+          "Package count matches shipping paper",
+          "Contents consistent with declared commodity"
+        ]
+      },
+      {
+        "doc": "UN1845 Dry Ice Declaration",
+        "required_for": "Shipments with dry ice",
+        "key_checks": [
+          "UN1845 present",
+          "Net weight of dry ice declared",
+          "Packaging marking"
+        ]
+      },
+      {
+        "doc": "GDP Temperature-Handling Instructions",
+        "required_for": "Temperature-sensitive pharma",
+        "key_checks": [
+          "Temperature range specified",
+          "Handling instructions present"
+        ]
+      },
+      {
+        "doc": "Temperature Monitoring Records",
+        "required_for": "Temperature-sensitive pharma (when provided)",
+        "key_checks": [
+          "Continuous record",
+          "No excursions or excursions documented"
+        ]
+      },
+      {
+        "doc": "Chain-of-Custody Document",
+        "required_for": "Pharmaceutical shipments (Nexus Aurea SOP)",
+        "key_checks": [
+          "Signature chain complete",
+          "Dates/times consistent",
+          "No unaccounted gaps"
+        ]
+      },
+      {
+        "doc": "Certificate of Analysis / Conformance",
+        "required_for": "When provided by shipper",
+        "key_checks": [
+          "Product name, lot number, quantity match shipping paper",
+          "Issued by authorized party"
+        ]
+      }
     ]
   },
-
   "finding_status_definitions": {
     "Pass": "Document element is present, correct, and consistent with the cited regulation.",
     "Fail": "Document element is missing, incorrect, or inconsistent with the cited regulation. Requires immediate flagging for human review.",
     "Warning": "Document element is present but contains an anomaly or ambiguity that requires human verification before release.",
     "Unable_to_Verify": "The required document or data element was not provided or is not legible. Cannot confirm compliance or non-compliance.",
     "Not_Applicable": "The rule or check does not apply to this shipment type, mode, or material."
+  },
+  "pending_checks": [
+    {
+      "check_id": "PH-005",
+      "check": "Air waybill temperature notation",
+      "question": "For air transport of temperature-sensitive pharma, does the air waybill include special handling instructions (e.g., 'KEEP FROZEN', 'KEEP REFRIGERATED', temperature range)?",
+      "blocked_on": "IATA DGR 67th Edition — listed under pending_sources, not yet integrated. A check whose authority is not in the library can only return Unable to Verify."
+    }
+  ],
+  "open_findings": {
+    "preamble": "This register is embedded in the library so its limits are visible at the point of use, not only in a separate report. Eight Critical findings block release. Nothing in this register has been closed by verifying a citation against primary source — the closures below are structural and document-control fixes only.",
+    "detail_reports": "audit-findings/cfr-library-v1.0-audit-findings.md and audit-findings/cfr-library-json-vs-md-delta.md",
+    "findings": [
+      {
+        "id": "F-01",
+        "finding": "§175.10 mis-cited as authority for cargo dry ice declarations",
+        "status": "Withdrawn in v1.0.1; check held PENDING",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-02",
+        "finding": "§173.217 (dry ice packaging) absent from the library",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-03",
+        "finding": "Lithium batteries (UN3480/3481) listed in scope, zero audit checks",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-04",
+        "finding": "No temperature values anywhere — cannot detect a wrong temperature",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-05",
+        "finding": "Dry ice checks are presence-only; no cross-document reconciliation",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-06",
+        "finding": "Part 172 Subparts D/E/F/G/H absent",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-07",
+        "finding": "Part 175 omits §175.33 NOTOC, §175.30, §175.75",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-08",
+        "finding": "Four of five pharma checks carry no citable authority",
+        "status": "Open",
+        "risk": "Critical",
+        "blocks_release": true
+      },
+      {
+        "id": "F-09",
+        "finding": "Class 3 PG I flash point criterion disputed; §173.121 absent",
+        "status": "Open — table flagged in v1.0.1",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "F-10",
+        "finding": "§172.200 exceptions omit the waste / hazardous substance carve-out",
+        "status": "Open — needs primary source",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "F-11",
+        "finding": "§173.27 (air packaging requirements) absent",
+        "status": "Open",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "F-12",
+        "finding": "OECD TG 439 listed as accepted corrosivity method",
+        "status": "Moved to under-review in v1.0.1",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "F-13",
+        "finding": "§172.202 quantity/package paragraph assignments unconfirmed",
+        "status": "Open — needs primary source",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "F-14",
+        "finding": "\"ERG number\" used for emergency response telephone number",
+        "status": "CLOSED — JSON correct; Markdown now generated",
+        "risk": "Medium",
+        "blocks_release": false
+      },
+      {
+        "id": "F-15",
+        "finding": "EPA waste code cited to the HMR; \"Waste\" PSN prefix unchecked",
+        "status": "Open — needs primary source",
+        "risk": "Medium",
+        "blocks_release": false
+      },
+      {
+        "id": "F-16",
+        "finding": "Division 6.2 (UN3373) and Class 2.2 cryogenic absent",
+        "status": "Open",
+        "risk": "Medium",
+        "blocks_release": false
+      },
+      {
+        "id": "F-17",
+        "finding": "No document control block",
+        "status": "CLOSED in v1.0.1 — approver still UNASSIGNED",
+        "risk": "Medium",
+        "blocks_release": false
+      },
+      {
+        "id": "F-18",
+        "finding": "PH-005 active on a pending source",
+        "status": "CLOSED in v1.0.1 — moved to pending_checks",
+        "risk": "Medium",
+        "blocks_release": false
+      },
+      {
+        "id": "F-19",
+        "finding": "Definitional imprecision vs source wording",
+        "status": "Open — needs primary source",
+        "risk": "Low",
+        "blocks_release": false
+      },
+      {
+        "id": "F-20",
+        "finding": "Worked example varied two attributes",
+        "status": "CLOSED in v1.0.1",
+        "risk": "Low",
+        "blocks_release": false
+      },
+      {
+        "id": "J-01",
+        "finding": "JSON and Markdown diverged at the same version number",
+        "status": "CLOSED in v1.0.1 — Markdown generated from JSON",
+        "risk": "Critical",
+        "blocks_release": false
+      },
+      {
+        "id": "J-02",
+        "finding": "Standing rule 3 omitted \"Not Applicable\" used by 16 checks",
+        "status": "CLOSED in v1.0.1",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "J-03",
+        "finding": "Asserted amendment dates, one implausible",
+        "status": "CLOSED in v1.0.1 — replaced with an explicit unverified status",
+        "risk": "High",
+        "blocks_release": false
+      },
+      {
+        "id": "J-04",
+        "finding": "§175.10 correctly scoped in Part 175 yet cited for cargo",
+        "status": "CLOSED in v1.0.1",
+        "risk": "Critical",
+        "blocks_release": false
+      },
+      {
+        "id": "J-05",
+        "finding": "Declared scope excluded the firm's actual operations",
+        "status": "CLOSED in v1.0.1 — boundary stated explicitly",
+        "risk": "Medium",
+        "blocks_release": false
+      }
+    ]
   }
 }

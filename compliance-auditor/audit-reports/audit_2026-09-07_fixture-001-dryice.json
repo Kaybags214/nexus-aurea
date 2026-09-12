@@ -1,0 +1,37 @@
+{
+  "skill": "dry-ice-un1845",
+  "run": "2026-09-07T21:40:00Z",
+  "documents": ["AWB 020-4471 8823", "Packing list MB-2026-0912", "Invoice MB-INV-4471"],
+  "source": "audit-lab/test-fixtures/FIXTURE-001-awb-dryice.md (synthetic fixture)",
+  "references_read": [
+    "compliance-auditor/skill-contract.md",
+    "compliance-auditor/standards-of-precedence.md",
+    "compliance-auditor/audit-report-template.md",
+    "audit-lab/dry-ice-un1845/dry-ice-review-checklist.md",
+    ".claude/skills/dry-ice-un1845/checks/01-shipment-type.md",
+    ".claude/skills/dry-ice-un1845/checks/02-identity-and-weight.md",
+    ".claude/skills/dry-ice-un1845/checks/03-marking.md",
+    ".claude/skills/dry-ice-un1845/checks/04-awb-entry.md",
+    ".claude/skills/dry-ice-un1845/checks/05-cross-document.md"
+  ],
+  "precedence_levels_cited": [
+    "IATA DGR 67th ed.",
+    "IATA CEIV Pharma / TCR",
+    "standards-of-precedence.md section 2",
+    "standards-of-precedence.md section 4"
+  ],
+  "dgd_required": false,
+  "dgd_required_basis": "Dry ice is a pure refrigerant for non-dangerous contents; no UN number, class or PSN appears for the product itself in any document.",
+  "findings": { "critical": 5, "major": 4, "minor": 0 },
+  "unverified": [
+    "PI 954 quantity limit — no per-package kg figure, aircraft type undetermined, no DGR 67th ed. copy available to this run",
+    "All package marking, labelling and venting — submission is a transcription, not package photographs",
+    "Product classification — vialled biological cannot be ruled out from the document set; confirm with shipper",
+    "Exact required AWB entry format for class — cited as Major but not confirmed against a DGR copy"
+  ],
+  "referred_to_other_skills": [
+    "awb-review: check digit on 020-4471 8823; chargeable weight below gross weight; blank declared value for carriage",
+    "commercial-invoice-review: CIF on an air shipment with no named place"
+  ],
+  "verdict": "HOLD FOR CORRECTION"
+}

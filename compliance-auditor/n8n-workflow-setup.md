@@ -41,9 +41,37 @@ This mirrors your `market-watch/n8n-analysis-prompt.md` setup — same Anthropic
 
 6. **GitHub node** (`n8n-nodes-base.github`) — Create/Update file
    - Repo: `Kaybags214/nexus-aurea`
-   - Path: `compliance-auditor/audit-reports/audit_{{ $now.format('yyyy-MM-dd') }}_{{ $json.doc_type || 'doc' }}.md`
+   - Path: `compliance-auditor/audit-reports/audit_{{ $now.format('yyyy-MM-dd') }}_{{ $json.docSlug }}.md`
    - Content: the formatted audit.
-   - Commit message: `Compliance audit {{ $now.format('yyyy-MM-dd') }} — {{ $json.doc_type }}`.
+   - Commit message: `Compliance audit {{ $now.format('yyyy-MM-dd') }} — {{ $json.docSlug }}`.
+
+   **`docSlug`, not `doc_type`.** `doc_type` is written by whoever submits the form. Putting it
+   straight into a path lets a submitter choose where in the repository this node writes —
+   `../../.github/workflows/anything` is a valid string. Add a **Code** node before this one:
+
+   ```javascript
+   const raw = ($json.doc_type ?? '').toString();
+   const docSlug = raw.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+                      .replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 32) || 'doc';
+   return [{ json: { ...$json, docSlug } }];
+   ```
+
+   The same allowlist-not-escape rule as `n8n-headless-setup.md` §2. A slug cannot traverse.
+
+## What this path does not have
+
+This is the fallback, and it is thinner than the headless path in `n8n-headless-setup.md`:
+no repository access, so no skills, no `checks/` files and no sidecar log. Two consequences
+worth stating plainly:
+
+- **The submitter's text reaches the model directly.** `doc_type` and `notes` are pasted into
+  the user message. Someone can write instructions there rather than a document type, and this
+  path has no skill contract constraining what the model does with them. Treat any audit it
+  produces as needing a human read before it goes anywhere.
+- **Nothing enforces the sidecar**, because there is no script in the loop. Reports from this
+  path arrive without the audit trail the contract requires.
+
+Use it when the laptop is off. Do not use it for a client deliverable.
 
 ## Billing
 

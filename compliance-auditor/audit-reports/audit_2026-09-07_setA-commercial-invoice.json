@@ -1,0 +1,33 @@
+{
+  "skill": "commercial-invoice-review",
+  "run": "2026-09-07",
+  "reconstructed": true,
+  "reconstruction_note": "RECONSTRUCTED 2026-09-08, not written by the run. The original run produced the report without the sidecar skill-contract.md requires, and audit-document.sh did not catch it (it now exits 71). Every field below is derived from the report text itself, so it records what the report shows, NOT an observed log of what the run read. Treat references_read as 'cited in the report', not 'proven to have been opened'.",
+  "documents": [
+    "Commercial Invoice, handwritten, ship date 7/11/26",
+    "cross-referenced: Shipper's Declaration and AWB 771-221-2765 from the same set"
+  ],
+  "source": "operator practice document set (photographs); invented parties Apex Inc. / ABC Flyers",
+  "references_read": [
+    "compliance-auditor/standards-of-precedence.md",
+    ".claude/skills/commercial-invoice-review/checks/02-arithmetic.md",
+    ".claude/skills/commercial-invoice-review/checks/03-incoterms.md",
+    ".claude/skills/commercial-invoice-review/checks/04-hs-origin.md"
+  ],
+  "precedence_levels_cited": [
+    "standards-of-precedence.md section 3",
+    "standards-of-precedence.md section 4"
+  ],
+  "findings": {
+    "critical": 1,
+    "major": 8,
+    "minor": 2
+  },
+  "unverified": [
+    "Whether HS 2811.21 is correct for the goods as constituted — plausible and well-formed, but classification is the destination authority's determination and this skill does not assign codes",
+    "Line arithmetic and the subtotal — handwriting not legible with confidence",
+    "Whether an importer of record is required for this movement",
+    "Currency — USD presumable from a domestic US movement, but not declared"
+  ],
+  "verdict": "HOLD FOR CORRECTION"
+}

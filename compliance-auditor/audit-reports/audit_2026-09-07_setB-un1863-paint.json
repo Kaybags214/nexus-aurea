@@ -1,0 +1,54 @@
+{
+  "skill": "dgd-check",
+  "run": "2026-09-07T23:30:00Z",
+  "documents": [
+    "Shipper's Declaration, handwritten, page 1 of 1 — UN1863 declared",
+    "Air Waybill 123 4744 667x, handwritten"
+  ],
+  "source": "operator practice document set (photographs)",
+  "references_read": [
+    "compliance-auditor/skill-contract.md",
+    "compliance-auditor/standards-of-precedence.md",
+    "compliance-auditor/audit-report-template.md",
+    "dgr/05-checklists/dg-checklist-non-radioactive-reference.md",
+    ".claude/skills/dgd-check/checks/01-header.md",
+    ".claude/skills/dgd-check/checks/02-classification.md",
+    ".claude/skills/dgd-check/checks/03-aircraft.md",
+    ".claude/skills/dgd-check/checks/04-certification.md",
+    ".claude/skills/dgd-check/checks/05-form-condition.md",
+    ".claude/skills/dgd-check/checks/06-vs-awb.md"
+  ],
+  "precedence_levels_cited": [
+    "IATA DGR 67th ed.",
+    "standards-of-precedence.md section 4"
+  ],
+  "check_6_performed": true,
+  "check_6_note": "First submission with both a declaration and its matching AWB. Found the aircraft-limitation contradiction.",
+  "findings": {
+    "critical": 4,
+    "major": 4,
+    "minor": 2
+  },
+  "referred_to_other_skills": [
+    "awb-review: shipper signed in the issuing-carrier box while the shipper box is blank; gross weight blank; stray 'ALL CAPS' annotation in Nature and Quantity; executed-on date and place blank"
+  ],
+  "unverified": [
+    "UN1863 vs UN1263 for 'paint related material' — specific reason to doubt the pairing, not asserted, no DGR 67th ed. copy available",
+    "Packing instruction 364 for this UN number, aircraft type and quantity",
+    "Passenger-aircraft quantity limit for Class 3 PG II — C-1 no longer draws a conclusion from it",
+    "Final digit of the AWB number on both documents — photograph legibility; arithmetic gives check digit 4",
+    "Red hatched border, package marking, Cargo Aircraft Only label — not visible in the images",
+    "State and operator variations on the IAD-ATL domestic leg"
+  ],
+  "pattern_finding": "Across four declarations: AWB number, signatory title and emergency country code now fixed; unsigned and no place of signing persist on 4 of 4; date of signing regressed on this one.",
+  "verdict": "REJECT - DO NOT TENDER",
+  "corrections": [
+    {
+      "finding": "C-1",
+      "date": "2026-09-08",
+      "withdrawn": "Selected the AWB as correct and instructed the shipper to alter the declaration, on an unverified passenger-aircraft limit and against standards-of-precedence.md section 4, which ranks the declaration above the AWB.",
+      "now": "The contradiction is still Critical. The document at fault is left unresolved pending the verified limit and the physical package evidence.",
+      "raised_by": "automated PR review on pull request 7"
+    }
+  ]
+}

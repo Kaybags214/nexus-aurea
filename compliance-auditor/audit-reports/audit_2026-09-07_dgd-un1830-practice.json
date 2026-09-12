@@ -1,0 +1,28 @@
+{
+  "skill": "dgd-check",
+  "run": "2026-09-07T22:40:00Z",
+  "documents": ["Shipper's Declaration, column format, page 1 of 1, dated 9/3/2026 — UN1830"],
+  "source": "operator practice declaration (fillable PDF, form-field extraction)",
+  "references_read": [
+    "compliance-auditor/skill-contract.md",
+    "compliance-auditor/standards-of-precedence.md",
+    "compliance-auditor/audit-report-template.md",
+    "dgr/05-checklists/dg-checklist-non-radioactive-reference.md",
+    ".claude/skills/dgd-check/checks/01-header.md",
+    ".claude/skills/dgd-check/checks/02-classification.md",
+    ".claude/skills/dgd-check/checks/03-aircraft.md",
+    ".claude/skills/dgd-check/checks/04-certification.md",
+    ".claude/skills/dgd-check/checks/05-form-condition.md",
+    ".claude/skills/dgd-check/checks/06-vs-awb.md"
+  ],
+  "precedence_levels_cited": ["IATA DGR 67th ed.", "standards-of-precedence.md section 1"],
+  "classification_block": "correct — all columns mutually consistent",
+  "checks_not_performed": ["check 6 — no AWB submitted and the AWB field is blank"],
+  "unverified": [
+    "Packing instruction number and its quantity limit — no DGR 67th ed. copy available",
+    "Red hatched border and form condition — form-field data read, not a rendered page",
+    "State and operator variations on the US domestic leg",
+    "Whether the emergency telephone number is monitored 24 hours"
+  ],
+  "verdict": "REJECT - DO NOT TENDER"
+}

@@ -1,5 +1,9 @@
 .report-worktree/
 
+# uploaded documents and run logs — never commit
+compliance-auditor/intake/incoming/
+compliance-auditor/intake/runs.log
+
 # n8n exports — raw exports may contain cleartext secrets; see ops-hardening/01-backup-and-export-sop.md
 n8n-exports/
 *.raw.json

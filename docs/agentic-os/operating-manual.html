@@ -1,0 +1,260 @@
+<title>Running Nexus Aurea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F1F3F2; --surface:#FFFFFF; --surface-2:#E6EAEA;
+  --line:#C8D1D2; --line-soft:#DEE4E4;
+  --ink:#101D22; --muted:#576B72; --faint:#84969B;
+  --gold:#8A6D10; --cryo:#0E7C8C;
+  --stop:#B0242A; --go:#1C7550; --think:#94590C;
+  --placard:#101D22; --placard-ink:#F1F3F2;
+  --shadow:0 1px 0 rgba(16,29,34,.05), 0 10px 26px -20px rgba(16,29,34,.5);
+  --f-d:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-b:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --f-m:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0A1418; --surface:#101E23; --surface-2:#152B32;
+    --line:#243F48; --line-soft:#1A2F36;
+    --ink:#DCE8EB; --muted:#7C969F; --faint:#5F777F;
+    --gold:#D5B03C; --cryo:#57D5E4;
+    --stop:#EE5F65; --go:#46C28E; --think:#EFAB47;
+    --placard:#DCE8EB; --placard-ink:#0A1418;
+    --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 30px -22px #000;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0A1418; --surface:#101E23; --surface-2:#152B32;
+  --line:#243F48; --line-soft:#1A2F36;
+  --ink:#DCE8EB; --muted:#7C969F; --faint:#5F777F;
+  --gold:#D5B03C; --cryo:#57D5E4;
+  --stop:#EE5F65; --go:#46C28E; --think:#EFAB47;
+  --placard:#DCE8EB; --placard-ink:#0A1418;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 30px -22px #000;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-b);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 80px}
+
+header.top{padding:34px 0 6px}
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cryo);margin-bottom:12px}
+h1{font-family:var(--f-d);font-variation-settings:"wdth" 108,"wght" 700;
+  font-size:clamp(34px,6vw,54px);line-height:1;letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+.sub{color:var(--muted);max-width:60ch;margin:0;font-size:16.5px}
+
+/* the 90% card */
+.loop{border:1px solid var(--line);border-left:4px solid var(--cryo);background:var(--surface);
+  padding:22px 24px;margin:32px 0 14px;box-shadow:var(--shadow)}
+.loop .lab{font-family:var(--f-m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cryo);margin-bottom:12px}
+.loop ol{margin:0;padding-left:20px}
+.loop li{margin-bottom:7px}
+.loop li:last-child{margin-bottom:0}
+.loop b{font-weight:600}
+.loop .most{margin:14px 0 0;padding-top:13px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:14px}
+
+h2{font-family:var(--f-d);font-variation-settings:"wdth" 96,"wght" 700;
+  font-size:13px;letter-spacing:.15em;text-transform:uppercase;
+  border-bottom:1px solid var(--line);padding-bottom:9px;margin:52px 0 20px}
+h3{font-family:var(--f-d);font-variation-settings:"wdth" 100,"wght" 600;
+  font-size:19px;margin:26px 0 9px;line-height:1.3;text-wrap:balance}
+p{margin:0 0 13px;max-width:66ch}
+ul,ol{max-width:66ch}
+li{margin-bottom:5px}
+code{font-family:var(--f-m);font-size:.87em;background:var(--surface-2);padding:1.5px 5px;border-radius:2px}
+pre{background:var(--placard);color:var(--placard-ink);padding:14px 16px;overflow-x:auto;
+  font-family:var(--f-m);font-size:12.5px;line-height:1.6;margin:0 0 15px}
+pre code{background:none;padding:0;font-size:1em;color:inherit}
+
+/* the fork */
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 8px}
+@media (max-width:640px){.fork{grid-template-columns:1fr}}
+.side{border:1px solid var(--line);background:var(--surface);padding:18px 19px;box-shadow:var(--shadow)}
+.side.go{border-top:3px solid var(--go)}
+.side.stop{border-top:3px solid var(--stop)}
+.side h4{font-family:var(--f-d);font-variation-settings:"wdth" 96,"wght" 700;
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;margin:0 0 4px}
+.side.go h4{color:var(--go)}
+.side.stop h4{color:var(--stop)}
+.side .who{font-size:13.5px;color:var(--muted);margin-bottom:12px;min-height:2.6em}
+.side pre{margin-bottom:10px;font-size:11.5px}
+.side .out{font-size:13px;color:var(--muted);margin:0}
+.side .out b{color:var(--ink);font-weight:600}
+
+.never{border:1px solid var(--stop);background:var(--surface);padding:20px 22px;margin:24px 0;box-shadow:var(--shadow)}
+.never h3{margin-top:0;color:var(--stop);font-size:15px;letter-spacing:.06em;text-transform:uppercase;
+  font-variation-settings:"wdth" 94,"wght" 700}
+.never ul{margin:0;padding-left:19px}
+.never li{margin-bottom:8px}
+.never li:last-child{margin-bottom:0}
+.never b{font-weight:600}
+
+.why{border-left:3px solid var(--think);padding:2px 0 2px 15px;margin:18px 0;color:var(--muted);font-size:14.5px}
+.why b{color:var(--ink);font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 18px}
+th{font-family:var(--f-m);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);text-align:left;font-weight:500;padding:0 14px 9px 0;border-bottom:1px solid var(--line)}
+td{padding:10px 14px 10px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+td:first-child{white-space:nowrap}
+.tw{overflow-x:auto}
+
+.auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:6px 0 18px}
+.auto div{background:var(--surface);padding:15px 16px}
+.auto b{display:block;font-size:14px;margin-bottom:3px}
+.auto span{font-size:13px;color:var(--muted);line-height:1.45}
+
+.foot{border-top:1px solid var(--line);margin-top:54px;padding-top:20px;font-size:13.5px;color:var(--muted)}
+.foot a{color:var(--cryo);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--cryo) 40%,transparent)}
+.foot a:hover{border-bottom-color:var(--cryo)}
+.foot a:focus-visible{outline:2px solid var(--cryo);outline-offset:3px}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Nexus Aurea &mdash; operating manual</div>
+  <h1>Running it, day&nbsp;to&nbsp;day</h1>
+  <p class="sub">Not how it was built. What to do when a document lands, what never to do with it, and what runs without you.</p>
+</header>
+
+<div class="loop">
+  <div class="lab">The whole job</div>
+  <ol>
+    <li><b>A document arrives.</b> Decide: practice, or a real client? &mdash; see below, it matters more than anything else here.</li>
+    <li><b>Audit it.</b> Attach the photo, say &ldquo;audit this.&rdquo; Or run the script.</li>
+    <li><b>Read the findings.</b> Criticals first. Those block the shipment.</li>
+    <li><b>Tell the sender</b> what&rsquo;s flagged. Send the corrected copy.</li>
+  </ol>
+  <p class="most">Most days none of that happens. You open the dashboard, nothing is red, you close it. That is the system working, not the system idle.</p>
+</div>
+
+<h2>When a document arrives</h2>
+
+<p><strong>Before anything else, answer one question.</strong> Getting this wrong is the only mistake here you cannot undo.</p>
+
+<div class="fork">
+  <div class="side go">
+    <h4>Practice</h4>
+    <p class="who">Invented parties. Apex Inc., ABC Flyers, your own filled forms, fixtures. Nobody real is named.</p>
+<pre><code>./scripts/audit-document.sh \
+  path/to/doc.jpg</code></pre>
+    <p class="out">Report lands in the repo, gets committed and pushed. Shows on the dashboard next morning. <b>This is your portfolio</b> &mdash; it is meant to be seen.</p>
+  </div>
+  <div class="side stop">
+    <h4>Real client</h4>
+    <p class="who">A real company&rsquo;s real shipment. Anything that arrived at kenya@nexusaureainc.com from someone who is not you.</p>
+<pre><code>./scripts/audit-document.sh --client \
+  path/to/doc.jpg</code></pre>
+    <p class="out">Report goes to <code>~/nexus-aurea-client/</code>. <b>Nothing is committed. Git is never touched.</b> The script refuses to run if that folder is inside the repo.</p>
+  </div>
+</div>
+
+<p class="why"><b>Why the report is as sensitive as the document.</b> A findings report names the shipper, the consignee, the commodity, the AWB number and the declared value. It is a description of that client&rsquo;s business. Committing the report discloses the same things as committing the document.</p>
+
+<h3>Reading what comes back</h3>
+
+<div class="tw"><table>
+  <thead><tr><th>You see</th><th>It means</th><th>You do</th></tr></thead>
+  <tbody>
+    <tr><td>🔴 <b>Critical</b></td><td>The shipment does not tender until this is fixed</td><td>Tell the sender. Every one.</td></tr>
+    <tr><td>🟡 <b>Major</b></td><td>Correctable before tender</td><td>Include in what you send back</td></tr>
+    <tr><td>🟢 <b>Minor</b></td><td>Formatting, legibility, cleanup</td><td>Mention, don&rsquo;t lead with it</td></tr>
+    <tr><td><b>Cannot verify</b></td><td>The photo didn&rsquo;t show it</td><td>Ask for a reshoot. Not a finding.</td></tr>
+    <tr><td><b>Unverified</b> in the sidecar</td><td>A rule it could not confirm without your DGR copy</td><td><b>Check these yourself before sending.</b></td></tr>
+  </tbody>
+</table></div>
+
+<p><strong>The verdict line is the answer the sender wants.</strong> PASS, HOLD FOR CORRECTION, or REJECT &mdash; DO NOT TENDER. Lead with it.</p>
+
+<div class="never">
+  <h3>Never, regardless of who asks</h3>
+  <ul>
+    <li><b>Never commit a real client&rsquo;s document or report.</b> Not redacted, not &ldquo;just this once.&rdquo; Redaction destroys the audit anyway &mdash; cross-document checking <em>is</em> party matching, so the names are the evidence.</li>
+    <li><b>Never send a PASS with an open Critical.</b> Not if the sender pushes. The verdict is HOLD or REJECT.</li>
+    <li><b>Never sign or certify.</b> You flag and correct. A qualified person signs before tender.</li>
+    <li><b>Never decide a product is fit for use after a temperature excursion.</b> Only a QP or the MA holder releases product. You assemble the evidence; they decide.</li>
+    <li><b>Never assign an HS code.</b> Flag it as absent or implausible and refer to a licensed broker.</li>
+    <li><b>Never state a regulatory limit from memory</b> &mdash; yours or the system&rsquo;s. Verify against the DGR, or record it as unverified.</li>
+    <li><b>Never send a real client document to a new AI service</b> before the client has agreed to that processing.</li>
+  </ul>
+</div>
+
+<h2>Every day, every week</h2>
+
+<h3>Daily &mdash; about a minute</h3>
+<p>Open the command centre. One question: <strong>is anything red?</strong></p>
+<ul>
+  <li><b>Nothing red</b> &mdash; close it. Done.</li>
+  <li><b>Criticals in Intake</b> &mdash; that is your list, most recent at the top.</li>
+  <li><b>Next on the board</b> &mdash; the specific things outstanding.</li>
+</ul>
+
+<h3>Weekly &mdash; fifteen minutes</h3>
+<p>The ARMS guide calls this keeping it alive, and it is the only maintenance the system needs.</p>
+<ol>
+  <li><b>Read the new <code>learnings.md</code> entries.</b> Each skill writes down what surprised it. This is where a skill&rsquo;s second month beats its first.</li>
+  <li><b>Fix one thing.</b> A check in the wrong order, a state variation now known, a limit worth writing down with its edition stamped beside it.</li>
+  <li><b>Delete a widget you stopped looking at.</b> Same for a routine that never earns its run.</li>
+  <li><b>Check retention.</b> Client work older than 30 days after delivery gets deleted &mdash; document and report both.</li>
+</ol>
+
+<h3>The do-it-twice rule</h3>
+<p>Prompt the same task twice, make it a skill. That habit is what turned a generic assistant into yours, and it is the only rule that keeps compounding.</p>
+
+<h2>What runs without you</h2>
+
+<div class="auto">
+  <div><b>07:00 ET daily</b><span>Dashboard refresh. Re-reads the repo, updates the figures, republishes. Nothing changed means it does nothing.</span></div>
+  <div><b>16:32 ET weekdays</b><span>Market watch flow brief. Lands in <code>market-watch/flow-briefs/</code>.</span></div>
+  <div><b>Every audit</b><span>Report written, sidecar log written, committed and pushed &mdash; practice mode only.</span></div>
+  <div><b>Never automatic</b><span>Telling the sender. Sending the corrected copy. Deciding a verdict. Those are yours.</span></div>
+</div>
+
+<h2>When something breaks</h2>
+
+<div class="tw"><table>
+  <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+  <tbody>
+    <tr><td>Script hangs, no output</td><td>Waiting on an approval it cannot show</td><td>Ctrl-C. Check <code>claude --help | grep -i permission</code>, then <code>export CLAUDE_AUDIT_FLAGS=&hellip;</code></td></tr>
+    <tr><td><code>command not found</code></td><td>n8n runs with a minimal PATH</td><td>Call the script by absolute path, or set PATH in n8n&rsquo;s own environment</td></tr>
+    <tr><td>Exit <b>66</b></td><td>File isn&rsquo;t at that path</td><td>Check the filename. Drag the file into the terminal to get the real path.</td></tr>
+    <tr><td>Exit <b>70</b></td><td>Ran, wrote nothing</td><td>Read <code>compliance-auditor/intake/runs.log</code></td></tr>
+    <tr><td>Exit <b>78</b></td><td><b>Client output path is inside the repo</b></td><td>Working as intended. Set <code>NA_CLIENT_DIR</code> outside the repo.</td></tr>
+    <tr><td>Dashboard numbers stale</td><td>Refresh runs at 07:00; a snapshot, not live</td><td>Wait, or ask here for a refresh</td></tr>
+    <tr><td>Edited a file, nothing changed</td><td>You have two clones</td><td><code>~/nexus-aurea</code> is the live one</td></tr>
+  </tbody>
+</table></div>
+
+<p><strong>Anything not on this list:</strong> paste the error here. Errors are quick; guessing is slow.</p>
+
+<h2>Where things live</h2>
+
+<div class="tw"><table>
+  <tbody>
+    <tr><td><code>CLAUDE.md</code></td><td>The map. A cold session reads this first.</td></tr>
+    <tr><td><code>AUDIT.md</code></td><td>The review system &mdash; skills, governance, reports</td></tr>
+    <tr><td><code>.claude/skills/</code></td><td>Seven skills. Router plus <code>checks/</code> each.</td></tr>
+    <tr><td><code>standards-of-precedence.md</code></td><td>Which rule wins when two disagree. <b>The authority.</b></td></tr>
+    <tr><td><code>skill-contract.md</code></td><td>Rules every skill obeys, and the sidecar spec</td></tr>
+    <tr><td><code>data-handling.md</code></td><td>What happens to client documents. Read before real work.</td></tr>
+    <tr><td><code>audit-reports/</code></td><td>Practice reports. Committed.</td></tr>
+    <tr><td><code>~/nexus-aurea-client/</code></td><td><b>Client work. Outside the repo. Never committed.</b></td></tr>
+  </tbody>
+</table></div>
+
+<h2>If you only remember three things</h2>
+<ol>
+  <li><b>Real client work never touches git.</b> Use <code>--client</code>. The report is as sensitive as the document.</li>
+  <li><b>Criticals block the shipment.</b> Never a PASS with one open, however the sender pushes.</li>
+  <li><b>Check the unverified list before you send.</b> That is where the system tells you what it could not confirm &mdash; and it is the difference between a finding you can defend and one you cannot.</li>
+</ol>
+
+<div class="foot">
+  <p>Companion pages: <a href="https://claude.ai/code/artifact/f685bfab-eefc-4962-97bb-42940af9fe13">command centre</a> &middot; <a href="https://claude.ai/code/artifact/50370611-d383-4c04-9451-8a0ee603bce6">ARMS grid</a>. This manual describes practice, not legal cover &mdash; whether Nexus Aurea needs a data processing agreement is a lawyer&rsquo;s question, and pharma clients will eventually ask it.</p>
+</div>
+
+</div>

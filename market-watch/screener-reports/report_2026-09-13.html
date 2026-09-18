@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Aurea Market Watch - 2026-09-13</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+            color: #f8fafc;
+        }
+        .market-summary {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .index-card {
+            background: #1e293b;
+            padding: 10px 20px;
+            border-radius: 8px;
+            min-width: 180px;
+        }
+        .index-name {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .index-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .pos { color: #22c55e; }
+        .neg { color: #ef4444; }
+
+        section {
+            margin-bottom: 50px;
+        }
+        h2 {
+            border-left: 4px solid #3b82f6;
+            padding-left: 15px;
+            margin-bottom: 25px;
+            color: #f1f5f9;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .card.warning {
+            border: 1px solid #f59e0b;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .priority-badge {
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .price-section {
+            margin-bottom: 15px;
+        }
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.875rem;
+            margin-bottom: 15px;
+        }
+        .stat-label { color: #94a3b8; }
+        .range-container {
+            margin: 15px 0;
+        }
+        .range-bar {
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            position: relative;
+            margin: 5px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 3px;
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .notes-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-bottom: 15px;
+        }
+        .xcheck-box {
+            background: #0f172a;
+            border-left: 3px solid #3b82f6;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+        .commentary {
+            font-style: italic;
+            border-top: 1px solid #334155;
+            padding-top: 10px;
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        .news-list, .filings-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+        .news-item, .filing-item {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        .news-item:last-child, .filing-item:last-child {
+            border-bottom: none;
+        }
+        .closed-banner {
+            background: #1e293b;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .closed-banner h3 {
+            margin: 0 0 10px 0;
+            color: #f59e0b;
+            font-size: 1.1rem;
+        }
+        .integrity {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 0.875rem;
+        }
+        .integrity h3 { margin-top: 0; color: #f1f5f9; }
+        .integrity li { margin-bottom: 8px; }
+        table.srctable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        table.srctable th, table.srctable td {
+            text-align: left;
+            padding: 6px 8px;
+            border-bottom: 1px solid #334155;
+        }
+        table.srctable th { color: #94a3b8; }
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nexus Aurea Market Watch &mdash; 2026-09-13</h1>
+            <p style="color:#94a3b8; margin:0 0 15px 0;">
+                Sunday &mdash; U.S. equity markets closed. Crypto-only report per
+                <code>daily-update-playbook.md</code> &sect;6.
+                Last equity close shown below is Friday 2026-09-11.
+            </p>
+            <div class="market-summary">
+    
+                <div class="index-card">
+                    <div class="index-name">GSPC</div>
+                    <div class="index-value">7,656.98</div>
+                    <div class="index-change pos">
+                        +65.28 (+0.86%)
+                    </div>
+                </div>
+        
+                <div class="index-card">
+                    <div class="index-name">IXIC</div>
+                    <div class="index-value">26,333.04</div>
+                    <div class="index-change pos">
+                        +251.31 (+0.96%)
+                    </div>
+                </div>
+        
+                <div class="index-card">
+                    <div class="index-name">DJI</div>
+                    <div class="index-value">52,573.29</div>
+                    <div class="index-change pos">
+                        +509.19 (+0.98%)
+                    </div>
+                </div>
+        
+                <div class="index-card">
+                    <div class="index-name">VIX</div>
+                    <div class="index-value">15.84</div>
+                    <div class="index-change neg">
+                        -2.00 (-11.21%)
+                    </div>
+                </div>
+        
+            </div>
+        </header>
+
+        <div class="closed-banner">
+            <h3>&#9888; Equity market closed &mdash; Sunday, 2026-09-13</h3>
+            <p style="margin:0 0 10px 0;">
+                The NYSE and Nasdaq do not trade on Sundays. There was no 2026-09-13 session, no closing
+                print, and no equity price data of any kind for this date. The index bar above carries the
+                <strong>last completed session, Friday 2026-09-11</strong>, and is labelled as such rather
+                than presented as a Sunday figure. The next session opened Monday 2026-09-14.
+            </p>
+            <p style="margin:0 0 10px 0;">
+                <strong>Equity watchlist:</strong> not covered. Per playbook &sect;6 a closed day is
+                crypto-only. Carrying Friday's per-ticker prices into a Sunday card would violate the
+                &sect;4 rule against presenting a stale price as current.
+            </p>
+            <p style="margin:0;">
+                <strong>SEC filings (&sect;2.3):</strong> none. EDGAR does not accept filings on weekends;
+                the submission window was closed for the whole reporting period. Nothing to append to
+                <code>filing-tracker.md</code>.
+            </p>
+        </div>
+
+        <section>
+            <h2>Session Context</h2>
+            <div class="notes-box" style="font-size:0.9rem;">
+                <p style="margin-top:0;">
+                    The macro tape drove the weekend, not anything crypto-native. A hot monthly core CPI
+                    print had pushed market-implied odds of a Federal Reserve hike at the
+                    <strong>15&ndash;16 September 2026 FOMC</strong> to roughly 87&ndash;90% by the time of
+                    this session, with core CPI running near 2.4%. Seven of the nine tokens on this board
+                    closed lower.
+                </p>
+                <p>
+                    <strong>Reported as pending, not decided.</strong> As of 2026-09-13 the FOMC decision had
+                    not occurred. This report deliberately does not state the outcome, which fell outside the
+                    reporting date. Sources:
+                    <a href="https://www.riotimesonline.com/crypto-markets-bitcoin-majors-monday-september-14-2026/" target="_blank">Rio Times session wrap</a>,
+                    <a href="https://www.cbsnews.com/news/fed-rate-hike-september-likelihood-cpi/" target="_blank">CBS News</a>.
+                    The precise odds figure varied by venue (CME FedWatch and prediction markets disagreed
+                    materially), so a range is given rather than a single number.
+                </p>
+                <p style="margin-bottom:0;">
+                    <strong>Weekend liquidity.</strong> Aggregate Crypto.com notional across the nine names
+                    was $322.0M against $169.2M on Saturday 09-12 &mdash; a 1.90x Sunday pickup, concentrated
+                    almost entirely in BTC (2.20x) and the FIL anomaly (22.76x). XLM was the only name to
+                    trade lighter than Saturday.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Blockchain &amp; Crypto Assets</h2>
+            <div class="grid">
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">BTC</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Bitcoin</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Base crypto asset / settlement network</span><br/>
+                            <span class="badge priority-badge" style="background:#8b5cf6;">Core study</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$76,813.40</div>
+                        <div class="neg">
+                            -0.60% (24h) &nbsp;|&nbsp; <span class="neg">-4.39% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $190,336,820</div>
+                        <div><span class="stat-label">vs prior day:</span> 2.20x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $76,460.67</span><span>H: $77,440.00</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 36.02%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $77,266.84</span><span>Range 1.28%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Institutional digital-asset infrastructure, custody, security model, and regulatory treatment
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> N/A &mdash; not a supply-chain thesis</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Deep &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> Alpha Vantage: close $76,799.90, 24h -0.60%, 7d -4.41%. Rio Times (2026-09-14 wrap): &ldquo;US$76,838&hellip;down 0.56%&rdquo;. Three sources agree inside 0.05pp.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://www.riotimesonline.com/crypto-markets-bitcoin-majors-monday-september-14-2026/" target="_blank">Bitcoin Slips Near US$76,838 as Rate Bets Firm &mdash; Sunday close reported at US$76,838, -0.56% d/d, with Fed hike odds firming near 90% into the 15&ndash;16 Sep FOMC.</a><br/><small>Rio Times | reports the 2026-09-13 session</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> No change. Weekend drift inside a 1.28% range on a macro-driven tape. Nothing here touches custody, settlement or regulatory treatment, which is the only reason BTC sits on this page.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">ETH</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Ethereum</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Smart-contract infrastructure</span><br/>
+                            <span class="badge priority-badge" style="background:#8b5cf6;">Core study</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$2,476.14</div>
+                        <div class="neg">
+                            -1.96% (24h) &nbsp;|&nbsp; <span class="neg">-1.53% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $123,761,350</div>
+                        <div><span class="stat-label">vs prior day:</span> 1.63x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $2,461.42</span><span>H: $2,527.64</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 22.23%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $2,525.54</span><span>Range 2.69%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Tokenized records, compliance workflows, identity, stablecoins, audit trails, and enterprise smart-contract patterns
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Unverified &mdash; no pharma-specific review done</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Deep &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> Alpha Vantage: close $2,475.86, 24h -1.96%, 7d -1.53%. Rio Times: &ldquo;US$2,477&hellip;a drop of 1.94%&rdquo;. Agreement to 0.02pp.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item">No ETH-specific protocol, regulatory or enterprise headline dated 2026-09-13 was found. Move tracks the same macro tape as BTC.<br/><small>No catalyst found</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> No change. ETH remains a study of tokenized-record and audit-trail patterns, and a weekend beta move says nothing about that.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">LINK</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Chainlink</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Oracle / external-data infrastructure</span><br/>
+                            <span class="badge priority-badge" style="background:#f97316;">High</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$11.201</div>
+                        <div class="neg">
+                            -2.70% (24h) &nbsp;|&nbsp; <span class="neg">-15.35% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $485,417</div>
+                        <div><span class="stat-label">vs prior day:</span> 1.14x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $11.157</span><span>H: $11.561</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 10.89%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $11.506</span><span>Range 3.62%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> External data connection for temperature, GPS, shipment status, proof of delivery, and compliance events
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Verified, but financial not logistics &mdash; see 2026-07-28 review</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Thin &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> Alpha Vantage: close $11.199, 24h -2.66%, 7d -15.40%. Agreement to 0.05pp.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item">No Chainlink-specific news dated 2026-09-13 located. Searches returned only undated price commentary, which this report does not treat as a catalyst.<br/><small>No catalyst found</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> Worst 7-day performer on the board at -15.35%, and the weakness is unexplained by anything sourced. Flagging the drawdown, not diagnosing it. The 2026-07-28 finding stands: LINK's real traction is financial/RWA settlement, not the cold-chain telemetry this file lists it for.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">HBAR</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Hedera</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Enterprise distributed ledger</span><br/>
+                            <span class="badge priority-badge" style="background:#f97316;">High</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$0.075128</div>
+                        <div class="pos">
+                            +0.57% (24h) &nbsp;|&nbsp; <span class="neg">-7.98% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $355,174</div>
+                        <div><span class="stat-label">vs prior day:</span> 0.99x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $0.074607</span><span>H: $0.07751</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 17.95%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $0.074698</span><span>Range 3.89%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Enterprise governance, high-throughput records, audit logs, identity, and supply-chain documentation
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Mixed &mdash; DPP deployment verified, pharma framing false, NHS proof point stale</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Thin &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> SINGLE SOURCE. Alpha Vantage cross-check not obtained &mdash; free-tier quota (25 req/day) exhausted during this run. Treat the figures as unconfirmed.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://coinmarketcap.com/cmc-ai/hedera/latest-updates/" target="_blank">Hedera mainnet passed its 8th anniversary on 2026-08-25 (fork-free operation); smart-contract service now EVM-compatible (Solidity/Hardhat). Both predate 2026-09-13 and neither is a session catalyst.</a><br/><small>CoinMarketCap AI summary | aggregator, not primary &mdash; undated within the page</small></li><li class="news-item"><a href="https://www.coingecko.com/en/coins/hedera" target="_blank">CoinGecko showed HBAR -5.60% over 7 days against this feed's -7.98%. Venue and window differ; the discrepancy is noted rather than reconciled.</a><br/><small>CoinGecko | conflicts with exchange feed</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> No change, and no new evidence either way. The 2026-07-28 finding governs: the Merck integration is Merck KGaA (Darmstadt) pigment authentication, not Merck &amp; Co pharma, and the NHS cold-chain proof point still dates to January 2021.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">VET</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">VeChain</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Supply-chain blockchain</span><br/>
+                            <span class="badge priority-badge" style="background:#f97316;">High</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$0.007694</div>
+                        <div class="pos">
+                            +2.18% (24h) &nbsp;|&nbsp; <span class="pos">+8.59% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $115,840</div>
+                        <div><span class="stat-label">vs prior day:</span> 2.65x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $0.007515</span><span>H: $0.008001</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 36.79%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $0.007519</span><span>Range 6.47%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Product provenance, anti-counterfeit tracking, serialization concepts, and logistics traceability
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Verified &mdash; 300k+ DPP events onchain Q1 2026, non-pharma</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Very thin &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> SINGLE SOURCE. Alpha Vantage cross-check not obtained &mdash; quota exhausted. Unconfirmed.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://vechain.org/vechain-renaissance-interstellar-sets-course" target="_blank"><strong>Interstellar hard fork (VIP-255) pending at report date.</strong> VeChain's official account put activation at block 25,902,540 on 16 Sep 2026, 11:15:10 UTC &mdash; three days after this report. Bundles 11 EIPs (EIP-1153, 5656, 6780, 7939, 2537, 7951, 7823, 7883, 2935, 7825, 7934) for EVM equivalence. Approved by all-stakeholder governance vote held 10&ndash;17 Aug 2026.</a><br/><small>vechain.org + @vechainofficial | PRIMARY &mdash; verified</small></li><li class="news-item">An unnamed &ldquo;partnership with a major Asian logistics firm&rdquo; appears in aggregator coverage with no counterparty, no date and no primary source. <strong>UNVERIFIED &mdash; not treated as a proof point.</strong><br/><small>Aggregator claim | UNVERIFIED, counterparty unnamed</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> Best 7-day performer at +8.59% and second-best on the day, into a dated, primary-sourced protocol upgrade three days out. Attributing the move to the fork is <em>interpretation</em>, not established fact &mdash; but the upgrade itself is verified and the timing is consistent. Note what Interstellar actually is: EVM compatibility, i.e. developer reach. It is not a traceability or serialization feature, so it does not advance the pharma thesis this file lists VET for.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">TRAC</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">OriginTrail</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Decentralized knowledge graph / supply-chain data</span><br/>
+                            <span class="badge priority-badge" style="background:#f97316;">High</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$0.32774</div>
+                        <div class="pos">
+                            +1.85% (24h) &nbsp;|&nbsp; <span class="neg">-3.98% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $4,478</div>
+                        <div><span class="stat-label">vs prior day:</span> 1.33x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $0.31175</span><span>H: $0.33448</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 70.35%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $0.32576</span><span>Range 7.29%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Verifiable supply-chain data, product traceability, knowledge graphs, and pharmaceutical provenance concepts
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Partial &mdash; GS1/EPCIS work verified, SMP status unconfirmed since 2023</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Illiquid &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> SINGLE SOURCE. Alpha Vantage cross-check not obtained &mdash; quota exhausted. At $4.5k daily notional this is the thinnest quote on the board and the least reliable.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://coinmarketcap.com/cmc-ai/origintrail/latest-updates/" target="_blank">Election Guardian &mdash; deepfake and disinformation detection built on OriginTrail with Viva AI, launched 2026-08-21, producing a tamper-proof verifiable record of events. Predates the report date; not a 09-13 catalyst.</a><br/><small>CoinMarketCap AI summary | aggregator, not primary</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> Election Guardian is a real attestation product, but it is election integrity, not supply chain &mdash; the same narrative drift toward AI flagged in the 2026-07-28 review. The GS1 EPCIS/CBV 2.0 standards work remains the reason TRAC is here, and nothing this session advanced or contradicted it. $4,478 of daily notional: thesis relevance and tradability remain on opposite ends of this board.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">XLM</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Stellar</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Payments / settlement network</span><br/>
+                            <span class="badge priority-badge" style="background:#3b82f6;">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$0.17706</div>
+                        <div class="neg">
+                            -1.69% (24h) &nbsp;|&nbsp; <span class="neg">-5.54% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $141,333</div>
+                        <div><span class="stat-label">vs prior day:</span> 0.76x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $0.17624</span><span>H: $0.18094</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 17.45%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $0.18</span><span>Range 2.67%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Low-cost cross-border settlement, stablecoin movement, humanitarian and healthcare payment rails
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Unverified</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Thin &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> SINGLE SOURCE. Alpha Vantage cross-check not obtained &mdash; quota exhausted. Unconfirmed.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://coinmarketcap.com/cmc-ai/stellar/latest-updates/" target="_blank">U.S. Bank reported completing a live cross-border pilot moving its USBDC stablecoin on Stellar in an internal treasury test &mdash; dated 2026-09-11, two days before this report.</a><br/><small>CoinMarketCap AI summary | aggregator &mdash; primary source not located</small></li><li class="news-item"><a href="https://coinmarketcap.com/cmc-ai/stellar/latest-updates/" target="_blank">Coinbase/Moov partnership reported 2026-09-12 bringing stablecoin payments to 1,000+ community banks. One day before the report date.</a><br/><small>CoinMarketCap AI summary | aggregator &mdash; primary source not located</small></li><li class="news-item">Pending at report date: Protocol 28 &ldquo;Adapter&rdquo; mainnet vote (2026-09-16) and a Senate CLARITY Act vote (2026-09-15) naming XLM as a digital-commodity example.<br/><small>Forward-dated | pending as of 2026-09-13</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> Two dated institutional settlement data points inside 48 hours, and the token still closed -1.69% on the lightest relative volume on the board (0.76x Saturday). That gap is the finding. Both items are aggregator-sourced and neither was confirmed against a U.S. Bank or Coinbase primary release, so they are logged, not banked.
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">XRP</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">XRP Ledger</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Payments / institutional settlement</span><br/>
+                            <span class="badge priority-badge" style="background:#3b82f6;">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$1.3408</div>
+                        <div class="neg">
+                            -1.87% (24h) &nbsp;|&nbsp; <span class="neg">-5.82% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $6,443,682</div>
+                        <div><span class="stat-label">vs prior day:</span> 1.09x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $1.3324</span><span>H: $1.3702</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 22.22%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $1.3664</span><span>Range 2.84%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Cross-border settlement, liquidity movement, and regulated payment infrastructure
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Unverified</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Moderate &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> Rio Times session wrap: &ldquo;XRP settled at US$1.3406, down 1.90%&rdquo; against this feed's $1.3408 / -1.87%. Independent agreement to 0.03pp. Alpha Vantage quota exhausted.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://www.riotimesonline.com/crypto-markets-bitcoin-majors-monday-september-14-2026/" target="_blank">No XRP-specific catalyst dated 2026-09-13 found. Session wrap attributes the move to the same macro tape driving BTC and ETH.</a><br/><small>Rio Times | reports the 2026-09-13 session</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> No change. Moved with the macro tape, not with anything specific to regulated payment infrastructure.
+                    </div>
+                </div>
+    
+                <div class="card warning">
+                    <div class="card-header">
+                        <div>
+                            <div style="font-weight:700; font-size:1.2rem;">FIL</div>
+                            <div style="font-size:0.85rem; color:#94a3b8;">Filecoin</div>
+                        </div>
+                        <div style="text-align:right">
+                            <span class="badge" style="background:#334155;">Decentralized storage</span><br/>
+                            <span class="badge priority-badge" style="background:#3b82f6;">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="current-price">$0.9514</div>
+                        <div class="pos">
+                            +18.69% (24h) &nbsp;|&nbsp; <span class="pos">+17.69% (7d)</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div><span class="stat-label">24h Vol:</span> $359,356</div>
+                        <div><span class="stat-label">vs prior day:</span> 22.76x</div>
+                        <div><span class="stat-label">Mkt Cap:</span> DATA UNAVAILABLE</div>
+                        <div><span class="stat-label">Supply:</span> DATA UNAVAILABLE</div>
+                    </div>
+
+                <div class="range-container">
+                    <div class="range-labels"><span>Day L: $0.8003</span><span>H: $1.0322</span></div>
+                    <div class="range-bar"><div class="range-fill" style="width: 65.16%; left: 0;"></div></div>
+                    <div class="range-labels"><span>Open $0.801</span><span>Range 28.98%</span></div>
+                </div>
+
+                    <div class="notes-box">
+                        <strong>Pharma / Logistics Relevance:</strong> Decentralized storage concepts for audit records, certificates, shipment evidence, and data availability
+                        <div style="margin-top:5px;"><strong>Standing evidence:</strong> Unverified</div>
+                        <div style="margin-top:5px;"><strong>Liquidity:</strong> Very thin &mdash; tracked separately from priority, and not an endorsement.</div>
+                    </div>
+
+                    <div class="xcheck-box">
+                        <strong>Cross-check:</strong> <strong>CONFIRMED on two independent feeds.</strong> Crypto.com: +18.69% / 7d +17.69% / 28.98% range. Alpha Vantage (multi-venue aggregate): close $0.9509, +18.74% / 7d +17.71% / 30.11% range, on 6.9x the prior day's base volume. Divergence 0.05pp. This is a real move, not a thin-venue print.
+                    </div>
+
+                    <div class="extra-info">
+                        <h4>News &amp; Catalysts</h4>
+                        <ul class="news-list"><li class="news-item"><a href="https://coinmarketcap.com/top-stories/6aa6bb8597430411637abbe2/" target="_blank"><strong>No fundamental catalyst identified.</strong> CoinMarketCap's own write-up of the move attributes it to trading flows and existing narratives, stating there were no Filecoin-specific news items, listings or protocol upgrades in the preceding 24 hours. A separate targeted search for a 2026-09-13 Filecoin announcement returned nothing.</a><br/><small>CoinMarketCap | aggregator &mdash; reports ABSENCE of catalyst</small></li><li class="news-item"><a href="https://en.cryptonomist.ch/2026/09/13/filecoin-crypto-analysis-overbought-september/" target="_blank">Same-day technical commentary put daily RSI14 at 73.04 and hourly at 84.64, with the close above the upper Bollinger band &mdash; i.e. overbought and extended.</a><br/><small>Cryptonomist | dated 2026-09-13, price commentary &mdash; low source quality</small></li><li class="news-item"><strong>Do not carry over the 2026-09-02 narrative.</strong> The +16.57% move on 2026-09-02 was attributed to AI-capex positioning and ~$1.5M of short liquidations. That explanation belongs to that day and is <em>not</em> evidence for this one. Two separate rallies, eleven days apart.<br/><small>Attribution hazard | flagged, not applied</small></li></ul>
+                        <h4>Network Activity</h4>
+                        <p style="font-size:0.8rem">DATA UNAVAILABLE &mdash; on-chain metrics (transactions, active addresses, TVL, staking) are not carried by the exchange feed, and no explorer or DefiLlama snapshot dated 2026-09-13 was retrieved during this reconstruction.</p>
+                    </div>
+
+                    <div class="commentary">
+                        <strong>Thesis check:</strong> The only material price event of the session and the one entry that warranted a second feed. A +18.7% Sunday move on 22.8x the prior day's venue notional, with a 29% intraday range and no identifiable news, is flow, not adoption. Under this file's review rules that makes it noise: real-world usage is primary, price movement is secondary. Worth recording that it did not hold &mdash; FIL closed 0.9361 on 09-14 and 0.8165 on 09-15, giving back 14.2% of the move within two sessions.
+                    </div>
+                </div>
+    
+            </div>
+        </section>
+
+        <section>
+            <h2>Adoption Check &mdash; Pharma / Cold Chain / Logistics</h2>
+            <div class="notes-box" style="font-size:0.9rem;">
+                <p style="margin-top:0;">
+                    <strong>Nothing moved the pharma thesis this session.</strong> Not one of the nine
+                    tokens produced a dated, primary-sourced pharmaceutical, cold-chain or serialization
+                    proof point for 2026-09-13.
+                </p>
+                <p>
+                    The one verified protocol event in the window &mdash; VeChain's Interstellar fork,
+                    pending three days out &mdash; is EVM compatibility. That is developer reach, not
+                    traceability. It does not advance the provenance and serialization case this file lists
+                    VET for, and it should not be scored as adoption evidence.
+                </p>
+                <p>
+                    <strong>DSCSA position unchanged.</strong> Research during this reconstruction found the
+                    2026 state consistent with Finding 2 in
+                    <code>blockchain-pharma-watchlist.md</code>: enhanced drug traceability is in force,
+                    interoperable exchange runs on GS1 EPCIS, and blockchain adoption remains limited by
+                    competing network standards, onboarding cost, data-privacy conflict, throughput and
+                    regulatory ambiguity. The compliance requirement is still the data standard. The ledger
+                    is still optional.
+                </p>
+                <p style="margin-bottom:0;">
+                    <strong>Narrative drift continues.</strong> The two names with the tightest supply-chain
+                    alignment keep shipping elsewhere &mdash; OriginTrail's most recent product is election
+                    deepfake detection (2026-08-21), and VeChain's 2026 roadmap is agentic AI. Both were
+                    flagged in the 2026-07-28 review. Neither has reversed.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Private Company Signals</h2>
+            <div class="notes-box" style="font-size:0.9rem;">
+                <p style="margin:0;">
+                    <strong>Not covered.</strong> Playbook &sect;2.5 covers private entries
+                    (Sygaldry Technologies, Solidigm) as part of the equity lane, which &sect;6 suspends on a
+                    closed day. No funding, partnership, hiring, product or listing signal dated 2026-09-13
+                    was searched for or found. Recorded as a deliberate omission, not an oversight.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Data Integrity &amp; Sourcing</h2>
+            <div class="integrity">
+                <h3>Reconstruction notice</h3>
+                <p>
+                    This report was <strong>reconstructed on 2026-09-18</strong>, five days after the fact.
+                    The original 2026-09-13 run was never committed and its container is gone. It is a
+                    historical reconstruction, not a live capture, and is labelled as such deliberately.
+                </p>
+                <p>
+                    Every price is the <strong>UTC daily candle for 2026-09-13 as recorded at the time</strong>,
+                    retrieved from the Crypto.com exchange feed on 2026-09-18. No current price has been
+                    substituted for a historical one anywhere in this file.
+                </p>
+
+                <h3>Source of record</h3>
+                <p>
+                    Crypto.com <code>get_candlestick</code>, <code>1D</code> timeframe, per
+                    <code>&lt;TOKEN&gt;_USD</code>. Playbook &sect;2.4 prefers the exchange feed over
+                    aggregator scraping when the connector is present. It was present for this run, which
+                    supersedes the &sect;8 note recording the 2026-08-24 disconnection.
+                    Volume figures are single-venue Crypto.com notional, <strong>not global volume</strong>.
+                </p>
+
+                <h3>Cross-check coverage &mdash; 4 of 9 confirmed</h3>
+                <table class="srctable">
+                    <tr><th>Token</th><th>Second source</th><th>Result</th></tr>
+                    <tr><td>BTC</td><td>Alpha Vantage + Rio Times</td><td class="pos">Confirmed &mdash; agreement within 0.05pp</td></tr>
+                    <tr><td>ETH</td><td>Alpha Vantage + Rio Times</td><td class="pos">Confirmed &mdash; within 0.02pp</td></tr>
+                    <tr><td>LINK</td><td>Alpha Vantage</td><td class="pos">Confirmed &mdash; within 0.05pp</td></tr>
+                    <tr><td>FIL</td><td>Alpha Vantage</td><td class="pos">Confirmed &mdash; within 0.05pp on an 18.7% move</td></tr>
+                    <tr><td>XRP</td><td>Rio Times</td><td class="pos">Confirmed &mdash; within 0.03pp</td></tr>
+                    <tr><td>HBAR</td><td>&mdash;</td><td class="neg">Not obtained &mdash; API quota</td></tr>
+                    <tr><td>VET</td><td>&mdash;</td><td class="neg">Not obtained &mdash; API quota</td></tr>
+                    <tr><td>TRAC</td><td>&mdash;</td><td class="neg">Not obtained &mdash; API quota</td></tr>
+                    <tr><td>XLM</td><td>&mdash;</td><td class="neg">Not obtained &mdash; API quota</td></tr>
+                </table>
+                <p style="margin-top:10px;">
+                    The Alpha Vantage free tier caps at 25 requests/day and was exhausted mid-run. Four
+                    tokens therefore rest on a single venue and are marked unconfirmed on their cards.
+                    <strong>TRAC is the weakest figure in this file</strong> &mdash; $4,478 of daily notional
+                    on one venue, which is exactly the illiquid-quote hazard &sect;2.4 warns about for the
+                    thin names.
+                </p>
+
+                <h3>What is missing, and why</h3>
+                <ul>
+                    <li><strong>Market capitalization and circulating/total supply</strong> &mdash; DATA
+                        UNAVAILABLE for all nine. The exchange feed does not carry them, and &sect;2.4 sends
+                        these to web research. Any figure retrievable today would be an 2026-09-18 snapshot,
+                        and back-dating it to 09-13 would be exactly the substitution this reconstruction was
+                        told not to make.</li>
+                    <li><strong>Token unlock schedules</strong> &mdash; DATA UNAVAILABLE. Same reason.</li>
+                    <li><strong>On-chain activity</strong> (transactions, active addresses, TVL, staking)
+                        &mdash; DATA UNAVAILABLE for all nine. No explorer, project dashboard or DefiLlama
+                        snapshot dated 2026-09-13 was retrieved. Present-day readings are not a substitute
+                        for a five-day-old state.</li>
+                    <li><strong>Equity watchlist, SEC filings, private-company signals</strong> &mdash; out
+                        of scope on a closed day per &sect;6.</li>
+                </ul>
+
+                <h3>Claims explicitly labelled unverified</h3>
+                <ul>
+                    <li><strong>VeChain &ldquo;major Asian logistics firm&rdquo; partnership</strong> &mdash;
+                        no counterparty named, no date, no primary source. Not treated as a proof point.</li>
+                    <li><strong>Stellar U.S. Bank USBDC pilot (09-11) and Coinbase/Moov (09-12)</strong>
+                        &mdash; dated, and correctly prior to this report, but sourced only to an aggregator
+                        summary. No U.S. Bank or Coinbase primary release was located. Logged, not banked.</li>
+                    <li><strong>Hedera EVM compatibility and 8th-anniversary items</strong> &mdash;
+                        aggregator-sourced, undated within the source page.</li>
+                    <li><strong>FIL catalyst</strong> &mdash; the finding is the <em>absence</em> of one.
+                        Two independent searches failed to surface any Filecoin announcement dated
+                        2026-09-13. The 2026-09-02 AI-capex and short-liquidation narrative is a different
+                        event and has not been carried across.</li>
+                    <li><strong>HBAR 7-day change</strong> &mdash; CoinGecko showed -5.60% against this
+                        feed's -7.98%. Window and venue differ. Noted, not reconciled.</li>
+                </ul>
+                <p style="margin-bottom:0;">
+                    Source-quality note per &sect;2.4 and the watchlist's own warning: much of the available
+                    crypto coverage is price-promotion material. Primary sources are used where they exist
+                    &mdash; vechain.org and VeChain's official account for Interstellar &mdash; and
+                    aggregator material is marked as such everywhere else.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            Generated on 2026-09-18 &mdash; historical reconstruction of the 2026-09-13 session<br/>
+            For research/tracking purposes only. Not financial advice.
+        </footer>
+    </div>
+</body>
+</html>

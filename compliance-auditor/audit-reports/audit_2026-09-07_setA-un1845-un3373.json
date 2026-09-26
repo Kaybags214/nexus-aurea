@@ -1,0 +1,53 @@
+{
+  "skill": "dgd-check",
+  "run": "2026-09-07",
+  "reconstructed": true,
+  "reconstruction_note": "RECONSTRUCTED 2026-09-08, not written by the run. The original run produced the report without the sidecar skill-contract.md requires, and audit-document.sh did not catch it (it now exits 71). Every field below is derived from the report text itself, so it records what the report shows, NOT an observed log of what the run read. Treat references_read as 'cited in the report', not 'proven to have been opened'.",
+  "documents": [
+    "Shipper's Declaration, handwritten, dated 7/11/26, signed — UN1845 + UN3373",
+    "Air Waybill 771-221-2765, handwritten",
+    "Commercial Invoice, handwritten"
+  ],
+  "source": "operator practice document set (photographs); invented parties Apex Inc. / ABC Flyers",
+  "references_read": [
+    "compliance-auditor/skill-contract.md",
+    "compliance-auditor/standards-of-precedence.md",
+    "compliance-auditor/audit-report-template.md",
+    "dgr/03-shipper-declarations/completed-example-reference.md",
+    "templates/01-awb/awb-reference-template.md",
+    ".claude/skills/dgd-check/checks/01-header.md",
+    ".claude/skills/dgd-check/checks/02-classification.md",
+    ".claude/skills/dgd-check/checks/03-aircraft.md",
+    ".claude/skills/dgd-check/checks/04-certification.md",
+    ".claude/skills/dgd-check/checks/05-form-condition.md",
+    ".claude/skills/dgd-check/checks/06-vs-awb.md"
+  ],
+  "precedence_levels_cited": [
+    "IATA DGR 67th ed.",
+    "IATA Resolution 600a",
+    "standards-of-precedence.md section 4"
+  ],
+  "check_6_performed": true,
+  "check_6_note": "Three documents from one shipment; the invoice net-weight break (C-3) came from it.",
+  "findings": {
+    "critical": 3,
+    "major": 7,
+    "minor": 2
+  },
+  "unverified": [
+    "Packing group on the UN3373 / PI 650 entry — report says confirm against a DGR copy; none to hand",
+    "AWB check digit — arithmetic gives 2, but that assumes the seven digits shown are the serial; not to be appended on that basis",
+    "Whether a Shipper's Declaration is required at all for Category B under PI 650 (M-7)",
+    "State and operator variations on the IAD-ATL leg",
+    "Package marking and labelling — not visible in the images",
+    "Whether the 24-hour emergency number is required on this routing — added 2026-09-08 when dgd-check check 4 stopped treating it as unconditional"
+  ],
+  "corrections": [
+    {
+      "date": "2026-09-08",
+      "note": "M-3 graded the malformed emergency number as a defect without establishing that the routing requires one. check 4 now requires applicability to be established first; on a re-run this would be unverified, not a finding."
+    }
+  ],
+  "withdrawn_from_earlier_report": "The Set B improvement trend — this set is dated earlier and is signed, so there is no chronological progression.",
+  "verdict": "HOLD FOR CORRECTION"
+}

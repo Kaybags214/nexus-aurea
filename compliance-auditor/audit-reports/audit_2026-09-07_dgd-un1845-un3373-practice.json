@@ -1,0 +1,37 @@
+{
+  "skill": "dgd-check",
+  "run": "2026-09-07T22:10:00Z",
+  "documents": ["Shipper's Declaration, column format, page 1 of 1, dated 9/3/2026"],
+  "source": "operator practice declaration (fillable PDF, AES-encrypted, form-field extraction)",
+  "references_read": [
+    "compliance-auditor/skill-contract.md",
+    "compliance-auditor/standards-of-precedence.md",
+    "compliance-auditor/audit-report-template.md",
+    "dgr/05-checklists/dg-checklist-non-radioactive-reference.md",
+    "pharma/03-biological-substances/biological-substances-reference.md",
+    "dgr/03-shipper-declarations/completed-example-reference.md",
+    ".claude/skills/dgd-check/checks/01-header.md",
+    ".claude/skills/dgd-check/checks/02-classification.md",
+    ".claude/skills/dgd-check/checks/03-aircraft.md",
+    ".claude/skills/dgd-check/checks/04-certification.md",
+    ".claude/skills/dgd-check/checks/05-form-condition.md",
+    ".claude/skills/dgd-check/checks/06-vs-awb.md"
+  ],
+  "precedence_levels_cited": [
+    "IATA DGR 67th ed.",
+    "standards-of-precedence.md section 1",
+    "PI 650 / PI 954"
+  ],
+  "findings": { "critical": 4, "major": 9, "minor": 2 },
+  "checks_not_performed": [
+    "check 6 — agreement with the AWB: no AWB submitted and the declaration's AWB field is blank"
+  ],
+  "unverified": [
+    "Red hatched border and form condition — form-field data was read, not a rendered page",
+    "PI 954 and PI 650 quantity limits — no DGR 67th ed. copy available to this run",
+    "Whether the emergency telephone number is monitored 24 hours",
+    "State and operator variations for the IAD-ATL domestic leg — no source available",
+    "Absence of a packing group for UN3373 — consistent with PI 650 practice but not confirmed against a DGR copy"
+  ],
+  "verdict": "REJECT - DO NOT TENDER"
+}

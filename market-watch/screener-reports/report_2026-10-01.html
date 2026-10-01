@@ -1,0 +1,1425 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Aurea Market Watch - 2026-10-01</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --green: #22c55e;
+            --red: #ef4444;
+            --amber: #f59e0b;
+            --border: #334155;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        h1 { margin: 0; font-size: 2.5rem; }
+        .market-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .index-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            border-left: 5px solid var(--amber);
+            padding-left: 15px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+        .card.warning { border-color: var(--amber); }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .ticker { font-size: 1.4rem; font-weight: bold; }
+        .price-row { font-size: 1.25rem; margin-bottom: 5px; }
+        .positive { color: var(--green); }
+        .negative { color: var(--red); }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .stat-label { color: var(--text-muted); }
+        .range-container {
+            margin: 15px 0;
+        }
+        .range-bar {
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            position: relative;
+            margin: 5px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: var(--amber);
+            border-radius: 4px;
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .notes-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        .news-list, .filing-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+        .news-item, .filing-item {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        .news-item:last-child, .filing-item:last-child { border-bottom: none; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .commentary {
+            margin-top: 15px;
+            padding: 10px;
+            background: #2d3748;
+            border-radius: 6px;
+            font-style: italic;
+            font-size: 0.9rem;
+            border-left: 3px solid #60a5fa;
+        }
+        footer {
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nexus Aurea Market Watch</h1>
+            <div style="color: var(--text-muted);">2026-10-01</div>
+            <div class="market-bar">
+    
+                <div class="index-card">
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">S&P 500</div>
+                    <div style="font-weight: bold;">7,666.45</div>
+                    <div class="positive">+14.91 (+0.19%)</div>
+                </div>
+            
+                <div class="index-card">
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">Nasdaq</div>
+                    <div style="font-weight: bold;">26,871.60</div>
+                    <div class="positive">+10.54 (+0.04%)</div>
+                </div>
+            
+                <div class="index-card">
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">Dow Jones</div>
+                    <div style="font-weight: bold;">50,926.56</div>
+                    <div class="positive">+20.51 (+0.04%)</div>
+                </div>
+            
+                <div class="index-card">
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">VIX</div>
+                    <div style="font-weight: bold;">16.39</div>
+                    <div class="positive">+0.05 (+0.31%)</div>
+                </div>
+            
+            </div>
+        </header>
+
+        <section>
+            <h2 class="section-title">Stocks Watchlist</h2>
+            <div class="grid">
+    
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">CARV</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Carver Bancorp, Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $1.78 
+                        <span style="font-size: 0.9rem;">-0.01 (-0.56%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 1,603</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $10.38M</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $1.07</span>
+                            <span>52W High: $3.85</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 25.53956731617879%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Community bank / ownership and capital structure watch</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track filings, dilution, capital position, insider activity</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTFA3dWRmU250NGlaNEFIb2pobmNSd05OeTE4MHNXelVhckgxVVFiQ2ozYTdyQlM5S1B4TXFPblI3YTYxU2tadzFEU1NlV2Zna21aWE9acXZVc1lvZ29sZnh6UExTQ1ZOcFhvVlBXY0NHRQ?oc=5" target="_blank">Carver Bancorp Inc. (CARV) Stock Price, News, Earnings & Company Profile - RTTNews</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">RTTNews - Tue, 29 Sep 2026 21:56:30 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track filings, dilution, capital position, insider activity... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">INFQ</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Infleqtion Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $13.36 
+                        <span style="font-size: 0.9rem;">-0.11 (-0.82%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 4,442,020</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $3.01B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $8.52</span>
+                            <span>52W High: $21.28</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 37.931031792141425%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Quantum infrastructure and public-company watch</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Verify latest filings, capital raises, partnerships, dilution</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxOMUVPRDBlNmc0RTg4dVQ4WGl4anZaSEZOUEJwU09CelloY3hsNjJKaTVlVXNqNDlPMDJwQzVDazhBM19pQ2NuZV9NUFZoenZnTi1FdEMxSE5JVDJoZGRpa0tnd04tS0QwUnFPZmp6eEhiZjJDMTllcTUwUTBpUnFhWWdRNzdJY2t0VTZXT3h0V3hwMHdabmR2SEVQc2poc2xTYlpjTWhDT2YtU1JFajVPVm56c29XbFNFRUtmUHRzd0RQLUsweHE5Snl1U2ViOGpuUTEzRTlZZTFmOHF4UW5LLWN0UDFWcElrbm9MT3NnSlg?oc=5" target="_blank">INFQ Stock Surges After Infleqtion Solves Key Technical Hurdle In Large-Scale Quantum Computing - Stocktwits</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stocktwits - Thu, 01 Oct 2026 01:25:58 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE9KVnp5cjBsZEh3NDU1cXNSeHNOamRNVnFBYXR0Zlo2VTZDSEVMY2xRRlVMcEdZQlBRRklTTG5VQUZNTVJ3TzdlYU5qUjlmY1BZVmVMMFN3UGc1OEo4M1JtekJZRjZJUQ?oc=5" target="_blank">INFQ Nov 2026 11.000 put (INFQ261120P00011000) stock price, news, quote and history - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Wed, 30 Sep 2026 08:42:56 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE52UFFyeXNSM2QzN28xZXBubFdRQjVWSHNNNExySFJ2N2JvbDFNVU11XzZoS1dVSE1wZi1aUUxyZDJSTW1Yczgxa0dwbVVmZU9GMS14SFBEWWpGU3NBcEMyT1dLREVDa1BOQTRKYmNkTm0?oc=5" target="_blank">INFQ Oct 2026 11.000 call (INFQ261023C00011000) stock historical prices and data - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Wed, 30 Sep 2026 08:48:18 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBwdkxaS2tqRFBFXzNGNU1DdDItRnZWeHFuVDNOVm1BMHpfMlJseks5UGxHTG5kR1F5YnpPWktqTlNJblhWSTNkSWxIV0VLQ3ZBa0R4b3pZdGVEZnBNSEJlNktqVDFkWnI5eFEtUWpxX1c?oc=5" target="_blank">INFQ Oct 2026 11.000 call (INFQ261023C00011000) Stock Historical Prices & Data - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Wed, 30 Sep 2026 08:36:04 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE13TUE2Njhsdi1neTBJNlpkSUZVMlBvOTV0Y3FRUnljX0t2aFBrNHprWjVPVnRRbHZ2NTBIR05LNlY3S3ZQdDNqT0wxSWFsMURkSTJnQlRrLWhiUFJSdG8wZDE4OG4yUnlyclRFVzhB?oc=5" target="_blank">INFQ Oct 2026 11.000 call (INFQ261023C00011000) Interactive Stock Chart - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Wed, 30 Sep 2026 08:41:41 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Verify latest filings, capital raises, partnerships, dilution... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">LIFE</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Ethos Technologies</div>
+                        </div>
+                        <span class="badge" style="background: #3b82f6; color: white;">Medium</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $32.57 
+                        <span style="font-size: 0.9rem;">-1.00 (-2.98%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 3,515,343</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $3.12B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $9.45</span>
+                            <span>52W High: $42.55</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 69.84894167620611%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Insurance technology / newly public company watch</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track filings, revenue growth, profitability, insider activity</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiUEFVX3lxTE5KeFo5WUxJN2dBMWN4Yjd5NER3RS1Ga240TWRyQllGOGF5ejNlc1Q2bVByWlliS2hDaVFMZW5ZamNWdVdERkkxLVB3bGhJbl85?oc=5" target="_blank">Wave Life Sciences, Inc. (WVE) Stock Price, News, Quote & History - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Thu, 01 Oct 2026 01:04:48 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi9wFBVV95cUxORmU4U2NtVUpKV2ZSNTJxMF9LY0FETTZlUFBsYXNvSGVDSGJfNzQ1SzJaSElRWDhmZU1EREZ2MzhnZzh2N05NWTFSaHNUZ1VlX0RuLUZqMVdqbDVfVlBEMGp3cVRxUEU4cnJndm5hbUV5WmZZSWJZaV80aHNQNlJqbl9yUGdPaDdsNUg5UWVtTDVmRnFpbjU3Yk9sMHdNRW9fOHBxaFl2ZlYwUnpaajBvSFljU01zQjVGR3JjeElOUFF1MUxyT1puYThyc0kyc2NRT1E4bTdSQVZLVk9VM1pycUgxdm1KN21TeFZQMGIzR0dzOTU0RUNZ?oc=5" target="_blank">Ethos Technologies Inc. Class A Common Stock (NASDAQ:LIFE) Rating Lowered to Neutral at JPMorgan Chase & Co. - MarketBeat</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">MarketBeat - Thu, 01 Oct 2026 13:14:20 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxPek5ESDRYQkFackE2R1Y4eFVCb2R5dUhWcGtFQ1ktWHhMMFpPQUcwdjlYdjF6ZjFNMmhBekR3elZiWFFMQ3V2Y3hxYVJRRmJxRGdJcGcyWmdzeU1RVmpWbnJINTNaSG1FZEJRc0tneHhzb3BObGpkV2FJUlczZ1dKX3dhYzVvekdrYl9lczgtclZSV1dkWlNvUjRnTDhwcnQ1dk5sZ1A5SHdoVmN2QUduMUZyODFyTnVJZTg0NlE0dklwQTl2TEtjQWFZUlh6T1FCNEsyR2RZQzJLNXNlM3F5T2ln0gHnAUFVX3lxTFBmR193cmFIeDdaMDhDcHN1a3pHVk85OVFxZ0d6elhCZHpsTEZoNGxocXhaLXJkQ1BCbldGZ0ZRN0JPc3Q0RHp3bFVGcWtSX0Nud3kyeHo1UFlxSWRodlVzMjhVbTBodzh5QUlON3dqTEpuWW5mR0Q1bjl6SmFqOXZNamNvenRYV3JmMzctWC1rTUNUVWJtN2JRQV81Q1hodl9CUkZmY0JhRVA1MHdpQXFuckhTZHVWU1poczZPWHVwazNrUVhmZzYxSllpdlJIRjhpcUVuanRWbFhEZGpDSWVVS1VqWUM0RQ?oc=5" target="_blank">Boots Sale Spotlight Could Lift Interest In Venture Life Group Stock - Simply Wall Street</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Simply Wall Street - Thu, 01 Oct 2026 15:41:30 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE44bWpNOFlYa2dTVU1qc0xZMFBDcGdNQnV0Ny1iaFVVMjBpX0p2bjZyeXV0ajd1Y3BsN1NnLW9adUVtLTdjOTBGXzQ3QlF2M2pDWUVJMQ?oc=5" target="_blank">Manulife Financial Corporation (MFC.TO) Stock Price, News, Quote & History - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Thu, 01 Oct 2026 01:10:15 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTEtqSHZhVE5tZDNUb0o4bWtYTmtTbENYTlpZRFNpMTBJQmFfRlpXMmU2ellrTTdrQzctajVzYnNNNl9tbnVKeE5rSy1TUFZFWFpNUlUxUXlNUjE3REVDYnZfaTVOMFZyOTMyZGJnSHRBTWk4MjNWODBUcDVRSUxsRUdrOHd3SnFRMDBGM2YxVFdZbVgzaTVobkdxSUlkZklIUWZLMmM1enFkamFwdUF0Vkxybmg1SUZjNzRyd3haaER4UTB3S2hUYg?oc=5" target="_blank">Hanwha Life acquires Acuon Capital: what it means for Hanwha Life stock - AD HOC NEWS</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">AD HOC NEWS - Thu, 01 Oct 2026 15:50:00 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409116/0001193125-26-409116-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409118/0001193125-26-409118-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409127/0001193125-26-409127-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112568/0001104659-26-112568-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132581426000154/0001325814-26-000154-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000165495426008746/0001654954-26-008746-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000165495426008634/0001654954-26-008634-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133039926000127/0001330399-26-000127-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133039926000125/0001330399-26-000125-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132581426000156/0001325814-26-000156-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133175426000192/0001331754-26-000192-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133175426000194/0001331754-26-000194-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000131694426000160/0001316944-26-000160-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132677126000159/0001326771-26-000159-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133146526000177/0001331465-26-000177-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133175726000177/0001331757-26-000177-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132587826000207/0001325878-26-000207-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132587826000205/0001325878-26-000205-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000132677126000157/0001326771-26-000157-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133175726000175/0001331757-26-000175-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133145126000182/0001331451-26-000182-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133145126000180/0001331451-26-000180-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133146526000175/0001331465-26-000175-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133146326000186/0001331463-26-000186-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000133146326000188/0001331463-26-000188-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000085014126000036/0000850141-26-000036-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000191132126000036/0001911321-26-000036-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000183368326000019/0001833683-26-000019-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000176549626000018/0001765496-26-000018-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000183368326000018/0001833683-26-000018-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000176549626000019/0001765496-26-000019-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000184986726000022/0001849867-26-000022-index.htm" target="_blank">Form 8-K/A</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526407823/0001193125-26-407823-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031535/0001437749-26-031535-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045123/0001493152-26-045123-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000166357726000311/0001663577-26-000311-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000071253426000067/0000712534-26-000067-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045157/0001493152-26-045157-index.htm" target="_blank">Form 8-K/A</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026105778/0001213900-26-105778-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000167770326000118/0001677703-26-000118-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226044917/0001493152-26-044917-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000139873326000052/0001398733-26-000052-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526405776/0001193125-26-405776-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104901/0001213900-26-104901-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045260/0001493152-26-045260-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526408287/0001193125-26-408287-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000076642126000043/0000766421-26-000043-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112354/0001104659-26-112354-index.htm" target="_blank">Form 10-Q</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000170160526000029/0001701605-26-000029-index.htm" target="_blank">Form 8-K/A</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026064135/0001628280-26-064135-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104755/0001213900-26-104755-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526405731/0001193125-26-405731-index.htm" target="_blank">Form 10-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526410677/0001193125-26-410677-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526407701/0001193125-26-407701-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409206/0001193125-26-409206-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119983526000359/0001199835-26-000359-index.htm" target="_blank">Form 10-K/A</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000007312426000057/0000073124-26-000057-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409451/0001193125-26-409451-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000179454626000020/0001794546-26-000020-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526407337/0001193125-26-407337-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000126282326000067/0001262823-26-000067-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000193943326000158/0001939433-26-000158-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000156276226000113/0001562762-26-000113-index.htm" target="_blank">Form 10-Q</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000075500126000031/0000755001-26-000031-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226044801/0001493152-26-044801-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000182014426000033/0001820144-26-000033-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111952/0001104659-26-111952-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000129413326000037/0001294133-26-000037-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000095015726001054/0000950157-26-001054-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409138/0001193125-26-409138-index.htm" target="_blank">Form 10-K/A</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526408052/0001193125-26-408052-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000164511326000071/0001645113-26-000071-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045265/0001493152-26-045265-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045034/0001493152-26-045034-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526410662/0001193125-26-410662-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000165495426008640/0001654954-26-008640-index.htm" target="_blank">Form 10-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000073787526000035/0000737875-26-000035-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000152447226000134/0001524472-26-000134-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026064259/0001628280-26-064259-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526407331/0001193125-26-407331-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000147793226005955/0001477932-26-005955-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026105464/0001213900-26-105464-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031602/0001437749-26-031602-index.htm" target="_blank">Form 10-Q</a> - 2026-09-30</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track filings, revenue growth, profitability, insider activity... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">WQTM</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">WisdomTree Quantum Computing Fund</div>
+                        </div>
+                        <span class="badge" style="background: #6b7280; color: white;">Hold</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $32.20 
+                        <span style="font-size: 0.9rem;">+0.14 (+0.44%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 182,119</div>
+                        <div><span class="stat-label">Mkt Cap:</span> N/A</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $23.18</span>
+                            <span>52W High: $41.38</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 49.574063000491634%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Sector basket / quantum theme watch</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">ETF, not operating company; analyze holdings and sector movement, not company filings</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE13cDl6ZXRUMm5mM0dZRVVNRkJ2ZjFUSHI3VUF0Q0pNVk5wd2ZnRFZnYzB4VjBCVGhFRmlVbWZqLVNNUjZzbDgwM1ExeG5vMzZ2aWU2RXlYX2pzbGJzU1RxZDBfZw?oc=5" target="_blank">WQTM ETF Profile: Dividends, Returns (HAN:WQTM) - TradingView</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">TradingView - Tue, 29 Sep 2026 21:31:08 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE0xODVjTllCeHhfeXZsUWliY18wRVZqU2t0Q0pzS2ZUVmgyLXd4MHQzazRLMFJydXNPSXFlUEtHM1p1ejVIaEtWZjlkanA1TkUwSzZrdXV6dENhaUdMR01ra04xNmM?oc=5" target="_blank">WQTM ETF Holdings List — HAN:WQTM - TradingView</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">TradingView - Wed, 30 Sep 2026 02:01:34 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: ETF, not operating company; analyze holdings and sector movement, not company filings... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">CJMB</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Callan JMB Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #ef4444; color: white;">High-risk watch</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $2.27 
+                        <span style="font-size: 0.9rem;">-0.16 (-6.58%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 58,796</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $15.11M</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $0.65</span>
+                            <span>52W High: $5.61</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 32.66128993803456%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Healthcare logistics, vaccine storage, emergency preparedness, specialty packaging, regulated operations</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track Nasdaq compliance, reverse split risk, dilution, government contracts, customer concentration, 10-Q cash burn, going-concern language</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxQTXJ6Y082aDJBTmhoTDg3dHh5d0VyNXVsNVNkajhkWmhwTXFzbHRzcFItcFZMb0lWd0ZTWFo1a3ZxTkNTSUdCVUdVTkpnbDZKRUIyTHhwR0ZhZ1o3RE92N1B0NGEzM3BnTFhOdHRuY2djVG5uMEg5ZUZPeXVock1kXzRaU3NJMi1USWlraUpKZ3I0aHlpRnlBSFBRTVh1SDV5ekpmT1B0dEllQUNHekpYNEx3STdpQUhKSVZLOVBTZi00Ti1lQTdwSU81Q0poZWtr0gHWAUFVX3lxTFBvbnJNNnhpTjlTRG0xaU9LZGI1RzB3R0VRZF9DV3g5ZTl4d0FRUFRuWk1wUnQzd2Ztbm1WODRnd3hMZS1FLTJzTFE1V2hYb2t1YVNteUh1bzhYR2tVbmZoMjRtNDFWcW45N3pOMk5wdWwwQlUxWENFTUlZQ05ZSEFLWW1iLTdyajU0eGFxem5temJDQWo2RUszN3JIX0JsY3lFdGs2clJYR3FVUTVRVFBLQnJFekhHSWJlWjlaclphZ3IwdmlTbWc4OGttb1NJMmNYb3M4QkE?oc=5" target="_blank">Callan JMB Insider Confidence Rewarded, Stock Hits US$13m Market Cap - Simply Wall Street</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Simply Wall Street - Wed, 30 Sep 2026 10:41:15 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track Nasdaq compliance, reverse split risk, dilution, government contracts, customer concentration, 10-Q cash burn, going-concern language... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">CRCL</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Circle Internet Group, Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $82.91 
+                        <span style="font-size: 0.9rem;">+0.74 (+0.90%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 9,206,141</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $22.60B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $49.90</span>
+                            <span>52W High: $159.47</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 30.12686288410092%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">USDC, digital payments, regulated crypto settlement, reserve infrastructure, trust-bank development</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track 10-Q/10-K updates, Form 4/Form 144 insider activity, USDC circulation, reserve income, regulation, competition, Arc blockchain execution, valuation risk</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPTFUzbHQ0WGhoV1VOX2lRenlSQkIyemN3THJvaDBYUktzdWIwQ1dnNHFhTUlSV1Robm9uYjZ0YXEwdkpUV00tcUJRSDVSTi1ycUhoWFNCVjMyMEFrb2NrVFQ5b2kxWVhSallZY1Y3VnFJdXJST2NRZjgxamZCQWhnQ0p0c1I2UENSdWFaVmJ3aVUzcXJNRC1lQXU4OA?oc=5" target="_blank">Circle (CRCL) Stock Looks Fairly Valued Despite Fresh USDC Partnership News - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Wed, 30 Sep 2026 16:11:47 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxQX3JaOWNRM29uMy1Lam51aTNfUmNCM280dnZialRMS3Q1b05tYTFhdjdpV1lYaTYtS3JweGNXMW5tbDhGUTZwZWtkYWRSNWRMUm5TbEkta0lwNl9MUTNwNFBOWnF4aHQyMF9iYWc5NXNwMzdCbjREZkNCb21pZzZ0dDk4YUFuWkFraXVXRXFUXzhOaVNCc2haN3JBdzI0bzNhbDR0Rg?oc=5" target="_blank">After three 50,000-share sales, a former director proposes another at Circle Internet Group (CRCL). - Stock Titan</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stock Titan - Thu, 01 Oct 2026 13:40:15 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxPY2p6dmZYc2RMdTN5dG1sSTYyTHZiamtkanRfSzVwMzQ5T2NWTEFCUmZzOG5QQ04tVk5ZRFl1SDJ1SWVjZU5mdklaeWhwSUhaTWtIWVNBXzRIVXBlWXFZNm92ZnRzUFZPZVJSZWc0cGFQQWhXa0ZVT0UxbGFsaklocnlyWWE1V1BSTUUxMTdHX0V2al9md1BZWnlJUkxVamdsbnR6ZnZUT3RCR0tXMm9lc2draERLaUVtZW55N3I1NUVmVUNNRmplb3dtRzdsV01XNFZz0gHYAUFVX3lxTFBwZlEyN0hpbG9hem9pS3NyVG1GdW5TY1RGbHRPVWlCdnJvVkZXMnhIN2tGUGFGdWdIbUw5dlFXVVpBblN6NFdLTXpBNnZEbU9KamtXdUQ3R1BkU0VfRFZvejczc29vR1FqODhTLVFBNlpSVnc0X2o1U3VVX2RncGhMWTVqZFZPY1FOVWxISzVTeWhqZTd5WC1TeDI2YklaRWJIeFBRX1JtRnQ2TG9sZ1BveTFXRlNEMXpWWHVpUXNmckZ1TEtGWVBjQjVHNVRUSzloc2sxUG56ZQ?oc=5" target="_blank">Circle Internet Group (CRCL) Launches Arc And Adds Capital, Is The Stock Cheap? - Simply Wall Street</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Simply Wall Street - Wed, 30 Sep 2026 20:02:23 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTE1FYUswSVd4eUJkbklBMVNWbnp0dzlFRGFoM1llOW8zRWk4TGI1bjBfVHg2eE9LcmFZalFZcUdqSGozTFROYVRuZ2RhV25WdWhaTDBabF9XV1Y?oc=5" target="_blank">CRCL Stock Outlook Ahead of U.S. Core PCE YoY Data Drops Today - Cryptonews.net</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Cryptonews.net - Wed, 30 Sep 2026 21:42:24 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxQZXVoQ2R5WFFmMUZTV1YyUXVLckhWeVNaSWg3c2wzcUpjTS12QXlsQmx4UklwWDlwUFdnaW1rSUpmU3ZaeFdTSjViSjVmRmxxRmFJeFZCc3R1MVgyY2ZGR0N2blZsYldXNkRES3NjYmU5dUdYeXJET19DQ3l6ZjNnWFl5dllTZURkWHU2eWpYZ1BFRkVfa2c?oc=5" target="_blank">CRCL Stock Outlook Ahead of U.S. Core PCE YoY Data Drops Today - coingape.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">coingape.com - Wed, 30 Sep 2026 10:39:30 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track 10-Q/10-K updates, Form 4/Form 144 insider activity, USDC circulation, reserve income, regulation, competition, Arc blockchain execution, valuat... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">CRSP</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">CRISPR Therapeutics AG</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $55.44 
+                        <span style="font-size: 0.9rem;">+0.12 (+0.22%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 1,050,259</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $5.36B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $44.12</span>
+                            <span>52W High: $78.48</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 32.94528121859425%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">CASGEVY commercialization, CRISPR/Cas9 platform, gene-editing pipeline, regulated medicine infrastructure</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track CASGEVY revenue and patient starts, Vertex economics, cash burn, clinical trial results, safety/regulatory updates, dilution, and pipeline progress</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOekw0a2F2WmZQMGo4ZC1Ha3hNQ3ZBaTczMWh2RENxWHIybUVTLUpEcWtXMXN2aTNxQzMzeURjYy15NGVYVmtMVlV5enFRV2tsUk1wREFSQ1FhdDU2MEJ2VVBsWW9HZGN4TnFOSzdWMW02UzNIbEExaFdFMDB5LVJBQlhQZEQ0WUUxVHdITFFWRWVoWFpuWXZaRlU2VW9oTF81cUQ0azBoczlmajl2TUlOc1NUd2FFWlZXcXJrQmhYcjY1dw?oc=5" target="_blank">Responsive Playbooks and the CRSP Inflection - Stock Traders Daily</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stock Traders Daily - Wed, 30 Sep 2026 22:10:02 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNRC02TmFSWThENGxfVWhXWXQ5NmcxTlFfa3U4OHZPNkJxalFTcnloeTJmN2FoNjBpOGZ5eDRZcklXeXh4UVZVdDRiWGM2ZXZyVThBbHRJbzR6TnFFblV0WXJnRzFOMGhDWWJOdWVSLWYyOFFyVThGT0lxbEwwQzJUSTZha1lhdjZBOVVWVVc1UXBOanhpUWh2NEM3WFJ4Zw?oc=5" target="_blank">Anthropic Just Made a CRISPR-Like Discovery. What It Actually Means for CRSP Stock Investors. - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Wed, 30 Sep 2026 14:07:40 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBqd3dGdWZSYkdLMjRaY1hEN3N3SjdfcjVfcEowUy1yc3M3bUxjUzBiRVJrX21VVVFOUW9pUEQtbm13SngzdElBRTF1QVR0WjI3cFlxcW9pQ0otV1hfLTgtUHBRX3JjZw?oc=5" target="_blank">CRSP Oct 2026 57.000 call (CRSP261002C00057000) stock price, news, quote and history - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Wed, 30 Sep 2026 23:01:10 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE01YXowMVc4Rk5WcWwzN0pMLVNZYTdlcU0wb0ZQVHp1X1YyOFk4MERTOHoxcFhsLU9xQUx1SGwtcG1wN2ZDazhwclExM0VfNkdQN25Od1ZtX2FZRG1OMnh0eVZ0NU93MjBvS1VzVzNB?oc=5" target="_blank">CRSP Oct 2026 61.000 call (CRSP261002C00061000) Interactive Stock Chart - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Wed, 30 Sep 2026 23:00:05 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxOLXpUZjV4X1l0NGtoMEdqejRtYWZOcWJvX1VXaUNaYTJ1aXByQmRUdDF4Mm1xdW5raklFdmpDWmhKTkFDdXRObGtNSmFnUFhtS1lMMTByZWdYeWFoZXVUMGJ5cXA3YzJVUXR1VlRYRk02dkVGR0llUElPMW1acVFqcjFXQmJUU3Q1N2Q5cUhaOXE?oc=5" target="_blank">CRISPR Therapeutics AG (CRSP) Stock forecasts - Yahoo Finance Singapore</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance Singapore - Wed, 30 Sep 2026 09:09:12 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        CRISPR Therapeutics continues to advance its CASGEVY launch. Focus remains on patient starts and revenue conversion through the Vertex partnership. Pipeline expansion into autoimmune and oncology provides additional long-term value drivers.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">CYRX</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Cryoport, Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $17.36 
+                        <span style="font-size: 0.9rem;">-0.04 (-0.23%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 738,649</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $879.27M</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $7.61</span>
+                            <span>52W High: $17.98</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 94.02122092913753%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Temperature-controlled supply chain, cell and gene therapy logistics, clinical-trial support, specialty packaging, life-sciences infrastructure</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track Q2 2026 results, full-year guidance, gross margin, operating cash flow, cash balance, trial count, commercial therapy count, DHL partnership, dilution or buybacks, and biotech funding demand</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMzRJR2JEU2lJZWVMc3N0c3h4N3ZmdVlxNEQ3LW95aW5SVVNhRWVkbWhTdGJ1NV9WWDdrNmxieXp6ZHZYOUNJN25BMjYyTGhlUURYdmZIMnFjcVFEMEpoNkdqMk5VQk9QZHI3VzhCY2JacjRyMzQ3UmVFcFBGWi1vYW1sQldNMERHb0h0LTRFdUJwcFpUZG5CSWwyWHJOa2dMekc2NTdTeDVUQQ?oc=5" target="_blank">Is CryoPort (CYRX) Outperforming Other Medical Stocks This Year? - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 18:39:34 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE5sbklnRzlraVVHMjNodG5NR0hQc29iMGhwdHplVnRVeEpzNUw0NUV2dDZ1c2sxMXRRakVGS3VtZGNSUXRoZG9oNkd4NlVmSHpTR3ptUzRzSFJJc19UamxrRw?oc=5" target="_blank">CYRX261120C00015000 Interactive Stock Chart | CYRX Nov 2026 15.000 call Stock - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Tue, 29 Sep 2026 22:31:25 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track Q2 2026 results, full-year guidance, gross margin, operating cash flow, cash balance, trial count, commercial therapy count, DHL partnership, di... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">H</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Hyatt Hotels Corporation</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">Medium-High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $160.94 
+                        <span style="font-size: 0.9rem;">+2.38 (+1.50%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 876,323</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $15.17B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $134.18</span>
+                            <span>52W High: $206.86</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 36.8189356651159%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">User works at Hyatt; hotel operations, travel demand, asset-light hotel management, brand/loyalty economics, resort and international growth</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track RevPAR, management/franchise fees, owned vs managed mix, debt, buybacks, Playa integration, development pipeline, travel-cycle risk, and insider activity; do not trade on non-public workplace information</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE5WMzBDVVpyWlNIeTRmblZoTkhpNmo0QUswMWU0QW10SlY4MDEtem81ajVxcWtsV0RDdDg5VUFVSkVDODFxWm9yT25QekJhdw?oc=5" target="_blank">Hyatt Hotels Corporation (H) stock price, news, quote and history - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Thu, 01 Oct 2026 05:35:52 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE5GRVllLUUzOElsWVNCNDA3ZWZQU3BOM2Vmd0pHX1pNZ3MzR21RZ0Qwcms2eHFNVDdVVFQ2NDNXaGtiVXU1ZGJTTzhhbEIyQQ?oc=5" target="_blank">Hyatt Hotels Corporation (H) Stock Price, News, Quote & History - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Wed, 30 Sep 2026 09:05:05 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTFAtR2Q5aGY4dXFNMjZudUlNNVJyeUZzbnp1akVKUkM4Y2M4TGszQkJtdUZJbm5SbHJfTkJCbGM0UU5QRmpOa195TWVVQWhqY1UwLXdvVU9NU2FfbDVhTndV?oc=5" target="_blank">ETFs Investing in Sany Heavy Industry Co., Ltd. Class H Stocks - TradingView</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">TradingView - Wed, 30 Sep 2026 07:54:55 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNb1JkNXB0cFhJQ1U5TGUyWlVOQ0JWVjM0VU5JeE5nRnFpaUFQOGx5cUR1STU2TktSUXpFa2dLUjVWTUdmV1R0d0RxZU1meVA2bFl4c2h5QzlLUE90M29hTTllOVpvbE93SGpHVFY2Rk1IOWVlR2QwdTk3UWQ0WWwxclB4Qk5NQ3RDUzlBcUI2UkJra3ZRNmxPSEc4S2hoM2pmMmk0?oc=5" target="_blank">Hyatt aims to make each hotel brand distinct. Its new creative chief will work across the portfolio. - Stock Titan</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stock Titan - Wed, 30 Sep 2026 12:41:15 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPWTNaMWc3a3k0Q3lWLVZEdmhnVTJjM3h2d1NuSldKTW00bWJ6QXBJQm5WTjdBaC01bHE4UVhRZDBUN2VKUldIeFpPSnE1MS1RY2ZNd0QwZlRrT24xVFdfeW10Y0RuUXdLRk41Z1o2VGVERUpXc2p3WjVvWHJ0RnNMQUh6MWFzN2VBMlU3c3pIMlBzVHgwSmszRDdaR1ZtdHJUTldnR2RVczZXcEJSTTRBNVBpMVhBQTFkVDY4Q0NpelJpVFNDVURqYjBmWFRqdnPSAdQBQVVfeXFMTWlaWXRJOTlOUEYtc3pjVjhCOWVvYkE0VDZOZ1RpSU9xLWxVMk9GM0FpSUpQbmhvcUNxNXpSNnJUUmJMSFF0bHc1eUd4MUhJZm10SVNCUEM5dzRzcTBlaUZCdGRwZDJKSmRkaktSbzFTcmtqdFJxQjN4QkgzVWZjM0Nma29ORzBUVUpoRU9ZbF9TVWtVeThFTkNPbWlZdGVOUVlUZTJCSnpvbnBEZEkyamJwREZia2duVDgxZUI2ZFNFUVhPNGNBQjZ6aWRtYjZWSkE1bnM?oc=5" target="_blank">Essentials Expansion Might Change The Case For Investing In Hyatt Stock (H) - Simply Wall Street</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Simply Wall Street - Wed, 30 Sep 2026 18:05:18 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112148/0001104659-26-112148-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121465926012383/0001214659-26-012383-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026064226/0001628280-26-064226-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000181643126000061/0001816431-26-000061-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026063813/0001628280-26-063813-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031602/0001437749-26-031602-index.htm" target="_blank">Form 10-Q</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112721/0001104659-26-112721-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104429/0001213900-26-104429-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111783/0001104659-26-111783-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112340/0001104659-26-112340-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031486/0001437749-26-031486-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000183526826000038/0001835268-26-000038-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031416/0001437749-26-031416-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000170160526000029/0001701605-26-000029-index.htm" target="_blank">Form 8-K/A</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104317/0001213900-26-104317-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000180899726000052/0001808997-26-000052-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526406966/0001193125-26-406966-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026105457/0001213900-26-105457-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000112329226001333/0001123292-26-001333-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000107997326001303/0001079973-26-001303-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111482/0001104659-26-111482-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026063770/0001628280-26-063770-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112359/0001104659-26-112359-index.htm" target="_blank">Form 8-K/A</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026105757/0001213900-26-105757-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000180899726000051/0001808997-26-000051-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111938/0001104659-26-111938-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000152447226000134/0001524472-26-000134-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121465926012132/0001214659-26-012132-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162828026064276/0001628280-26-064276-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226044924/0001493152-26-044924-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000166357726000311/0001663577-26-000311-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111989/0001104659-26-111989-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000117891326004645/0001178913-26-004645-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000114036126038110/0001140361-26-038110-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104296/0001213900-26-104296-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000168316826007512/0001683168-26-007512-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226044997/0001493152-26-044997-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031655/0001437749-26-031655-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526410662/0001193125-26-410662-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000173882726000058/0001738827-26-000058-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409335/0001193125-26-409335-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226045143/0001493152-26-045143-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026105410/0001213900-26-105410-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000100263826000091/0001002638-26-000091-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112360/0001104659-26-112360-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000107173926000181/0001071739-26-000181-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000101017826000013/0001010178-26-000013-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031535/0001437749-26-031535-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000112632826000214/0001126328-26-000214-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121465926012120/0001214659-26-012120-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000182912626010508/0001829126-26-010508-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000081158926000160/0000811589-26-000160-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000107093826000022/0001070938-26-000022-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000207612026000008/0002076120-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000139564326000018/0001395643-26-000018-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000134888926000012/0001348889-26-000012-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000199377626000008/0001993776-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000118819226000008/0001188192-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000123356526000008/0001233565-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000176174426000014/0001761744-26-000014-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111608/0001104659-26-111608-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000120936626000008/0001209366-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000158268326000008/0001582683-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008014/0001225208-26-008014-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031743/0001437749-26-031743-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008011/0001225208-26-008011-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008015/0001225208-26-008015-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031741/0001437749-26-031741-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008046/0001225208-26-008046-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926112101/0001104659-26-112101-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000182518526000003/0001825185-26-000003-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000126183826000005/0001261838-26-000005-index.htm" target="_blank">Form 4/A</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008045/0001225208-26-008045-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008012/0001225208-26-008012-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121421226000002/0001214212-26-000002-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008033/0001225208-26-008033-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000122520826008013/0001225208-26-008013-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000089183926000421/0000891839-26-000421-index.htm" target="_blank">Form 4</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409214/0001193125-26-409214-index.htm" target="_blank">Form 8-K</a> - 2026-09-30</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111782/0001104659-26-111782-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119312526409856/0001193125-26-409856-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111778/0001104659-26-111778-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111777/0001104659-26-111777-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111780/0001104659-26-111780-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111781/0001104659-26-111781-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000121390026104291/0001213900-26-104291-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000110465926111779/0001104659-26-111779-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000105879526000013/0001058795-26-000013-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000114036126038259/0001140361-26-038259-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track RevPAR, management/franchise fees, owned vs managed mix, debt, buybacks, Playa integration, development pipeline, travel-cycle risk, and insider... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">IBM</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">International Business Machines Corporation</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">Medium-High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $225.62 
+                        <span style="font-size: 0.9rem;">+5.69 (+2.59%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 8,752,095</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $212.56B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $199.19</span>
+                            <span>52W High: $332.46</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 19.831916498227287%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Red Hat, watsonx, enterprise AI governance, mainframe infrastructure, quantum research, automation, and dividend tech exposure</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track software growth, Red Hat growth, free cash flow, debt, dividend coverage, consulting demand, AI revenue quality, quantum milestones, and mainframe cycle</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNbG4zNG1iV2pGM3NQaWdrYV85b1YyQkU2Uzk1WnJkSnJmZnR0Y19LaHNGSkNmZGRnQXI2eEU3bEpHeUxqQXZ2eWRSeUFfNWNyeHRkNXBHRFRvRWhZZVFzTy1fRVJPaF92Z1NZdXUxS3VrRXh5T3MzZzM0eXhXM1FuWnUzQUkyT3BSUVRRTnNFXzE?oc=5" target="_blank">IBM Jumps 5% as Bob Coding Agent Gains Self-Hosted Deployment; Salesforce Rises 3%, Palantir Inches Higher - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 13:23:43 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxPZjRwQUFualpFMG1uUEVVdEwxUzhfSlN1ZDZyU1pDSk1aa0JCemo4M2l5aHJoeFZJR091YXFjTDBWdzNWc1pQdVkxVUpBV0FnQkNXUWJTVWllM3l2SUVERTNaNDBkVGtyVmFlZDdzbDRWRkhOTDVCWEFfXy1mLVFlRl9QT2JVOHRQ?oc=5" target="_blank">Strength in Accenture’s Consulting Business Gives IBM Stock a Much-Needed Boost - barrons.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">barrons.com - Thu, 01 Oct 2026 17:37:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5nRkRETUZkeU1NZ2ppa3BzZDRUT2VkUm9yTFlrRkdFelAzYmU0T25sd0lfSkttMDZvVENCVUg1NUkydzI2WU9ieC14MU5WX2ZUVjBJYVNmSkE1R1dmNldNM0V6RXJkLVM1SHBsRWdB?oc=5" target="_blank">Is IBM Stock a Buy? - The Motley Fool</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Motley Fool - Thu, 01 Oct 2026 17:48:35 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxQMUFDNXFHdlo0b2dpb3Fzb0hzMF9xSDRIMXpUbWNDdm5ISi1JNWU0T1dWMl9SdlpGWldPV1BmVFk3VTVIeE42TzNqVlllOUJlTmpWWjR2T0VHc1VxRHJ6UmNUYzRzOUVhdmJRWnZ5M1NSbDlkVWRKTE9fdUZYUXhMekM1S3paUWQtUm1VYS1tNnhBazVnX1V3UFhSdTA4bXREbVdHVkRtS1YwOTg0UUszNjIwS0dzeWtqLUVYVUQ3SUxaWkNnYVE?oc=5" target="_blank">IBM Stock Rises After Unveiling Self-Hosted Deployment for IBM Bob - Benzinga</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Benzinga - Thu, 01 Oct 2026 11:44:13 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQb04tMWtYWVNKenF5WEtQRm1Ub1VLTnpKQ0s3anI5a1BOTEVfQnAyVHdYXzVhRU1obTNtZWNwcEgyYXYtSkNvR1ppcUhUNmcxUTlPWklMQXh4dUdPdXFfX2NESTVhMXU0VVYxTkcxRG9iSFUtN0JmZFBoRDZ3N2pMazQ1TF9ENVFaNWJ6dTlHazlRVGEtbHRRenRVWUFjWWRVZ2xSdXR2a3lIVVdob1djVzgwS0dEOEhuYUhrYVJB?oc=5" target="_blank">Why is International Business Machines stock rallying today? - Investing.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Investing.com - Thu, 01 Oct 2026 11:27:57 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000005114326000086/0000051143-26-000086-index.htm" target="_blank">Form 8-K</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000176527126000004/0001765271-26-000004-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000173898726000004/0001738987-26-000004-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000162879726000004/0001628797-26-000004-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000173181426000006/0001731814-26-000006-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000177193326000007/0001771933-26-000007-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000176938926000005/0001769389-26-000005-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000119698526000004/0001196985-26-000004-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000180418326000014/0001804183-26-000014-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000118347426000005/0001183474-26-000005-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000126997126000004/0001269971-26-000004-index.htm" target="_blank">Form 4</a> - 2026-10-01</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000145314926000008/0001453149-26-000008-index.htm" target="_blank">Form 4</a> - 2026-10-01</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track software growth, Red Hat growth, free cash flow, debt, dividend coverage, consulting demand, AI revenue quality, quantum milestones, and mainfra... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">INTC</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Intel Corporation</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $120.00 
+                        <span style="font-size: 0.9rem;">-0.23 (-0.19%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 100,882,663</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $634.33B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $32.89</span>
+                            <span>52W High: $142.35</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 79.58158231317377%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">U.S. chip manufacturing, AI server infrastructure, Intel Foundry, advanced packaging, CHIPS Act exposure, PC/server cycle, and turnaround execution</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track 18A/18A-P progress, external foundry customers, advanced packaging wins, data-center revenue, gross margin, free cash flow, capex discipline, AMD/Nvidia/TSMC competition, and policy support</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxNQzkydGxNUGthUXl6S3pkalU3bEFIeG9HOU1GNmxHMURXSkk3WVRqTVR3UGozT2ZkOGVnU1ktZXJoZDJsVXE1WlVfcDFfYlR4T3NXWFZMcnZUeFFyWUkzSktLelhQX1kyQ01paTd4Z3hPcThYT19kOUNiS3RmdGhwNHh6SWppNllSbFBj?oc=5" target="_blank">Intel Stock (NASDAQ:INTC) Gains Despite Foundry Concerns - TipRanks</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">TipRanks - Wed, 30 Sep 2026 19:00:50 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE5vdGJyNHZZM1diX1FWOVpwUVRSRi14X2FyNW9DemtMMzQza2dfc2xQc3hBR1IwQm4xUHI5THc4a2VlYmdpd2pXTmFEOEJiOGM3MUd2ZXA0TTlxM2FhMnVkY0ZMTFhzdXdyYWR0YzBEQkg3QlkyR252bkFoR0FOdw?oc=5" target="_blank">Intel Up 3.7% at $120 as Trump Calls It the Hottest Stock - financefeeds.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">financefeeds.com - Thu, 01 Oct 2026 13:07:56 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxOTVUwMERLWmNodDJyZjNicWMtaUFNNXdhZmVWSVFSNVROUHhPS1FEOGNCM0RmTGxIOUVBX0p0cE16bnR0aGg3Y29MVk9qSWdVNndjS3NkSG0wWVNESG9wU1Jzak1MdjZzZ2ZYbGFJRGozVVlGME55cGIwTHcwb2x2UGhZVDlkdTVj?oc=5" target="_blank">TSMC Vs. Intel: Goliath Is Defeating David (NASDAQ:INTC) - Seeking Alpha</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Seeking Alpha - Thu, 01 Oct 2026 05:54:47 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxNcmNkVEpsZ01BdHdzTldzSW9pMjBVeVhsWFBZMUR1ajVRNEo5LWIxa3dqOHY0dUtMVzBtTS1ZcGRFXzktQkRvM2pGZnpJejhXLTZsT2VRanJVY29BX1JrUEhwdTNfbkdaXzdFdnBRTE02MnV3R3J4cHVGNXdjV0RhMnhaa3NfNFQ5eUNGbGp5TGNyZXZwWGJFamYySXZHaTRGWWx2X2ZCb0pQdEt6dmNHZXFVNkd2SlNqUENNTzREWlQ4RUJLeWlrSXBxd1VZSHNDakUxSE9UUWZkQkFoNU5N?oc=5" target="_blank">Intel Surges 222% in a Year: Should Investors Join the Bandwagon? - The Globe and Mail</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Globe and Mail - Thu, 01 Oct 2026 15:26:27 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxOUG45OHp6eDR1ZVUzS0lZZmVlemJTNFFERXZxMGhJck5vaDRqOFU3ZUQ5bWJuQU5RU0pZMEhyTG9BWko0bTY2QUtIbUN3WTl5MlZCR0pROXVpclRrVEJWU1QyOHQwQS1ob2Q5M0NVLVRuNW16d2pnQm1Lc2E2NGlBUVo3WkxteVpaLWtibHBSTlZVb0pLRDdTT0cwekI?oc=5" target="_blank">What's Going On With Intel Stock Wednesday? - Benzinga</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Benzinga - Wed, 30 Sep 2026 17:07:46 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Intel's turnaround hinges on the 18A process node readiness by 2025. Foundry customer wins are the primary catalyst for valuation re-rating. Capex discipline and CHIPS Act subsidies are necessary to bridge the current cash flow gap.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">IPGP</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">IPG Photonics Corporation</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">Medium-High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $83.66 
+                        <span style="font-size: 0.9rem;">+5.38 (+6.87%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 433,837</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $3.55B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $69.41</span>
+                            <span>52W High: $155.82</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 16.491151096064552%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Fiber lasers, industrial laser systems, precision manufacturing, automation, semiconductor/medical/defense exposure, and optical components</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track revenue recovery, gross margin, industrial demand, China exposure, bookings, free cash flow, insider 10b5-1 plans, competition, and emerging-growth product expansion</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxPRVNNZ0Y5T0Z2aWxXZWZpd0Y0eXBYb1JfbTJEa0Z4cUZDM2R0bDJZTnJYYkotVWlmYzRyeExFUF9VMTB5Tm9vbW11NjYyVWdXdWRkNFdWX2pQcDlYc3ZSb2J3R2ZTWXI4aUUySUFRcDQ1VWEtR2pNc2JkVWRsTWxMY3NJOEt6TWtHTzZKN3RaTzNzbWp0bzM3OHROa0N5NF9mcGlZenF4eU9oekJEUTJPM2ZTbUE0M1ByX0VkdENrdVJmVXJ2dE5zb2hxSHcxUmNrLUJ1ZHRhWWRDbUFOQi14U3hB?oc=5" target="_blank">IPG Photonics Corp. stock outperforms competitors on strong trading day - MarketWatch</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">MarketWatch - Tue, 29 Sep 2026 21:26:00 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track revenue recovery, gross margin, industrial demand, China exposure, bookings, free cash flow, insider 10b5-1 plans, competition, and emerging-gro... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">IYW</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">iShares U.S. Technology ETF</div>
+                        </div>
+                        <span class="badge" style="background: #6b7280; color: white;">Hold</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $266.83 
+                        <span style="font-size: 0.9rem;">+1.93 (+0.73%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 586,838</div>
+                        <div><span class="stat-label">Mkt Cap:</span> N/A</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $172.54</span>
+                            <span>52W High: $267.67</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 99.11698367735269%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Broad U.S. tech-sector basket for comparing individual AI, software, semiconductor, and infrastructure names</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">ETF, not operating company; track top holdings, concentration, expense ratio, AI/semiconductor exposure, overlap with QQQ/VGT/XLK/401(k) funds, and sector drawdown risk</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxPQThjV0ZBcWhfaFg4TDE5X1RMUjJkRURmTGRQYXItTVUtbmd4SE9SSEtpNkdsLXRPbW9lNzFUemhVRVVJNi0wSU1zUmJodnhCMlRrdV9ERzJmVTlLZC1lNFJWb1U4TWcwSkJFTTktd3VQZkRMZG1KaUFOd3Vid3NLd1lmTjVmZzZmQVVEekpHV3JqSWM?oc=5" target="_blank">Vanguard Tech ETF (VGT) vs. iShares Tech ETF (IYW): Which Offers Better Value for Investors? - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Wed, 30 Sep 2026 03:10:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPX0l0OEUxZElydktQWHdPUUVtZzB5cjN0Rk43X1Zvdy1qSVY5MldYVENISlBXTTBWVG9yamUxRWZnT0R5dkdKejgtRzE0TkNnazhpNTZsZTlWWW9VUlFxa1NKeGJiREFBTnNBTnEzd0tFUDNMcWFuM1FGMnVfMDVGTnZoNTJ4QUVBZm1kT2hEclVOSEVjRTU4MklPTG94a045cWY5Q1cwcWZySVZ4MmFJcEtkZU5VUWd5amVDb3FWZGdBUQ?oc=5" target="_blank">Vanguard Tech ETF (VGT) vs. iShares Tech ETF (IYW): Which Offers Better Value for Investors? - The Motley Fool</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Motley Fool - Wed, 30 Sep 2026 03:50:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE1ObzNIY1hndFFlYW0yLXNsSDVYemcxNUpwZ0xlX21JVnlDbW9yUnd1cmJlQ1dfNWVVbVBMdURRWUp5OGE3bUdKNE02cHZXcTFkVUJsN1Y4T2pvYkN6QlNFSk1DWQ?oc=5" target="_blank">IYW261218C00230000 Interactive Stock Chart | IYW Dec 2026 230.000 call Stock - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Thu, 01 Oct 2026 00:37:34 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: ETF, not operating company; track top holdings, concentration, expense ratio, AI/semiconductor exposure, overlap with QQQ/VGT/XLK/401(k) funds, and se... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">KTOS</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Kratos Defense & Security Solutions, Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row positive">
+                        $42.82 
+                        <span style="font-size: 0.9rem;">+0.13 (+0.30%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 4,492,439</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $8.03B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $41.83</span>
+                            <span>52W High: $134.00</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 1.074101871351004%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Jet-powered unmanned systems, hypersonics, rocket systems, satellite ground systems, C5ISR, microwave electronics, missile defense, counter-UAS, and national-security infrastructure</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track backlog/book-to-bill, drone production scaling, contract awards, defense budget exposure, margins, free cash flow, R&D spend, stock compensation, dilution, and valuation risk</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxPSTBUX3oybENjYVBnek1qX1FPOEZnUmw0MkVCU2QyVnIxSkVCSjlra0xCZmVNVmJOb014R0R3NFZuYlR5QlNvSENqM0JEZEJfTmhTTjdrVzZjclN6NUQ0SFFIbGN2UDMzNWpkQXBrU1dWa0RDQkNzcHJ4azlNMU03T2JhY1RtdmEzbFBGbTFJVkktejQ?oc=5" target="_blank">ONDS, AVAV, KTOS, RCAT, UMAC Stocks Rise Overnight: Pentagon Maps Out AI-Driven Defense Shift With Autonomous Warfare Command - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 02:10:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxNdFFwNHoxbU53dmtLQ1phRXEtdURJMWprX284aExqSmJ4ZmF5Tzh4UWN3MjVtRTBSX3d2WGhXYk1Kcy05Y3ZLWjU3aGxwYTNTcHhjMm9DTTlpbjZ6X0p1cU5GcnJTc1JFcHlQbWF2N29RVXdDT0V1MGpmTVRXN3ZXcFh5cWprTG02UmFmdkFwRFB0bmk1c2FsVUlldF9hTDZab0pTTnBRQTk0Y3pSVDhMZkZyelRxRmdoTnhhMHl3Yw?oc=5" target="_blank">2 Cash-Burning Stocks on Our Watchlist and 1 That Underwhelm - FinancialContent</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">FinancialContent - Wed, 30 Sep 2026 04:37:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFA5cDA3eXU5eXplY0FDU3hsWkdUS2tqOWNBYWhLQ2lyNEpmMG1rTmhNdGVkNFBMN0RGaU5xUDNtY09kTEowV091ekpxSzFPamZOVWdBaEJFMEFQVzBOQV9JQkRNdkdjcUlRVFFn?oc=5" target="_blank">Why Cathie Wood Is Quietly Loading Up On This AI Stock | Kratos Defense (KTOS) Stock Analysis Miyazaki (AKsviWhxm5) - media.unisba.ac.id</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">media.unisba.ac.id - Wed, 30 Sep 2026 09:53:19 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNY2d6ZmFybjJZd0FacDlmdWNYZXRVMnc5NURaUGd6N3pKU1pMVndXSV9YZVdXRkI1cTloblg3dlhyOWdoWDhnNG1FbUVnaWdpMHZOSFBSYU1oMzZzTDFJNGNhZ294WEJJUlN3NlBYOXVwQTYwWUJEZmxiakZ0b2NQQ19tMnRSSEU?oc=5" target="_blank">Why Cathie Wood Is Quietly Loading Up On This AI Stock | Kratos Defense (KTOS) Stock Analysis Hmp Frankland (bLOH0oo03p) - media.unisba.ac.id</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">media.unisba.ac.id - Wed, 30 Sep 2026 21:06:57 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Current monitoring focus: Track backlog/book-to-bill, drone production scaling, contract awards, defense budget exposure, margins, free cash flow, R&D spend, stock compensation... Data suggests stable tracking within thesis parameters.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">NVO</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Novo Nordisk A/S</div>
+                        </div>
+                        <span class="badge" style="background: #f97316; color: white;">High</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $37.40 
+                        <span style="font-size: 0.9rem;">-0.51 (-1.35%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 11,791,390</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $165.14B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $35.12</span>
+                            <span>52W High: $64.16</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 7.851244923825444%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Ozempic, Wegovy, oral Wegovy, higher-dose Wegovy, diabetes and obesity care, regulated medicine infrastructure, cold-chain demand, and global metabolic-health market</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track Wegovy/Ozempic sales, GLP-1 market share, Lilly competition, oral obesity medicine adoption, pricing/reimbursement pressure, supply capacity, pipeline data, FDA/regulatory updates, litigation, margins, and currency effects</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPLU5uVGhaY3BEN3RRb0FXakIwbm9GOFNSRFd6dTUzM2o3UXlKY2NDWm4zWlVQLXNzSWxnMnJ5TmVtd2xTXzA2S2pXb1V3X3hKYjRISWtySkw5NlNPSUJlWV9jN29DWElwQllMRTBLYlZ6LTlMZ29Ldy1rMkFGZ3R0VWF6bTFuenUxUUo4UkpITGl3MElPazJvZS1JV29jTVN3SEl4S1ZjTGs?oc=5" target="_blank">Why Is NVO Stock Falling Pre-Market Today? - Stocktwits</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stocktwits - Thu, 01 Oct 2026 00:06:33 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbDhYa0dkV3ppZk9PMzBwS0w5NjNGeENoeGx4Wkw2RVJoSHhMMzB2a2t5TG5yWkMtT0tSU0xLTE8xSVJGOGF1OXdldmFtSkE0YllUTGF4Q2ZPbDNQdWJDZFRydHBGR2Z4bFpjb2RiSWZ1QWJRWnhSVklEZTMwSzN3YjBhRW9KYjdpbF9hdDgtM0FUMDh6RjBSWU56WFlXYTM1d3JBdUhTY1FtU0tnRklHNUFRLWZhQ3ZaT1ZZ?oc=5" target="_blank">Wegovy cut average liver fat from 8.8% to 3.1% in 55 adults with excess liver fat over 72 weeks. - Stock Titan</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stock Titan - Thu, 01 Oct 2026 10:45:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBIdmowMzgxQzhMeHdXTDg1cFNncTdITUdKaVE3QTRCNFFFMldsMUpHbmxsQlNfc3BKNnQ2NE1JTFZGT0pCajgzSXJLVzkzZEZWcnFQQUM5bEIwNVJiakhCR29uQmw?oc=5" target="_blank">NVO Oct 2026 39.000 put (NVO261002P00039000) stock price, news, quote and history - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Thu, 01 Oct 2026 00:40:50 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRC0yMURtNTUxTUpNYjRUa2tzenkzTWhzZnNNYzdhUmJNYUxEWTVRMGFXWFdxN1JhM1M0Vk9JQ3lNbUd0REpPQUFseVJZUVE1MmZFYzRYMUVMdkp5OTNzMEJhUG1RcFlKTHpfc2hQaDVfMElLclByZUpva0hMR1Ita3EzS3pvN3lRMlFGazVhQWdCM3VmZmV4RnI4QVdtXzJRcWw3WmZma2Z6UHFfalZ3cTlhdzgyWXVq?oc=5" target="_blank">If You Love Speculating, You Should Keep a Close Eye on Novo Nordisk Stock - Barchart.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Barchart.com - Wed, 30 Sep 2026 14:03:20 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE5EZHNlZGw2aWR0TjhZRHFRcURQZ3FnU1FaOHU1VlNTVFFEVF9vZE1DcWxob0FKNXRLNURDRk5wSkhLaV81dHBYSk5EejEya0NHeWkxNG5meE9uUFhPYjhycE92R0Q?oc=5" target="_blank">NVO Oct 2026 52.000 put (NVO261002P00052000) stock price, news, quote and history - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Wed, 30 Sep 2026 23:48:03 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Novo Nordisk continues to dominate the GLP-1 market despite Lilly competition. Supply chain capacity expansion is the main constraint on growth. Pipeline readouts for oral formulations will dictate the next leg of the obesity trade.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">OKLO</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Oklo Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #ef4444; color: white;">High-risk watch</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $36.14 
+                        <span style="font-size: 0.9rem;">-0.88 (-2.38%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 8,434,789</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $6.72B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $34.38</span>
+                            <span>52W High: $193.84</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 1.103724689356851%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Fast-fission power plants, Aurora powerhouse, nuclear fuel recycling, isotope production, DOE Reactor Pilot Program, AI data-center power demand, and U.S. energy security</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track DOE/NRC authorization steps, Aurora-INL milestones, fuel supply, construction progress, cash burn, dilution, customer power agreements, data-center demand, policy support, permitting risk, and whether first power is actually delivered</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMilAJBVV95cUxQUVNBTTBpakZnSm5ERE82OEhkQVExd2NqY3ZJLV9KcVpXeFBxcE9zamJzR19GdVhuSVdwdVNUYW1zeXZMdUx6ZF9qU09KclhUQjNaaWpFak1nV3NPTkZTai0zQS1QUUNZNE9CdEdQbmJtcEpfb1lYX0xZTGphb3RDZU5wMGJXQ2Y3NENxZTRfZU9zZjFnOXBzcGlCcVc4MjV5dmlQbF9aSjBpOEMtNTMtY1plVmhqazVTSUJIeUE2aGRvLWEtcjJnbHIzWlJOaWthNzd4WnF0OHVyYjV6UFctVXQ0WXczU0dQWXdnTWRnRFd1Z0NRNDhoQ3ZRa0oxdUVydldDWFJSaFpFeGlQNFppYUlpU00?oc=5" target="_blank">X-Energy Just Went Public in 2026. Here's How It Stacks Up Against Oklo, NuScale, and BWX Technologies. - The Globe and Mail</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Globe and Mail - Thu, 01 Oct 2026 18:44:39 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQT0o3TVZ1R2JVMGg3SkRnbnV5a2dXNV9ORVQ0VEhHa2hLaFR6ZVcwOG5ZOWk3NTlNWTRFZUZpYm1IWk50ZFdDRnhHT2ZRZUZJQUJjNjNQSXB6WXdkWmI1UjhZUGxXMTJzckg1MHZMTWxNNkxBUW5iM2w5M1QteDl5Szdfajh5Qkl0Ump2aUpGSFZmTDlpZW5n?oc=5" target="_blank">Can Oklo and NuScale Power Survive a Stock Market Crash? (Hint: Yes, but It's Complicated) - The Motley Fool</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Motley Fool - Thu, 01 Oct 2026 17:32:25 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxQMTRQaUJjdTIxTkZOZHJXcmRNTFBNTkF0dUY2aGFGV1ZSbFl6NENsVmJuNF9BVk9FeVRzQ0l2R2xTUkVSd01MbERDZTVrOGQzYTl5QUl4YzVDSHFnYi1TdllfNDRjWHNCV2tUWEx2cjJWM1R1OGpub0pfMlZuMFFPSUFpVUY4WXpQZjlodUxBSGJmQVRldUhNWUhBZDdHd1k0ZFhsLXJCRk40SDBnOXI2NlV0dXhrSk1NUVI0N3UzdFZESC1yOXFJ?oc=5" target="_blank">NANO Nuclear Energy vs. Oklo: Which Industrials Stock Is a Better Buy in 2026? - The Motley Fool</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Motley Fool - Thu, 01 Oct 2026 13:50:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE1SYW9ob0dkR3FWRlk1QnU3VUhmMEhZVFVZM3dnMWNzTVVIVmo2bXVST2ZhSjBPWXNuc0ZtYnNXSXNacUpaWktXaWM0Qy1WaERaLXc?oc=5" target="_blank">Oklo Inc. (OKLO) stock price, news, quote and history - Yahoo Finance Singapore</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance Singapore - Thu, 01 Oct 2026 12:12:16 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQaXE2YTJXNWI5aWxrb2EtMTUyMmIzOExGUmo4QWNTckFlUldGNzl2RW1wMno1RWJScUNSUmJjbFNJNWNwb3hEUzhVc29weDhtV1hSOXBRdElNbGhDT2FLRFhPUlFKUmN3T2ZuU3ZuZ01NNHNMWERnX0ZDVlJRdU1ibFQ3UkJwVkhDUV9uRHZUSzlmZ3JJSXllN1dwaDZnVXFpU0dPT3dEdDVrQXF5elJOZjlEeGtiY184SEZDcGVldw?oc=5" target="_blank">Piper Sandler reiterates Oklo stock rating on reactor progress - Investing.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Investing.com - Thu, 01 Oct 2026 14:44:50 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000214768026000012/0002147680-26-000012-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000208071726000013/0002080717-26-000013-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000214682826000008/0002146828-26-000008-index.htm" target="_blank">Form 4</a> - 2026-09-29</li><li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000143774926031414/0001437749-26-031414-index.htm" target="_blank">Form 10-K</a> - 2026-09-29</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Oklo remains an early-stage infrastructure play tied to data center power demand. Regulatory milestones with the NRC for the Aurora powerhouse are the next major hurdles. Funding stays sufficient for near-term milestones but long-term capex is significant.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">RGTI</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Rigetti Computing, Inc.</div>
+                        </div>
+                        <span class="badge" style="background: #ef4444; color: white;">High-risk watch</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $15.62 
+                        <span style="font-size: 0.9rem;">-0.12 (-0.76%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 12,733,356</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $5.21B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $12.53</span>
+                            <span>52W High: $58.15</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 6.7733447732553325%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">Full-stack quantum computing, superconducting quantum processors, quantum cloud services, and founder-linked private company Sygaldry Technologies as an adjacent private quantum-AI signal</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track cash runway, dilution, revenue quality, system roadmap, qubit fidelity, customer traction, government contracts, technical milestones, quantum-sector hype risk, and Sygaldry developments</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTE5pSUFzX2hUVExuVDJjTTg2V0FoX1pWVXJBSjNjRlp4SFFIZnRuZDVEWUdKeGp1TnMteTd3VFlBekc0bWZvS0ZLQjVQVFBmcEt0eEE?oc=5" target="_blank">Rigetti Computing, Inc. (RGTI) Stock Price, News, Quote & History - Yahoo! Finance Canada</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo! Finance Canada - Wed, 30 Sep 2026 16:46:16 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPYl8tUkxIc1FEQWVtSUFKV2IwdURrYW0zQjZPSVBwdWJJNUFjVEVEUEc2TWdfQ1VsejlrbXhtQkF6ekRXTk0wVGc5UmI5M0Q2bXB5WjRKQ0xpOXo3UVlua0Y0aGIwQ25jU2pPUlpLSy1tdEZpOUc0RlcwWVAyTWttbWR6dE9McUtMMElkbC05bXROTmQycXJ0MWlweXRWTDF4aUdrRlZWVXRheDFpUFlUR2pFQ1NMZDh5YkNF?oc=5" target="_blank">Rigetti Computing (NASDAQ:RGTI) Stock Price Down 1.3% - Here's Why - MarketBeat</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">MarketBeat - Tue, 29 Sep 2026 21:26:01 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxQUGRRdk5yQzdWY1d6Ui1FY05KSGsydUFyUVFBd3p2TmhGUVB1aGlSQVJpNWw1VTJQNnNTeGpJZkwwdE5HWVhaNmQ4QUJaVWEyTUdNd0dUT2tPYVFvWU54c2hIeEduR0hQY1NhWnFUbnNZYUkzOGhHOVJxbVY0eWdMWXhrdDBNTlQxVnNJbFpoUW9vSXdqbE9lWUJpWnN2UUd3ZzdrdjNtZkViUXhRenV1ZW80WUdDcno0YmpCbUt1UDI4MHFHYXJjMlA4bXpzVkpEQXQ4WWRR?oc=5" target="_blank">Quantum Computing Stocks Face Profitability Test as Revenue Boom Meets Earnings Reality - ChartMill</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">ChartMill - Thu, 01 Oct 2026 12:06:08 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQQlRRTjZxX2s2TEdCVjlNYUxfMnUzbGdRV1BYOVhOMjVsb0NrdVF0MjlBbzNBaHVseGJ2QXgyLWpUYjRfbWtUNzVFSWlSM0FsWUJlYjN2TWhZdE9hbjkwbjY2ZENId2F2aVY0NGUyYi1TTl96ZkhWUVoyZ21NNEk1aU5IblVTLWc?oc=5" target="_blank">Rigetti Computing, Inc. (RGTI) Dips More Than Broader Market: What You Should Know - Yahoo Finance Singapore</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance Singapore - Tue, 29 Sep 2026 20:50:05 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTFBxOGtlc2JOaXpvN0NudFdyQ3VXVTJZbWlnNDQ1NERZcW1ucjJSSWJoM1pmZVJ1emFQd1R1VFdsb2tGYm1qQ1NzVFFLUVY0c0l6S0dKa0JYRHgtc2pXb0JEbk1TclVwaGEwS2hVbjFR?oc=5" target="_blank">RGTI Oct 2026 25.000 call (RGTI261023C00025000) interactive stock chart - Yahoo Finance UK</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance UK - Wed, 30 Sep 2026 13:11:58 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class='filing-item' style='color: var(--text-muted);'>No new SEC filings in the last 48 hours.</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        Rigetti's cash runway is the critical metric following recent capital raises. Qubit fidelity improvements are essential for technical differentiation. Investors should watch for dilution risk and progress on the 84-qubit Ankaa-3 system.
+                    </div>
+                </div>
+        
+                <div class="card ">
+                    <div class="card-header">
+                        <div>
+                            <span class="ticker">SMR</span>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">NuScale Power Corporation</div>
+                        </div>
+                        <span class="badge" style="background: #ef4444; color: white;">High-risk watch</span>
+                    </div>
+        
+                    <div class="price-row negative">
+                        $7.79 
+                        <span style="font-size: 0.9rem;">-0.11 (-1.39%)</span>
+                    </div>
+                    
+                    <div class="stat-grid">
+                        <div><span class="stat-label">Volume:</span> 30,339,009</div>
+                        <div><span class="stat-label">Mkt Cap:</span> $3.20B</div>
+                    </div>
+
+                    <div class="range-container">
+                        <div class="range-labels">
+                            <span>52W Low: $7.21</span>
+                            <span>52W High: $57.42</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" style="width: 1.155148300842516%;"></div>
+                        </div>
+                    </div>
+            
+                    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Reason Watching:</div>
+                    <div class="notes-box">NRC-certified SMR technology, VOYGR/NuScale Power Module, ENTRA1/TVA planning, RoPower Romania, Framatome fuel partnership, data-center power demand, and U.S. energy security</div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                    <div style="font-size: 0.85rem; margin-bottom: 15px;">Track binding customer contracts, NRC/regulatory progress, TVA/ENTRA1 milestones, RoPower Romania, manufacturing readiness, fuel supply, construction cost, cash runway, dilution, project cancellations, electricity-cost competitiveness, and proof of commercial deployment</div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                    <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQT0o3TVZ1R2JVMGg3SkRnbnV5a2dXNV9ORVQ0VEhHa2hLaFR6ZVcwOG5ZOWk3NTlNWTRFZUZpYm1IWk50ZFdDRnhHT2ZRZUZJQUJjNjNQSXB6WXdkWmI1UjhZUGxXMTJzckg1MHZMTWxNNkxBUW5iM2w5M1QteDl5Szdfajh5Qkl0Ump2aUpGSFZmTDlpZW5n?oc=5" target="_blank">Can Oklo and NuScale Power Survive a Stock Market Crash? (Hint: Yes, but It's Complicated) - The Motley Fool</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Motley Fool - Thu, 01 Oct 2026 17:32:25 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNX1VGYllNcHpLbzBRZFpXNXVxNjRrWW5abGZXdUhYcV9hX0JzVFZOQ1lCWkY3OFpnQjFhVUV6N2E4eHBFVFM2MmRZTW1FdHlwNGEyTEp1MzVzS2tUZ1N4Yi1CZUNYZm9KMUVuN25odVVoN19sMFBWWS11RC15N1ZKSjBzT195TTMtLVk5OS1wdzdGT0ExallXNTln?oc=5" target="_blank">Officer Robert R. Hamady proposes a $158K sale of 20,000 NuScale Power (NYSE: SMR) shares. - Stock Titan</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stock Titan - Thu, 01 Oct 2026 15:52:53 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQZG1NSEpUdklQdWNwbV9WcWdpNHJZOHRiQnlHUnItR2s5el9oejMwVWQ2c25QT0szS0lDaVVBWWpWQl9FMDV6aUZLWnR1WFpIQUQ3akMwcG93aXVYX1pvc3hOa3dHY2J0eDBwWmhUSFNFQ19VVHhiS3lDOThyX2VDYTNLc0hnSmNuYkZRNlB6b1BJYkxualNrRV93eURNSWZaTUVpd0xsWWFXTnZIcE5CMzlMOWFPOXRiSTVjWQ?oc=5" target="_blank">Why Did SMR, TMC, SPWR Stocks Tumble To 52-Week Lows Today? - Stocktwits</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stocktwits - Thu, 01 Oct 2026 02:29:21 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQaHJOUEZhZ1ZMS0JQZmRaSG8yc0NlQjlOdGhIMkJNamFsandwUEpDeEVJUEVZM1FteFF1R3Zvd0RKUUJUdmt2UmFSWjFYUkJSMllOb1BiTGhlS1dRei0xOVhuOEVWMnJEZERsUndFNHZ6U2ZYaTBvdDlCTmdFMER3VWRsNFR6UUpzenhDUVdIaThSa0xlbVRUVkJSdHk4TG5KamttR2t3OWM5SkFFLUxqdGRRenNjZ09qWE0wVUhaTQ?oc=5" target="_blank">NuScale Power: Rising Risks, Profitability Uncertain (Rating Downgrade) (NYSE:SMR) - Seeking Alpha</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Seeking Alpha - Thu, 01 Oct 2026 12:07:21 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxQQ3phdk5UUkM0RE5PQURHMGw4QW1ScmhTVkJET0QxWHAtaW1ZbURody1vdVZLSmZHaTRMZmlFem55ZDdvQU93RzkxVEFWQnFmQW90NlhVQUN5enlsQVdPQ3RIdmJudXd0XzdrTVRwd2NhWTFEa1VLREthUGpTME00U3ZZQnpmcmxiR2FvWTlOZ0Z2c3lkM1UxQmRHbml4YXhUdjQ3bTdIQ0d2aThjdlo1Rld5YmFOMnpuX3hua2dKeTdDNmtMeEF5cGNxSW9JSW95RjBoVTBuRS1iMFE4YmZPbmZ6cTloTWgtWThjOFRaZFZSSXZQaXVBYkhTSnJ1Q3Izeko1Y0ozUk9QRTZtNVFoR0FDQQ?oc=5" target="_blank">X-Energy Just Went Public in 2026. Here's How It Stacks Up Against Oklo, NuScale, and BWX Technologies. - The Globe and Mail</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Globe and Mail - Thu, 01 Oct 2026 18:40:45 GMT</span></li>
+                    </ul>
+                    
+                    <div style="font-size: 0.85rem; font-weight: bold; margin: 15px 0 10px;">SEC Filings (48h):</div>
+                    <ul class="filing-list">
+        <li class="filing-item"><a href="https://www.sec.gov/Archives/edgar/data//000149315226044924/0001493152-26-044924-index.htm" target="_blank">Form 8-K</a> - 2026-09-29</li>
+                    </ul>
+                    <div class="commentary">
+                        <strong>Analyst Commentary:</strong><br>
+                        NuScale's SMR certification is a moat, but commercial execution is key after the UAMPS project cancellation. New customer agreements in data center or industrial sectors are needed to validate the commercial model.
+                    </div>
+                </div>
+        
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Blockchain / Crypto Infrastructure</h2>
+            <div class="grid">
+    
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">BTC</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Bitcoin</div>
+                    </div>
+                     <span class="badge" style="background: #94a3b8; color: white;">Core study</span>
+                </div>
+        
+                <div class="price-row positive">
+                    $84,746.0000
+                    <span style="font-size: 0.9rem;">+1.33%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $33.50B</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $1702.74B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Base crypto asset / settlement network</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Institutional digital-asset infrastructure, custody, security model, and regulatory treatment</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">N/A — not a supply-chain thesis</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNdlVkLXZKanBYa1c2OVVSLWt0U2dtNU1aWmZLRDBORnBxOVFLbEJhNUd5V3Jrcm53QnlVSk9DM0N0aXA4Uld6ZjNiNkV1Z1RKME9LaEg3UXJyYjFPUGFlRUVuT3JmSUJyMy1QQ1YxVy1LQ1dkeTVJNGZ2b3c3dTlVWTNaYXBBdUVHZGpxb3Q2UkI2b3BlZFpQOEdXM3JZMkw0by1HNlJIVVlEQ3B4aUNMVENRVnlMM09wOGhGdmxDMlRobks4alM3S1JIblFHXzQ?oc=5" target="_blank">Bitcoin Whales Add 41,000 BTC in 10 Days as Retail Passes: What’s Happening? - Benzinga</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Benzinga - Wed, 30 Sep 2026 18:15:30 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxOSHptNHNLakpPOUltUERnSnQxeFZ4S0JtMmN2NDhabU1UTEU3SzN2RFJPMkxIZ0tjbkFsNHFrQmFhQXhiSXJmV0FybzFkcTM1TWgwTTJqTUplVEhWMVhPb3lPbExCTHlManRFODdaT1RkekFVTTVLYlVtaEo4Nk84SGFJejZncWdVd1ZrMi1nMnM1Z19KeTR5VFdvNENQdjVwanJ3SFZZUmk?oc=5" target="_blank">Bitcoin just landed a surprising new bull - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 10:43:34 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQMWYtZWRITUNXZWktbHM2WGdwTTBmWlpaSFJYZ0Nzd2ZPUlFaWkpiLXQycU42M1VzUDR4YmdXb2tRd1hhWkdMbVZpTFNFdmUyNUVvUEU1UDhCZEhRbzN1UVBWTVUtTFowT0NobEpheWZLbnJ5NS1fWl8yTTBaVUU2aDROcFdnOXRfbFhDaDRENUVHdXNfQXhGQUJaQnNIWFZNWGFRMkhJZkU3dTkwUFczRA?oc=5" target="_blank">Live updates: Bitcoin posts tentative gains as rates drop ahead of Friday's jobs report - CoinDesk</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">CoinDesk - Thu, 01 Oct 2026 17:46:25 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxObHVpTW00X0pMRm1SbTRsUHFheDk4cWVfcDJQekVUZF9WblROeFA5emZQa2RyQ2FyOERvakppWjV5WU0xMTV5T1FYSzhKbWdINFFqaUtUeEd2Mk9HdlF1WHhwSzZvZXctODFNT0NfQmNIbjF3R0ZHYjh4U09tVHl6b0dFdmYzQ1I1am5wQnB3ejZvZTNyUnpjUWhkbGlEcjZTOTRiNU9Dam1IbmxGVkdFSno4cDVuM1RzWEtFZ0dVS05kY3pIYWZENnhoWlRSd2hiZzNfajYyQm1aVDdO?oc=5" target="_blank">Bitcoin ETFs' 9-day, $3 billion inflow streak comes to an end as $149 million exits the funds - The Block</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Block - Thu, 01 Oct 2026 12:17:06 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNSUNQR3hCWUVVc2tzREJiMDMxOWlubDRMd0V6ZE4wV0toUEFhbnJ6cjgxTm5iYlFJU09JWWJ1NTVsdUpfcGpoTk16QWFRekwweTJtM0ZWU1dTNXRqSWx1dnR2bGs1NjVleW01aTZTcTdXb1pXOVdSdlc1Z05EZXBrMzlKUVBaWWVsRTJ3OUFOR01ZU0s2ZEN5MFQ5RGdDM2hhajFCTXFvQQ?oc=5" target="_blank">Hayes sets bullish Bitcoin, Ethereum predictions; crypto stocks jump - Seeking Alpha</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Seeking Alpha - Wed, 30 Sep 2026 13:28:39 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">ETH</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Ethereum</div>
+                    </div>
+                     <span class="badge" style="background: #94a3b8; color: white;">Core study</span>
+                </div>
+        
+                <div class="price-row positive">
+                    $2,700.5500
+                    <span style="font-size: 0.9rem;">+0.84%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $13.85B</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $329.71B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Smart-contract infrastructure</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Tokenized records, compliance workflows, identity, stablecoins, audit trails, and enterprise smart-contract patterns</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Unverified — no pharma-specific review done</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPRWJna0VPYzgtRHlEU0hBSlFZMkhDS2N6SHBuenR5NE9ia2VrcUhJZ0JMejNJcHNfYzJHT05zT0VXQk10YUs5cXJiVlNENWt4TV82aUJzWkNIamU2WXZQN2pYbndnRkZab3JzUFdrdXpMV2lVS2gtdWN1bGFKZEdjcVdFNk8zS0RyWTRYczhnMVJVNzhsR19IdEZtdEwxQzdOUHlQdU9jWmZ0WmJ6RWZFcnNRSUNWd053R18ySnJrX21QajQyb0kwR2VwMA?oc=5" target="_blank">MetaMask exits Ethereum validators after attacker diverts staking rewards - CoinDesk</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">CoinDesk - Thu, 01 Oct 2026 07:30:43 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxON05EM1IweXVtTzEySDJpMk1naFhHNUlZeTlPeG5BYV8xMlZ2Z1BkS19aLWUzWTJpWE9FSFdqcWxJSVk3OGlIYXd5ZlBWSE5EOTdyR3prS09xU1dtUnI4Q01ITjBkU1djYXJ5NXlTMVZXMmxrbVNGZjQzRmdhT0xrTVlxNEVKZ0QwQkJDdncwbmw0WjZzYWxBb2lR?oc=5" target="_blank">BMNR Stock Forms Golden Cross For First Time Since Bitmine’s Ethereum Pivot Rally - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Wed, 30 Sep 2026 17:04:45 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE1RLVk1dkxXYnlHZ3dzbUtKVFczWm5GbVVlTWRyaEd3QVlyUFdLQ3pUNE5JeF96VkpLR1dzRHRuSHJ1Mkkydl9lUGRtdm91dEUweHlBVXUwSTIyZjU4Znd4VmtpalVVeWtK?oc=5" target="_blank">Current price of Ethereum for Sept. 30, 2026 - Fortune</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Fortune - Wed, 30 Sep 2026 15:34:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNTWJ2ZDRyNWpQcmJIc3FnUlgya0lLZUtzNjBHekhaUHQ0WkdOQjB0N0J3SVBWdmlDV2V6X2VUVEQ2RlZidHZVSEg2VVFsYUV5N19NN1RCNFQyRWJRdGxMR05tUGFpcVhvRjlvUkctUURwNldkeFQ0SWdtWnAxWWpYZzhGZElZWDNPbVJ1dVFMcWdyejRxNVlENQ?oc=5" target="_blank">BTC Price Target: Citi Raises Bitcoin Forecast To $113K, Ethereum Target To $3,028 As ETF Inflows Return - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 11:02:40 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNMmxIRVZOaVdGcTIwR0NCRWFJSXFjb1VWSGQ0YjRyZFdtWWhYM2RkV1MyOWpDNjJnc0JEQllOeG0wRHdtbDVYRE81QUprUnJqQ2l4NzBFNTh3RGxtMm1vZzU4LWdyQjZNMVBKNzZiTnRSS1JGWjBNcktmYUF3OWF2RXRDd3BHVWRQMWtRQ0tIWWMyU0lmaUZ3ZksteXZiNFQ1YXJzOXlhVFh2WGZoRTVCVWt5RVlOOTdkM1kw?oc=5" target="_blank">Citi updates BTC, ETH forecasts. Here are the new 2027 targets - Investing.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Investing.com - Thu, 01 Oct 2026 14:48:59 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">LINK</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Chainlink</div>
+                    </div>
+                     <span class="badge" style="background: #f97316; color: white;">High</span>
+                </div>
+        
+                <div class="price-row positive">
+                    $14.4400
+                    <span style="font-size: 0.9rem;">+0.83%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $414.30M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $10.79B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Oracle / external-data infrastructure</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">External data connection for temperature, GPS, shipment status, proof of delivery, and compliance events</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Verified, but financial not logistics — see 2026-07-28 review</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOQ1lMUGlaMEZRMWpjR0JocVBTd3pmRTB5RnBSc1U5R1c3cTVwQmJTRnd3akdULTNJR1M5ZDk4XzRld29wRnNMRnFUWmhZaXdUMzdReVZ1VjJsT01DMUs1UWNmTUIzaktNcm15YTZ5X21oNmprbW42dG1Fck1qQ29leEE0SnRqeG80cnJlVWdfZkJkTWV6eTNhTTQ0cTVHekJNTkZUTEM5c1ZpNlo5RkkyZDRNU2FTMW9H?oc=5" target="_blank">Trump loses favor with crypto fans who call him out for cashing in - The Washington Post</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">The Washington Post - Thu, 01 Oct 2026 19:32:52 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxQejlfdzBZWEZlTEEzLXBkY1d2cjBOMnNVQ1Q1dS1iZ1lvanQ4YnhESzdIQmVqR19reW5QTElUUHBZVlFPbFowMkJobkJhS0YzNllCUTdPTGIwcjFFRmgzYW9UMko5MVpOajdHSEhab3IyTklvZlMwUFU3SVpJZ3VNTlpjVHdrMElqcmE2cXJkVGtacUhpX2hIMF9jSXpLbzZ5cE9SRThWd2hOQ3Z0aVl5MGhpX0hMNDJGdXRLdDgxdUozdEotUVM2TTFVY1lUM3o3cERzcGo2QjJsRE1QaFJGVmtyTUkyZDFsc3lF?oc=5" target="_blank">Best Crypto to Buy: ADA and LINK Face a New Utility Comparison as Remittix Opens PayFi Access - StreetInsider</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">StreetInsider - Thu, 01 Oct 2026 12:16:45 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxNZ2V4UVpUaWw3czdsZV9GV0dMNnVzYU51eldjTS1QWFNFeTRSVDQ2WDF2N2xadWJrQnZMd0l5ZnIwbG5OeGJ2Y2pPTElIVkxGX2VGemVjdjY2N0tkZEd1NC13QVZxZy00SDZjSm5pOXVlSlpwWWFyWGJ5VUtBRUYzMUFVRG1qM3JBajQxQmhQU29NdV9UdkMyZDVjYXFSV25SMl9Mb0dCdW9YMlZRZzlUMjRYVno2UmlnaHVYZlB0Ym9rbnJfZTM4NjRmeHBHV2hzbDFVdGJ1UGk?oc=5" target="_blank">LINK Hits 2026 High As Token Doubles From June Low – Outpacing BTC, ETH - Stocktwits</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Stocktwits - Tue, 29 Sep 2026 23:17:35 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPci1mNV96TmhlSHJHS1hSOUFLMTNXa21HWUJPek93TTdmSTdXcDEtcVMzZW9aM2ZCSDg1OHRUSk1YcXhvMGdrYzZvOHduZmF0ZFhTZFdsTTRjeDdBdEprRlVYTzJzbVpQQ1lPS3U5Y2lyRjVwdkh6Y3N2QjVXRWZkVm5nMGJKaHNabnBNRmlZcU50WE1j?oc=5" target="_blank">Ethereum price outlook as Joseph Lubin linked wallet moves 133,298 ETH - crypto.news</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">crypto.news - Thu, 01 Oct 2026 06:01:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5fUmUwZVBNQUVGQWltU0N1M05uMHBzNHlGVll4dlFFeXRtbVEyQ1U1YTJ0RWY0ZG9BMU1hQ0M1bDhqeFNDdHdzOEVBY1JMTjBUc1R5NnVsZU5WWThRbXlMOTBPTlQ1MGRxOXVEUmxYN2xXNEVlMVZOQQ?oc=5" target="_blank">Chainlink price: why LINK is falling after the Swift news - cryptoticker.io</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">cryptoticker.io - Wed, 30 Sep 2026 18:26:41 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">HBAR</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Hedera</div>
+                    </div>
+                     <span class="badge" style="background: #f97316; color: white;">High</span>
+                </div>
+        
+                <div class="price-row negative">
+                    $0.1030
+                    <span style="font-size: 0.9rem;">-5.73%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $195.84M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $4.52B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Enterprise distributed ledger</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Enterprise governance, high-throughput records, audit logs, identity, and supply-chain documentation</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Mixed — DPP deployment verified, pharma framing false, NHS proof point stale</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiigJBVV95cUxQb2RWdk5LSk1kZlc4MHQyOXRNd3pOenhJdFd2OVdNQ05lZjg5VmNILTlXYmVZcmJJeE04R2pfZEFMYVpXVzVmWHowRy00REdfMDVKOTg4eHV4QlItTk13RnlzVmZ1S1dDbzd0WkxFUG9lUTllQ1hpV2ZxV2Ffc0prQXlGekVfSlFpSGtnRWljbk5NTGpoWDVyZ19XcGFVWXQ3cjd3cU02dEV4dXFycGtNeDhPN2F1NUVLVTJtYTJsQ0wzQWxGNnBjNzhqWnZjMVJVNUw4YUxqLXlJX0lJM1dWQ2tNWlR4T2NQSDY2TVlhTVo0by1hSWV3cWhhNmlacVM2dkpBZEZNQWZVQQ?oc=5" target="_blank">Hedera Jumped 27% on an IBM Cloud Deal and Gave Back 16% the Next Day. HBAR vs XRP: Which Enterprise Coin Is the Better Buy? - 24/7 Wall St.</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">24/7 Wall St. - Thu, 01 Oct 2026 14:00:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOWHhUVE1sNkVJcGhrN3BqYmdNVk5zRE5JeEMzT1lRNlBJR0JQR0ZXY2ZLMy1vaXNab1BUaDhWVzJHSlRxdUxjeDVRV1d0OG92MGQ2Ynh6cktWRzVRT3FRZHBmLVpKMWdYdEhGb283RFE4M1ZybEZKbFJIbFFzeDlXYUg4bTZhMDBTRkZMcGxINU44YTFqa0E?oc=5" target="_blank">Hedera Jumped 27% on an IBM Cloud Deal and Gave Back 16% the Next Day. HBAR vs XRP: Which Enterprise Coin Is the Better Buy? - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 14:00:27 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPZXlxcU1EX2xsVmhTWVBxZk5jR05rd05MNEg1d193dDlaMWQ3TFRXRFk2ZnIwZjA4dkF6aU45TDhNb1h6NUg2azFDRFVBU3ZVUkZUWEJ5T3FJeTExM1RPdXlKSW1UN25pNzlOWHVVVTFYcXRCME9JVFJuUXZnVDk2V0k1QzgxdEdja05PWk0wSGhIUldsbEZtZzNvWThsNHlmR0lJLUlKZGN4dFNYMlJSeUlaTkhjbFk?oc=5" target="_blank">Uphold Launches Digital Assets Inheritance For XRP, Bitcoin, And HBAR - crowdfundinsider.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">crowdfundinsider.com - Thu, 01 Oct 2026 11:41:05 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQWXE0UGdYX0tkWDQ0TVR0YlZraGdJWlpFMENxVUg5MjBVWE5HaGk2VTdWMThCa3hZbk9fbWNZVlBMZUJ2MEhvRHhCWmNPaXRaZjFSb2QtYnZEVmhjdU14eTBWQnI4NXNGQlE3WHgyV1lNcEc2eVdlZGVfdzZlZnpJRkRwOXoyVzljUURLVnVoWmF4RXlDTllXRDA5cFFVbHdpSnA5dV9vS2kyaGxsVGxuZFBxaw?oc=5" target="_blank">Crypto Market Today: HBAR Gives Back Its IBM Pump While QNT Keeps Climbing - CryptoRank</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">CryptoRank - Thu, 01 Oct 2026 12:04:10 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiTEFVX3lxTFBpd2hydUVPYml0VURDOEw0bmwzeFN4dU1FellQNVcxbEcxUUg1ZjF0Zm51NUFGMDh4RjdHWlluTG9wQVhSX2pZYWk2dmE?oc=5" target="_blank">HBAR vs XRP: Which Network Is Cheaper to Send a Payment On? - Phemex</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Phemex - Wed, 30 Sep 2026 05:25:47 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">VET</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">VeChain</div>
+                    </div>
+                     <span class="badge" style="background: #f97316; color: white;">High</span>
+                </div>
+        
+                <div class="price-row negative">
+                    $0.0088
+                    <span style="font-size: 0.9rem;">-0.33%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $8.99M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $756.30M</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Supply-chain blockchain</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Product provenance, anti-counterfeit tracking, serialization concepts, and logistics traceability</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Verified — 300k+ DPP events onchain Q1 2026, non-pharma</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxONUd6R3d2aDFZQzcydXBCaE1WZ1MtNXJxV0VPZWlBMEhfeldfRmg3WXQ2X2l2OGpJNVNkTVlPVVRmb25ZRVVCNEotT3cxNGNuMXktckRoUjJyb0tYeXFWaXpoQVE5ZnRUTk1VUkQ4NjhWTF8wVDdyclZneTMwZFZTbkljQjNLa3VlOVhiMEZjaE5wRV9yaVdYN2M5cnBFeW4zdGI2NVFFMA?oc=5" target="_blank">Is VeChain a good investment? What enterprise use cases say about VET’s future - htxt.co.za</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">htxt.co.za - Thu, 01 Oct 2026 17:48:45 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE5hejNra290cDJVQzY2dWRSNzd3aTljcWViLWk0ZFZaODJ0QWozd0lzLWxUMUtpT2s2TkFPU0hXcExpaEpTaFhTMzFRZGlYZ1lTblhlTEtOZUdjclBR?oc=5" target="_blank">Convert 100 USD (United States Dollar) to VET (VeChain) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Thu, 01 Oct 2026 00:00:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFByaFZSZTM0SlRSV1FldTlQeEVMLTN3ekoyUnMzRXlNanl6cElEUnRfSk1DM2VMdURzZ0JuazluYU1iNUdvWG1Td2pUOGpNMjBQYWFyODl2bw?oc=5" target="_blank">Convert 1 VET (VeChain) to USD (United States Dollar) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Wed, 30 Sep 2026 03:56:16 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE13aWZUYjdpSktMZGxoRUZ2VVAzSV96RUhWSTh2eVJsZ04yeWVCWGlfTy1Yd19ValV4WHNsQ0NxdmpwQWZxdmhnem4xYVJyLVNmOGxPSHltQ3BOdw?oc=5" target="_blank">Convert 5 VET (VeChain) to AED (UAE Dirham) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Thu, 01 Oct 2026 00:00:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qR0JaQWp5UEZIWDdmUUpSTVdwR1B0OEpnOHVkRGhNZGRyaFdiWjAyNDdNRDdkcVRDbHFIUlJDVVpKeXhwamFlV3BVdDRCcWZFVnVFRFhXenMxWlJHS1Zv?oc=5" target="_blank">Convert 10000 GBP (GBP) to VET (VeChain) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Wed, 30 Sep 2026 00:00:00 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">TRAC</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">OriginTrail</div>
+                    </div>
+                     <span class="badge" style="background: #f97316; color: white;">High</span>
+                </div>
+        
+                <div class="price-row positive">
+                    $0.4427
+                    <span style="font-size: 0.9rem;">+7.38%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $46.00M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $197.95M</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Decentralized knowledge graph / supply-chain data</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Verifiable supply-chain data, product traceability, knowledge graphs, and pharmaceutical provenance concepts</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Partial — GS1/EPCIS work verified, SMP status unconfirmed since 2023</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class='news-item'>No recent news found.</li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">XLM</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Stellar</div>
+                    </div>
+                     <span class="badge" style="background: #3b82f6; color: white;">Medium</span>
+                </div>
+        
+                <div class="price-row negative">
+                    $0.2203
+                    <span style="font-size: 0.9rem;">-3.38%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $257.16M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $7.72B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Payments / settlement network</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Low-cost cross-border settlement, stablecoin movement, humanitarian and healthcare payment rails</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Unverified</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNZzFZMWw0M2haZzJhMVdhX2xCQkY5SUF3em0yRHk3bVB0OWlWLXZtYzNwbzVReVpyZTlIdmlQSTZLRldRY0NpeG5WLS1WdFlpdWVOUHdmaHBlVmxLbm1wekhhM0pLYXFrdVROanhJV3ZOd0xFTllpaGsxRloyMXpfUTZZR0pGakEwOW0xVV9BQ2t4N2NNeTRXdA?oc=5" target="_blank">Peter Brandt Once Mocked XRP, Now Chooses Stellar as His Long-Shot Pick - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 13:00:02 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxOQXd5UkhidE1fWmpWU3BGWXY1NG5FeEtFblV2c21uSHh6eUhPcUlNS1k5NXBPQ003QS02Zll4dElKRVdyX1JpY0RTZ0pjNWt0d3ltamc0eDdvb3Q1TzY2YXZUQklTbHQtVVZkZWZyODFHN1BoNmU5WmI0Y3l4bFQwUFRxV3ZjRkpvQkdnTkJlWWtuMnhOX3BFNTJrQU5RQXZ5aVAycjJONmU2ODZoQmtpMnJvR0xxeFRPV1hNV1c2emxZVEgwWUMtUg?oc=5" target="_blank">Peter Brandt Once Mocked XRP, Now Chooses Stellar as His Long-Shot Pick - 24/7 Wall St.</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">24/7 Wall St. - Thu, 01 Oct 2026 13:00:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE50V0htRWg2Tjc3clMtamxMRlRINTBUREFtSFpWUE9rRHVLYVkzbjFKRlJZaWdsd01yQ3R0d0lqbG1QVW9qcl9rU1ZleFE3RlpGRmNVV3llMVFzWTlmYnhESkpfaU9za2s2UWFkMHAyZ1U?oc=5" target="_blank">Stellar (XLM) Pulls Back 3.66% Amid Consolidation Phase - CoinMarketCap</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">CoinMarketCap - Thu, 01 Oct 2026 15:05:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxQbVRuX25uc2xjWDdVOUhxa0dYYi05dWpUVXRwODZLNlVBSUJCM3RCeUI4a1FVcm44Qnp5MXJmdTlkYVVwTnJLQTY1VkIxN05oOURaQmNoX0Y3MDdMQnpaX2F1d2IwRlZxQzVEX1NBUmFNaks4TUFLS1JUcHd6b2NDUmFxZUZkMEJaV1Zmd1gyOWg5NFZOUmFGQm1xRWtmUzFxYXFWWDVkNUxNTWhlenVCUXo2OTNOVHByU2VqZEYzeDFoRFNQWUpBcnV2dkVMMHF2VlVnMnVCLXU3TnpqM3Rz?oc=5" target="_blank">Ripple and Stellar outlook: XRP slips, XLM rebound faces resistance amid mixed sentiment - FXStreet</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">FXStreet - Thu, 01 Oct 2026 03:59:52 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFBMOEdyODhrZ1BfN3NoZjcweEF4N0JzOGhJdlFSdVZRa1JvU1BGNnpCVHNncVpud0pjUEh6WVZCc0w0VVU0Y09FYnp2bjJ0SldlUko1cDdQYlV5RkE?oc=5" target="_blank">Convert 10 JPY (Japanese Yen) to XLM (Stellar Lumens) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Wed, 30 Sep 2026 00:00:00 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">XRP</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">XRP Ledger</div>
+                    </div>
+                     <span class="badge" style="background: #3b82f6; color: white;">Medium</span>
+                </div>
+        
+                <div class="price-row positive">
+                    $1.5000
+                    <span style="font-size: 0.9rem;">+0.72%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $2.42B</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $94.85B</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Payments / institutional settlement</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Cross-border settlement, liquidity movement, and regulated payment infrastructure</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Unverified</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQQ0lmbi1HeWppbWdxOEU0WXJfSS1LT1lLZFVfUkJTSDUwQnFLbXdTR3VUbmFXQXZtQmU2ekpxTUVrMXU0R05oSVhLYm1OclIyMnpqY1RLcHBWelZSRGxjWnFRNEtpa2V6RzlwRVdjc0VOUlNVOENXV21rUVdiQ3pDanMtM3ZEa0kxVzNPR3pTajI0VjdEaE1tcnhMbWdVN1VXWDAwd0pvVWhFLWFRRTVj?oc=5" target="_blank">Could XRP Reach $25 by 2030? Walking Through the Math - 24/7 Wall St.</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">24/7 Wall St. - Wed, 30 Sep 2026 14:25:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxPYXBMSHNiYzU0Y1JFZWRmWmk3elhwbmltLVhMamsyd0VwT3U1b0JNTWZIdHhGamNOMXJZclVMRjJlTWJ2ZlRha21XQkJTczRFNUV1VzlnSjZCN2toLUI1eW9peVhIV21vVmVuVzIzNTV4QWVkVVNYRVlCTXVpUUlsM2ctZldHcGNGSE8wNk9GdjgyZnI4cTBldTg5ZVBIdi1ZZHBV?oc=5" target="_blank">XRP Gains After Evernorth Merger Vote Passes As 473M XRP Treasury Deal Advances - coingape.com</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">coingape.com - Wed, 30 Sep 2026 17:11:46 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOZVpsY1gyZXVPRVRoY3lybVFRejU4VFpaWFctQnBPYTdnc1AybkUxV0FsdTNOZUlzX3RSQzd4aGNheGVqdjR0clMwaTI1cDB0RW05VnBfSlBnanRmT2NoUTFoQmoxSFdaNnNscF9MN0ZtUjMwMmFfWHNNWnZEZ0NQX2tR?oc=5" target="_blank">Is XRP a Buy Right Now? - Yahoo Finance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Yahoo Finance - Thu, 01 Oct 2026 08:45:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxPdlFjeVFhWEQ0WGdlQkZ4QUpOODlSNTFDUFY4NHhlX0xWRXhTTnRocGlRTGVnNFJSck04NGV0STVuWmpPV1B1bndQS19MOXdlMlVmZDM4RzlKWTBDQW5qUVBQWGpUYWp2X1hiakRoY1NuMkZ5MFhLVXF2Qm5meXNmbGZxR1lhTEZOYUR1T1BJdFRKZ295NWF4VWFPc1dVWHF3cVdCVWxkeUdkQjlwSWIwSGo3U3R6QUtHRkdOdEpKSkNoaFU1?oc=5" target="_blank">XRP Ledger starts carrying fund records from Brazil operator overseeing $4 trillion - CoinDesk</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">CoinDesk - Wed, 30 Sep 2026 05:45:46 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxPbzNKTTRPYkt6WmIySURGa0FSdElqY2ZqeU5kTDA1T2RXcFBHeTZiQTBHY2ljNWpZZVNoaENGd3lNdEM0ZHVvcHZTcUNXdVhWd1JCOV9VRnNpZkZiWGY1bjkzRU9ySk1lYldVLWd1ZGw5S05RZzhhM1FOd1F1d090MzByVXVIbXlyNWlrVnVXYjRLaTF2eS1wT2xSYlQzem5NRERCTjhrUGlTLXVsbWMtOWl3aFMxQjhTVDl2V3RzYlNqUDNMeUtjRmRSNG8?oc=5" target="_blank">Bitcoin, Ethereum, XRP Are Stuck—So Where Is Crypto Money Actually Going? - Benzinga</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Benzinga - Wed, 30 Sep 2026 21:01:27 GMT</span></li>
+                </ul>
+            </div>
+        
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="ticker">FIL</span>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Filecoin</div>
+                    </div>
+                     <span class="badge" style="background: #3b82f6; color: white;">Medium</span>
+                </div>
+        
+                <div class="price-row negative">
+                    $1.0200
+                    <span style="font-size: 0.9rem;">-1.84%</span>
+                </div>
+                <div class="stat-grid">
+                    <div><span class="stat-label">24h Vol:</span> $141.05M</div>
+                    <div><span class="stat-label">Mkt Cap:</span> $848.81M</div>
+                </div>
+            
+                <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 5px;">Study Bucket:</div>
+                <div class="notes-box">Decentralized storage</div>
+
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Pharma / Logistics Relevance:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 10px;">Decentralized storage concepts for audit records, certificates, shipment evidence, and data availability</div>
+                
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Watchlist Notes:</div>
+                <div style="font-size: 0.85rem; margin-bottom: 15px;">Unverified</div>
+
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent News (48h):</div>
+                <ul class="news-list">
+        <li class="news-item"><a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE1LN0dDME1Sd2hqbFl2cG5ESDhFY3VJTUYyTl92UU1PRDFqM3d1am9mOEVuRExKcEJtdXhyV2p5bF96Vzk5NDJsQnpBUEF3NkNsUHFvVloxOE5qMER4NXc?oc=5" target="_blank">Convert 1000 GBP (GBP) to FIL (FIL) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Thu, 01 Oct 2026 00:00:00 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE9IYUhHODF2UGdzUWlDVHljVGFDT2NFZkNqcC05eXZUT0JEN3lWNWo1djVCUzBTVWM1djdfVUthUk0xbjg0RkZjM245bVVKeDIzcDdjOE9IRjFiMzh6aUl5akU4cEs?oc=5" target="_blank">Crypto -Insight(@raiyaseen)'s insights - Binance</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Binance - Tue, 29 Sep 2026 20:54:17 GMT</span></li><li class="news-item"><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTE9qVXBIa3lfMVlHWU9vcFdnSnRlYnNQZ1pmXzFfM2FCVFZfb2FUQTlsa0N6MzRITzBaeEFZc1N3TjkzeDA0UEhIY0Jvc08wTWItZ2JaWV9IVQ?oc=5" target="_blank">Convert 1 USD (United States Dollar) to FIL (FIL) - Bybit</a><br><span style="color: var(--text-muted); font-size: 0.75rem;">Bybit - Wed, 30 Sep 2026 00:00:00 GMT</span></li>
+                </ul>
+            </div>
+        
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Private Company Signals</h2>
+            <div class="card">
+                <div class="card-header">
+                    <span class="ticker">Sygaldry Technologies</span>
+                    <span class="badge" style="background: #ef4444; color: white;">Strategic Monitor</span>
+                </div>
+                <div style="font-size: 0.9rem; margin-bottom: 15px;">
+                    Private company linked to Chad Rigetti; tracked as an adjacent signal for quantum-accelerated AI server development.
+                </div>
+                <div style="font-size: 0.85rem; font-weight: bold; margin-bottom: 10px;">Recent Public Mentions (72h):</div>
+                <ul class="news-list">
+    <li class='news-item' style='color: var(--text-muted);'>No new public mentions found in the last 48–72 hours.</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            Generation Timestamp: 2026-10-01 16:33:03 EDT<br>
+            For research/tracking purposes only. Not financial advice.
+        </footer>
+    </div>
+</body>
+</html>
+    
